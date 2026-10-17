@@ -16,6 +16,14 @@ namespace Fortress
         public float pitchSpeed = 30f;
         public float powerSpeed = 12f;
         [Min(0.01f)] public float maxFlightTime = 15f;
+        [Min(1)] public float maxHealth = 100f;
+        [Min(0)] public float explosionDamage = 30f;
+        [Min(0)] public float fallDamagePerMeter = 5f;
+        [Min(0)] public float maxWind = 4f;
+        [Min(0.01f)] public float tankCapsuleRadius = 1f;
+        [Min(0.02f)] public float tankCapsuleHeight = 2f;
+        public float tankGroundOffset;
+        [Min(1)] public int spawnAttempts = 32;
         public float groundHeight;
         public float terrainLowerHeight = -8f;
         public float waterHeight = -10f;

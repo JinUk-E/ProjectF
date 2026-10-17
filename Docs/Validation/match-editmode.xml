@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="196" result="Passed" total="196" passed="193" failed="0" inconclusive="3" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:54Z" duration="0.3552953">
+  <test-suite type="TestSuite" id="1000" name="ProjectF" fullname="ProjectF" runstate="Runnable" testcasecount="196" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:54Z" duration="0.355295" total="196" passed="193" failed="0" inconclusive="3" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1037" name="Fortress.EditModeTests.dll" fullname="D:/MoraeGames/01.Unity/ProjectF/Library/ScriptAssemblies/Fortress.EditModeTests.dll" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.158396" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="11412" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1038" name="Fortress" fullname="Fortress" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.158129" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1039" name="Tests" fullname="Fortress.Tests" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.157958" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="FlatShotControllerTests" fullname="Fortress.Tests.FlatShotControllerTests" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.071264" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1012" name="CancelShot_TerrainShot_DiscardsCraterAndUnlocksField" fullname="Fortress.Tests.FlatShotControllerTests.CancelShot_TerrainShot_DiscardsCraterAndUnlocksField" methodname="CancelShot_TerrainShot_DiscardsCraterAndUnlocksField" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="623584068" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.033619" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="CancelShot_WhileFiring_ReleasesRunnerAndRemovesShotCallbacks" fullname="Fortress.Tests.FlatShotControllerTests.CancelShot_WhileFiring_ReleasesRunnerAndRemovesShotCallbacks" methodname="CancelShot_WhileFiring_ReleasesRunnerAndRemovesShotCallbacks" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="405129731" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.002847" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="SetAim_OutOfRange_ClampsPitchPowerAndUsesWorldYaw" fullname="Fortress.Tests.FlatShotControllerTests.SetAim_OutOfRange_ClampsPitchPowerAndUsesWorldYaw" methodname="SetAim_OutOfRange_ClampsPitchPowerAndUsesWorldYaw" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="1202890736" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.005485" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="TryFire_DuringFlight_RejectsSecondShotAndAimWindChangesThenUnlocks" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_DuringFlight_RejectsSecondShotAndAimWindChangesThenUnlocks" methodname="TryFire_DuringFlight_RejectsSecondShotAndAimWindChangesThenUnlocks" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="499731300" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.002081" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1006" name="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.007594" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1002" name="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(0.0f,45.0f,22.0f,0.0f)" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(0.0f,45.0f,22.0f,0.0f)" methodname="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="1352180857" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.003214" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1003" name="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(90.0f,25.0f,30.0f,2.0f)" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(90.0f,25.0f,30.0f,2.0f)" methodname="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="155533603" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000715" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(237.0f,70.0f,15.0f,-3.0f)" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(237.0f,70.0f,15.0f,-3.0f)" methodname="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="1478339540" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000707" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(359.0f,0.0f,5.0f,0.0f)" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(359.0f,0.0f,5.0f,0.0f)" methodname="TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="337167157" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000522" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1013" name="TryFire_LeavesTerrainBounds_CompletesWithoutDiggingAtTimeout" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_LeavesTerrainBounds_CompletesWithoutDiggingAtTimeout" methodname="TryFire_LeavesTerrainBounds_CompletesWithoutDiggingAtTimeout" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="139045705" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000705" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="TryFire_NoSurfaceHit_FinishesAtConfiguredTimeLimit" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_NoSurfaceHit_FinishesAtConfiguredTimeLimit" methodname="TryFire_NoSurfaceHit_FinishesAtConfiguredTimeLimit" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="801629386" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.001013" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="TryFire_TerrainShot_AppliesOnlyAfterFinishAndReaimMatchesChangedGround" fullname="Fortress.Tests.FlatShotControllerTests.TryFire_TerrainShot_AppliesOnlyAfterFinishAndReaimMatchesChangedGround" methodname="TryFire_TerrainShot_AppliesOnlyAfterFinishAndReaimMatchesChangedGround" classname="Fortress.Tests.FlatShotControllerTests" runstate="Runnable" seed="573171360" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.004049" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1014" name="MatchControllerTests" fullname="Fortress.Tests.MatchControllerTests" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.079578" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1023" name="CancelShot_DoesNotAdvanceTurnOrApplyDamage" fullname="Fortress.Tests.MatchControllerTests.CancelShot_DoesNotAdvanceTurnOrApplyDamage" methodname="CancelShot_DoesNotAdvanceTurnOrApplyDamage" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="1526035303" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.016452" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="CapsuleIntersection_UsesEarliestEntryAndExcludesShooter" fullname="Fortress.Tests.MatchControllerTests.CapsuleIntersection_UsesEarliestEntryAndExcludesShooter" methodname="CapsuleIntersection_UsesEarliestEntryAndExcludesShooter" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="2087414250" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.004970" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="Impact_HoldsHealthAndTerrainUntilFinished_ThenJudgesWinner" fullname="Fortress.Tests.MatchControllerTests.Impact_HoldsHealthAndTerrainUntilFinished_ThenJudgesWinner" methodname="Impact_HoldsHealthAndTerrainUntilFinished_ThenJudgesWinner" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="1310808471" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.008184" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="InputDisabled_ImmediatelyHidesPreview" fullname="Fortress.Tests.MatchControllerTests.InputDisabled_ImmediatelyHidesPreview" methodname="InputDisabled_ImmediatelyHidesPreview" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="1634326926" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.007088" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1021" name="InvalidRestart_IsRejectedBeforeMutatingActiveMatch" fullname="Fortress.Tests.MatchControllerTests.InvalidRestart_IsRejectedBeforeMutatingActiveMatch" methodname="InvalidRestart_IsRejectedBeforeMutatingActiveMatch" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="1187218374" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.005966" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1015" name="Miss_CompletesAndAlternatesWithoutChangingWorld" fullname="Fortress.Tests.MatchControllerTests.Miss_CompletesAndAlternatesWithoutChangingWorld" methodname="Miss_CompletesAndAlternatesWithoutChangingWorld" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="1111037316" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.004437" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="Restart_RestoresOriginalHeightsHealthSeedAndWind" fullname="Fortress.Tests.MatchControllerTests.Restart_RestoresOriginalHeightsHealthSeedAndWind" methodname="Restart_RestoresOriginalHeightsHealthSeedAndWind" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="1057082894" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.008736" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1018" name="SeededSpawnAndWind_AreReproducibleAndUseSeparateStreams" fullname="Fortress.Tests.MatchControllerTests.SeededSpawnAndWind_AreReproducibleAndUseSeparateStreams" methodname="SeededSpawnAndWind_AreReproducibleAndUseSeparateStreams" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="1496364213" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.017461" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1019" name="TankDamage_LinearFalloffAndFallDamage" fullname="Fortress.Tests.MatchControllerTests.TankDamage_LinearFalloffAndFallDamage" methodname="TankDamage_LinearFalloffAndFallDamage" classname="Fortress.Tests.MatchControllerTests" runstate="Runnable" seed="431623956" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.004502" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1024" name="TerrainShotSurfaceTests" fullname="Fortress.Tests.TerrainShotSurfaceTests" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.006164" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1035" name="ApplyCrater_ClipsBoundsAndLowerHeight_LeavesOutsideRadiusUnchanged" fullname="Fortress.Tests.TerrainShotSurfaceTests.ApplyCrater_ClipsBoundsAndLowerHeight_LeavesOutsideRadiusUnchanged" methodname="ApplyCrater_ClipsBoundsAndLowerHeight_LeavesOutsideRadiusUnchanged" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="479205044" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000801" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1036" name="ApplyCrater_DuringShot_RejectsMutationUntilEndShot" fullname="Fortress.Tests.TerrainShotSurfaceTests.ApplyCrater_DuringShot_RejectsMutationUntilEndShot" methodname="ApplyCrater_DuringShot_RejectsMutationUntilEndShot" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="1870066741" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000433" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1026" name="HeightField_SourceChanges_DoNotMutateOwnedHeights" fullname="Fortress.Tests.TerrainShotSurfaceTests.HeightField_SourceChanges_DoNotMutateOwnedHeights" methodname="HeightField_SourceChanges_DoNotMutateOwnedHeights" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="1881899590" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000392" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="Initialize_LowerBelowTerrainRepresentation_RejectsBeforeCloning" fullname="Fortress.Tests.TerrainShotSurfaceTests.Initialize_LowerBelowTerrainRepresentation_RejectsBeforeCloning" methodname="Initialize_LowerBelowTerrainRepresentation_RejectsBeforeCloning" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="1584177536" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000798" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1033" name="TryHit_BilinearRidgeBetweenAboveEndpoints_ReturnsFirstRoot" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_BilinearRidgeBetweenAboveEndpoints_ReturnsFirstRoot" methodname="TryHit_BilinearRidgeBetweenAboveEndpoints_ReturnsFirstRoot" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="1909329145" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000280" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1032" name="TryHit_EntersMapFromOutside_FindsInsideIntersection" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_EntersMapFromOutside_FindsInsideIntersection" methodname="TryHit_EntersMapFromOutside_FindsInsideIntersection" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="147354456" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000708" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1031" name="TryHit_FullyOutsideMap_DoesNotExtendGroundPlane" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_FullyOutsideMap_DoesNotExtendGroundPlane" methodname="TryHit_FullyOutsideMap_DoesNotExtendGroundPlane" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="1374780337" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000196" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1034" name="TryHit_LongSegmentAcrossMultipleCells_DoesNotSkipRidge" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_LongSegmentAcrossMultipleCells_DoesNotSkipRidge" methodname="TryHit_LongSegmentAcrossMultipleCells_DoesNotSkipRidge" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="824867642" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000219" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1030" name="TryHit_VerticalAndBoundarySegments_ReturnGround" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_VerticalAndBoundarySegments_ReturnGround" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000808" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1027" name="TryHit_VerticalAndBoundarySegments_ReturnGround(0.0f,0.0f)" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_VerticalAndBoundarySegments_ReturnGround(0.0f,0.0f)" methodname="TryHit_VerticalAndBoundarySegments_ReturnGround" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="1864225184" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000295" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="TryHit_VerticalAndBoundarySegments_ReturnGround(-2.0f,-2.0f)" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_VerticalAndBoundarySegments_ReturnGround(-2.0f,-2.0f)" methodname="TryHit_VerticalAndBoundarySegments_ReturnGround" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="2096810082" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000048" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="TryHit_VerticalAndBoundarySegments_ReturnGround(2.0f,2.0f)" fullname="Fortress.Tests.TerrainShotSurfaceTests.TryHit_VerticalAndBoundarySegments_ReturnGround(2.0f,2.0f)" methodname="TryHit_VerticalAndBoundarySegments_ReturnGround" classname="Fortress.Tests.TerrainShotSurfaceTests" runstate="Runnable" seed="1171569382" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000040" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1241" name="UnityProjectile.EditModeTests.dll" fullname="D:/MoraeGames/01.Unity/ProjectF/Library/ScriptAssemblies/UnityProjectile.EditModeTests.dll" runstate="Runnable" testcasecount="165" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:54Z" duration="0.190938" total="165" passed="162" failed="0" inconclusive="3" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="11412" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1242" name="UnityProjectile" fullname="UnityProjectile" runstate="Runnable" testcasecount="165" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:54Z" duration="0.190817" total="165" passed="162" failed="0" inconclusive="3" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1243" name="Tests" fullname="UnityProjectile.Tests" runstate="Runnable" testcasecount="165" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:54Z" duration="0.190618" total="165" passed="162" failed="0" inconclusive="3" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1049" name="AllocationTests" fullname="UnityProjectile.Tests.AllocationTests" classname="UnityProjectile.Tests.AllocationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.005795" total="3" passed="0" failed="0" inconclusive="3" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1050" name="LaunchAndTick_200ShotsAfterWarmUp_AllocateNothing" fullname="UnityProjectile.Tests.AllocationTests.LaunchAndTick_200ShotsAfterWarmUp_AllocateNothing" methodname="LaunchAndTick_200ShotsAfterWarmUp_AllocateNothing" classname="UnityProjectile.Tests.AllocationTests" runstate="Runnable" seed="1514101601" result="Inconclusive" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.003927" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <reason>
+                <message><![CDATA[GC.GetAllocatedBytesForCurrentThread does not count here; measure GC.Alloc with the Profiler on a licensed PC.]]></message>
+              </reason>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1053" name="PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing" fullname="UnityProjectile.Tests.AllocationTests.PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing" classname="UnityProjectile.Tests.AllocationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.001182" total="2" passed="0" failed="0" inconclusive="2" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1051" name="PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Authored)" fullname="UnityProjectile.Tests.AllocationTests.PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Authored)" methodname="PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing" classname="UnityProjectile.Tests.AllocationTests" runstate="Runnable" seed="396904625" result="Inconclusive" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000655" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <reason>
+                  <message><![CDATA[GC.GetAllocatedBytesForCurrentThread does not count here; measure GC.Alloc with the Profiler on a licensed PC.]]></message>
+                </reason>
+              </test-case>
+              <test-case id="1052" name="PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Physical)" fullname="UnityProjectile.Tests.AllocationTests.PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Physical)" methodname="PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing" classname="UnityProjectile.Tests.AllocationTests" runstate="Runnable" seed="127612287" result="Inconclusive" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000184" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <reason>
+                  <message><![CDATA[GC.GetAllocatedBytesForCurrentThread does not count here; measure GC.Alloc with the Profiler on a licensed PC.]]></message>
+                </reason>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1054" name="ArtilleryTests" fullname="UnityProjectile.Tests.ArtilleryTests" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" testcasecount="21" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.028593" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1060" name="Aim_YawPitch_GivesUnitDirection" fullname="UnityProjectile.Tests.ArtilleryTests.Aim_YawPitch_GivesUnitDirection" methodname="Aim_YawPitch_GivesUnitDirection" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1540177198" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000475" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1072" name="AuthoredScatter_InheritWind_BendsThePathButKeepsTheAuthoredLanding" fullname="UnityProjectile.Tests.ArtilleryTests.AuthoredScatter_InheritWind_BendsThePathButKeepsTheAuthoredLanding" methodname="AuthoredScatter_InheritWind_BendsThePathButKeepsTheAuthoredLanding" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="595138215" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.004676" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="LaunchParams_NaNWind_IsRejected" fullname="UnityProjectile.Tests.ArtilleryTests.LaunchParams_NaNWind_IsRejected" methodname="LaunchParams_NaNWind_IsRejected" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="217844795" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000469" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1073" name="PhysicalScatter_GroundBurst_SubmunitionsLeaveTheGroundAndLandLater" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicalScatter_GroundBurst_SubmunitionsLeaveTheGroundAndLandLater" methodname="PhysicalScatter_GroundBurst_SubmunitionsLeaveTheGroundAndLandLater" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1040087035" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.001501" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1071" name="PhysicalScatter_SameShot_BitIdenticalAcrossLaunches" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicalScatter_SameShot_BitIdenticalAcrossLaunches" methodname="PhysicalScatter_SameShot_BitIdenticalAcrossLaunches" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="513203690" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.001785" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1074" name="PhysicalScatter_SurfaceChangesAfterLaunch_SpawnStillMatchesTheLaunchTimeForecast" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicalScatter_SurfaceChangesAfterLaunch_SpawnStillMatchesTheLaunchTimeForecast" methodname="PhysicalScatter_SurfaceChangesAfterLaunch_SpawnStillMatchesTheLaunchTimeForecast" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1163752578" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.002936" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1070" name="PhysicalScatter_SurfaceGiven_ChildrenInheritItAndLandOnIt" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicalScatter_SurfaceGiven_ChildrenInheritItAndLandOnIt" methodname="PhysicalScatter_SurfaceGiven_ChildrenInheritItAndLandOnIt" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="211635301" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.003870" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1069" name="PhysicalScatter_Wind_DriftsTheLandingPoints" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicalScatter_Wind_DriftsTheLandingPoints" methodname="PhysicalScatter_Wind_DriftsTheLandingPoints" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1967054925" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.001367" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1057" name="PhysicsArc_Apex_IsAboveBothEnds" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicsArc_Apex_IsAboveBothEnds" methodname="PhysicsArc_Apex_IsAboveBothEnds" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="201471788" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000530" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1058" name="PhysicsArc_NegativeOrNaNGravity_IsRejected" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicsArc_NegativeOrNaNGravity_IsRejected" methodname="PhysicsArc_NegativeOrNaNGravity_IsRejected" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1683886999" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000730" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1055" name="PhysicsArc_NoWind_IsTheGravityParabolaThroughBothEnds" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicsArc_NoWind_IsTheGravityParabolaThroughBothEnds" methodname="PhysicsArc_NoWind_IsTheGravityParabolaThroughBothEnds" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="650003838" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000438" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1056" name="PhysicsArc_Wind_BendsThePathAndStillEndsAtTheTarget" fullname="UnityProjectile.Tests.ArtilleryTests.PhysicsArc_Wind_BendsThePathAndStillEndsAtTheTarget" methodname="PhysicsArc_Wind_BendsThePathAndStillEndsAtTheTarget" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1868291435" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000380" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1075" name="Pool_ClearsShotSurfaceOnRelease" fullname="UnityProjectile.Tests.ArtilleryTests.Pool_ClearsShotSurfaceOnRelease" methodname="Pool_ClearsShotSurfaceOnRelease" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1442918556" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000562" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1068" name="Runner_SolvedShot_ImpactsExactlyAtTheHitPointAndTime" fullname="UnityProjectile.Tests.ArtilleryTests.Runner_SolvedShot_ImpactsExactlyAtTheHitPointAndTime" methodname="Runner_SolvedShot_ImpactsExactlyAtTheHitPointAndTime" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="2064014740" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.002581" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1061" name="Solver_FlatGround_LandsAtTheAnalyticRange" fullname="UnityProjectile.Tests.ArtilleryTests.Solver_FlatGround_LandsAtTheAnalyticRange" methodname="Solver_FlatGround_LandsAtTheAnalyticRange" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="604670242" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000440" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1066" name="Solver_HitsARaisedWallBeforeTheGround" fullname="UnityProjectile.Tests.ArtilleryTests.Solver_HitsARaisedWallBeforeTheGround" methodname="Solver_HitsARaisedWallBeforeTheGround" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="418117712" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000802" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1067" name="Solver_InvalidSpeedOrSurface_Throws" fullname="UnityProjectile.Tests.ArtilleryTests.Solver_InvalidSpeedOrSurface_Throws" methodname="Solver_InvalidSpeedOrSurface_Throws" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="669083915" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000438" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1064" name="Solver_NothingHit_ReturnsFalseWithFreeFlightToMaxTime" fullname="UnityProjectile.Tests.ArtilleryTests.Solver_NothingHit_ReturnsFalseWithFreeFlightToMaxTime" methodname="Solver_NothingHit_ReturnsFalseWithFreeFlightToMaxTime" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="655281037" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000471" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1062" name="Solver_RoundTrip_FlownPathIsTheMarchedParabola" fullname="UnityProjectile.Tests.ArtilleryTests.Solver_RoundTrip_FlownPathIsTheMarchedParabola" methodname="Solver_RoundTrip_FlownPathIsTheMarchedParabola" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1024649303" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000725" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1065" name="Solver_SameInputs_BitIdentical" fullname="UnityProjectile.Tests.ArtilleryTests.Solver_SameInputs_BitIdentical" methodname="Solver_SameInputs_BitIdentical" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="2001257732" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000514" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1063" name="Solver_Wind_ShiftsTheLanding" fullname="UnityProjectile.Tests.ArtilleryTests.Solver_Wind_ShiftsTheLanding" methodname="Solver_Wind_ShiftsTheLanding" classname="UnityProjectile.Tests.ArtilleryTests" runstate="Runnable" seed="1193828757" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000571" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1076" name="OrientationTests" fullname="UnityProjectile.Tests.OrientationTests" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:54Z" duration="0.010501" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1082" name="AfterImpact_AnyOrientation_RotationStaysAtImpactValue" fullname="UnityProjectile.Tests.OrientationTests.AfterImpact_AnyOrientation_RotationStaysAtImpactValue" methodname="AfterImpact_AnyOrientation_RotationStaysAtImpactValue" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="789551323" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.003133" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1077" name="AlignToPath_AnyProgress_ForwardEqualsTangent" fullname="UnityProjectile.Tests.OrientationTests.AlignToPath_AnyProgress_ForwardEqualsTangent" methodname="AlignToPath_AnyProgress_ForwardEqualsTangent" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="1362724775" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000778" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1083" name="CustomOrientation_DefinedInTests_ReceivesContextAndIsApplied" fullname="UnityProjectile.Tests.OrientationTests.CustomOrientation_DefinedInTests_ReceivesContextAndIsApplied" methodname="CustomOrientation_DefinedInTests_ReceivesContextAndIsApplied" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="428958898" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.001024" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1081" name="Fixed_AnyProgress_KeepsLaunchRotation" fullname="UnityProjectile.Tests.OrientationTests.Fixed_AnyProgress_KeepsLaunchRotation" methodname="Fixed_AnyProgress_KeepsLaunchRotation" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="2141857268" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000655" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1078" name="NullOrientation_FallsBackToAlignToPath" fullname="UnityProjectile.Tests.OrientationTests.NullOrientation_FallsBackToAlignToPath" methodname="NullOrientation_FallsBackToAlignToPath" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="318152233" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000516" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1084" name="Orientation_InRunner_TransformFollowsRotationAtTime" fullname="UnityProjectile.Tests.OrientationTests.Orientation_InRunner_TransformFollowsRotationAtTime" methodname="Orientation_InRunner_TransformFollowsRotationAtTime" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="2053758445" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.000666" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1079" name="Spin_FlightTime_AngleIsDegreesPerSecondTimesFlightTime" fullname="UnityProjectile.Tests.OrientationTests.Spin_FlightTime_AngleIsDegreesPerSecondTimesFlightTime" methodname="Spin_FlightTime_AngleIsDegreesPerSecondTimesFlightTime" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="9675499" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:53Z" duration="0.001013" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1080" name="Spin_ZeroAxis_UsesRight" fullname="UnityProjectile.Tests.OrientationTests.Spin_ZeroAxis_UsesRight" methodname="Spin_ZeroAxis_UsesRight" classname="UnityProjectile.Tests.OrientationTests" runstate="Runnable" seed="26301727" result="Passed" start-time="2026-10-17 10:46:53Z" end-time="2026-10-17 10:46:54Z" duration="0.000511" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1085" name="PoolTests" fullname="UnityProjectile.Tests.PoolTests" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.011361" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1087" name="ActiveRunner_DestroyedExternally_ActiveCountDecreases" fullname="UnityProjectile.Tests.PoolTests.ActiveRunner_DestroyedExternally_ActiveCountDecreases" methodname="ActiveRunner_DestroyedExternally_ActiveCountDecreases" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="1447366299" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001053" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1088" name="ActiveRunner_DestroyedExternally_CanSpawnFreesSlotWithoutReadingActiveCount" fullname="UnityProjectile.Tests.PoolTests.ActiveRunner_DestroyedExternally_CanSpawnFreesSlotWithoutReadingActiveCount" methodname="ActiveRunner_DestroyedExternally_CanSpawnFreesSlotWithoutReadingActiveCount" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="1001015521" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000469" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1089" name="ActiveRunner_PoolInactiveThenRunnerDestroyed_SlotFreed" fullname="UnityProjectile.Tests.PoolTests.ActiveRunner_PoolInactiveThenRunnerDestroyed_SlotFreed" methodname="ActiveRunner_PoolInactiveThenRunnerDestroyed_SlotFreed" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="259710615" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000619" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1091" name="ActiveRunner_TemplateDestroyedBeforeRetire_DestroyedAndUncounted" fullname="UnityProjectile.Tests.PoolTests.ActiveRunner_TemplateDestroyedBeforeRetire_DestroyedAndUncounted" methodname="ActiveRunner_TemplateDestroyedBeforeRetire_DestroyedAndUncounted" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="1977698684" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001441" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1090" name="ActiveRunners_OneOfThreeDestroyed_RemainingReleasesCountDownToZero" fullname="UnityProjectile.Tests.PoolTests.ActiveRunners_OneOfThreeDestroyed_RemainingReleasesCountDownToZero" methodname="ActiveRunners_OneOfThreeDestroyed_RemainingReleasesCountDownToZero" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="1124654392" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000663" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1092" name="FreeRunner_DestroyedExternally_GetMakesNewOneAndCountsOnce" fullname="UnityProjectile.Tests.PoolTests.FreeRunner_DestroyedExternally_GetMakesNewOneAndCountsOnce" methodname="FreeRunner_DestroyedExternally_GetMakesNewOneAndCountsOnce" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="89290318" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000803" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1086" name="Release_RunnerNotMadeByPoolInEditMode_DestroyedImmediatelyWithoutError" fullname="UnityProjectile.Tests.PoolTests.Release_RunnerNotMadeByPoolInEditMode_DestroyedImmediatelyWithoutError" methodname="Release_RunnerNotMadeByPoolInEditMode_DestroyedImmediatelyWithoutError" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="245990841" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000465" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1093" name="Release_ToOtherPool_OriginalPoolSlotFreed" fullname="UnityProjectile.Tests.PoolTests.Release_ToOtherPool_OriginalPoolSlotFreed" methodname="Release_ToOtherPool_OriginalPoolSlotFreed" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="739075284" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000529" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1094" name="Retire_AfterHostSwitchedPool_OriginalPoolSlotFreed" fullname="UnityProjectile.Tests.PoolTests.Retire_AfterHostSwitchedPool_OriginalPoolSlotFreed" methodname="Retire_AfterHostSwitchedPool_OriginalPoolSlotFreed" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="1505873579" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000528" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1095" name="Reuse_AfterLaunchWithOtherProfile_ProfileRestoredToPrefabProfile" fullname="UnityProjectile.Tests.PoolTests.Reuse_AfterLaunchWithOtherProfile_ProfileRestoredToPrefabProfile" methodname="Reuse_AfterLaunchWithOtherProfile_ProfileRestoredToPrefabProfile" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="1251555476" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000542" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1097" name="Reuse_AfterPausedSlowMotionShot_StartsUnpausedAtNormalScale" fullname="UnityProjectile.Tests.PoolTests.Reuse_AfterPausedSlowMotionShot_StartsUnpausedAtNormalScale" methodname="Reuse_AfterPausedSlowMotionShot_StartsUnpausedAtNormalScale" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="1972604101" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000451" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1096" name="Reuse_SubmunitionWithProfileOverride_ProfileRestoredToPrefabProfile" fullname="UnityProjectile.Tests.PoolTests.Reuse_SubmunitionWithProfileOverride_ProfileRestoredToPrefabProfile" methodname="Reuse_SubmunitionWithProfileOverride_ProfileRestoredToPrefabProfile" classname="UnityProjectile.Tests.PoolTests" runstate="Runnable" seed="774529060" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001694" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1098" name="PredictionTests" fullname="UnityProjectile.Tests.PredictionTests" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" testcasecount="21" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.025292" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1111" name="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly" fullname="UnityProjectile.Tests.PredictionTests.Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002917" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1106" name="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.03333334f)" fullname="UnityProjectile.Tests.PredictionTests.Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.03333334f)" methodname="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="854565242" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001340" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1107" name="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.01666667f)" fullname="UnityProjectile.Tests.PredictionTests.Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.01666667f)" methodname="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="846742856" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000304" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1108" name="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.01111111f)" fullname="UnityProjectile.Tests.PredictionTests.Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.01111111f)" methodname="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="863068395" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000316" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1109" name="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.25f)" fullname="UnityProjectile.Tests.PredictionTests.Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.25f)" methodname="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="648855330" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000231" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.3f)" fullname="UnityProjectile.Tests.PredictionTests.Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly(0.3f)" methodname="Impacted_AnyDeltaTime_FlightTimeEqualsArrivalExactly" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="309200614" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000235" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1102" name="ImpactSoon_AirBurstNoImpact_UsesPayloadTriggeredAsFirstVisible" fullname="UnityProjectile.Tests.PredictionTests.ImpactSoon_AirBurstNoImpact_UsesPayloadTriggeredAsFirstVisible" methodname="ImpactSoon_AirBurstNoImpact_UsesPayloadTriggeredAsFirstVisible" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="580501611" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001278" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1101" name="ImpactSoon_ClusterCarrier_FiresAtFirstSubmunitionImpactMinusLeadAfterFinished" fullname="UnityProjectile.Tests.PredictionTests.ImpactSoon_ClusterCarrier_FiresAtFirstSubmunitionImpactMinusLeadAfterFinished" methodname="ImpactSoon_ClusterCarrier_FiresAtFirstSubmunitionImpactMinusLeadAfterFinished" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="165079625" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001708" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1103" name="ImpactSoon_SimpleShot_FiresExactlyAtPredictedTime" fullname="UnityProjectile.Tests.PredictionTests.ImpactSoon_SimpleShot_FiresExactlyAtPredictedTime" methodname="ImpactSoon_SimpleShot_FiresExactlyAtPredictedTime" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="697437626" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000343" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1116" name="Launch_InvalidArrivalTime_ThrowsAndStaysIdle" fullname="UnityProjectile.Tests.PredictionTests.Launch_InvalidArrivalTime_ThrowsAndStaysIdle" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001647" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1112" name="Launch_InvalidArrivalTime_ThrowsAndStaysIdle(0.0f)" fullname="UnityProjectile.Tests.PredictionTests.Launch_InvalidArrivalTime_ThrowsAndStaysIdle(0.0f)" methodname="Launch_InvalidArrivalTime_ThrowsAndStaysIdle" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="1643488195" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000476" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1113" name="Launch_InvalidArrivalTime_ThrowsAndStaysIdle(-1.0f)" fullname="UnityProjectile.Tests.PredictionTests.Launch_InvalidArrivalTime_ThrowsAndStaysIdle(-1.0f)" methodname="Launch_InvalidArrivalTime_ThrowsAndStaysIdle" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="1089518053" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000217" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1114" name="Launch_InvalidArrivalTime_ThrowsAndStaysIdle(float.NaN)" fullname="UnityProjectile.Tests.PredictionTests.Launch_InvalidArrivalTime_ThrowsAndStaysIdle(float.NaN)" methodname="Launch_InvalidArrivalTime_ThrowsAndStaysIdle" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="628651395" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000209" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1115" name="Launch_InvalidArrivalTime_ThrowsAndStaysIdle(float.PositiveInfinity)" fullname="UnityProjectile.Tests.PredictionTests.Launch_InvalidArrivalTime_ThrowsAndStaysIdle(float.PositiveInfinity)" methodname="Launch_InvalidArrivalTime_ThrowsAndStaysIdle" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="731920468" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000204" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1099" name="PayloadTriggered_AnyDeltaTime_FiresAtPredictedTimeAndPositionBitIdentical" fullname="UnityProjectile.Tests.PredictionTests.PayloadTriggered_AnyDeltaTime_FiresAtPredictedTimeAndPositionBitIdentical" methodname="PayloadTriggered_AnyDeltaTime_FiresAtPredictedTimeAndPositionBitIdentical" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="2118898579" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001251" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1123" name="PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth" fullname="UnityProjectile.Tests.PredictionTests.PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001448" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1121" name="PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth(0.25f)" fullname="UnityProjectile.Tests.PredictionTests.PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth(0.25f)" methodname="PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="759292409" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000766" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1122" name="PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth(0.01666667f)" fullname="UnityProjectile.Tests.PredictionTests.PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth(0.01666667f)" methodname="PenetrationFuse_AtDepth_TriggersAtTargetPlusFinalDirectionTimesDepth" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="1538606409" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000329" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1117" name="Prediction_Hold_ReportsRemainingFlightAfterHold" fullname="UnityProjectile.Tests.PredictionTests.Prediction_Hold_ReportsRemainingFlightAfterHold" methodname="Prediction_Hold_ReportsRemainingFlightAfterHold" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="1632305387" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000486" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1104" name="SegmentChanged_AnyDeltaTime_FiresAtSegmentStartTime" fullname="UnityProjectile.Tests.PredictionTests.SegmentChanged_AnyDeltaTime_FiresAtSegmentStartTime" methodname="SegmentChanged_AnyDeltaTime_FiresAtSegmentStartTime" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="267241779" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002273" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1105" name="SpeedCurve_Changed_MovesBoundaryTimesButKeepsArrivalAndEndpoints" fullname="UnityProjectile.Tests.PredictionTests.SpeedCurve_Changed_MovesBoundaryTimesButKeepsArrivalAndEndpoints" methodname="SpeedCurve_Changed_MovesBoundaryTimesButKeepsArrivalAndEndpoints" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="679106031" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000805" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1100" name="Submunitions_AnyDeltaTime_OriginTargetAndImpactMatchForecastBitIdentical" fullname="UnityProjectile.Tests.PredictionTests.Submunitions_AnyDeltaTime_OriginTargetAndImpactMatchForecastBitIdentical" methodname="Submunitions_AnyDeltaTime_OriginTargetAndImpactMatchForecastBitIdentical" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="1411845614" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.007548" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1120" name="TimeFuse_BeforeImpact_TriggersExactlyAtTime" fullname="UnityProjectile.Tests.PredictionTests.TimeFuse_BeforeImpact_TriggersExactlyAtTime" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001692" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1118" name="TimeFuse_BeforeImpact_TriggersExactlyAtTime(0.25f)" fullname="UnityProjectile.Tests.PredictionTests.TimeFuse_BeforeImpact_TriggersExactlyAtTime(0.25f)" methodname="TimeFuse_BeforeImpact_TriggersExactlyAtTime" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="142786144" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000765" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1119" name="TimeFuse_BeforeImpact_TriggersExactlyAtTime(0.01666667f)" fullname="UnityProjectile.Tests.PredictionTests.TimeFuse_BeforeImpact_TriggersExactlyAtTime(0.01666667f)" methodname="TimeFuse_BeforeImpact_TriggersExactlyAtTime" classname="UnityProjectile.Tests.PredictionTests" runstate="Runnable" seed="1579155321" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000278" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1124" name="ProjectileRunnerTests" fullname="UnityProjectile.Tests.ProjectileRunnerTests" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.011040" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1130" name="AltitudeFuseTriggersAtExactHeightEvenWithLargeSteps" fullname="UnityProjectile.Tests.ProjectileRunnerTests.AltitudeFuseTriggersAtExactHeightEvenWithLargeSteps" methodname="AltitudeFuseTriggersAtExactHeightEvenWithLargeSteps" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="1822268988" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000738" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1126" name="EventsFireInOrder" fullname="UnityProjectile.Tests.ProjectileRunnerTests.EventsFireInOrder" methodname="EventsFireInOrder" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="159956665" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001164" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1128" name="HoldWaitsForResume" fullname="UnityProjectile.Tests.ProjectileRunnerTests.HoldWaitsForResume" methodname="HoldWaitsForResume" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="2132733847" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000577" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1125" name="ImpactsAtExactArrivalTimeAndTarget" fullname="UnityProjectile.Tests.ProjectileRunnerTests.ImpactsAtExactArrivalTimeAndTarget" methodname="ImpactsAtExactArrivalTimeAndTarget" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="774046085" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000584" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1127" name="ImpactSoonFiresAtLead" fullname="UnityProjectile.Tests.ProjectileRunnerTests.ImpactSoonFiresAtLead" methodname="ImpactSoonFiresAtLead" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="1159774104" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000508" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1131" name="PenetrationTriggersAtDepthAfterDelay" fullname="UnityProjectile.Tests.ProjectileRunnerTests.PenetrationTriggersAtDepthAfterDelay" methodname="PenetrationTriggersAtDepthAfterDelay" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="411981773" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000867" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1133" name="PoolReusesInstanceAndDropsOldSubscribers" fullname="UnityProjectile.Tests.ProjectileRunnerTests.PoolReusesInstanceAndDropsOldSubscribers" methodname="PoolReusesInstanceAndDropsOldSubscribers" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="1007438685" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000837" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1132" name="ScatterIsDeterministicAndInsideRadius" fullname="UnityProjectile.Tests.ProjectileRunnerTests.ScatterIsDeterministicAndInsideRadius" methodname="ScatterIsDeterministicAndInsideRadius" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="223907737" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.003340" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1134" name="StopFinishesWithoutImpactOrPayload" fullname="UnityProjectile.Tests.ProjectileRunnerTests.StopFinishesWithoutImpactOrPayload" methodname="StopFinishesWithoutImpactOrPayload" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="1277096543" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000497" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1129" name="TimeScaleSlowsOnlyThisProjectile" fullname="UnityProjectile.Tests.ProjectileRunnerTests.TimeScaleSlowsOnlyThisProjectile" methodname="TimeScaleSlowsOnlyThisProjectile" classname="UnityProjectile.Tests.ProjectileRunnerTests" runstate="Runnable" seed="1757777979" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000490" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1135" name="ReentrancyTests" fullname="UnityProjectile.Tests.ReentrancyTests" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.012875" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1142" name="Fire_PauseSetInFiredHandler_StaysPausedAlsoOnReusedInstance" fullname="UnityProjectile.Tests.ReentrancyTests.Fire_PauseSetInFiredHandler_StaysPausedAlsoOnReusedInstance" methodname="Fire_PauseSetInFiredHandler_StaysPausedAlsoOnReusedInstance" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="802173713" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001666" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1145" name="Launch_InFinishedHandler_RunnerNotRetiredAndNewShotRuns" fullname="UnityProjectile.Tests.ReentrancyTests.Launch_InFinishedHandler_RunnerNotRetiredAndNewShotRuns" methodname="Launch_InFinishedHandler_RunnerNotRetiredAndNewShotRuns" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="1388307473" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000696" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1144" name="Launch_InImpactedHandler_DropsOldShotEventsAndStartsNewShot" fullname="UnityProjectile.Tests.ReentrancyTests.Launch_InImpactedHandler_DropsOldShotEventsAndStartsNewShot" methodname="Launch_InImpactedHandler_DropsOldShotEventsAndStartsNewShot" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="111348865" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000793" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1141" name="Launch_PauseSetInLaunchedHandler_StaysPausedUntilResumed" fullname="UnityProjectile.Tests.ReentrancyTests.Launch_PauseSetInLaunchedHandler_StaysPausedUntilResumed" methodname="Launch_PauseSetInLaunchedHandler_StaysPausedUntilResumed" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="348206559" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000626" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1140" name="Launch_RunningPausedRunnerOutsidePool_ClearsPauseKeepsTimeScale" fullname="UnityProjectile.Tests.ReentrancyTests.Launch_RunningPausedRunnerOutsidePool_ClearsPauseKeepsTimeScale" methodname="Launch_RunningPausedRunnerOutsidePool_ClearsPauseKeepsTimeScale" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="554473788" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000535" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1137" name="Pause_DuringPayloadDelay_ClockPoseAndEventsFrozenThenResumesOnSchedule" fullname="UnityProjectile.Tests.ReentrancyTests.Pause_DuringPayloadDelay_ClockPoseAndEventsFrozenThenResumesOnSchedule" methodname="Pause_DuringPayloadDelay_ClockPoseAndEventsFrozenThenResumesOnSchedule" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="84838720" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000784" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1136" name="Pause_DuringPenetration_ClockPoseAndEventsFrozenThenResumesOnSchedule" fullname="UnityProjectile.Tests.ReentrancyTests.Pause_DuringPenetration_ClockPoseAndEventsFrozenThenResumesOnSchedule" methodname="Pause_DuringPenetration_ClockPoseAndEventsFrozenThenResumesOnSchedule" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="459373116" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000874" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1138" name="Pause_SetInImpactedHandler_AbsorbsRestOfTick" fullname="UnityProjectile.Tests.ReentrancyTests.Pause_SetInImpactedHandler_AbsorbsRestOfTick" methodname="Pause_SetInImpactedHandler_AbsorbsRestOfTick" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="1816644716" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000610" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1139" name="Pause_SetInSegmentChangedHandler_StopsAtBoundaryAndResumesInOrder" fullname="UnityProjectile.Tests.ReentrancyTests.Pause_SetInSegmentChangedHandler_StopsAtBoundaryAndResumesInOrder" methodname="Pause_SetInSegmentChangedHandler_StopsAtBoundaryAndResumesInOrder" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="1202810785" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000605" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1148" name="Stop_InFinishedHandler_FinishedOnceLateEventsDroppedRetiredAtTickEnd" fullname="UnityProjectile.Tests.ReentrancyTests.Stop_InFinishedHandler_FinishedOnceLateEventsDroppedRetiredAtTickEnd" methodname="Stop_InFinishedHandler_FinishedOnceLateEventsDroppedRetiredAtTickEnd" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="2123767015" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001179" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1146" name="Stop_InImpactSoonHandler_FinishedOnceNoImpactRetiredAtTickEnd" fullname="UnityProjectile.Tests.ReentrancyTests.Stop_InImpactSoonHandler_FinishedOnceNoImpactRetiredAtTickEnd" methodname="Stop_InImpactSoonHandler_FinishedOnceNoImpactRetiredAtTickEnd" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="700558801" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000510" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1147" name="Stop_InPayloadTriggeredHandler_NoSubmunitionsSpawned" fullname="UnityProjectile.Tests.ReentrancyTests.Stop_InPayloadTriggeredHandler_NoSubmunitionsSpawned" methodname="Stop_InPayloadTriggeredHandler_NoSubmunitionsSpawned" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="1976715283" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001010" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1143" name="Submunition_PauseSetInChildLaunchedHandler_ChildHeldAtStart" fullname="UnityProjectile.Tests.ReentrancyTests.Submunition_PauseSetInChildLaunchedHandler_ChildHeldAtStart" methodname="Submunition_PauseSetInChildLaunchedHandler_ChildHeldAtStart" classname="UnityProjectile.Tests.ReentrancyTests" runstate="Runnable" seed="1846953039" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001062" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1149" name="SegmentTests" fullname="UnityProjectile.Tests.SegmentTests" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.016488" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1175" name="AutoShares_VariousTargetDistances_BoundarySpeedContinuous" fullname="UnityProjectile.Tests.SegmentTests.AutoShares_VariousTargetDistances_BoundarySpeedContinuous" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001746" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1172" name="AutoShares_VariousTargetDistances_BoundarySpeedContinuous(60.0f)" fullname="UnityProjectile.Tests.SegmentTests.AutoShares_VariousTargetDistances_BoundarySpeedContinuous(60.0f)" methodname="AutoShares_VariousTargetDistances_BoundarySpeedContinuous" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1305032350" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001055" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1173" name="AutoShares_VariousTargetDistances_BoundarySpeedContinuous(150.0f)" fullname="UnityProjectile.Tests.SegmentTests.AutoShares_VariousTargetDistances_BoundarySpeedContinuous(150.0f)" methodname="AutoShares_VariousTargetDistances_BoundarySpeedContinuous" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1790120672" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000162" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1174" name="AutoShares_VariousTargetDistances_BoundarySpeedContinuous(400.0f)" fullname="UnityProjectile.Tests.SegmentTests.AutoShares_VariousTargetDistances_BoundarySpeedContinuous(400.0f)" methodname="AutoShares_VariousTargetDistances_BoundarySpeedContinuous" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1159061297" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000144" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1152" name="Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1" fullname="UnityProjectile.Tests.SegmentTests.Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001311" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1150" name="Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1(0.2f,0.6f,0.2f)" fullname="UnityProjectile.Tests.SegmentTests.Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1(0.2f,0.6f,0.2f)" methodname="Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="618047364" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000856" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1151" name="Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1(0.0f,1.0f,0.0f)" fullname="UnityProjectile.Tests.SegmentTests.Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1(0.0f,1.0f,0.0f)" methodname="Boundaries_BuiltInSegments_PositionContinuousAndDirectionG1" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="641024674" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000162" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1179" name="CustomSegment_ChainedOriginSegments_FeedFreeDirectionForward" fullname="UnityProjectile.Tests.SegmentTests.CustomSegment_ChainedOriginSegments_FeedFreeDirectionForward" methodname="CustomSegment_ChainedOriginSegments_FeedFreeDirectionForward" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="685306882" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000852" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1178" name="CustomSegment_DefinedInTests_BuildsWithoutCoreChanges" fullname="UnityProjectile.Tests.SegmentTests.CustomSegment_DefinedInTests_BuildsWithoutCoreChanges" methodname="CustomSegment_DefinedInTests_BuildsWithoutCoreChanges" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1237188059" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000654" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1180" name="CustomSegment_InRunner_RaisesSegmentChangedAndImpacts" fullname="UnityProjectile.Tests.SegmentTests.CustomSegment_InRunner_RaisesSegmentChangedAndImpacts" methodname="CustomSegment_InRunner_RaisesSegmentChangedAndImpacts" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1915292125" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000682" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1181" name="CustomSegment_InvalidSettings_ReportedByFlightValidate" fullname="UnityProjectile.Tests.SegmentTests.CustomSegment_InvalidSettings_ReportedByFlightValidate" methodname="CustomSegment_InvalidSettings_ReportedByFlightValidate" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1635103988" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000235" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1176" name="ExplicitShares_SpeedJump_ReportedByBoundarySpeedRatio" fullname="UnityProjectile.Tests.SegmentTests.ExplicitShares_SpeedJump_ReportedByBoundarySpeedRatio" methodname="ExplicitShares_SpeedJump_ReportedByBoundarySpeedRatio" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1366790384" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000527" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1156" name="Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree" fullname="UnityProjectile.Tests.SegmentTests.Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001342" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1153" name="Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree(30.0f)" fullname="UnityProjectile.Tests.SegmentTests.Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree(30.0f)" methodname="Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1222543699" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000557" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1154" name="Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree(45.0f)" fullname="UnityProjectile.Tests.SegmentTests.Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree(45.0f)" methodname="Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1392172301" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000139" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1155" name="Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree(89.0f)" fullname="UnityProjectile.Tests.SegmentTests.Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree(89.0f)" methodname="Terminal_EntryAngle_FinalDirectionMatchesWithinTenthDegree" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1666791358" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000146" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1177" name="TerminalEase_Two_EntrySpeedPositiveAndEndTwiceEntry" fullname="UnityProjectile.Tests.SegmentTests.TerminalEase_Two_EntrySpeedPositiveAndEndTwiceEntry" methodname="TerminalEase_Two_EntrySpeedPositiveAndEndTwiceEntry" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="575785176" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000388" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1170" name="Validate_EqualButSeparateSegments_Accepted" fullname="UnityProjectile.Tests.SegmentTests.Validate_EqualButSeparateSegments_Accepted" methodname="Validate_EqualButSeparateSegments_Accepted" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="300409458" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000340" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1169" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.005852" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1157" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NoSegments&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NoSegments&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1946656922" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002032" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1158" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NoSpan&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NoSpan&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="186720146" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000272" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1159" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;TwoSpans&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;TwoSpans&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1935025016" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000247" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1160" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;OriginAfterSpan&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;OriginAfterSpan&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1821871182" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000240" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1161" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;TargetBeforeSpan&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;TargetBeforeSpan&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="677576210" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000240" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1162" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NullSegment&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NullSegment&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="544661469" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000232" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1163" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;SpanAutoShare&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;SpanAutoShare&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1904194966" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000236" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1164" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NegativeShare&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;NegativeShare&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1114376448" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000238" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1165" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;DuplicateOriginReference&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;DuplicateOriginReference&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="237038841" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000240" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1166" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;DuplicateTargetReference&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;DuplicateTargetReference&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="2134323975" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000241" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1167" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;DecreasingCurve&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;DecreasingCurve&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="417603428" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000303" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1168" name="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;FlatCurve&quot;)" fullname="UnityProjectile.Tests.SegmentTests.Validate_InvalidFlight_RejectedByValidateBuildAndLaunch(&quot;FlatCurve&quot;)" methodname="Validate_InvalidFlight_RejectedByValidateBuildAndLaunch" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1647744940" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000266" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1171" name="Validate_NonDecreasingCurveWithFlatPart_Accepted" fullname="UnityProjectile.Tests.SegmentTests.Validate_NonDecreasingCurveWithFlatPart_Accepted" methodname="Validate_NonDecreasingCurveWithFlatPart_Accepted" classname="UnityProjectile.Tests.SegmentTests" runstate="Runnable" seed="1253672118" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000597" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1182" name="TickOrderTests" fullname="UnityProjectile.Tests.TickOrderTests" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.016852" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1191" name="ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged" fullname="UnityProjectile.Tests.TickOrderTests.ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001613" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1188" name="ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged(0.01666667f)" fullname="UnityProjectile.Tests.TickOrderTests.ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged(0.01666667f)" methodname="ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="1249408040" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000706" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1189" name="ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged(0.25f)" fullname="UnityProjectile.Tests.TickOrderTests.ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged(0.25f)" methodname="ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="425946033" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000305" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1190" name="ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged(10.0f)" fullname="UnityProjectile.Tests.TickOrderTests.ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged(10.0f)" methodname="ConsumingPayload_BeforeImpact_NoImpactedAndNoLaterSegmentChanged" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="1834508251" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000258" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1194" name="Finished_AirBurstWithLinger_FlightTimeProgressAndStateFrozen" fullname="UnityProjectile.Tests.TickOrderTests.Finished_AirBurstWithLinger_FlightTimeProgressAndStateFrozen" methodname="Finished_AirBurstWithLinger_FlightTimeProgressAndStateFrozen" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="607261893" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000739" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1195" name="Finished_LateImpactSoon_CarrierPoseFlightTimeAndStateFrozen" fullname="UnityProjectile.Tests.TickOrderTests.Finished_LateImpactSoon_CarrierPoseFlightTimeAndStateFrozen" methodname="Finished_LateImpactSoon_CarrierPoseFlightTimeAndStateFrozen" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="32544597" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001093" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1186" name="PayloadDelay_LongerThanRemainingFlight_TriggersAtImpactPointAfterImpacted" fullname="UnityProjectile.Tests.TickOrderTests.PayloadDelay_LongerThanRemainingFlight_TriggersAtImpactPointAfterImpacted" methodname="PayloadDelay_LongerThanRemainingFlight_TriggersAtImpactPointAfterImpacted" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="1485868862" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000663" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1187" name="PayloadDelay_Penetrator_TriggersAtDepthAfterDelay" fullname="UnityProjectile.Tests.TickOrderTests.PayloadDelay_Penetrator_TriggersAtDepthAfterDelay" methodname="PayloadDelay_Penetrator_TriggersAtDepthAfterDelay" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="1410342100" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002198" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1196" name="Stop_WithLinger_PoseAndStateStayAtStoppedPoint" fullname="UnityProjectile.Tests.TickOrderTests.Stop_WithLinger_PoseAndStateStayAtStoppedPoint" methodname="Stop_WithLinger_PoseAndStateStayAtStoppedPoint" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="1690866981" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000609" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1193" name="SubmunitionLaunched_HandlerStopsCarrier_BegunChildStillGetsRestOfTick" fullname="UnityProjectile.Tests.TickOrderTests.SubmunitionLaunched_HandlerStopsCarrier_BegunChildStillGetsRestOfTick" methodname="SubmunitionLaunched_HandlerStopsCarrier_BegunChildStillGetsRestOfTick" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="1596503176" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000930" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1192" name="Submunitions_CarrierTimeScale_InheritedAndRestOfTickApplied" fullname="UnityProjectile.Tests.TickOrderTests.Submunitions_CarrierTimeScale_InheritedAndRestOfTickApplied" methodname="Submunitions_CarrierTimeScale_InheritedAndRestOfTickApplied" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="509567568" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001230" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1184" name="Tick_SameTimeEvents_FireInContractOrder" fullname="UnityProjectile.Tests.TickOrderTests.Tick_SameTimeEvents_FireInContractOrder" methodname="Tick_SameTimeEvents_FireInContractOrder" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="574745969" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000868" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1183" name="Tick_SingleLargeStep_FiresBoundariesInTimeOrderAndStopsAtHold" fullname="UnityProjectile.Tests.TickOrderTests.Tick_SingleLargeStep_FiresBoundariesInTimeOrderAndStopsAtHold" methodname="Tick_SingleLargeStep_FiresBoundariesInTimeOrderAndStopsAtHold" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="861656755" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.004888" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[: ImpactSoon at 1.5s comes before the hold at 1.8s (lead 0.5s is longer than the time left after the hold). (Logged once per profile.)
+]]></output>
+            </test-case>
+            <test-case id="1185" name="Tick_ZeroLead_ImpactSoonFiresWithImpactInContractOrder" fullname="UnityProjectile.Tests.TickOrderTests.Tick_ZeroLead_ImpactSoonFiresWithImpactInContractOrder" methodname="Tick_ZeroLead_ImpactSoonFiresWithImpactInContractOrder" classname="UnityProjectile.Tests.TickOrderTests" runstate="Runnable" seed="188075618" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000430" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1197" name="TrajectoryTests" fullname="UnityProjectile.Tests.TrajectoryTests" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.009611" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1203" name="BallisticApexIsHeightAboveHigherEndpoint" fullname="UnityProjectile.Tests.TrajectoryTests.BallisticApexIsHeightAboveHigherEndpoint" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002724" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1200" name="BallisticApexIsHeightAboveHigherEndpoint(0.0f,30.0f)" fullname="UnityProjectile.Tests.TrajectoryTests.BallisticApexIsHeightAboveHigherEndpoint(0.0f,30.0f)" methodname="BallisticApexIsHeightAboveHigherEndpoint" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="684869453" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001208" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1201" name="BallisticApexIsHeightAboveHigherEndpoint(10.0f,20.0f)" fullname="UnityProjectile.Tests.TrajectoryTests.BallisticApexIsHeightAboveHigherEndpoint(10.0f,20.0f)" methodname="BallisticApexIsHeightAboveHigherEndpoint" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="372626137" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000601" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1202" name="BallisticApexIsHeightAboveHigherEndpoint(-15.0f,25.0f)" fullname="UnityProjectile.Tests.TrajectoryTests.BallisticApexIsHeightAboveHigherEndpoint(-15.0f,25.0f)" methodname="BallisticApexIsHeightAboveHigherEndpoint" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="639156400" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000555" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1210" name="DeterministicRandomRepeatsPerSeed" fullname="UnityProjectile.Tests.TrajectoryTests.DeterministicRandomRepeatsPerSeed" methodname="DeterministicRandomRepeatsPerSeed" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="285389970" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000759" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1209" name="InvalidArrivalTimeIsRejected" fullname="UnityProjectile.Tests.TrajectoryTests.InvalidArrivalTimeIsRejected" methodname="InvalidArrivalTimeIsRejected" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="288892320" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000368" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1206" name="PathHasNoJumpsAtSegmentBoundaries" fullname="UnityProjectile.Tests.TrajectoryTests.PathHasNoJumpsAtSegmentBoundaries" methodname="PathHasNoJumpsAtSegmentBoundaries" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="1649980310" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001031" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1199" name="SameSeedGivesIdenticalPath_DifferentSeedChangesWobble" fullname="UnityProjectile.Tests.TrajectoryTests.SameSeedGivesIdenticalPath_DifferentSeedChangesWobble" methodname="SameSeedGivesIdenticalPath_DifferentSeedChangesWobble" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="1613643580" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001282" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1208" name="SegmentOrderIsValidated" fullname="UnityProjectile.Tests.TrajectoryTests.SegmentOrderIsValidated" methodname="SegmentOrderIsValidated" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="1219863133" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000456" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1207" name="SpeedCurveKeepsEndpointsExact" fullname="UnityProjectile.Tests.TrajectoryTests.SpeedCurveKeepsEndpointsExact" methodname="SpeedCurveKeepsEndpointsExact" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="1475789275" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000401" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1198" name="StartsAtOriginAndEndsExactlyAtTarget" fullname="UnityProjectile.Tests.TrajectoryTests.StartsAtOriginAndEndsExactlyAtTarget" methodname="StartsAtOriginAndEndsExactlyAtTarget" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="526098254" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000337" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1205" name="TerminalEntersAtConfiguredAngle" fullname="UnityProjectile.Tests.TrajectoryTests.TerminalEntersAtConfiguredAngle" methodname="TerminalEntersAtConfiguredAngle" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="1626280345" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000271" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1204" name="ZeroApexIsAStraightLine" fullname="UnityProjectile.Tests.TrajectoryTests.ZeroApexIsAStraightLine" methodname="ZeroApexIsAStraightLine" classname="UnityProjectile.Tests.TrajectoryTests" runstate="Runnable" seed="1686157467" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000330" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1211" name="ValidationTests" fullname="UnityProjectile.Tests.ValidationTests" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" testcasecount="24" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.040601" total="24" passed="24" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1214" name="Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes" fullname="UnityProjectile.Tests.ValidationTests.Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002644" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1212" name="Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes(0.75f)" fullname="UnityProjectile.Tests.ValidationTests.Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes(0.75f)" methodname="Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1892447971" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001498" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[: PayloadTriggered at 1s comes before the hold at progress 0.75; hold pulled to 0.9s. (Logged once per profile.)
+]]></output>
+              </test-case>
+              <test-case id="1213" name="Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes(0.5f)" fullname="UnityProjectile.Tests.ValidationTests.Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes(0.5f)" methodname="Hold_AtOrAfterPayload_PulledBeforePayloadAndResumes" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1898911598" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000847" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[: PayloadTriggered at 1s comes before the hold at progress 0.5; hold pulled to 0.9s. (Logged once per profile.)
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1220" name="Hold_ImpactSoonBeforeHold_Flagged" fullname="UnityProjectile.Tests.ValidationTests.Hold_ImpactSoonBeforeHold_Flagged" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002061" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1218" name="Hold_ImpactSoonBeforeHold_Flagged(0.9f,True)" fullname="UnityProjectile.Tests.ValidationTests.Hold_ImpactSoonBeforeHold_Flagged(0.9f,True)" methodname="Hold_ImpactSoonBeforeHold_Flagged" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="47748629" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001367" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[: ImpactSoon at 1.5s comes before the hold at 1.8s (lead 0.5s is longer than the time left after the hold). (Logged once per profile.)
+]]></output>
+              </test-case>
+              <test-case id="1219" name="Hold_ImpactSoonBeforeHold_Flagged(0.5f,False)" fullname="UnityProjectile.Tests.ValidationTests.Hold_ImpactSoonBeforeHold_Flagged(0.5f,False)" methodname="Hold_ImpactSoonBeforeHold_Flagged" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1480461054" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000229" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1217" name="Hold_PayloadWithinPullBack_HoldDisabled" fullname="UnityProjectile.Tests.ValidationTests.Hold_PayloadWithinPullBack_HoldDisabled" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002989" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1215" name="Hold_PayloadWithinPullBack_HoldDisabled(0.05f)" fullname="UnityProjectile.Tests.ValidationTests.Hold_PayloadWithinPullBack_HoldDisabled(0.05f)" methodname="Hold_PayloadWithinPullBack_HoldDisabled" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1794231302" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001299" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[: PayloadTriggered at 0.05s is too early to hold before it; hold dropped. (Logged once per profile.)
+]]></output>
+              </test-case>
+              <test-case id="1216" name="Hold_PayloadWithinPullBack_HoldDisabled(0.1f)" fullname="UnityProjectile.Tests.ValidationTests.Hold_PayloadWithinPullBack_HoldDisabled(0.1f)" methodname="Hold_PayloadWithinPullBack_HoldDisabled" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1981503801" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001218" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[: PayloadTriggered at 0.1s is too early to hold before it; hold dropped. (Logged once per profile.)
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1232" name="Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002732" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1230" name="Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects(-0.5f)" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects(-0.5f)" methodname="Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="829426473" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001427" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1231" name="Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects(float.NaN)" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects(float.NaN)" methodname="Launch_InvalidImpactSoonLead_RejectedWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="773632459" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000590" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1229" name="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002780" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1225" name="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;ChildNoFlight&quot;)" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;ChildNoFlight&quot;)" methodname="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1004526761" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000696" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1226" name="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;ChildInvalidFlight&quot;)" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;ChildInvalidFlight&quot;)" methodname="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1118525847" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000533" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1227" name="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;GrandchildNoFlight&quot;)" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;GrandchildNoFlight&quot;)" methodname="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="398380119" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000507" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1228" name="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;ChildNegativeLead&quot;)" fullname="UnityProjectile.Tests.ValidationTests.Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects(&quot;ChildNegativeLead&quot;)" methodname="Launch_InvalidProfileInSubmunitionChain_RejectedAtLaunchWithoutSideEffects" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1956361053" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000451" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1222" name="Launch_MutualSubmunitionCycle_ThrowsAndKeepsState" fullname="UnityProjectile.Tests.ValidationTests.Launch_MutualSubmunitionCycle_ThrowsAndKeepsState" methodname="Launch_MutualSubmunitionCycle_ThrowsAndKeepsState" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="961471351" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001962" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1224" name="Launch_PayloadPlanThrowsAfterTrajectoryBuilt_RunningShotUntouched" fullname="UnityProjectile.Tests.ValidationTests.Launch_PayloadPlanThrowsAfterTrajectoryBuilt_RunningShotUntouched" methodname="Launch_PayloadPlanThrowsAfterTrajectoryBuilt_RunningShotUntouched" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="295307479" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002459" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1221" name="Launch_SelfReferencingSubmunitionProfile_ThrowsAndKeepsState" fullname="UnityProjectile.Tests.ValidationTests.Launch_SelfReferencingSubmunitionProfile_ThrowsAndKeepsState" methodname="Launch_SelfReferencingSubmunitionProfile_ThrowsAndKeepsState" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="2122852240" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000485" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1223" name="Launch_SubmunitionProfileWithoutFlight_ThrowsAndKeepsRunningShot" fullname="UnityProjectile.Tests.ValidationTests.Launch_SubmunitionProfileWithoutFlight_ThrowsAndKeepsRunningShot" methodname="Launch_SubmunitionProfileWithoutFlight_ThrowsAndKeepsRunningShot" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1281038340" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000884" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1233" name="Launch_ZeroImpactSoonLead_Accepted" fullname="UnityProjectile.Tests.ValidationTests.Launch_ZeroImpactSoonLead_Accepted" methodname="Launch_ZeroImpactSoonLead_Accepted" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="90573106" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001089" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1240" name="Pool_GetAndRetire_TracksActiveCountAndLimit" fullname="UnityProjectile.Tests.ValidationTests.Pool_GetAndRetire_TracksActiveCountAndLimit" methodname="Pool_GetAndRetire_TracksActiveCountAndLimit" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1208964056" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.000791" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1236" name="Submunitions_ChildFailsToLaunchWithoutPool_InstanceNotLeftBehind" fullname="UnityProjectile.Tests.ValidationTests.Submunitions_ChildFailsToLaunchWithoutPool_InstanceNotLeftBehind" methodname="Submunitions_ChildFailsToLaunchWithoutPool_InstanceNotLeftBehind" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="2023943695" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.002587" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[: submunition(s) could not be launched and were skipped (ArgumentException: : has no flight profile.
+Parameter name: profile). (Logged once per profile.)
+]]></output>
+            </test-case>
+            <test-case id="1234" name="Submunitions_ChildProfileBrokenAfterLaunch_ChildrenReturnedWarnedCarrierContinues" fullname="UnityProjectile.Tests.ValidationTests.Submunitions_ChildProfileBrokenAfterLaunch_ChildrenReturnedWarnedCarrierContinues" methodname="Submunitions_ChildProfileBrokenAfterLaunch_ChildrenReturnedWarnedCarrierContinues" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1138777229" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001852" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[: submunition(s) could not be launched and were skipped (ArgumentException: : has no flight profile.
+Parameter name: profile). (Logged once per profile.)
+]]></output>
+            </test-case>
+            <test-case id="1237" name="Submunitions_FourthGeneration_NotSpawnedAndFlaggedInPrediction" fullname="UnityProjectile.Tests.ValidationTests.Submunitions_FourthGeneration_NotSpawnedAndFlaggedInPrediction" methodname="Submunitions_FourthGeneration_NotSpawnedAndFlaggedInPrediction" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="641779393" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.005482" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[: submunitions beyond generation 3 are not spawned. (Logged once per profile.)
+: submunitions beyond generation 3 are not spawned. (Logged once per profile.)
+: submunitions beyond generation 3 are not spawned. (Logged once per profile.)
+]]></output>
+            </test-case>
+            <test-case id="1235" name="Submunitions_OneChildFailsToLaunch_SkippedAndNextChildSpawns" fullname="UnityProjectile.Tests.ValidationTests.Submunitions_OneChildFailsToLaunch_SkippedAndNextChildSpawns" methodname="Submunitions_OneChildFailsToLaunch_SkippedAndNextChildSpawns" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1003721490" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.004119" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[: submunition(s) could not be launched and were skipped (ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: arrivalTime). (Logged once per profile.)
+]]></output>
+            </test-case>
+            <test-case id="1238" name="Submunitions_PoolAtMaxActive_SkippedAndFlagged" fullname="UnityProjectile.Tests.ValidationTests.Submunitions_PoolAtMaxActive_SkippedAndFlagged" methodname="Submunitions_PoolAtMaxActive_SkippedAndFlagged" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="380689597" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001750" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[: pool 'TestPool' reached maxActive 3; 2 submunition(s) skipped. (Logged once per profile.)
+]]></output>
+            </test-case>
+            <test-case id="1239" name="Warnings_SameProfileManyLaunches_LoggedOncePerProfileAndKind" fullname="UnityProjectile.Tests.ValidationTests.Warnings_SameProfileManyLaunches_LoggedOncePerProfileAndKind" methodname="Warnings_SameProfileManyLaunches_LoggedOncePerProfileAndKind" classname="UnityProjectile.Tests.ValidationTests" runstate="Runnable" seed="1208981409" result="Passed" start-time="2026-10-17 10:46:54Z" end-time="2026-10-17 10:46:54Z" duration="0.001850" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[: PayloadTriggered at 1s comes before the hold at progress 0.75; hold pulled to 0.9s. (Logged once per profile.)
+: PayloadTriggered at 1s comes before the hold at progress 0.75; hold pulled to 0.9s. (Logged once per profile.)
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: C:/Users/jjw68/AppData/LocalLow/DefaultCompany/ProjectF\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

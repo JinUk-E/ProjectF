@@ -41,6 +41,13 @@ namespace Fortress
             // Constructor lower-bound clamping must also be reflected by the view.
             UpdateRegion(new RectInt(0,0,resolution,resolution));
         }
+        public void ResetTerrain()
+        {
+            Initialize();
+            if (Field == null) return;
+            Field.Reset();
+            UpdateRegion(new RectInt(0,0,Field.Width,Field.Depth));
+        }
         public void UpdateRegion(RectInt region)
         {
             if(runtimeData==null || Field==null || region.width<=0 || region.height<=0) return;

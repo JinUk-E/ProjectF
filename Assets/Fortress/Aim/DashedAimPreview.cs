@@ -35,7 +35,7 @@ namespace Fortress
             for(int i=0;i<count;i++)
             {
                 var line=lines[i];
-                line.enabled=isActiveAndEnabled && !controller.IsFiring;
+                line.enabled=isActiveAndEnabled && !controller.IsFiring && controller.InputEnabled;
                 line.sharedMaterial=lineMaterial;
                 line.startWidth=line.endWidth=settings.previewWidth;
                 line.SetPosition(0,shot.PositionAt(i*step));

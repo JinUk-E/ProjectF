@@ -1,6 +1,6 @@
 {
   "name": "Fortress.PlayModeTests",
-  "references": ["Fortress", "UnityProjectile.Runtime", "UnityEngine.TestRunner"],
+  "references": ["Fortress", "UnityProjectile.Runtime", "UnityEngine.TestRunner", "Unity.TextMeshPro", "Unity.ugui"],
   "overrideReferences": true,
   "precompiledReferences": ["nunit.framework.dll"],
   "autoReferenced": false,

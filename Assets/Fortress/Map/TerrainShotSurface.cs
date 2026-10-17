@@ -6,7 +6,7 @@ namespace Fortress
 {
     /// <summary>Clipped cell traversal; bilinear height along a segment is quadratic.
     /// Solves both roots in every traversed cell, including above-to-above ridge crossings.</summary>
-    public sealed class TerrainShotSurface : IShotSurface
+    public sealed class TerrainShotSurface : IHeightFieldSurface
     {
         public HeightField Field { get; }
         public TerrainShotSurface(HeightField field) { Field = field ?? throw new ArgumentNullException(nameof(field)); }

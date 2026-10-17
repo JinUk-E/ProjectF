@@ -14,6 +14,16 @@ namespace Fortress
         public ParticleSystem impactEffect;
         public Transform predictionMarker;
         public HeightFieldTerrain terrainMap;
+        public bool externalResolution;
+        bool inputEnabled = true;
+        public bool InputEnabled
+        {
+            get => inputEnabled;
+            set { if (inputEnabled == value) return; inputEnabled = value; StateChanged?.Invoke(); }
+        }
+        public int ActiveTankIndex { get; private set; }
+        public event Action BeforeResolution;
+        public event Action ShotCancelled;
         public event Action StateChanged;
         public event Action<ProjectileRunner> ShotLaunched;
         public event Action<ProjectileRunner> ShotImpacted;
@@ -25,7 +35,7 @@ namespace Fortress
         public bool LastSolveHit { get; private set; }
         public float Power { get; private set; }
         public Vector3 Wind { get; private set; }
-        public TankRig ActiveTank => tanks != null && tanks.Length > 0 ? tanks[0] : null;
+        public TankRig ActiveTank => tanks != null && ActiveTankIndex >= 0 && ActiveTankIndex < tanks.Length ? tanks[ActiveTankIndex] : null;
         bool initialized;
         IShotSurface surface;
         HeightField shotField;
@@ -57,6 +67,14 @@ namespace Fortress
             SetAim(ActiveTank.transform.eulerAngles.y, tuning.initialPitch, tuning.initialPower);
         }
 
+        public bool SetActiveTank(int index)
+        {
+            if (IsFiring || tanks == null || index < 0 || index >= tanks.Length) return false;
+            ActiveTankIndex = index;
+            RefreshPrediction();
+            StateChanged?.Invoke();
+            return true;
+        }
         public bool SetSurface(IShotSurface shotSurface)
         {
             if (IsFiring || shotSurface == null) return false;
@@ -79,7 +97,7 @@ namespace Fortress
 
         public bool SetAim(float yaw, float pitch, float power)
         {
-            if (IsFiring || tuning == null || ActiveTank == null || !Finite(yaw) || !Finite(pitch) || !Finite(power)) return false;
+            if (!InputEnabled || IsFiring || tuning == null || ActiveTank == null || !Finite(yaw) || !Finite(pitch) || !Finite(power)) return false;
             ActiveTank.SetAim(yaw, Mathf.Clamp(pitch, tuning.minPitch, tuning.maxPitch));
             Power = Mathf.Clamp(power, tuning.minPower, tuning.maxPower);
             RefreshPrediction();
@@ -90,8 +108,8 @@ namespace Fortress
         public bool TryFire()
         {
             Initialize();
-            if (!isActiveAndEnabled || IsFiring || pool == null || !TryBuildLaunch(out var launch)) return false;
-            var candidateField = (surface as TerrainShotSurface)?.Field;
+            if (!InputEnabled || !isActiveAndEnabled || IsFiring || pool == null || !TryBuildLaunch(out var launch)) return false;
+            var candidateField = (surface as IHeightFieldSurface)?.Field;
             if (candidateField != null && candidateField.IsFrozen) return false;
             var runner = pool.Get(projectilePrefab);
             shotField = candidateField;
@@ -176,13 +194,14 @@ namespace Fortress
             if (shotField != null)
             {
                 shotField.EndShot();
-                if (pendingImpact)
+                if (pendingImpact && !externalResolution)
                 {
                     var region = shotField.ApplyCrater(pendingImpactPosition, tuning.craterRadius, tuning.craterDepth);
                     if (terrainMap != null && terrainMap.Field == shotField) terrainMap.UpdateRegion(region);
                 }
             }
             shotField = null; pendingImpact = false;
+            BeforeResolution?.Invoke();
             RefreshPrediction();
             IsFiring = false;
             ShotFinished?.Invoke();
@@ -202,7 +221,7 @@ namespace Fortress
                 runner.Stop();
                 if (pool != null) pool.Release(runner);
             }
-            if (wasFiring) StateChanged?.Invoke();
+            if (wasFiring) { ShotCancelled?.Invoke(); StateChanged?.Invoke(); }
         }
         void UpdateDebugMarker()
         {

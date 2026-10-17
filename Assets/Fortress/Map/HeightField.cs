@@ -7,6 +7,7 @@ namespace Fortress
     public sealed class HeightField
     {
         readonly float[,] heights;
+        readonly float[,] originalHeights;
         public int Width => heights.GetLength(1);
         public int Depth => heights.GetLength(0);
         public Vector3 Origin { get; }
@@ -31,17 +32,28 @@ namespace Fortress
                 if (float.IsNaN(heights[z,x]) || float.IsInfinity(heights[z,x])) throw new ArgumentException("Non-finite height.");
                 heights[z,x] = Mathf.Max(lowerHeight, heights[z,x]);
             }
+            originalHeights = (float[,])heights.Clone();
+        }
+        public void Reset()
+        {
+            if (IsFrozen) throw new InvalidOperationException("Cannot reset active shot terrain.");
+            Array.Copy(originalHeights,heights,heights.Length);
+            Revision++;
         }
         public float GetHeight(int x, int z) => heights[z,x];
         public void BeginShot() { if (IsFrozen) throw new InvalidOperationException("Shot already active."); IsFrozen = true; }
         public void EndShot() { IsFrozen = false; }
-        public bool TrySample(float x, float z, out float height)
+        public bool TrySample(float x, float z, out float height) => TrySampleGrid(heights,x,z,out height);
+        public bool TrySampleOriginal(float x, float z, out float height) => TrySampleGrid(originalHeights,x,z,out height);
+        bool TrySampleGrid(float[,] grid,float x,float z,out float height)
         {
             float gx = (x - Origin.x) / CellX, gz = (z - Origin.z) / CellZ;
             height = 0;
             if (!(gx >= 0 && gx <= Width - 1 && gz >= 0 && gz <= Depth - 1)) return false;
             int ix = Mathf.Min(Mathf.FloorToInt(gx), Width - 2), iz = Mathf.Min(Mathf.FloorToInt(gz), Depth - 2);
-            height = SampleCell(ix, iz, gx - ix, gz - iz);
+            float u=gx-ix,v=gz-iz;
+            height = Mathf.LerpUnclamped(Mathf.LerpUnclamped(grid[iz,ix],grid[iz,ix+1],u),
+                Mathf.LerpUnclamped(grid[iz+1,ix],grid[iz+1,ix+1],u),v);
             return true;
         }
         internal float SampleCell(int x, int z, float u, float v) =>
