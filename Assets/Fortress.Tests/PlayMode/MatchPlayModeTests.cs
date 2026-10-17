@@ -148,6 +148,66 @@ namespace Fortress.Tests
             shots.CancelShot();
             yield return null;
         }
+        [UnityTest]
+        public IEnumerator Match_CraterReachesWater_DefeatsHealthyTankAndRestartClearsDrowning()
+        {
+            var original=match.tuning;
+            var controlled=Object.Instantiate(original);
+            // Isolate the approved water-loss path without mutating the shared settings asset.
+            controlled.explosionDamage=0;controlled.fallDamagePerMeter=0;
+            match.tuning=controlled;shots.tuning=controlled;
+            try
+            {
+                Assert.That(match.terrainMap.Field.LowerHeight,Is.EqualTo(-8));
+                Assert.That(match.terrainMap.Field.WaterHeight,Is.EqualTo(-4));
+                var water=GameObject.Find("Match Water");
+                Assert.That(water,Is.Not.Null);
+                Assert.That(water.transform.position.y,Is.EqualTo(-4));
+                Assert.That(water.GetComponent<Collider>(),Is.Null,"Water is a visual view, not an alternate projectile surface.");
+                int fired=0;
+                while(match.State!=MatchState.Ended && fired<12)
+                {
+                    AimAtOpponent();
+                    int target=1-match.ActivePlayerIndex;
+                    float height=match.Tanks[target].GroundHeight;
+                    Assert.That(shots.TryFire(),Is.True);
+                    shots.ActiveRunner.Tick(.01f);
+                    Assert.That(match.Tanks[target].GroundHeight,Is.EqualTo(height));
+                    Assert.That(match.Tanks[target].Drowned,Is.False);
+                    shots.ActiveRunner.Tick(shots.tuning.maxFlightTime+1);
+                    fired++;
+                    yield return null;
+                }
+                Assert.That(match.State,Is.EqualTo(MatchState.Ended));
+                var loser=match.Tanks[1-match.WinnerIndex];
+                Assert.That(loser.Drowned,Is.True);
+                Assert.That(loser.Health,Is.EqualTo(100),"Water alone must defeat a full-health tank.");
+                Assert.That(loser.GroundHeight,Is.LessThanOrEqualTo(-4));
+                var hud=Object.FindAnyObjectByType<MatchHud>();
+                Assert.That(hud.resultLabel.text,Does.Contain("SUBMERGED"));
+                Assert.That(shots.TryFire(),Is.False);
+                TestContext.WriteLine("Water defeat at HP="+loser.Health+", ground="+loser.GroundHeight+", shots="+fired);
+                if(CaptureEnabled())
+                {
+                    Capture("water-defeat.png",1280,720);
+                    hud.resultPanel.SetActive(false);
+                    var camera=Camera.main;
+                    camera.transform.position=loser.Rig.transform.position+new Vector3(10,14,-10);
+                    camera.transform.LookAt(loser.Rig.transform.position+Vector3.up*2);
+                    Capture("water-crater-detail.png",1280,720);
+                }
+                hud.restartButton.onClick.Invoke();
+                Assert.That(match.State,Is.EqualTo(MatchState.Aim));
+                foreach(var tank in match.Tanks)
+                {
+                    Assert.That(tank.Drowned,Is.False);
+                    Assert.That(tank.Health,Is.EqualTo(100));
+                    Assert.That(tank.GroundHeight,Is.GreaterThan(-4));
+                }
+                Assert.That(hud.resultPanel.activeSelf,Is.False);
+            }
+            finally { match.tuning=original;shots.tuning=original;Object.Destroy(controlled); }
+        }
         void AimAtOpponent()
         {
             // Controlled wind isolates saved-scene collision/damage wiring from seed randomness.

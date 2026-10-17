@@ -24,6 +24,26 @@ namespace Fortress.Editor
             try { Create(); EditorApplication.Exit(0); }
             catch (Exception e) { Debug.LogException(e); EditorApplication.Exit(1); }
         }
+        public static void UpgradeWaterBatch()
+        {
+            try
+            {
+                if(!File.Exists(ScenePath)) Create();
+                var scene=EditorSceneManager.OpenScene(ScenePath);
+                var match=UnityEngine.Object.FindAnyObjectByType<MatchController>();
+                if(match==null) throw new InvalidOperationException("Military match is missing its controller.");
+                Undo.RecordObject(match.tuning,"Approved water level");
+                match.tuning.waterHeight=-4f;
+                EditorUtility.SetDirty(match.tuning);
+                ApplyWater(match);
+                AssetDatabase.SaveAssets();
+                EditorSceneManager.MarkSceneDirty(scene);
+                EditorSceneManager.SaveScene(scene,ScenePath);
+                Debug.Log("Approved water level applied: -4m; terrain lower bound unchanged.");
+                EditorApplication.Exit(0);
+            }
+            catch(Exception e) { Debug.LogException(e);EditorApplication.Exit(1); }
+        }
         [MenuItem("Fortress/Open Military Match")]
         public static void Create()
         {
@@ -35,6 +55,7 @@ namespace Fortress.Editor
             var tuning = UnityEngine.Object.Instantiate(shots.tuning);
             tuning.name = "MatchTuning";
             tuning.showDebugPrediction = false;
+            tuning.waterHeight = -4f;
             AssetDatabase.CreateAsset(tuning, Data + "MatchTuning.asset");
             shots.tuning = tuning;
             shots.terrainMap.tuning = tuning;
@@ -46,6 +67,7 @@ namespace Fortress.Editor
             match.spawnAreas = new[] { Spawn("SpawnLeft", new Vector2(-29,-8), new Vector2(-21,8)), Spawn("SpawnRight", new Vector2(21,-8), new Vector2(29,8)) };
             CreateHud(match);
             CreateShotPresentation(shots);
+            ApplyWater(match);
             EditorUtility.SetDirty(shots); EditorUtility.SetDirty(tuning);
             EditorUtility.SetDirty(match); EditorUtility.SetDirty(shots.terrainMap);
             AssetDatabase.SaveAssets();
@@ -58,6 +80,31 @@ namespace Fortress.Editor
             var area = ScriptableObject.CreateInstance<SpawnArea>();
             area.name = name; area.min = min; area.max = max;
             AssetDatabase.CreateAsset(area, Data + name + ".asset"); return area;
+        }
+        static void ApplyWater(MatchController match)
+        {
+            var terrain=match.terrainMap.terrain;
+            var water=GameObject.Find("Match Water");
+            if(water==null)
+            {
+                water=GameObject.CreatePrimitive(PrimitiveType.Plane);water.name="Match Water";
+                Undo.RegisterCreatedObjectUndo(water,"Create match water view");
+                UnityEngine.Object.DestroyImmediate(water.GetComponent<Collider>());
+            }
+            Undo.RecordObject(water.transform,"Position match water");
+            var origin=terrain.transform.position;var size=terrain.terrainData.size;
+            water.transform.position=new Vector3(origin.x+size.x*.5f,match.tuning.waterHeight,origin.z+size.z*.5f);
+            water.transform.localScale=new Vector3(size.x/10,1,size.z/10);
+            var material=AssetDatabase.LoadAssetAtPath<Material>(Data+"MatchWater.mat");
+            if(material==null)
+            {
+                material=new Material(Shader.Find("Universal Render Pipeline/Lit"));material.name="Match Water";
+                material.SetColor("_BaseColor",new Color(.055f,.22f,.27f));
+                material.SetFloat("_Smoothness",.8f);material.SetFloat("_Metallic",.25f);
+                AssetDatabase.CreateAsset(material,Data+"MatchWater.mat");
+            }
+            var renderer=water.GetComponent<MeshRenderer>();renderer.sharedMaterial=material;
+            renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;
         }
         static void CreateShotPresentation(FlatShotController shots)
         {

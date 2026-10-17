@@ -90,6 +90,8 @@ namespace Fortress
                 Tanks=nextTanks;
                 for(int i=0;i<Tanks.Length;i++) Tanks[i].Spawn(positions[i]);
                 WinnerIndex=-1;IsDraw=false;ActivePlayerIndex=0;TurnNumber=1;initialized=true;
+                // Commit coherent new-match state before BeginAim publishes any shot/UI events.
+                State=MatchState.Aim;
                 Time.timeScale=1;
             }
             finally { restarting=false; }

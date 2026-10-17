@@ -24,7 +24,8 @@ namespace Fortress
                 throw new ArgumentException("Height grid requires at least 2 by 2 samples.");
             if (!(size.x > 0) || !(size.y > 0) || float.IsInfinity(size.x) || float.IsInfinity(size.y))
                 throw new ArgumentOutOfRangeException(nameof(size));
-            if (!(waterHeight < lowerHeight)) throw new ArgumentException("Water must be below terrain lower bound.");
+            if (float.IsNaN(waterHeight) || float.IsInfinity(waterHeight) || float.IsNaN(lowerHeight) || float.IsInfinity(lowerHeight))
+                throw new ArgumentException("Water and terrain lower heights must be finite.");
             heights = (float[,])worldHeights.Clone();
             Origin = origin; Size = size; LowerHeight = lowerHeight; WaterHeight = waterHeight;
             for (int z = 0; z < Depth; z++) for (int x = 0; x < Width; x++)

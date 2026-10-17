@@ -24,8 +24,8 @@ namespace Fortress
             var topHeight = baseHeight + terrain.terrainData.size.y;
             if (!(tuning.terrainLowerHeight >= baseHeight && tuning.terrainLowerHeight <= topHeight))
                 throw new System.InvalidOperationException("Terrain lower bound must lie within the Terrain vertical range.");
-            if (!(tuning.waterHeight < tuning.terrainLowerHeight))
-                throw new System.InvalidOperationException("Water must be below the terrain lower bound.");
+            if (float.IsNaN(tuning.waterHeight) || float.IsInfinity(tuning.waterHeight))
+                throw new System.InvalidOperationException("Water height must be finite.");
             originalData=terrain.terrainData;
             runtimeData=Instantiate(originalData);
             runtimeData.name=originalData.name+" (Runtime)";

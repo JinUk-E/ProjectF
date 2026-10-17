@@ -46,7 +46,8 @@ namespace Fortress
                 healthLabels[i].SetText("PLAYER {0}  /  {1:0} HP", i + 1, tanks[i].Health);
                 healthFills[i].fillAmount = tanks[i].Health / match.tuning.maxHealth;
             }
-            bool ended = match.State == MatchState.Ended;
+            bool hasWinner = match.WinnerIndex >= 0 && match.WinnerIndex < tanks.Length;
+            bool ended = match.State == MatchState.Ended && (match.IsDraw || hasWinner);
             turnLabel.SetText("TURN {0:0}  /  PLAYER {1}", match.TurnNumber, match.ActivePlayerIndex + 1);
             var wind = shots.Wind;
             windLabel.SetText("WIND {0:0.0} m/s²   X {1:0.0}  Z {2:0.0}", wind.magnitude, wind.x, wind.z);
@@ -58,6 +59,8 @@ namespace Fortress
             if (ended)
             {
                 if (match.IsDraw) resultLabel.SetText("DRAW\n{0:0} TURNS", match.TurnNumber);
+                else if(tanks[1-match.WinnerIndex].Drowned)
+                    resultLabel.SetText("PLAYER {0} WINS\nOPPONENT SUBMERGED\n{1:0} TURNS",match.WinnerIndex+1,match.TurnNumber);
                 else resultLabel.SetText("PLAYER {0} WINS\n{1:0} TURNS", match.WinnerIndex + 1, match.TurnNumber);
             }
         }

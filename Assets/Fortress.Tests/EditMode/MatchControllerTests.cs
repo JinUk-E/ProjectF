@@ -129,6 +129,53 @@ namespace Fortress.Tests
             shots.InputEnabled=false;
             foreach(var line in preview.GetComponentsInChildren<LineRenderer>()) Assert.That(line.enabled,Is.False);
         }
+        [TestCase(3.999f,false)]
+        [TestCase(4f,true)]
+        [TestCase(4.001f,true)]
+        public void WaterBoundary_SettlesOnlyAfterShotAndDefeatsWithHealthRemaining(float depth,bool drowned)
+        {
+            Assert.That(map.Field.WaterHeight,Is.EqualTo(-4));
+            var target=match.Tanks[1];map.Field.ApplyCrater(target.Rig.transform.position,4,depth);
+            settings.maxFlightTime=.1f;shots.SetAim(90,85,35);
+            Assert.That(shots.TryFire(),Is.True);Assert.That(shots.LastSolveHit,Is.False);
+            Assert.That(target.Drowned,Is.False);Assert.That(target.GroundHeight,Is.Zero);Assert.That(target.Health,Is.EqualTo(100));
+            Finish();
+            Assert.That(target.GroundHeight,Is.EqualTo(-depth).Within(.00001));
+            Assert.That(target.Health,Is.GreaterThan(0));Assert.That(target.Drowned,Is.EqualTo(drowned));
+            Assert.That(target.IsDefeated,Is.EqualTo(drowned));
+            Assert.That(match.State,Is.EqualTo(drowned?MatchState.Ended:MatchState.Aim));
+            if(drowned) Assert.That(match.WinnerIndex,Is.EqualTo(0));
+        }
+        [Test] public void Restart_AfterDrowning_RestoresDryTerrainAndClearsDefeat()
+        {
+            map.Field.ApplyCrater(match.Tanks[1].Rig.transform.position,4,4);
+            settings.maxFlightTime=.1f;shots.SetAim(90,85,35);Assert.That(shots.TryFire(),Is.True);Finish();
+            Assert.That(match.Tanks[1].Drowned,Is.True);Assert.That(match.Tanks[1].Health,Is.GreaterThan(0));
+            match.RestartMatch(1234);
+            Assert.That(match.Tanks[1].Drowned,Is.False);Assert.That(match.Tanks[1].IsDefeated,Is.False);
+            Assert.That(match.Tanks[1].Health,Is.EqualTo(100));Assert.That(match.Tanks[1].GroundHeight,Is.Zero.Within(.001));
+            Assert.That(map.Field.TrySample(8,0,out var ground),Is.True);Assert.That(ground,Is.Zero.Within(.001));
+            Assert.That(match.State,Is.EqualTo(MatchState.Aim));Assert.That(match.WinnerIndex,Is.EqualTo(-1));Assert.That(shots.InputEnabled,Is.True);
+        }
+        [Test] public void Restart_AfterEnded_PublishesOnlyCoherentNewMatchState()
+        {
+            map.Field.ApplyCrater(match.Tanks[1].Rig.transform.position,4,4);
+            settings.maxFlightTime=.1f;shots.SetAim(90,85,35);Assert.That(shots.TryFire(),Is.True);Finish();
+            Assert.That(match.State,Is.EqualTo(MatchState.Ended));
+            int observed=0;
+            System.Action observe=()=>
+            {
+                observed++;
+                Assert.That(match.State,Is.EqualTo(MatchState.Aim),"new-match data must never be published as an old ended result");
+                Assert.That(match.WinnerIndex,Is.EqualTo(-1));Assert.That(match.IsDraw,Is.False);
+                Assert.That(match.TurnNumber,Is.EqualTo(1));Assert.That(match.Seed,Is.EqualTo(5678));
+                foreach(var tank in match.Tanks) { Assert.That(tank.Health,Is.EqualTo(100));Assert.That(tank.IsDefeated,Is.False); }
+            };
+            shots.StateChanged+=observe;
+            try { match.RestartMatch(5678); }
+            finally { shots.StateChanged-=observe; }
+            Assert.That(observed,Is.GreaterThan(0));
+        }
         [Test] public void CancelShot_DoesNotAdvanceTurnOrApplyDamage()
         {
             Assert.That(shots.TryFire(),Is.True);shots.CancelShot();

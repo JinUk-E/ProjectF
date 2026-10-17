@@ -15,7 +15,7 @@ The military presentation adds mesh-only gun recoil, muzzle flash and impact fla
 ## Scope and remaining work
 
 - This is a local two-player standard-shell match. AI, special ammunition and general submunition-family lifecycle tracking are later work. Scatter profiles remain rejected rather than ending a turn early.
-- Water remains at -10m under the -8m diggable floor pending the user's planning decision. The defensive water-defeat check exists, but digging cannot trigger it with these settings. This is **not full FR-5 acceptance**. No frozen planning document was changed.
+- Approved 2026-10-17: MilitaryMatch water is -4m, terrain floor remains -8m. After shot completion a tank whose ground reaches or falls below water loses even with HP remaining. The result identifies submersion. Water is a visual plane; projectile collision still uses terrain and tank capsules. Restart restores dry starting terrain and clears drowning.
 - Camera remains the shared overview. Shot tracking, audio and more detailed destruction presentation remain future improvements.
 - Automated PlayMode testing exercises scene wiring and the restart button callback; physical keyboard/mouse play and full-frame GPU performance are not asserted.
 

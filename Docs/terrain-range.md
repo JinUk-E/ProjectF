@@ -26,3 +26,6 @@ GC package allocation checks remain inconclusive in this runner. Manual keyboard
 ## Epic 3 planning issue
 
 The frozen wording puts water below the hard terrain lower bound. Current defaults preserve that: lower=-8m, water=-10m. A tank standing on clamped terrain cannot reach that water level, so terrain digging alone cannot trigger the planned water defeat. Before implementing water defeat, clarify the intended water/lower relationship through the planning backtracking procedure. No frozen planning document or water-defeat behavior has been changed here.
+
+
+2026-10-17 main-codex update: the user approved water=-4m above floor=-8m. New GameTuning defaults and MilitaryMatch now use this rule; stored legacy range settings remain unchanged. The earlier planning follow-up above is resolved. See military-match.md and Validation/water-status.md.

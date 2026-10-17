@@ -33,7 +33,7 @@ MonoBehaviour:
   spawnAttempts: 32
   groundHeight: 0
   terrainLowerHeight: -8
-  waterHeight: -10
+  waterHeight: -4
   craterRadius: 4
   craterDepth: 2
   previewSeconds: 1.5
