@@ -31,6 +31,15 @@ MonoBehaviour:
   tankCapsuleHeight: 2
   tankGroundOffset: 0
   spawnAttempts: 32
+  randomTerrain: 1
+  terrainBaseHeight: 0
+  terrainAmplitude: 4
+  terrainNoiseScale: 30
+  terrainOctaves: 3
+  terrainPersistence: 0.5
+  spawnPadMargin: 2
+  spawnPadBlend: 8
+  spawnPadClearance: 1
   groundHeight: 0
   terrainLowerHeight: -8
   waterHeight: -4

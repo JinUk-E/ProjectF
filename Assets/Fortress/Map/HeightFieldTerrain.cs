@@ -41,6 +41,36 @@ namespace Fortress
             // Constructor lower-bound clamping must also be reflected by the view.
             UpdateRegion(new RectInt(0,0,resolution,resolution));
         }
+        public HeightField PrepareSeededTerrain(int seed,GameTuning settings,SpawnArea[] spawnAreas)
+        {
+            Initialize();
+            if(Field==null) throw new System.InvalidOperationException("Terrain is not initialized.");
+            var candidate=SeededTerrainGenerator.Generate(Field,settings,seed,spawnAreas);
+            ValidateCandidate(candidate);
+            return candidate;
+        }
+        void ValidateCandidate(HeightField candidate)
+        {
+            if(candidate==null || runtimeData==null || Field==null || candidate.IsFrozen ||
+                candidate.Width!=Field.Width || candidate.Depth!=Field.Depth || candidate.Origin!=Field.Origin || candidate.Size!=Field.Size ||
+                candidate.LowerHeight!=Field.LowerHeight || candidate.WaterHeight!=Field.WaterHeight)
+                throw new System.ArgumentException("Candidate terrain must match the initialized map geometry and height limits.");
+            float bottom=terrain.transform.position.y,top=bottom+runtimeData.size.y;
+            for(int z=0;z<candidate.Depth;z++) for(int x=0;x<candidate.Width;x++)
+            {
+                float height=candidate.GetHeight(x,z);
+                if(!(height>=bottom && height<=top))
+                    throw new System.ArgumentException("Generated heights exceed the Terrain vertical range.");
+            }
+        }
+        public void InstallTerrain(HeightField candidate)
+        {
+            if(Field!=null && Field.IsFrozen) throw new System.InvalidOperationException("Cannot replace terrain during a shot.");
+            ValidateCandidate(candidate);
+            Field=candidate;
+            Surface=new TerrainShotSurface(Field);
+            UpdateRegion(new RectInt(0,0,Field.Width,Field.Depth));
+        }
         public void ResetTerrain()
         {
             Initialize();

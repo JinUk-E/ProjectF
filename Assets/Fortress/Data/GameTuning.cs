@@ -24,6 +24,15 @@ namespace Fortress
         [Min(0.02f)] public float tankCapsuleHeight = 2f;
         public float tankGroundOffset;
         [Min(1)] public int spawnAttempts = 32;
+        public bool randomTerrain;
+        public float terrainBaseHeight;
+        [Min(0)] public float terrainAmplitude = 4f;
+        [Min(0.01f)] public float terrainNoiseScale = 30f;
+        [Range(1,8)] public int terrainOctaves = 3;
+        [Range(0,1)] public float terrainPersistence = 0.5f;
+        [Min(0)] public float spawnPadMargin = 2f;
+        [Min(0.01f)] public float spawnPadBlend = 8f;
+        [Min(0.01f)] public float spawnPadClearance = 1f;
         public float groundHeight;
         public float terrainLowerHeight = -8f;
         public float waterHeight = -4f;

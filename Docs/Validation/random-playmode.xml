@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="20" result="Passed" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:29:15Z" duration="32.6794843">
+  <test-suite type="TestSuite" id="1032" name="ProjectF" fullname="ProjectF" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:29:15Z" duration="32.679484" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1026" name="Fortress.PlayModeTests.dll" fullname="D:/MoraeGames/01.Unity/ProjectF/Library/ScriptAssemblies/Fortress.PlayModeTests.dll" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:29:15Z" duration="32.671700" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="28088" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1027" name="Fortress" fullname="Fortress" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:29:15Z" duration="32.671264" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1028" name="Tests" fullname="Fortress.Tests" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:29:15Z" duration="32.671017" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="FlatRangePlayModeTests" fullname="Fortress.Tests.FlatRangePlayModeTests" classname="Fortress.Tests.FlatRangePlayModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:28:43Z" duration="1.328250" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1003" name="FlatRange_DisableDuringFlight_NativeLifecycleCancelsAndAllowsRestart" fullname="Fortress.Tests.FlatRangePlayModeTests.FlatRange_DisableDuringFlight_NativeLifecycleCancelsAndAllowsRestart" methodname="FlatRange_DisableDuringFlight_NativeLifecycleCancelsAndAllowsRestart" classname="Fortress.Tests.FlatRangePlayModeTests" runstate="Runnable" seed="1742798323" result="Passed" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:28:42Z" duration="0.440591" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="FlatRange_NormalShot_FinishesThroughNativeUpdateWithinOneCentimetre" fullname="Fortress.Tests.FlatRangePlayModeTests.FlatRange_NormalShot_FinishesThroughNativeUpdateWithinOneCentimetre" methodname="FlatRange_NormalShot_FinishesThroughNativeUpdateWithinOneCentimetre" classname="Fortress.Tests.FlatRangePlayModeTests" runstate="Runnable" seed="462862044" result="Passed" start-time="2026-10-17 11:28:42Z" end-time="2026-10-17 11:28:43Z" duration="0.875762" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1004" name="MatchPlayModeTests" fullname="Fortress.Tests.MatchPlayModeTests" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-17 11:28:43Z" end-time="2026-10-17 11:29:13Z" duration="29.666841" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1011" name="Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer" fullname="Fortress.Tests.MatchPlayModeTests.Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer" methodname="Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="483985016" result="Passed" start-time="2026-10-17 11:28:43Z" end-time="2026-10-17 11:28:44Z" duration="0.413733" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="Hud_Presentation_CapturesReadyAndResultsAtTargetResolutions" fullname="Fortress.Tests.MatchPlayModeTests.Hud_Presentation_CapturesReadyAndResultsAtTargetResolutions" methodname="Hud_Presentation_CapturesReadyAndResultsAtTargetResolutions" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="498661232" result="Passed" start-time="2026-10-17 11:28:44Z" end-time="2026-10-17 11:28:46Z" duration="2.389724" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="Hud_TurnNotice_ExpiresAndMissDoesNotClaimImpact" fullname="Fortress.Tests.MatchPlayModeTests.Hud_TurnNotice_ExpiresAndMissDoesNotClaimImpact" methodname="Hud_TurnNotice_ExpiresAndMissDoesNotClaimImpact" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="1145415097" result="Passed" start-time="2026-10-17 11:28:46Z" end-time="2026-10-17 11:28:46Z" duration="0.333678" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1014" name="Keyboard_AimAndFireBindings_DriveMatchAndLockDuringFlight" fullname="Fortress.Tests.MatchPlayModeTests.Keyboard_AimAndFireBindings_DriveMatchAndLockDuringFlight" methodname="Keyboard_AimAndFireBindings_DriveMatchAndLockDuringFlight" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="606040735" result="Passed" start-time="2026-10-17 11:28:46Z" end-time="2026-10-17 11:28:47Z" duration="0.420886" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="Match_CraterReachesWater_DefeatsHealthyTankAndRestartClearsDrowning" fullname="Fortress.Tests.MatchPlayModeTests.Match_CraterReachesWater_DefeatsHealthyTankAndRestartClearsDrowning" methodname="Match_CraterReachesWater_DefeatsHealthyTankAndRestartClearsDrowning" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="1892666951" result="Passed" start-time="2026-10-17 11:28:47Z" end-time="2026-10-17 11:28:57Z" duration="9.912945" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Water defeat at HP=100, ground=-5.627041, shots=5
+]]></output>
+            </test-case>
+            <test-case id="1009" name="Match_DisableAndEnable_CancelsFlightAndRestoresAimHud" fullname="Fortress.Tests.MatchPlayModeTests.Match_DisableAndEnable_CancelsFlightAndRestoresAimHud" methodname="Match_DisableAndEnable_CancelsFlightAndRestoresAimHud" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="1833661794" result="Passed" start-time="2026-10-17 11:28:57Z" end-time="2026-10-17 11:28:57Z" duration="0.315374" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="Match_FullHealthHotseat_ReachesWinnerThroughRepeatedShots" fullname="Fortress.Tests.MatchPlayModeTests.Match_FullHealthHotseat_ReachesWinnerThroughRepeatedShots" methodname="Match_FullHealthHotseat_ReachesWinnerThroughRepeatedShots" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="1956384342" result="Passed" start-time="2026-10-17 11:28:57Z" end-time="2026-10-17 11:29:07Z" duration="9.518783" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Full-health hotseat completed in 5 shots, winner=0
+]]></output>
+            </test-case>
+            <test-case id="1005" name="Match_Hit_ChangesHealthAndGroundOnlyAfterFlightThenSwitchesPlayer" fullname="Fortress.Tests.MatchPlayModeTests.Match_Hit_ChangesHealthAndGroundOnlyAfterFlightThenSwitchesPlayer" methodname="Match_Hit_ChangesHealthAndGroundOnlyAfterFlightThenSwitchesPlayer" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="1694025456" result="Passed" start-time="2026-10-17 11:29:07Z" end-time="2026-10-17 11:29:09Z" duration="2.273456" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="Match_RestartDuringFlight_CancelsAndReplaysSeedWithoutChangingLaunchRig" fullname="Fortress.Tests.MatchPlayModeTests.Match_RestartDuringFlight_CancelsAndReplaysSeedWithoutChangingLaunchRig" methodname="Match_RestartDuringFlight_CancelsAndReplaysSeedWithoutChangingLaunchRig" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="123549474" result="Passed" start-time="2026-10-17 11:29:09Z" end-time="2026-10-17 11:29:09Z" duration="0.379008" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="Match_Victory_DisplaysResultAndRestartButtonRestoresTerrainAndHealth" fullname="Fortress.Tests.MatchPlayModeTests.Match_Victory_DisplaysResultAndRestartButtonRestoresTerrainAndHealth" methodname="Match_Victory_DisplaysResultAndRestartButtonRestoresTerrainAndHealth" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="282302806" result="Passed" start-time="2026-10-17 11:29:09Z" end-time="2026-10-17 11:29:12Z" duration="2.378832" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="Terrain_InvalidGenerationDuringFlight_PreservesCurrentMatch" fullname="Fortress.Tests.MatchPlayModeTests.Terrain_InvalidGenerationDuringFlight_PreservesCurrentMatch" methodname="Terrain_InvalidGenerationDuringFlight_PreservesCurrentMatch" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="919354288" result="Passed" start-time="2026-10-17 11:29:12Z" end-time="2026-10-17 11:29:12Z" duration="0.322824" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1015" name="Terrain_NewSeedChangesMap_SameSeedRestoresMapAndSpawn" fullname="Fortress.Tests.MatchPlayModeTests.Terrain_NewSeedChangesMap_SameSeedRestoresMapAndSpawn" methodname="Terrain_NewSeedChangesMap_SameSeedRestoresMapAndSpawn" classname="Fortress.Tests.MatchPlayModeTests" runstate="Runnable" seed="1652465914" result="Passed" start-time="2026-10-17 11:29:12Z" end-time="2026-10-17 11:29:13Z" duration="1.005095" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="ParameterizedFixture" id="1025" name="TerrainRangePlayModeTests" fullname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-17 11:29:13Z" end-time="2026-10-17 11:29:15Z" duration="1.674604" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1017" name="TerrainRangePlayModeTests(False)" fullname="Fortress.Tests.TerrainRangePlayModeTests(False)" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 11:29:13Z" end-time="2026-10-17 11:29:14Z" duration="0.850552" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1020" name="TerrainRange_CraterPatch_Reports257GridUpdateTiming" fullname="Fortress.Tests.TerrainRangePlayModeTests(False).TerrainRange_CraterPatch_Reports257GridUpdateTiming" methodname="TerrainRange_CraterPatch_Reports257GridUpdateTiming" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" seed="1901778270" result="Passed" start-time="2026-10-17 11:29:13Z" end-time="2026-10-17 11:29:13Z" duration="0.293000" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[257x257 crater + partial upload + SyncHeightmap: max=0.326ms mean=0.237ms
+]]></output>
+              </test-case>
+              <test-case id="1019" name="TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight" fullname="Fortress.Tests.TerrainRangePlayModeTests(False).TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight" methodname="TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" seed="1064282655" result="Passed" start-time="2026-10-17 11:29:13Z" end-time="2026-10-17 11:29:13Z" duration="0.270582" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre" fullname="Fortress.Tests.TerrainRangePlayModeTests(False).TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre" methodname="TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" seed="1197858286" result="Passed" start-time="2026-10-17 11:29:13Z" end-time="2026-10-17 11:29:14Z" duration="0.286069" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Worst bilinear/triangle deviation bound: 0.0989434 m
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1021" name="TerrainRangePlayModeTests(True)" fullname="Fortress.Tests.TerrainRangePlayModeTests(True)" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-17 11:29:14Z" end-time="2026-10-17 11:29:15Z" duration="0.823572" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1024" name="TerrainRange_CraterPatch_Reports257GridUpdateTiming" fullname="Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_CraterPatch_Reports257GridUpdateTiming" methodname="TerrainRange_CraterPatch_Reports257GridUpdateTiming" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" seed="1650608129" result="Passed" start-time="2026-10-17 11:29:14Z" end-time="2026-10-17 11:29:14Z" duration="0.287810" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[257x257 crater + partial upload + SyncHeightmap: max=0.328ms mean=0.233ms
+]]></output>
+              </test-case>
+              <test-case id="1023" name="TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight" fullname="Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight" methodname="TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" seed="927062028" result="Passed" start-time="2026-10-17 11:29:14Z" end-time="2026-10-17 11:29:14Z" duration="0.262226" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1022" name="TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre" fullname="Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre" methodname="TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre" classname="Fortress.Tests.TerrainRangePlayModeTests" runstate="Runnable" seed="1456445767" result="Passed" start-time="2026-10-17 11:29:14Z" end-time="2026-10-17 11:29:15Z" duration="0.272840" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Worst bilinear/triangle deviation bound: 0.0989434 m
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: C:/Users/jjw68/AppData/LocalLow/DefaultCompany/ProjectF\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

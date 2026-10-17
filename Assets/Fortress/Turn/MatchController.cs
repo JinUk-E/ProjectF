@@ -63,7 +63,10 @@ namespace Fortress
                 throw new InvalidOperationException("Match requires shots, terrain, tuning, two tanks and two spawn areas.");
             terrainMap.Initialize();
             if(terrainMap.Field==null) throw new InvalidOperationException("Terrain initialization failed.");
-            // Prepare every spawn against the original grid before touching a running match.
+            var candidateTerrain=tuning.randomTerrain
+                ? terrainMap.PrepareSeededTerrain(seed,tuning,spawnAreas) : null;
+            var spawnField=candidateTerrain ?? terrainMap.Field;
+            // Prepare every spawn against the candidate/original grid before touching a running match.
             // An invalid configuration must leave the current shot, terrain, health and seed intact.
             var spawnRandom=new System.Random(unchecked(seed ^ 0x126e71));
             var nextTanks=new TankCombatant[2];
@@ -75,7 +78,7 @@ namespace Fortress
                 for(int attempt=0;attempt<Mathf.Max(1,tuning.spawnAttempts);attempt++)
                 {
                     var p=spawnAreas[i].Sample(spawnRandom);
-                    if(terrainMap.Field.TrySampleOriginal(p.x,p.y,out float height) && height>terrainMap.Field.WaterHeight)
+                    if(spawnField.TrySampleOriginal(p.x,p.y,out float height) && height>spawnField.WaterHeight)
                     { positions[i]=new Vector3(p.x,height,p.y);found=true;break; }
                 }
                 if(!found) throw new InvalidOperationException("Spawn area has no valid dry terrain sample.");
@@ -83,7 +86,8 @@ namespace Fortress
             restarting=true;
             try
             {
-                shots.CancelShot();impacts.Clear();terrainMap.ResetTerrain();
+                shots.CancelShot();impacts.Clear();
+                if(candidateTerrain!=null) terrainMap.InstallTerrain(candidateTerrain);else terrainMap.ResetTerrain();
                 shots.tuning=tuning;shots.terrainMap=terrainMap;
                 Subscribe();
                 Seed=seed;windRandom=new System.Random(unchecked(seed ^ 0x51f15e));

@@ -6,6 +6,8 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityProjectile;
 using Object=UnityEngine.Object;
 
@@ -79,15 +81,17 @@ namespace Fortress.Tests
             yield return null;
             if(CaptureEnabled()) Capture("match-result.png",1280,720);
             int seed=match.Seed;
-            int revision=match.terrainMap.Field.Revision;
+            var previousField=match.terrainMap.Field;
             hud.restartButton.onClick.Invoke();
             Assert.That(match.Seed,Is.Not.EqualTo(seed));
             Assert.That(match.State,Is.EqualTo(MatchState.Aim));
             Assert.That(match.TurnNumber,Is.EqualTo(1));
             Assert.That(hud.resultPanel.activeSelf,Is.False);
             foreach(var tank in match.Tanks) Assert.That(tank.Health,Is.EqualTo(match.tuning.maxHealth));
+            Assert.That(match.terrainMap.Field,Is.Not.SameAs(previousField));
+            Assert.That(match.terrainMap.Field.Revision,Is.Zero);
+            match.RestartMatch(seed);
             Assert.That(match.terrainMap.Field.GetHeight(128,128),Is.EqualTo(original));
-            Assert.That(match.terrainMap.Field.Revision,Is.GreaterThan(revision));
             yield return null;
         }
         [UnityTest]
@@ -281,6 +285,100 @@ namespace Fortress.Tests
             hud.restartButton.onClick.Invoke();
             Assert.That(hud.resultPanel.activeSelf,Is.False);
             Assert.That(hud.activeIndicators[0].enabled,Is.True);
+        }
+        [UnityTest]
+        public IEnumerator Keyboard_AimAndFireBindings_DriveMatchAndLockDuringFlight()
+        {
+            var oldFocus=InputSystem.settings.backgroundBehavior;
+            var oldEditor=InputSystem.settings.editorInputBehaviorInPlayMode;
+            // Batch mode has no focused Game view; route this synthetic device explicitly.
+            InputSystem.settings.backgroundBehavior=InputSettings.BackgroundBehavior.IgnoreFocus;
+            InputSystem.settings.editorInputBehaviorInPlayMode=InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
+            var keyboard=InputSystem.AddDevice<Keyboard>();
+            try
+            {
+                shots.SetAim(90,45,22);
+                InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.D,Key.W,Key.E));
+                yield return null; yield return null;
+                Assert.That(shots.ActiveTank.Yaw,Is.GreaterThan(90));
+                Assert.That(shots.ActiveTank.Pitch,Is.GreaterThan(45));
+                Assert.That(shots.Power,Is.GreaterThan(22));
+                float yaw=shots.ActiveTank.Yaw,pitch=shots.ActiveTank.Pitch,power=shots.Power;
+                InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.A,Key.S,Key.Q));
+                yield return null; yield return null;
+                Assert.That(shots.ActiveTank.Yaw,Is.LessThan(yaw));
+                Assert.That(shots.ActiveTank.Pitch,Is.LessThan(pitch));
+                Assert.That(shots.Power,Is.LessThan(power));
+                InputSystem.QueueStateEvent(keyboard,new KeyboardState());
+                yield return null;
+                shots.SetAim(90,85,30);
+                InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.Space));
+                yield return null; yield return null;
+                Assert.That(match.State,Is.EqualTo(MatchState.Firing));
+                var runner=shots.ActiveRunner;
+                yaw=shots.ActiveTank.Yaw;pitch=shots.ActiveTank.Pitch;power=shots.Power;
+                InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.A,Key.S,Key.Q));
+                yield return null;
+                InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.Space,Key.D,Key.W,Key.E));
+                yield return null; yield return null;
+                Assert.That(shots.ActiveRunner,Is.SameAs(runner));
+                Assert.That(shots.ActiveTank.Yaw,Is.EqualTo(yaw));
+                Assert.That(shots.ActiveTank.Pitch,Is.EqualTo(pitch));
+                Assert.That(shots.Power,Is.EqualTo(power));
+            }
+            finally
+            {
+                InputSystem.RemoveDevice(keyboard);
+                InputSystem.settings.backgroundBehavior=oldFocus;
+                InputSystem.settings.editorInputBehaviorInPlayMode=oldEditor;
+            }
+        }
+        [UnityTest]
+        public IEnumerator Terrain_NewSeedChangesMap_SameSeedRestoresMapAndSpawn()
+        {
+            Assert.That(match.tuning.randomTerrain,Is.True);
+            match.RestartMatch(12345);
+            var first=match.terrainMap.Field;
+            var position=match.Tanks[0].Rig.transform.position;
+            var wind=shots.Wind;
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressTerrainCapture")>=0) Capture("random-seed-12345.png",1280,720);
+            match.RestartMatch(98765);
+            var second=match.terrainMap.Field;
+            int differences=0;
+            for(int z=0;z<first.Depth;z+=8) for(int x=0;x<first.Width;x+=8)
+                if(Mathf.Abs(first.GetHeight(x,z)-second.GetHeight(x,z))>.01f) differences++;
+            Assert.That(differences,Is.GreaterThan(100));
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressTerrainCapture")>=0) Capture("random-seed-98765.png",1280,720);
+            match.RestartMatch(12345);
+            var restored=match.terrainMap.Field;
+            for(int z=0;z<first.Depth;z++) for(int x=0;x<first.Width;x++)
+                Assert.That(restored.GetHeight(x,z),Is.EqualTo(first.GetHeight(x,z)));
+            Assert.That(match.Tanks[0].Rig.transform.position,Is.EqualTo(position));
+            Assert.That(shots.Wind,Is.EqualTo(wind));
+            foreach(var tank in match.Tanks) Assert.That(tank.GroundHeight,Is.GreaterThan(match.tuning.waterHeight));
+            yield return null;
+        }
+        [UnityTest]
+        public IEnumerator Terrain_InvalidGenerationDuringFlight_PreservesCurrentMatch()
+        {
+            shots.SetAim(90,85,30);
+            Assert.That(shots.TryFire(),Is.True);
+            var field=match.terrainMap.Field;var runner=shots.ActiveRunner;int seed=match.Seed;
+            var original=match.tuning;
+            var invalid=Object.Instantiate(original);
+            invalid.terrainNoiseScale=0;
+            match.tuning=invalid;
+            try
+            {
+                Assert.Throws<ArgumentException>(()=>match.RestartMatch(99));
+                Assert.That(match.terrainMap.Field,Is.SameAs(field));
+                Assert.That(field.IsFrozen,Is.True);
+                Assert.That(shots.ActiveRunner,Is.SameAs(runner));
+                Assert.That(match.State,Is.EqualTo(MatchState.Firing));
+                Assert.That(match.Seed,Is.EqualTo(seed));
+            }
+            finally { match.tuning=original;Object.Destroy(invalid); }
+            yield return null;
         }
         void AimAtOpponent()
         {

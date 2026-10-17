@@ -15,6 +15,33 @@ namespace Fortress.Editor
         public const string ScenePath = "Assets/Fortress/Scenes/MilitaryMatch.unity";
         const string Data = "Assets/Fortress/Data/";
 
+        public static void UpgradeRandomTerrainBatch()
+        {
+            try
+            {
+                var scene=EditorSceneManager.OpenScene(ScenePath);
+                var match=UnityEngine.Object.FindAnyObjectByType<MatchController>();
+                if(match==null) throw new InvalidOperationException("Military match is missing its controller.");
+                Undo.RecordObject(match.tuning,"Enable seeded match terrain");
+                match.tuning.randomTerrain=true;
+                EditorUtility.SetDirty(match.tuning);
+                AssetDatabase.SaveAssets();
+                EditorSceneManager.SaveScene(scene,ScenePath);
+                Debug.Log("MilitaryMatch now generates terrain from each match seed.");
+                EditorApplication.Exit(0);
+            }
+            catch(Exception e) { Debug.LogException(e);EditorApplication.Exit(1); }
+        }
+        [MenuItem("Fortress/Play Military Match")]
+        public static void PlayMatch()
+        {
+            if(EditorApplication.isPlayingOrWillChangePlaymode) return;
+            if(!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            EditorSceneManager.OpenScene(ScenePath);
+            EditorApplication.ExecuteMenuItem("Window/General/Game");
+            EditorApplication.EnterPlaymode();
+        }
+
         public static void CreateBatch()
         {
             try { Create(); EditorApplication.Exit(0); }
@@ -52,6 +79,7 @@ namespace Fortress.Editor
             tuning.name = "MatchTuning";
             tuning.showDebugPrediction = false;
             tuning.waterHeight = -4f;
+            tuning.randomTerrain = true;
             AssetDatabase.CreateAsset(tuning, Data + "MatchTuning.asset");
             shots.tuning = tuning;
             shots.terrainMap.tuning = tuning;
