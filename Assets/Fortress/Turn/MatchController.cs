@@ -22,6 +22,7 @@ namespace Fortress
         public int WinnerIndex { get; private set; } = -1;
         public bool IsDraw { get; private set; }
         public int Seed { get; private set; }
+        public int Generation { get; private set; }
         public TankCombatant[] Tanks { get; private set; }
         public event Action StateChanged;
         System.Random windRandom;
@@ -95,6 +96,7 @@ namespace Fortress
                 for(int i=0;i<Tanks.Length;i++) Tanks[i].Spawn(positions[i]);
                 WinnerIndex=-1;IsDraw=false;ActivePlayerIndex=0;TurnNumber=1;initialized=true;
                 // Commit coherent new-match state before BeginAim publishes any shot/UI events.
+                Generation++;
                 State=MatchState.Aim;
                 Time.timeScale=1;
             }

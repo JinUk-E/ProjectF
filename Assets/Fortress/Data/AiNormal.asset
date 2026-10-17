@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4074b7377ea0949934b8e236e69dbb, type: 3}
+  m_Name: AiNormal
+  m_EditorClassIdentifier: Fortress::Fortress.AiSettings
+  yawSamples: 5
+  pitchSamples: 7
+  powerSamples: 5
+  maxSolverCalls: 200
+  yawSearchDegrees: 18
+  refinementPasses: 3
+  reachTolerance: 4
+  yawSigmaDegrees: 5
+  pitchSigmaDegrees: 2
+  powerSigma: 2
+  noiseDecay: 0.6123724
+  thinkSeconds: 1.5

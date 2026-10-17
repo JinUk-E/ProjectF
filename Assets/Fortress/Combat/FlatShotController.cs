@@ -37,6 +37,7 @@ namespace Fortress
         public Vector3 Wind { get; private set; }
         public TankRig ActiveTank => tanks != null && ActiveTankIndex >= 0 && ActiveTankIndex < tanks.Length ? tanks[ActiveTankIndex] : null;
         bool initialized;
+        public IShotSurface Surface => surface;
         IShotSurface surface;
         HeightField shotField;
         bool pendingImpact;

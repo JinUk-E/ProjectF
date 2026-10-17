@@ -6,6 +6,7 @@ namespace Fortress
     public sealed class AimInput : MonoBehaviour
     {
         public FlatShotController controller;
+        public AiOpponent ai;
         InputAction yaw;
         InputAction pitch;
         InputAction power;
@@ -40,11 +41,11 @@ namespace Fortress
         }
         void OnFire(InputAction.CallbackContext context)
         {
-            if (controller != null) controller.TryFire();
+            if (controller != null && (ai == null || !ai.OwnsCurrentTurn)) controller.TryFire();
         }
         void Update()
         {
-            if (controller == null || controller.IsFiring || controller.ActiveTank == null || controller.tuning == null) return;
+            if ((ai != null && ai.OwnsCurrentTurn) || controller == null || controller.IsFiring || controller.ActiveTank == null || controller.tuning == null) return;
             float y = yaw.ReadValue<float>(), p = pitch.ReadValue<float>(), s = power.ReadValue<float>();
             if (y == 0 && p == 0 && s == 0) return;
             var tuning = controller.tuning;
