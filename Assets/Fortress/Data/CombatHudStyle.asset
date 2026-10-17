@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09b45890fdd3b545b3b5e766475a586, type: 3}
+  m_Name: CombatHudStyle
+  m_EditorClassIdentifier: Fortress::Fortress.HudStyleSO
+  panel: {r: 0.035, g: 0.043, b: 0.045, a: 0.88}
+  text: {r: 0.94, g: 0.95, b: 0.91, a: 1}
+  muted: {r: 0.58, g: 0.64, b: 0.62, a: 1}
+  accent: {r: 0.68, g: 0.76, b: 0.44, a: 1}
+  danger: {r: 0.93, g: 0.29, b: 0.23, a: 1}
+  dangerHealthFraction: 0.25
+  notificationSeconds: 2.2
+  notificationFadeSeconds: 0.4

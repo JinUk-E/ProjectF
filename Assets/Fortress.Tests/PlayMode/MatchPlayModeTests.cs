@@ -208,6 +208,80 @@ namespace Fortress.Tests
             }
             finally { match.tuning=original;shots.tuning=original;Object.Destroy(controlled); }
         }
+        [UnityTest]
+        public IEnumerator Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer()
+        {
+            var hud=Object.FindAnyObjectByType<MatchHud>();
+            Assert.That(hud.activeIndicators[0].enabled,Is.True);
+            Assert.That(hud.activeIndicators[1].enabled,Is.False);
+            shots.SetAim(-37,62,match.tuning.minPower);
+            Assert.That(hud.powerFill.fillAmount,Is.Zero.Within(.0001));
+            Assert.That(hud.elevationLabel.text,Does.Contain("62"));
+            Assert.That(hud.headingLabel.text,Does.Contain("37"));
+            shots.SetAim(-37,62,match.tuning.maxPower);
+            Assert.That(hud.powerFill.fillAmount,Is.EqualTo(1).Within(.0001));
+            shots.SetWind(new Vector3(3,0,0));
+            Assert.That(Mathf.Abs(Mathf.DeltaAngle(hud.windArrow.localEulerAngles.z,0)),Is.LessThan(.01));
+            string windText=hud.windLabel.text;
+            shots.SetWind(new Vector3(0,0,-2));
+            Assert.That(Mathf.Abs(Mathf.DeltaAngle(hud.windArrow.localEulerAngles.z,-90)),Is.LessThan(.01));
+            Assert.That(hud.windLabel.text,Is.Not.EqualTo(windText));
+            match.Tanks[1].ApplyDamage(75);
+            shots.SetAim(90,85,match.tuning.minPower);
+            Assert.That(hud.healthFills[1].fillAmount,Is.EqualTo(.25f).Within(.0001));
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressHudCapture")>=0) Capture("hud-danger-720.png",1280,720);
+            Assert.That(shots.TryFire(),Is.True);
+            shots.ActiveRunner.Tick(shots.tuning.maxFlightTime+1);
+            Assert.That(match.ActivePlayerIndex,Is.EqualTo(1));
+            Assert.That(hud.activeIndicators[0].enabled,Is.False);
+            Assert.That(hud.activeIndicators[1].enabled,Is.True);
+            yield return null;
+        }
+        [UnityTest]
+        public IEnumerator Hud_TurnNotice_ExpiresAndMissDoesNotClaimImpact()
+        {
+            var hud=Object.FindAnyObjectByType<MatchHud>();
+            Assert.That(hud.notificationGroup.alpha,Is.GreaterThan(0));
+            hud.TickPresentation(hud.style.notificationSeconds+hud.style.notificationFadeSeconds+1);
+            Assert.That(hud.notificationGroup.alpha,Is.Zero);
+            shots.SetAim(90,85,35);
+            Assert.That(hud.notificationGroup.alpha,Is.Zero,"Adjusting aim must not replay the turn notification.");
+            shots.SetWind(new Vector3(100,0,0));
+            Assert.That(shots.TryFire(),Is.True);
+            Assert.That(shots.LastSolveHit,Is.False);
+            shots.ActiveRunner.Tick(shots.tuning.maxFlightTime+1);
+            Assert.That(hud.notificationGroup.alpha,Is.GreaterThan(0));
+            Assert.That(hud.notificationLabel.text.ToUpperInvariant(),Does.Not.Contain("IMPACT"));
+            yield return null;
+        }
+        [UnityTest]
+        public IEnumerator Hud_Presentation_CapturesReadyAndResultsAtTargetResolutions()
+        {
+            var hud=Object.FindAnyObjectByType<MatchHud>();
+            Assert.That(Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Length,Is.EqualTo(1));
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressHudCapture")>=0)
+            {
+                Capture("hud-turn-720.png",1280,720);
+                hud.TickPresentation(hud.style.notificationSeconds+hud.style.notificationFadeSeconds+1);
+                Capture("hud-ready-720.png",1280,720);
+                Capture("hud-ready-1080.png",1920,1080);
+            }
+            match.Tanks[1].ApplyDamage(match.Tanks[1].Health-1);
+            AimAtOpponent();
+            Assert.That(shots.TryFire(),Is.True);
+            shots.ActiveRunner.Tick(shots.tuning.maxFlightTime+1);
+            Assert.That(hud.resultPanel.activeSelf,Is.True);
+            Assert.That(hud.activeIndicators[0].enabled || hud.activeIndicators[1].enabled,Is.False);
+            yield return null;
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressHudCapture")>=0)
+            {
+                Capture("hud-result-720.png",1280,720);
+                Capture("hud-result-1080.png",1920,1080);
+            }
+            hud.restartButton.onClick.Invoke();
+            Assert.That(hud.resultPanel.activeSelf,Is.False);
+            Assert.That(hud.activeIndicators[0].enabled,Is.True);
+        }
         void AimAtOpponent()
         {
             // Controlled wind isolates saved-scene collision/damage wiring from seed randomness.

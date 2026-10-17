@@ -14,10 +14,6 @@ namespace Fortress.Editor
     {
         public const string ScenePath = "Assets/Fortress/Scenes/MilitaryMatch.unity";
         const string Data = "Assets/Fortress/Data/";
-        static TMP_FontAsset font;
-        static readonly Color Ink = new Color(.045f, .055f, .045f, .94f);
-        static readonly Color Text = new Color(.87f, .88f, .8f);
-        static readonly Color Accent = new Color(.83f, .72f, .43f);
 
         public static void CreateBatch()
         {
@@ -142,62 +138,6 @@ namespace Fortress.Editor
             effect.GetComponent<ParticleSystemRenderer>().sharedMaterial=material;
             return effect;
         }
-        static void CreateHud(MatchController match)
-        {
-            var previous = UnityEngine.Object.FindFirstObjectByType<Canvas>();
-            if (previous != null) UnityEngine.Object.DestroyImmediate(previous.gameObject);
-            font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
-            var canvas = new GameObject("Match HUD", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
-            canvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
-            var scaler = canvas.GetComponent<CanvasScaler>();
-            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920,1080); scaler.matchWidthOrHeight = .5f;
-            var hud = canvas.AddComponent<MatchHud>(); hud.match = match;
-            var top = Panel("Command Bar",canvas.transform, new Vector2(0,1),new Vector2(1,1),new Vector2(0,1),Vector2.zero,new Vector2(0,132),Ink);
-            Label("Title",top,new Vector2(26,-12),new Vector2(550,30),"FORTRESS  /  ARMORED DUEL",22,Accent);
-            hud.turnLabel = Label("Turn",top,new Vector2(26,-49),new Vector2(550,40),"",30,Text);
-            hud.healthLabels = new TMP_Text[2]; hud.healthFills = new Image[2];
-            for(int i=0;i<2;i++)
-            {
-                float x=700+i*560;
-                hud.healthLabels[i]=Label("Player "+(i+1),top,new Vector2(x,-16),new Vector2(400,38),"",28,Text);
-                var track=Panel("Armor Bar",top,Vector2.up,Vector2.up,Vector2.up,new Vector2(x,-68),new Vector2(420,18),new Color(.16f,.18f,.15f));
-                var fill=Panel("HP",track,Vector2.zero,Vector2.one,new Vector2(.5f,.5f),Vector2.zero,Vector2.zero,i==0?new Color(.44f,.59f,.32f):new Color(.72f,.56f,.33f));
-                hud.healthFills[i]=fill.GetComponent<Image>();
-                hud.healthFills[i].type=Image.Type.Filled; hud.healthFills[i].fillMethod=Image.FillMethod.Horizontal;
-                // Filled Images require a sprite; the built-in UI sprite is shared, never mutated.
-                hud.healthFills[i].sprite=AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
-            }
-            var bottom=Panel("Fire Console",canvas.transform,Vector2.zero,Vector2.right,Vector2.zero,Vector2.zero,new Vector2(0,142),Ink);
-            hud.aimLabel=Label("Aim",bottom,new Vector2(26,-12),new Vector2(1050,38),"",27,Text);
-            hud.stateLabel=Label("State",bottom,new Vector2(26,-55),new Vector2(1050,30),"",23,Accent);
-            Label("Controls",bottom,new Vector2(26,-97),new Vector2(1350,30),"A/D  DIRECTION     W/S  ELEVATION     Q/E  POWER     SPACE  FIRE     |     STANDARD SHELL  /  UNLIMITED",19,Text);
-            hud.windLabel=Label("Wind",bottom,new Vector2(1250,-25),new Vector2(640,38),"",25,Text);
-            var arrow=Label("Wind Direction",bottom,new Vector2(1190,-45),new Vector2(44,44),">",44,Accent).rectTransform;
-            arrow.pivot=new Vector2(.5f,.5f); hud.windArrow=arrow;
-            var result=Panel("Result",canvas.transform,new Vector2(.5f,.5f),new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(620,340),Ink);
-            hud.resultPanel=result.gameObject;
-            hud.resultLabel=Label("Winner",result,new Vector2(30,-40),new Vector2(560,150),"",40,Text); hud.resultLabel.alignment=TextAlignmentOptions.Center;
-            var buttonRect=Panel("Restart",result,Vector2.up,Vector2.up,Vector2.up,new Vector2(130,-220),new Vector2(360,64),new Color(.32f,.38f,.24f));
-            hud.restartButton=buttonRect.gameObject.AddComponent<Button>(); hud.restartButton.targetGraphic=buttonRect.GetComponent<Image>();
-            buttonRect.GetComponent<Image>().raycastTarget=true;
-            var navigation=hud.restartButton.navigation; navigation.mode=Navigation.Mode.None; hud.restartButton.navigation=navigation;
-            var restart=Label("Caption",buttonRect,new Vector2(0,-12),new Vector2(360,40),"NEW MATCH",28,Text); restart.alignment=TextAlignmentOptions.Center;
-            result.gameObject.SetActive(false);
-            var events=new GameObject("UI Events",typeof(EventSystem),typeof(InputSystemUIInputModule));
-            events.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();
-        }
-        static RectTransform Panel(string name,Transform parent,Vector2 min,Vector2 max,Vector2 pivot,Vector2 pos,Vector2 size,Color color)
-        {
-            var obj=new GameObject(name,typeof(RectTransform),typeof(Image)); obj.transform.SetParent(parent,false);
-            var rect=obj.GetComponent<RectTransform>(); rect.anchorMin=min; rect.anchorMax=max; rect.pivot=pivot; rect.anchoredPosition=pos; rect.sizeDelta=size;
-            var image=obj.GetComponent<Image>(); image.color=color; image.raycastTarget=false; return rect;
-        }
-        static TextMeshProUGUI Label(string name,Transform parent,Vector2 pos,Vector2 size,string text,float fontSize,Color color)
-        {
-            var obj=new GameObject(name,typeof(RectTransform),typeof(TextMeshProUGUI)); obj.transform.SetParent(parent,false);
-            var rect=obj.GetComponent<RectTransform>(); rect.anchorMin=Vector2.up; rect.anchorMax=Vector2.up; rect.pivot=Vector2.up; rect.anchoredPosition=pos; rect.sizeDelta=size;
-            var label=obj.GetComponent<TextMeshProUGUI>(); label.font=font; label.fontSize=fontSize; label.text=text; label.color=color; label.raycastTarget=false; return label;
-        }
+        static void CreateHud(MatchController match) { MatchHudBuilder.Create(match); }
     }
 }
