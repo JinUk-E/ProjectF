@@ -53,6 +53,9 @@ namespace Fortress.Tests
                 Assert.That(Vector3.Dot(delta.normalized,forward),Is.GreaterThan(.99f));
                 Assert.That(tank.Rig.Yaw,Is.EqualTo(yaw).Within(.001f));
                 Assert.That(Object.FindAnyObjectByType<MatchHud>().movementLabel.text,Does.Contain("LEFT"));
+                // Spend the remaining budget on the clear central road, not through a depot.
+                match.terrainMap.Field.TrySample(-25,0,out float roadHeight);
+                tank.MoveOnGround(new Vector3(-25,roadHeight,0));
                 match.TryMoveActiveTank(Vector2.right,100);
                 Assert.That(match.MovementRemaining,Is.Zero);
                 Assert.That(match.TryMoveActiveTank(Vector2.right,1),Is.False);
@@ -73,7 +76,7 @@ namespace Fortress.Tests
             Assert.That(match.MovementRemaining,Is.EqualTo(fuel));
             yield return null;
         }
-        [UnityTest] public IEnumerator Mountain_MultipleSeeds_HaveStrongReliefAndDrySpawns()
+        [UnityTest] public IEnumerator Hills_MultipleSeeds_HaveReliefDrySpawnsAndConnectedRoads()
         {
             float lowestRelief=float.PositiveInfinity;
             for(int seed=1;seed<=8;seed++)
@@ -82,10 +85,14 @@ namespace Fortress.Tests
                 float min=float.PositiveInfinity,max=float.NegativeInfinity;
                 for(int z=0;z<map.Depth;z+=4) for(int x=0;x<map.Width;x+=4)
                 { min=Mathf.Min(min,map.GetHeight(x,z));max=Mathf.Max(max,map.GetHeight(x,z)); }
-                lowestRelief=Mathf.Min(lowestRelief,max-min);Assert.That(max-min,Is.GreaterThan(20));
+                lowestRelief=Mathf.Min(lowestRelief,max-min);Assert.That(max-min,Is.GreaterThan(8));Assert.That(max-min,Is.LessThan(20));
                 foreach(var tank in match.Tanks) Assert.That(tank.GroundHeight,Is.GreaterThan(-4));
+                foreach(float roadZ in new[]{-22f,0,22f}) for(int x=-26;x<=26;x++)
+                { Assert.That(map.TrySample(x,roadZ,out float h),Is.True);Assert.That(h,Is.EqualTo(0).Within(.08f)); }
+                foreach(float roadX in new[]{-26f,26f}) for(int z=-22;z<=22;z++)
+                { map.TrySample(roadX,z,out float h);Assert.That(h,Is.EqualTo(0).Within(.08f)); }
             }
-            TestContext.WriteLine("Minimum mountain relief across 8 seeds: "+lowestRelief+"m");
+            TestContext.WriteLine("Minimum isolated hill relief across 8 seeds: "+lowestRelief+"m");
             yield return null;
         }
     }

@@ -13,6 +13,7 @@ namespace Fortress
         public FlatShotController shots;
         public HeightFieldTerrain terrainMap;
         public GameTuning tuning;
+        public BattlefieldCover cover;
         public SpawnArea[] spawnAreas;
         public int initialSeed = 1;
         public bool autoStart = true;
@@ -68,6 +69,7 @@ namespace Fortress
             var candidateTerrain=tuning.randomTerrain
                 ? terrainMap.PrepareSeededTerrain(seed,tuning,spawnAreas) : null;
             var spawnField=candidateTerrain ?? terrainMap.Field;
+            var nextBuildings=cover!=null?cover.Prepare(spawnField,seed,spawnAreas):null;
             // Prepare every spawn against the candidate/original grid before touching a running match.
             // An invalid configuration must leave the current shot, terrain, health and seed intact.
             var spawnRandom=new System.Random(unchecked(seed ^ 0x126e71));
@@ -90,6 +92,7 @@ namespace Fortress
             {
                 shots.CancelShot();impacts.Clear();
                 if(candidateTerrain!=null) terrainMap.InstallTerrain(candidateTerrain);else terrainMap.ResetTerrain();
+                if(cover!=null) cover.Install(terrainMap.Field,nextBuildings);
                 shots.tuning=tuning;shots.terrainMap=terrainMap;
                 Subscribe();
                 Seed=seed;windRandom=new System.Random(unchecked(seed ^ 0x51f15e));
@@ -111,7 +114,7 @@ namespace Fortress
             MovementRemaining=tuning.movementEnabled?Mathf.Max(0,tuning.moveDistancePerTurn):0;
             shots.InputEnabled=true;
             shots.SetActiveTank(ActivePlayerIndex);
-            shots.SetSurface(new CombatShotSurface(terrainMap.Field,Tanks,ActivePlayerIndex));
+            shots.SetSurface(new CombatShotSurface(terrainMap.Field,Tanks,ActivePlayerIndex,cover));
             float angle=(float)windRandom.NextDouble()*Mathf.PI*2;
             float magnitude=(float)windRandom.NextDouble()*Mathf.Max(0,tuning.maxWind);
             shots.SetWind(new Vector3(Mathf.Cos(angle)*magnitude,0,Mathf.Sin(angle)*magnitude));
@@ -132,7 +135,7 @@ namespace Fortress
                 terrainMap.Field.IsFrozen || MovementRemaining<=0 || !Finite(MovementRemaining) || !Finite(deltaTime) || deltaTime<=0 ||
                 !Finite(worldDirection.sqrMagnitude) || worldDirection.sqrMagnitude<=0 ||
                 !Finite(tuning.moveSpeed) || tuning.moveSpeed<=0 || !Finite(tuning.moveStep) || tuning.moveStep<=0 ||
-                !Finite(tuning.maxMoveSlopeDegrees)) return false;
+                !Finite(tuning.maxMoveSlopeDegrees) || !Finite(tuning.maxMoveStepHeight) || tuning.maxMoveStepHeight<0) return false;
             var tank=Tanks[ActivePlayerIndex];
             if(tank.IsDefeated) return false;
             var field=terrainMap.Field;
@@ -142,16 +145,21 @@ namespace Fortress
             float slope=Mathf.Tan(Mathf.Clamp(tuning.maxMoveSlopeDegrees,0,89)*Mathf.Deg2Rad);
             Vector3 ground=tank.Rig.transform.position;ground.y=tank.GroundHeight;
             float moved=0;
+            MeasureFootprint(field,ground,tank.Radius,slope,tuning.maxMoveStepHeight,out int unsafeSamples,out float supportError);
             while(moved<requested)
             {
                 float step=Mathf.Min(stepLimit,requested-moved);
                 if(step<=0) break;
                 Vector3 next=ground+new Vector3(direction.x*step,0,direction.y*step);
-                if(!field.TrySample(next.x,next.z,out float height) || height<=field.WaterHeight ||
-                    Mathf.Abs(height-ground.y)>slope*step) break;
+                if(!field.TrySample(next.x,next.z,out float height) || height<=field.WaterHeight) break;
                 next.y=height;
-                if(!FootprintSupported(field,next,tank.Radius,slope) || BlockedByTank(ground,next,tank.Radius)) break;
-                ground=next;moved+=step;
+                if(!CanTraverseHeight(field,ground,next,direction,step,tank.Radius,slope,tuning.maxMoveStepHeight)) break;
+                MeasureFootprint(field,next,tank.Radius,slope,tuning.maxMoveStepHeight,out int nextUnsafe,out float nextError);
+                // A shell may damage an already occupied footprint. Allow escape along a safe
+                // centre path, but never add wet/out-of-bounds samples or worsen the support.
+                if(nextUnsafe>unsafeSamples || (nextUnsafe==unsafeSamples && nextError>supportError+.00001f) ||
+                    BlockedByTank(ground,next,tank.Radius)) break;
+                ground=next;moved+=step;unsafeSamples=nextUnsafe;supportError=nextError;
             }
             if(moved<=0) return false;
             float yaw=tank.Rig.Yaw,pitch=tank.Rig.Pitch;
@@ -165,6 +173,7 @@ namespace Fortress
         }
         bool BlockedByTank(Vector3 from,Vector3 to,float radius)
         {
+            if(cover!=null && cover.BlocksMovement(from,to,radius)) return true;
             var a=new Vector2(from.x,from.z);var d=new Vector2(to.x-from.x,to.z-from.z);
             float lengthSquared=d.sqrMagnitude;
             for(int i=0;i<Tanks.Length;i++)
@@ -178,15 +187,30 @@ namespace Fortress
             }
             return false;
         }
-        static bool FootprintSupported(HeightField field,Vector3 center,float radius,float slope)
+        static bool CanTraverseHeight(HeightField field,Vector3 from,Vector3 to,Vector2 direction,
+            float step,float radius,float slope,float maxStepHeight)
         {
+            float rise=Mathf.Abs(to.y-from.y);
+            if(rise<=slope*step+.00001f) return true;
+            if(rise>maxStepHeight) return false;
+            // A small ledge is traversable only if a safe landing exists beyond it.
+            // This prevents repeatedly spending the step allowance to scale a steep ramp.
+            float probe=Mathf.Max(radius,step);
+            float x=to.x+direction.x*probe,z=to.z+direction.y*probe;
+            return field.TrySample(x,z,out float landing) && landing>field.WaterHeight &&
+                Mathf.Abs(landing-from.y)<=maxStepHeight && Mathf.Abs(landing-to.y)<=slope*probe+.00001f;
+        }
+        static void MeasureFootprint(HeightField field,Vector3 center,float radius,float slope,float maxStepHeight,
+            out int unsafeSamples,out float supportError)
+        {
+            unsafeSamples=0;supportError=0;
+            float tolerance=Mathf.Max(slope*radius,maxStepHeight);
             foreach(var direction in FootprintDirections)
             {
                 float x=center.x+direction.x*radius,z=center.z+direction.y*radius;
-                if(!field.TrySample(x,z,out float height) || height<=field.WaterHeight ||
-                    Mathf.Abs(height-center.y)>slope*radius) return false;
+                if(!field.TrySample(x,z,out float height) || height<=field.WaterHeight) { unsafeSamples++;continue; }
+                supportError+=Mathf.Max(0,Mathf.Abs(height-center.y)-tolerance);
             }
-            return true;
         }
         static bool Finite(float value)=>!float.IsNaN(value)&&!float.IsInfinity(value);
         void SetState(MatchState value) { State=value;StateChanged?.Invoke(); }
@@ -206,12 +230,16 @@ namespace Fortress
             impacts.Sort(ImpactOrder);
             foreach(var impact in impacts)
             {
-                foreach(var tank in Tanks) tank.ApplyExplosion(impact.position,tuning.explosionDamage,tuning.craterRadius);
+                // Evaluate shields against the intact world before this blast destroys cover.
+                foreach(var tank in Tanks)
+                    if(cover==null || !cover.Shields(impact.position,tank.Center)) tank.ApplyExplosion(impact.position,tuning.explosionDamage,tuning.craterRadius);
+                if(cover!=null) cover.ApplyExplosion(impact.position,tuning.craterRadius,tuning.explosionDamage);
                 // Projection is vertical: crater modifies the height grid at the impact XZ.
                 var region=terrainMap.Field.ApplyCrater(impact.position,tuning.craterRadius,tuning.craterDepth);
                 terrainMap.UpdateRegion(region);
             }
             impacts.Clear();
+            if(cover!=null) cover.SettleFoundations();
             foreach(var tank in Tanks) tank.Settle(terrainMap.Field,tuning.fallDamagePerMeter);
             SetState(MatchState.Judging);
         }

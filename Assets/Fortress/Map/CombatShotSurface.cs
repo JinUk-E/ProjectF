@@ -11,13 +11,16 @@ namespace Fortress
         readonly TerrainShotSurface terrain;
         readonly TankCombatant[] tanks;
         readonly int shooter;
+        readonly BattlefieldCover cover;
         public HeightField Field => terrain.Field;
-        public CombatShotSurface(HeightField field,TankCombatant[] combatants,int excludedPlayer)
-        { terrain=new TerrainShotSurface(field);tanks=combatants;shooter=excludedPlayer; }
+        public CombatShotSurface(HeightField field,TankCombatant[] combatants,int excludedPlayer,BattlefieldCover buildings=null)
+        { terrain=new TerrainShotSurface(field);tanks=combatants;shooter=excludedPlayer;cover=buildings; }
         public bool TryHit(Vector3 from,Vector3 to,out Vector3 hit)
         {
             bool found=terrain.TryHit(from,to,out hit);
             float best=found?(hit-from).sqrMagnitude:float.PositiveInfinity;
+            if(cover!=null && cover.TryHit(from,to,out var wall) && (wall-from).sqrMagnitude<best)
+            { found=true;best=(wall-from).sqrMagnitude;hit=wall; }
             for(int i=0;i<tanks.Length;i++)
             {
                 if(i==shooter || tanks[i].IsDefeated) continue;

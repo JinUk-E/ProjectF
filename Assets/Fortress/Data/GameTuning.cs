@@ -29,6 +29,7 @@ namespace Fortress
         [Min(0)] public float moveDistancePerTurn = 12f;
         [Range(0,89)] public float maxMoveSlopeDegrees = 30f;
         [Range(.01f,.25f)] public float moveStep = .25f;
+        [Min(0)] public float maxMoveStepHeight = .65f;
         public MountainTerrainSettings mountainTerrain;
         public bool randomTerrain;
         public float terrainBaseHeight;

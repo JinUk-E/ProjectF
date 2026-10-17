@@ -17,6 +17,7 @@ namespace Fortress
                 throw new ArgumentException("Random terrain settings must be finite and within their supported ranges.");
             if(spawnAreas==null) throw new ArgumentNullException(nameof(spawnAreas));
             var mountain=settings.mountainTerrain;
+            if(mountain!=null && mountain.tacticalHills) TacticalTerrain.Validate(mountain);
             if(mountain!=null && (!Finite(mountain.ridgeHeight)||mountain.ridgeHeight<0 ||
                 !Finite(mountain.ridgeOffset)||mountain.ridgeOffset<=0 || !Finite(mountain.ridgeWidth)||mountain.ridgeWidth<=0 ||
                 !Finite(mountain.valleyBend)||mountain.valleyBend<0 || !Finite(mountain.ridgeWavelength)||mountain.ridgeWavelength<=0 ||
@@ -55,6 +56,7 @@ namespace Fortress
                     float ridge=Mathf.Max(Mathf.Exp(-dn*dn),Mathf.Exp(-ds*ds));
                     float peaks=.78f+.22f*Noise(wx/22f,phase,unchecked(seed+107));
                     height=mountain.valleyFloor+mountain.ridgeHeight*ridge*peaks+mountain.detailHeight*(value/weight);
+                    if(mountain.tacticalHills) height=TacticalTerrain.Height(wx,wz,seed,mountain,value/weight);
                 }
                 float pad=0;
                 foreach(var area in spawnAreas)

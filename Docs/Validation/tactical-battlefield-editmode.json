@@ -1,0 +1,62 @@
+{
+  "job_id": "f6924796a85c4893bdd3b6d1c49942d4",
+  "status": "succeeded",
+  "mode": "EditMode",
+  "started_unix_ms": 1792244750428,
+  "finished_unix_ms": 1792244752775,
+  "last_update_unix_ms": 1792244752775,
+  "progress": {
+    "completed": 212,
+    "total": 212,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": 1792244752706,
+    "last_finished_test_full_name": "UnityProjectile.Tests.ValidationTests.Warnings_SameProfileManyLaunches_LoggedOncePerProfileAndKind",
+    "last_finished_unix_ms": 1792244752707,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 209,
+      "passed": 209,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 1.5919167,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "LaunchAndTick_200ShotsAfterWarmUp_AllocateNothing",
+        "fullName": "UnityProjectile.Tests.AllocationTests.LaunchAndTick_200ShotsAfterWarmUp_AllocateNothing",
+        "state": "Inconclusive",
+        "durationSeconds": 0.0034157,
+        "message": "GC.GetAllocatedBytesForCurrentThread does not count here; measure GC.Alloc with the Profiler on a licensed PC.",
+        "stackTrace": "at UnityProjectile.Tests.AllocationTests.LaunchAndTick_200ShotsAfterWarmUp_AllocateNothing () [0x00007] in D:\\MoraeGames\\Packages\\Projectile\\Packages\\com.unityprojectile.core\\Tests\\EditMode\\AllocationTests.cs:39\r\n",
+        "output": ""
+      },
+      {
+        "name": "PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Authored)",
+        "fullName": "UnityProjectile.Tests.AllocationTests.PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Authored)",
+        "state": "Inconclusive",
+        "durationSeconds": 0.0006215,
+        "message": "GC.GetAllocatedBytesForCurrentThread does not count here; measure GC.Alloc with the Profiler on a licensed PC.",
+        "stackTrace": "at UnityProjectile.Tests.AllocationTests.PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing (UnityProjectile.ScatterPayload+ScatterMode mode) [0x00007] in D:\\MoraeGames\\Packages\\Projectile\\Packages\\com.unityprojectile.core\\Tests\\EditMode\\AllocationTests.cs:65\r\n",
+        "output": ""
+      },
+      {
+        "name": "PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Physical)",
+        "fullName": "UnityProjectile.Tests.AllocationTests.PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing(Physical)",
+        "state": "Inconclusive",
+        "durationSeconds": 0.000139,
+        "message": "GC.GetAllocatedBytesForCurrentThread does not count here; measure GC.Alloc with the Profiler on a licensed PC.",
+        "stackTrace": "at UnityProjectile.Tests.AllocationTests.PooledFamilyWithSubscribers_RoundAfterWarmUp_AllocatesNothing (UnityProjectile.ScatterPayload+ScatterMode mode) [0x00007] in D:\\MoraeGames\\Packages\\Projectile\\Packages\\com.unityprojectile.core\\Tests\\EditMode\\AllocationTests.cs:65\r\n",
+        "output": ""
+      }
+    ]
+  }
+}

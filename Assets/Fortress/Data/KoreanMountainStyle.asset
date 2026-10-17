@@ -18,4 +18,13 @@ MonoBehaviour:
   valleyBend: 7
   ridgeWavelength: 65
   valleyFloor: 0
-  detailHeight: 2
+  detailHeight: 0.55
+  tacticalHills: 1
+  hillHeight: 14
+  hillRadius: 21
+  hillSpacing: 32
+  hillJitter: 7
+  roadHalfWidth: 3
+  roadBlend: 5
+  flankRoadOffset: 22
+  roadJunctionX: 26

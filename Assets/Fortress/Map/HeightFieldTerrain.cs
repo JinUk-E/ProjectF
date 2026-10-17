@@ -70,6 +70,21 @@ namespace Fortress
             Field=candidate;
             Surface=new TerrainShotSurface(Field);
             UpdateRegion(new RectInt(0,0,Field.Width,Field.Depth));
+            PaintTacticalRoads();
+        }
+        void PaintTacticalRoads()
+        {
+            var profile=tuning.mountainTerrain;
+            if(profile==null || !profile.tacticalHills || runtimeData.alphamapLayers!=2) return;
+            int width=runtimeData.alphamapWidth,height=runtimeData.alphamapHeight;
+            var alpha=new float[height,width,2];
+            for(int z=0;z<height;z++) for(int x=0;x<width;x++)
+            {
+                float wx=Field.Origin.x+Field.Size.x*x/(width-1),wz=Field.Origin.z+Field.Size.y*z/(height-1);
+                float road=1-Mathf.Clamp01(TacticalTerrain.RoadDistance(wx,wz,profile)-profile.roadHalfWidth+.5f);
+                alpha[z,x,0]=1-road;alpha[z,x,1]=road;
+            }
+            runtimeData.SetAlphamaps(0,0,alpha);
         }
         public void ResetTerrain()
         {

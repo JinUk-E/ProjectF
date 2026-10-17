@@ -388,7 +388,8 @@ namespace Fortress.Tests
             var delta=target-shots.ActiveTank.transform.position;
             float yaw=Mathf.Atan2(delta.x,delta.z)*Mathf.Rad2Deg;
             float best=float.PositiveInfinity,bestPitch=45,bestPower=22;
-            var surface=new CombatShotSurface(match.terrainMap.Field,match.Tanks,match.ActivePlayerIndex);
+            // Search the same terrain AND cover surface used by the actual shot.
+            var surface=shots.Surface;
             for(float pitch=15;pitch<=70;pitch+=1)
             {
                 shots.ActiveTank.SetAim(yaw,pitch);

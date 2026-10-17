@@ -1667,6 +1667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 189965743}
   - component: {fileID: 189965742}
+  - component: {fileID: 189965744}
   m_Layer: 0
   m_Name: Hotseat Match
   m_TagString: Untagged
@@ -1689,6 +1690,7 @@ MonoBehaviour:
   shots: {fileID: 1822788466}
   terrainMap: {fileID: 203035595}
   tuning: {fileID: 11400000, guid: 2957b850c1b554940a9834d169327238, type: 2}
+  cover: {fileID: 189965744}
   spawnAreas:
   - {fileID: 11400000, guid: 6e7232ef7fc84a540a728e207ec99ab4, type: 2}
   - {fileID: 11400000, guid: 2e5ef4f691053e64aad03dcd25f02f5d, type: 2}
@@ -1709,6 +1711,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &189965744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189965741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af3926f5b6887947bf77fcea173f362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fortress::Fortress.BattlefieldCover
+  settings: {fileID: 11400000, guid: be54983c612afdb44991af07571f78b6, type: 2}
 --- !u!1 &203035594
 GameObject:
   m_ObjectHideFlags: 0
@@ -8604,8 +8619,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836488647}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21066521, y: 0.6121947, z: -0.17380087, w: 0.7420452}
-  m_LocalPosition: {x: -62, y: 42, z: -12}
+  m_LocalRotation: {x: 0.24645363, y: 0.35115972, z: -0.09635938, w: 0.8981438}
+  m_LocalPosition: {x: -48, y: 44, z: -52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8625,7 +8640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fortress::Fortress.BattlefieldOrbitCamera
   match: {fileID: 189965742}
   settings: {fileID: 11400000, guid: 9b6063f7493a0cc4f8555c442c66397e, type: 2}
-  initialTarget: {x: 0, y: 3, z: 0}
+  initialTarget: {x: 0, y: 2, z: 0}
   initializeFromCurrentPose: 1
 --- !u!1 &841431475
 GameObject:
@@ -20213,7 +20228,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4285579949
   m_fontColor: {r: 0.68, g: 0.76, b: 0.44, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -20226,7 +20241,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
