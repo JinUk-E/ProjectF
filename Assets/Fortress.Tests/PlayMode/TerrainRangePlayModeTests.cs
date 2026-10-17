@@ -11,14 +11,18 @@ using Object=UnityEngine.Object;
 
 namespace Fortress.Tests
 {
+    [TestFixture(false)]
+    [TestFixture(true)]
     public sealed class TerrainRangePlayModeTests
     {
+        readonly bool military;
+        public TerrainRangePlayModeTests(bool military) { this.military=military; }
         FlatShotController controller;
         HeightFieldTerrain map;
         [UnitySetUp]
         public IEnumerator LoadRange()
         {
-            EditorSceneManager.LoadSceneInPlayMode("Assets/Fortress/Scenes/TerrainRange.unity",new LoadSceneParameters(LoadSceneMode.Single));
+            EditorSceneManager.LoadSceneInPlayMode(military ? "Assets/Fortress/Scenes/MilitaryRange.unity" : "Assets/Fortress/Scenes/TerrainRange.unity",new LoadSceneParameters(LoadSceneMode.Single));
             yield return null;
             controller=Object.FindFirstObjectByType<FlatShotController>();
             map=controller.terrainMap;
@@ -71,7 +75,15 @@ namespace Fortress.Tests
             TestContext.WriteLine("Worst bilinear/triangle deviation bound: "+worst+" m");
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressCapture")>=0)
             {
-                CaptureRange();
+                if(military) { controller.impactEffect.Simulate(.5f,true,true,true); TestContext.WriteLine("Smoke capture particles: "+controller.impactEffect.particleCount); yield return null; }
+                CaptureRange(military ? "military-after-shot.png" : "terrain-after-shot.png");
+                if(military)
+                {
+                    var camera=Camera.main;
+                    camera.transform.position=controller.ActiveTank.transform.position+new Vector3(10,7,-10);
+                    camera.transform.LookAt(controller.ActiveTank.transform.position+Vector3.up*1.5f);
+                    CaptureRange("military-tank-detail.png");
+                }
             }
         }
 
@@ -110,7 +122,7 @@ namespace Fortress.Tests
             yield return null;
         }
 
-        static void CaptureRange()
+        static void CaptureRange(string filename)
         {
             var camera=Camera.main;
             var target=new RenderTexture(1280,720,24);
@@ -131,7 +143,7 @@ namespace Fortress.Tests
                     new UnityEngine.Rendering.RenderPipeline.StandardRequest {destination=target});
                 RenderTexture.active=target;
                 pixels.ReadPixels(new Rect(0,0,1280,720),0,0); pixels.Apply();
-                System.IO.File.WriteAllBytes("Docs/Validation/terrain-after-shot.png",pixels.EncodeToPNG());
+                System.IO.File.WriteAllBytes("Docs/Validation/"+filename,pixels.EncodeToPNG());
             }
             finally
             {
