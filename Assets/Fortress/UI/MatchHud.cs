@@ -21,6 +21,7 @@ namespace Fortress
         public TMP_Text powerLabel, elevationLabel, headingLabel, notificationLabel;
         public Image[] activeIndicators;
         public CanvasGroup notificationGroup;
+        public TMP_Text movementLabel;
         int displayedTurn = -1, displayedSeed;
         float notificationRemaining;
         bool pendingImpact;
@@ -74,6 +75,7 @@ namespace Fortress
         {
             if (match == null || match.shots == null || match.tuning == null) return;
             var shots = match.shots;
+            if(movementLabel!=null) movementLabel.SetText("ARROW KEYS  MOVE  /  {0:0.0}m LEFT",match.MovementRemaining);
             var tanks = match.Tanks;
             if (tanks == null || tanks.Length != 2) return;
             for (int i = 0; i < 2; i++)

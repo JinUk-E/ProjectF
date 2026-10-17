@@ -19,8 +19,9 @@ MonoBehaviour:
   yawSearchDegrees: 18
   refinementPasses: 3
   reachTolerance: 4
-  yawSigmaDegrees: 8
-  pitchSigmaDegrees: 3
-  powerSigma: 3
-  noiseDecay: 0.8
+  yawSigmaDegrees: 9
+  pitchSigmaDegrees: 4
+  powerSigma: 3.5
+  noiseDecay: 0.92
+  minimumNoiseScale: 0.75
   thinkSeconds: 1.5

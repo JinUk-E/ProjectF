@@ -31,6 +31,12 @@ MonoBehaviour:
   tankCapsuleHeight: 2
   tankGroundOffset: 0
   spawnAttempts: 32
+  movementEnabled: 1
+  moveSpeed: 4
+  moveDistancePerTurn: 12
+  maxMoveSlopeDegrees: 30
+  moveStep: 0.25
+  mountainTerrain: {fileID: 11400000, guid: bd97f3697b8d6724a95dd4a7ea80ccb1, type: 2}
   randomTerrain: 1
   terrainBaseHeight: 0
   terrainAmplitude: 4
@@ -38,7 +44,7 @@ MonoBehaviour:
   terrainOctaves: 3
   terrainPersistence: 0.5
   spawnPadMargin: 2
-  spawnPadBlend: 8
+  spawnPadBlend: 14
   spawnPadClearance: 1
   groundHeight: 0
   terrainLowerHeight: -8

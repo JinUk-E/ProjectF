@@ -19,6 +19,7 @@ namespace Fortress
         public MatchState State { get; private set; }
         public int ActivePlayerIndex { get; private set; }
         public int TurnNumber { get; private set; }
+        public float MovementRemaining { get; private set; }
         public int WinnerIndex { get; private set; } = -1;
         public bool IsDraw { get; private set; }
         public int Seed { get; private set; }
@@ -107,6 +108,7 @@ namespace Fortress
         public void RestartMatch(int seed) { InitializeMatch(seed); }
         void BeginAim()
         {
+            MovementRemaining=tuning.movementEnabled?Mathf.Max(0,tuning.moveDistancePerTurn):0;
             shots.InputEnabled=true;
             shots.SetActiveTank(ActivePlayerIndex);
             shots.SetSurface(new CombatShotSurface(terrainMap.Field,Tanks,ActivePlayerIndex));
@@ -117,6 +119,76 @@ namespace Fortress
             shots.SetAim(Mathf.Atan2(toward.x,toward.z)*Mathf.Rad2Deg,tuning.initialPitch,tuning.initialPower);
             SetState(MatchState.Aim);
         }
+        static readonly Vector2[] FootprintDirections =
+        {
+            Vector2.right,Vector2.left,Vector2.up,Vector2.down,
+            new Vector2(.70710678f,.70710678f),new Vector2(-.70710678f,.70710678f),
+            new Vector2(.70710678f,-.70710678f),new Vector2(-.70710678f,-.70710678f)
+        };
+        public bool TryMoveActiveTank(Vector2 worldDirection,float deltaTime)
+        {
+            if(!initialized || !isActiveAndEnabled || State!=MatchState.Aim || tuning==null || !tuning.movementEnabled ||
+                shots==null || shots.IsFiring || !shots.InputEnabled || terrainMap==null || terrainMap.Field==null ||
+                terrainMap.Field.IsFrozen || MovementRemaining<=0 || !Finite(MovementRemaining) || !Finite(deltaTime) || deltaTime<=0 ||
+                !Finite(worldDirection.sqrMagnitude) || worldDirection.sqrMagnitude<=0 ||
+                !Finite(tuning.moveSpeed) || tuning.moveSpeed<=0 || !Finite(tuning.moveStep) || tuning.moveStep<=0 ||
+                !Finite(tuning.maxMoveSlopeDegrees)) return false;
+            var tank=Tanks[ActivePlayerIndex];
+            if(tank.IsDefeated) return false;
+            var field=terrainMap.Field;
+            Vector2 direction=worldDirection.normalized;
+            float requested=Mathf.Min(MovementRemaining,tuning.moveSpeed*deltaTime);
+            float stepLimit=Mathf.Clamp(tuning.moveStep,.01f,.25f);
+            float slope=Mathf.Tan(Mathf.Clamp(tuning.maxMoveSlopeDegrees,0,89)*Mathf.Deg2Rad);
+            Vector3 ground=tank.Rig.transform.position;ground.y=tank.GroundHeight;
+            float moved=0;
+            while(moved<requested)
+            {
+                float step=Mathf.Min(stepLimit,requested-moved);
+                if(step<=0) break;
+                Vector3 next=ground+new Vector3(direction.x*step,0,direction.y*step);
+                if(!field.TrySample(next.x,next.z,out float height) || height<=field.WaterHeight ||
+                    Mathf.Abs(height-ground.y)>slope*step) break;
+                next.y=height;
+                if(!FootprintSupported(field,next,tank.Radius,slope) || BlockedByTank(ground,next,tank.Radius)) break;
+                ground=next;moved+=step;
+            }
+            if(moved<=0) return false;
+            float yaw=tank.Rig.Yaw,pitch=tank.Rig.Pitch;
+            tank.MoveOnGround(ground);
+            tank.Rig.transform.rotation=Quaternion.Euler(0,Mathf.Atan2(direction.x,direction.y)*Mathf.Rad2Deg,0);
+            tank.Rig.SetAim(yaw,pitch);
+            MovementRemaining=Mathf.Max(0,MovementRemaining-moved);
+            shots.SetAim(yaw,pitch,shots.Power);
+            StateChanged?.Invoke();
+            return true;
+        }
+        bool BlockedByTank(Vector3 from,Vector3 to,float radius)
+        {
+            var a=new Vector2(from.x,from.z);var d=new Vector2(to.x-from.x,to.z-from.z);
+            float lengthSquared=d.sqrMagnitude;
+            for(int i=0;i<Tanks.Length;i++)
+            {
+                if(i==ActivePlayerIndex) continue;
+                var other=Tanks[i];var p=other.Rig.transform.position;
+                var center=new Vector2(p.x,p.z);
+                float t=lengthSquared>0?Mathf.Clamp01(Vector2.Dot(center-a,d)/lengthSquared):0;
+                float combined=radius+other.Radius;
+                if((a+d*t-center).sqrMagnitude<=combined*combined) return true;
+            }
+            return false;
+        }
+        static bool FootprintSupported(HeightField field,Vector3 center,float radius,float slope)
+        {
+            foreach(var direction in FootprintDirections)
+            {
+                float x=center.x+direction.x*radius,z=center.z+direction.y*radius;
+                if(!field.TrySample(x,z,out float height) || height<=field.WaterHeight ||
+                    Mathf.Abs(height-center.y)>slope*radius) return false;
+            }
+            return true;
+        }
+        static bool Finite(float value)=>!float.IsNaN(value)&&!float.IsInfinity(value);
         void SetState(MatchState value) { State=value;StateChanged?.Invoke(); }
         void OnLaunched(ProjectileRunner runner)
         {

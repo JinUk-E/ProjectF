@@ -11,6 +11,7 @@ namespace Fortress
         public float reachTolerance=4;
         public float yawSigmaDegrees=5,pitchSigmaDegrees=2,powerSigma=2;
         [Range(0,1)] public float noiseDecay=0.6123724f;
+        [Range(0,1)] public float minimumNoiseScale;
         [Range(1,2)] public float thinkSeconds=1.5f;
     }
 }

@@ -16,6 +16,12 @@ namespace Fortress
                 !Finite(settings.spawnPadClearance) || settings.spawnPadClearance<=0)
                 throw new ArgumentException("Random terrain settings must be finite and within their supported ranges.");
             if(spawnAreas==null) throw new ArgumentNullException(nameof(spawnAreas));
+            var mountain=settings.mountainTerrain;
+            if(mountain!=null && (!Finite(mountain.ridgeHeight)||mountain.ridgeHeight<0 ||
+                !Finite(mountain.ridgeOffset)||mountain.ridgeOffset<=0 || !Finite(mountain.ridgeWidth)||mountain.ridgeWidth<=0 ||
+                !Finite(mountain.valleyBend)||mountain.valleyBend<0 || !Finite(mountain.ridgeWavelength)||mountain.ridgeWavelength<=0 ||
+                !Finite(mountain.valleyFloor)||!Finite(mountain.detailHeight)||mountain.detailHeight<0))
+                throw new ArgumentException("Mountain settings must be finite with positive ridge dimensions.");
             foreach(var area in spawnAreas)
             {
                 if(area==null || !Finite(area.min.x) || !Finite(area.min.y) || !Finite(area.max.x) || !Finite(area.max.y) ||
@@ -37,6 +43,19 @@ namespace Fortress
                     weight+=amplitude;amplitude*=settings.terrainPersistence;frequency*=2;
                 }
                 float height=settings.terrainBaseHeight+settings.terrainAmplitude*(value/weight);
+                if(mountain!=null)
+                {
+                    // Connected winding ridgelines and an intervening valley; inspired by Korean mountain terrain,
+                    // not a geographic reconstruction. Keep the central combat corridor traversable.
+                    float phase=Hash(19,37,seed)*Mathf.PI;
+                    float valley=mountain.valleyBend*Mathf.Sin(wx/mountain.ridgeWavelength+phase);
+                    float north=mountain.ridgeOffset+valley;
+                    float south=-mountain.ridgeOffset+valley;
+                    float dn=(wz-north)/mountain.ridgeWidth,ds=(wz-south)/mountain.ridgeWidth;
+                    float ridge=Mathf.Max(Mathf.Exp(-dn*dn),Mathf.Exp(-ds*ds));
+                    float peaks=.78f+.22f*Noise(wx/22f,phase,unchecked(seed+107));
+                    height=mountain.valleyFloor+mountain.ridgeHeight*ridge*peaks+mountain.detailHeight*(value/weight);
+                }
                 float pad=0;
                 foreach(var area in spawnAreas)
                 {

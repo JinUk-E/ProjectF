@@ -25,6 +25,12 @@ namespace Fortress
             Health=MaxHealth;Drowned=false;GroundHeight=ground.y;
             Rig.transform.position=ground+Vector3.up*RootOffset;
         }
+        /// <summary>Ground locomotion preserves health and defeat flags; this is not a respawn.</summary>
+        public void MoveOnGround(Vector3 ground)
+        {
+            GroundHeight=ground.y;
+            Rig.transform.position=ground+Vector3.up*RootOffset;
+        }
         public void ApplyDamage(float amount) { Health=Mathf.Max(0,Health-Mathf.Max(0,amount)); }
         public void ApplyExplosion(Vector3 point,float damage,float radius)
         {

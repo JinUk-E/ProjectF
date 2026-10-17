@@ -131,24 +131,26 @@ namespace Fortress.Tests
             }
             finally { Object.Destroy(precise); }
         }
-        [UnityTest] public IEnumerator NormalAi_NoiseDecaysAcrossTurns_MeasuredLandingError()
+        [UnityTest] public IEnumerator EasyAi_RetainsLateTurnError_AndIsLessAccurateThanNormal()
         {
             shots.SetWind(Vector3.zero);
-            double first=0,third=0;
+            var normal=UnityEditor.AssetDatabase.LoadAssetAtPath<AiSettings>("Assets/Fortress/Data/AiNormal.asset");
+            double first=0,third=0,late=0,normalLate=0;
             int fallbacks=0;
             for(int seed=1;seed<=64;seed++)
             {
                 var a=AiShotPlanner.Plan(shots,match.Tanks[1].Center,ai.settings,seed,1);
                 var b=AiShotPlanner.Plan(shots,match.Tanks[1].Center,ai.settings,seed,3);
+                late+=AiShotPlanner.Plan(shots,match.Tanks[1].Center,ai.settings,seed,20).DistanceToTarget;
+                normalLate+=AiShotPlanner.Plan(shots,match.Tanks[1].Center,normal,seed,20).DistanceToTarget;
                 first+=a.DistanceToTarget;third+=b.DistanceToTarget;
                 if(a.UsedFallback) fallbacks++;
                 Assert.That(a.SolveCount,Is.LessThanOrEqualTo(200));
             }
-            first/=64;third/=64;
-            TestContext.WriteLine("Normal calibration: 64 noise seeds, scene seed1, calm wind; first="+first+"m third="+third+"m fallback="+fallbacks);
-            Assert.That(third,Is.LessThan(first));
-            Assert.That(first,Is.InRange(6,10),"Normal first-shot target is approximately 8m.");
-            Assert.That(third,Is.InRange(2,4),"Normal third-shot target is approximately 3m.");
+            first/=64;third/=64;late/=64;normalLate/=64;
+            TestContext.WriteLine("Easy mountain calibration: first="+first+"m third="+third+"m late="+late+"m versus Normal late="+normalLate+"m fallback="+fallbacks);
+            Assert.That(ai.settings.minimumNoiseScale,Is.GreaterThanOrEqualTo(.75f));
+            Assert.That(late,Is.GreaterThan(normalLate+2));
             Assert.That(fallbacks,Is.Zero,"This opponent is reachable.");
             yield return null;
         }

@@ -36,7 +36,7 @@ namespace Fortress
                 throw new ArgumentException("AI requires a configured shot controller and settings.");
             if(settings.yawSamples<1 || settings.pitchSamples<2 || settings.powerSamples<2 || settings.maxSolverCalls<2 || settings.maxSolverCalls>200 ||
                 settings.refinementPasses<0 || settings.refinementPasses>8 || !Finite(settings.yawSearchDegrees) || settings.yawSearchDegrees<0 ||
-                !Finite(settings.noiseDecay) || settings.noiseDecay<0 || settings.noiseDecay>1 || !Finite(settings.reachTolerance) || settings.reachTolerance<0 ||
+                !Finite(settings.noiseDecay) || settings.noiseDecay<0 || settings.noiseDecay>1 || !Finite(settings.minimumNoiseScale) || settings.minimumNoiseScale<0 || settings.minimumNoiseScale>1 || !Finite(settings.reachTolerance) || settings.reachTolerance<0 ||
                 !Finite(settings.yawSigmaDegrees) || settings.yawSigmaDegrees<0 || !Finite(settings.pitchSigmaDegrees) || settings.pitchSigmaDegrees<0 ||
                 !Finite(settings.powerSigma) || settings.powerSigma<0 || !Finite(settings.thinkSeconds))
                 throw new ArgumentException("AI search settings are outside supported bounds.");
@@ -85,7 +85,7 @@ namespace Fortress
             bool useFallback=distance>farthest+settings.reachTolerance;
             var selected=useFallback?fallback:best;
             var random=new System.Random(unchecked(seed ^ (aiTurnNumber*486187739)));
-            float decay=Mathf.Pow(settings.noiseDecay,Mathf.Max(0,aiTurnNumber-1));
+            float decay=Mathf.Max(settings.minimumNoiseScale,Mathf.Pow(settings.noiseDecay,Mathf.Max(0,aiTurnNumber-1)));
             var noisy=search.Solve(selected.yaw+Gaussian(random)*settings.yawSigmaDegrees*decay,
                 selected.pitch+Gaussian(random)*settings.pitchSigmaDegrees*decay,
                 useFallback?tuning.maxPower:selected.power+Gaussian(random)*settings.powerSigma*decay);
