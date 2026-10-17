@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e05b39480f39d94f81eff527bc72c4c, type: 3}
+  m_Name: GameTuning
+  m_EditorClassIdentifier: Fortress::Fortress.GameTuning
+  gravity: 9.81
+  minPitch: 0
+  maxPitch: 85
+  initialPitch: 45
+  minPower: 5
+  maxPower: 35
+  initialPower: 22
+  yawSpeed: 40
+  pitchSpeed: 30
+  powerSpeed: 12
+  maxFlightTime: 15
+  groundHeight: 0
+  wind: {x: 0, y: 0, z: 0}
+  predictionMarkerRadius: 0.4
+  impactTolerance: 0.01

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-17 08:38:56Z" end-time="2026-10-17 08:38:57Z" duration="1.287381">
+  <test-suite type="TestSuite" id="1010" name="ProjectF" fullname="ProjectF" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 08:38:56Z" end-time="2026-10-17 08:38:57Z" duration="1.287381" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1004" name="Fortress.PlayModeTests.dll" fullname="D:/MoraeGames/01.Unity/ProjectF/Library/ScriptAssemblies/Fortress.PlayModeTests.dll" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 08:38:56Z" end-time="2026-10-17 08:38:57Z" duration="1.280271" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="24772" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1005" name="Fortress" fullname="Fortress" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 08:38:56Z" end-time="2026-10-17 08:38:57Z" duration="1.279920" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1006" name="Tests" fullname="Fortress.Tests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 08:38:56Z" end-time="2026-10-17 08:38:57Z" duration="1.279710" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="FlatRangePlayModeTests" fullname="Fortress.Tests.FlatRangePlayModeTests" classname="Fortress.Tests.FlatRangePlayModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-17 08:38:56Z" end-time="2026-10-17 08:38:57Z" duration="1.278749" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1003" name="FlatRange_DisableDuringFlight_NativeLifecycleCancelsAndAllowsRestart" fullname="Fortress.Tests.FlatRangePlayModeTests.FlatRange_DisableDuringFlight_NativeLifecycleCancelsAndAllowsRestart" methodname="FlatRange_DisableDuringFlight_NativeLifecycleCancelsAndAllowsRestart" classname="Fortress.Tests.FlatRangePlayModeTests" runstate="Runnable" seed="771061006" result="Passed" start-time="2026-10-17 08:38:56Z" end-time="2026-10-17 08:38:57Z" duration="0.401079" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="FlatRange_NormalShot_FinishesThroughNativeUpdateWithinOneCentimetre" fullname="Fortress.Tests.FlatRangePlayModeTests.FlatRange_NormalShot_FinishesThroughNativeUpdateWithinOneCentimetre" methodname="FlatRange_NormalShot_FinishesThroughNativeUpdateWithinOneCentimetre" classname="Fortress.Tests.FlatRangePlayModeTests" runstate="Runnable" seed="1353133206" result="Passed" start-time="2026-10-17 08:38:57Z" end-time="2026-10-17 08:38:57Z" duration="0.866703" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: C:/Users/jjw68/AppData/LocalLow/DefaultCompany/ProjectF\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

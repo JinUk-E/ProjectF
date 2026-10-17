@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ff811c916e4dfc8d5f2396d9bccdf1, type: 3}
+  m_Name: Profile_Standard
+  m_EditorClassIdentifier: UnityProjectile.Runtime::UnityProjectile.ProjectileProfile
+  flight: {fileID: 11400000, guid: 4f025dc41457cbe4d901e7c53ced645b, type: 2}
+  fuse: {fileID: 11400000, guid: f92257d5d853308429fd744768c628ff, type: 2}
+  payload: {fileID: 11400000, guid: 7812516c31979ea428803cdd3536f940, type: 2}
+  impactSoonLead: 0.5
+  lingerTime: 0
