@@ -154,6 +154,65 @@ namespace Fortress.Tests
             Assert.That(pool.ActiveCount, Is.Zero);
         }
 
+        [Test]
+        public void TryFire_TerrainShot_AppliesOnlyAfterFinishAndReaimMatchesChangedGround()
+        {
+            var field=new HeightField(new float[257,257],new Vector3(-32,-8,-32),new Vector2(64,64),-8,-10);
+            controller.SetSurface(new TerrainShotSurface(field));
+            controller.SetAim(270,45,10);
+            Vector3 firstPrediction=controller.LastPrediction.ImpactPosition;
+            int observedImpacts=0;
+            controller.ShotImpacted += runner =>
+            {
+                Assert.That(field.IsFrozen,Is.True);
+                Assert.That(field.Revision,Is.EqualTo(observedImpacts));
+                Assert.That(controller.LastImpactError,Is.LessThanOrEqualTo(.01f));
+                observedImpacts++;
+            };
+            for(int shot=0;shot<2;shot++)
+            {
+                Vector3 predicted=controller.LastPrediction.ImpactPosition;
+                Assert.That(controller.TryFire(),Is.True);
+                Assert.That(field.IsFrozen,Is.True);
+                Finish(controller.ActiveRunner);
+                Assert.That(field.IsFrozen,Is.False);
+                Assert.That(field.Revision,Is.EqualTo(shot+1));
+                Assert.That(controller.LastImpactError,Is.LessThanOrEqualTo(.01f));
+                Assert.That(field.TrySample(predicted.x,predicted.z,out var height),Is.True);
+                Assert.That(height,Is.LessThan(predicted.y-.1f));
+            }
+            Assert.That(observedImpacts,Is.EqualTo(2));
+            Assert.That(Vector3.Distance(firstPrediction,controller.LastPrediction.ImpactPosition),Is.GreaterThan(.1f));
+        }
+
+        [Test]
+        public void CancelShot_TerrainShot_DiscardsCraterAndUnlocksField()
+        {
+            var field=new HeightField(new float[33,33],new Vector3(-32,-8,-32),new Vector2(64,64),-8,-10);
+            controller.SetSurface(new TerrainShotSurface(field));
+            controller.SetAim(270,45,10);
+            Assert.That(controller.TryFire(),Is.True);
+            controller.ActiveRunner.Tick(.1f);
+            controller.CancelShot();
+            Assert.That(field.IsFrozen,Is.False);
+            Assert.That(field.Revision,Is.Zero);
+            Assert.That(controller.TryFire(),Is.True);
+            Finish(controller.ActiveRunner);
+            Assert.That(field.Revision,Is.EqualTo(1));
+        }
+
+        [Test]
+        public void TryFire_LeavesTerrainBounds_CompletesWithoutDiggingAtTimeout()
+        {
+            var field=new HeightField(new float[3,3],Vector3.zero,new Vector2(2,2),-8,-10);
+            tuning.maxFlightTime=.5f;
+            controller.SetSurface(new TerrainShotSurface(field));
+            Assert.That(controller.TryFire(),Is.True);
+            Assert.That(controller.LastSolveHit,Is.False);
+            Finish(controller.ActiveRunner);
+            Assert.That(field.Revision,Is.Zero);
+            Assert.That(field.IsFrozen,Is.False);
+        }
         void Finish(ProjectileRunner runner)
         {
             for (int i = 0; i < 1000 && controller.IsFiring; i++) runner.Tick(0.02f);
@@ -183,5 +242,3 @@ namespace Fortress.Tests
         }
     }
 }
-
-

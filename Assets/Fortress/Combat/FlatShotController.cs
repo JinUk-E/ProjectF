@@ -4,7 +4,7 @@ using UnityProjectile;
 
 namespace Fortress
 {
-    /// <summary>Epic 1 standard shell only. Runtime state is separate from shared tuning assets.</summary>
+    /// <summary>Epic 1/2 standard shell only. Runtime state is separate from shared tuning assets.</summary>
     public sealed class FlatShotController : MonoBehaviour
     {
         public GameTuning tuning;
@@ -13,6 +13,7 @@ namespace Fortress
         public ProjectilePool pool;
         public ParticleSystem impactEffect;
         public Transform predictionMarker;
+        public HeightFieldTerrain terrainMap;
         public event Action StateChanged;
         public event Action<ProjectileRunner> ShotLaunched;
         public event Action<ProjectileRunner> ShotImpacted;
@@ -27,6 +28,9 @@ namespace Fortress
         public TankRig ActiveTank => tanks != null && tanks.Length > 0 ? tanks[0] : null;
         bool initialized;
         IShotSurface surface;
+        HeightField shotField;
+        bool pendingImpact;
+        Vector3 pendingImpactPosition;
 
         void Start() { Initialize(); }
         void OnEnable() { if (ActiveRunner != null) Subscribe(ActiveRunner); }
@@ -46,7 +50,9 @@ namespace Fortress
         {
             if (initialized || tuning == null || ActiveTank == null) return;
             initialized = true;
-            surface = new PlaneSurface(tuning.groundHeight);
+            if (terrainMap != null) terrainMap.Initialize();
+            surface = terrainMap != null && terrainMap.Surface != null
+                ? (IShotSurface)terrainMap.Surface : new PlaneSurface(tuning.groundHeight);
             Wind = tuning.wind;
             SetAim(ActiveTank.transform.eulerAngles.y, tuning.initialPitch, tuning.initialPower);
         }
@@ -85,7 +91,12 @@ namespace Fortress
         {
             Initialize();
             if (!isActiveAndEnabled || IsFiring || pool == null || !TryBuildLaunch(out var launch)) return false;
+            var candidateField = (surface as TerrainShotSurface)?.Field;
+            if (candidateField != null && candidateField.IsFrozen) return false;
             var runner = pool.Get(projectilePrefab);
+            shotField = candidateField;
+            if (shotField != null) shotField.BeginShot();
+            pendingImpact = false;
             ActiveRunner = runner;
             IsFiring = true;
             LastImpactError = float.NaN;
@@ -95,6 +106,8 @@ namespace Fortress
             {
                 Unsubscribe(runner);
                 ActiveRunner = null; IsFiring = false;
+                if (shotField != null) shotField.EndShot();
+                shotField = null; pendingImpact = false;
                 pool.Release(runner);
                 StateChanged?.Invoke();
                 throw;
@@ -120,7 +133,7 @@ namespace Fortress
         {
             if (!TryBuildLaunch(out var launch)) return;
             LastPrediction = ProjectilePredictor.Predict(projectilePrefab.Profile, launch, surface: surface);
-            if (predictionMarker != null) predictionMarker.position = LastPrediction.ImpactPosition;
+            UpdateDebugMarker();
         }
 
         void Subscribe(ProjectileRunner runner)
@@ -139,12 +152,14 @@ namespace Fortress
         void OnLaunched(ProjectileRunner runner)
         {
             LastPrediction = runner.Prediction;
-            if (predictionMarker != null) predictionMarker.position = LastPrediction.ImpactPosition;
+            UpdateDebugMarker();
             ShotLaunched?.Invoke(runner);
         }
         void OnImpacted(ProjectileRunner runner)
         {
             LastImpactError = Vector3.Distance(LastPrediction.ImpactPosition, runner.Position);
+            pendingImpact = LastSolveHit && shotField != null;
+            pendingImpactPosition = runner.Position;
             if (impactEffect != null && LastSolveHit)
             {
                 impactEffect.transform.position = runner.Position;
@@ -157,6 +172,18 @@ namespace Fortress
         {
             Unsubscribe(runner);
             ActiveRunner = null;
+            // Standard shell is the whole shot family in Epics 1/2. Scatter remains rejected.
+            if (shotField != null)
+            {
+                shotField.EndShot();
+                if (pendingImpact)
+                {
+                    var region = shotField.ApplyCrater(pendingImpactPosition, tuning.craterRadius, tuning.craterDepth);
+                    if (terrainMap != null && terrainMap.Field == shotField) terrainMap.UpdateRegion(region);
+                }
+            }
+            shotField = null; pendingImpact = false;
+            RefreshPrediction();
             IsFiring = false;
             ShotFinished?.Invoke();
             StateChanged?.Invoke();
@@ -165,6 +192,8 @@ namespace Fortress
         {
             var runner = ActiveRunner;
             bool wasFiring = IsFiring;
+            if (shotField != null) shotField.EndShot();
+            shotField = null; pendingImpact = false;
             ActiveRunner = null;
             IsFiring = false;
             if (runner != null)
@@ -175,15 +204,18 @@ namespace Fortress
             }
             if (wasFiring) StateChanged?.Invoke();
         }
+        void UpdateDebugMarker()
+        {
+            if (predictionMarker == null || tuning == null) return;
+            predictionMarker.gameObject.SetActive(tuning.showDebugPrediction);
+            predictionMarker.position = LastPrediction.ImpactPosition;
+        }
         void OnDrawGizmosSelected()
         {
-            if (!initialized || tuning == null) return;
+            if (!initialized || tuning == null || !tuning.showDebugPrediction) return;
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(LastPrediction.ImpactPosition, tuning.predictionMarkerRadius);
         }
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
     }
 }
-
-
-

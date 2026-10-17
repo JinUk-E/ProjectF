@@ -17,7 +17,16 @@ namespace Fortress
         public float powerSpeed = 12f;
         [Min(0.01f)] public float maxFlightTime = 15f;
         public float groundHeight;
+        public float terrainLowerHeight = -8f;
+        public float waterHeight = -10f;
+        [Min(0.01f)] public float craterRadius = 4f;
+        [Min(0.01f)] public float craterDepth = 2f;
+        [Min(0)] public float previewSeconds = 1.5f;
+        [Range(1,128)] public int previewSegments = 24;
+        [Range(0.01f,1)] public float previewDashFraction = 0.55f;
+        [Min(0.001f)] public float previewWidth = 0.08f;
         public Vector3 wind;
+        public bool showDebugPrediction = true;
         [Min(0)] public float predictionMarkerRadius = 0.4f;
         [Min(0)] public float impactTolerance = 0.01f;
     }
