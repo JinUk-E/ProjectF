@@ -7,6 +7,7 @@ namespace Fortress
     {
         public Terrain terrain;
         public GameTuning tuning;
+        [Range(0,89)] public float rockStartSlope=25f,rockFullSlope=55f;
         public HeightField Field { get; private set; }
         public TerrainShotSurface Surface { get; private set; }
         TerrainData originalData;
@@ -70,21 +71,39 @@ namespace Fortress
             Field=candidate;
             Surface=new TerrainShotSurface(Field);
             UpdateRegion(new RectInt(0,0,Field.Width,Field.Depth));
-            PaintTacticalRoads();
+
         }
-        void PaintTacticalRoads()
+        void PaintTacticalRoads(RectInt region)
         {
             var profile=tuning.mountainTerrain;
-            if(profile==null || !profile.tacticalHills || runtimeData.alphamapLayers!=2) return;
+            int layers=runtimeData.alphamapLayers;
+            if(profile==null || !profile.tacticalHills || (layers!=2 && layers!=3)) return;
             int width=runtimeData.alphamapWidth,height=runtimeData.alphamapHeight;
-            var alpha=new float[height,width,2];
-            for(int z=0;z<height;z++) for(int x=0;x<width;x++)
+            // Include a height-cell halo because slope samples straddle the updated rectangle.
+            int x0=Mathf.Clamp(Mathf.FloorToInt((region.x-1f)/(Field.Width-1)*(width-1)),0,width-1);
+            int z0=Mathf.Clamp(Mathf.FloorToInt((region.y-1f)/(Field.Depth-1)*(height-1)),0,height-1);
+            int x1=Mathf.Clamp(Mathf.CeilToInt((region.xMax+1f)/(Field.Width-1)*(width-1)),0,width-1);
+            int z1=Mathf.Clamp(Mathf.CeilToInt((region.yMax+1f)/(Field.Depth-1)*(height-1)),0,height-1);
+            var alpha=new float[z1-z0+1,x1-x0+1,layers];
+            for(int z=z0;z<=z1;z++) for(int x=x0;x<=x1;x++)
             {
                 float wx=Field.Origin.x+Field.Size.x*x/(width-1),wz=Field.Origin.z+Field.Size.y*z/(height-1);
                 float road=1-Mathf.Clamp01(TacticalTerrain.RoadDistance(wx,wz,profile)-profile.roadHalfWidth+.5f);
-                alpha[z,x,0]=1-road;alpha[z,x,1]=road;
+                float rock=0;
+                if(layers==3)
+                {
+                    float left=Mathf.Max(Field.Origin.x,wx-Field.CellX),right=Mathf.Min(Field.Origin.x+Field.Size.x,wx+Field.CellX);
+                    float back=Mathf.Max(Field.Origin.z,wz-Field.CellZ),front=Mathf.Min(Field.Origin.z+Field.Size.y,wz+Field.CellZ);
+                    Field.TrySample(left,wz,out float hl);Field.TrySample(right,wz,out float hr);
+                    Field.TrySample(wx,back,out float hb);Field.TrySample(wx,front,out float hf);
+                    float dx=(hr-hl)/(right-left),dz=(hf-hb)/(front-back);
+                    float degrees=Mathf.Atan(Mathf.Sqrt(dx*dx+dz*dz))*Mathf.Rad2Deg;
+                    rock=Mathf.SmoothStep(0,1,Mathf.InverseLerp(rockStartSlope,Mathf.Max(rockStartSlope+.01f,rockFullSlope),degrees))*(1-road);
+                    alpha[z-z0,x-x0,2]=rock;
+                }
+                alpha[z-z0,x-x0,0]=1-road-rock;alpha[z-z0,x-x0,1]=road;
             }
-            runtimeData.SetAlphamaps(0,0,alpha);
+            runtimeData.SetAlphamaps(x0,z0,alpha);
         }
         public void ResetTerrain()
         {
@@ -102,6 +121,7 @@ namespace Fortress
             // Only the affected rectangle is uploaded. Collider updates are not used for gameplay.
             runtimeData.SetHeightsDelayLOD(region.x,region.y,patch);
             runtimeData.SyncHeightmap();
+            PaintTacticalRoads(region);
         }
         void OnDestroy()
         {
@@ -113,3 +133,4 @@ namespace Fortress
         }
     }
 }
+

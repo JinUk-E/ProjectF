@@ -8,7 +8,8 @@ namespace Fortress
     {
         public FlatShotController shots;
         public BattleVisualTuning tuning;
-        public Transform[] gunVisuals;
+        public Transform[] gunVisuals = System.Array.Empty<Transform>();
+        public AudioSource shotAudio,impactAudio;
         public ParticleSystem muzzleFlash, impactFlash;
         Vector3[] restPositions;
         int recoiling = -1;
@@ -32,6 +33,8 @@ namespace Fortress
         }
         void Cancelled()
         {
+            if(shotAudio!=null) shotAudio.Stop();
+            if(impactAudio!=null) impactAudio.Stop();
             Restore();
             if(muzzleFlash!=null) muzzleFlash.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
             if(impactFlash!=null) impactFlash.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -39,6 +42,7 @@ namespace Fortress
         void Launched(ProjectileRunner runner)
         {
             Restore();
+            if(shotAudio!=null) { shotAudio.transform.position=runner.Position;shotAudio.Play(); }
             if(tuning==null || shots.ActiveTank==null) return;
             for(int i=0;i<shots.tanks.Length && i<gunVisuals.Length;i++)
                 if(shots.tanks[i]==shots.ActiveTank) { recoiling=i; elapsed=0; break; }
@@ -52,7 +56,9 @@ namespace Fortress
         }
         void Impacted(ProjectileRunner runner)
         {
-            if(!shots.LastSolveHit || impactFlash==null) return;
+            if(!shots.LastSolveHit) return;
+            if(impactAudio!=null) { impactAudio.transform.position=runner.Position;impactAudio.Play(); }
+            if(impactFlash==null) return;
             impactFlash.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
             impactFlash.transform.position=runner.Position;
             impactFlash.Play(true);
@@ -74,3 +80,5 @@ namespace Fortress
         }
     }
 }
+
+

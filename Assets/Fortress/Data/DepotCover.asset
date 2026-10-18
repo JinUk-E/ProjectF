@@ -23,7 +23,7 @@ MonoBehaviour:
   positionJitter: 1
   health: 45
   foundationDrop: 2
-  wallMaterial: {fileID: 2100000, guid: 12f15e50219dc5346a948d120d0712d5, type: 2}
-  roofMaterial: {fileID: 2100000, guid: 583d0f1652e0a2f4faf23da4f021abac, type: 2}
+  wallMaterial: {fileID: 2100000, guid: a3aa1e9ba0b655e4e99f28f010c65ef7, type: 2}
+  roofMaterial: {fileID: 2100000, guid: 6dd8e926091163545a398e5e12a54437, type: 2}
   windowMaterial: {fileID: 2100000, guid: 0c257c0dd23955147a2561d30f767519, type: 2}
-  rubbleMaterial: {fileID: 2100000, guid: 3c9ae354f2073ef418717a44685315b8, type: 2}
+  rubbleMaterial: {fileID: 2100000, guid: 21dde6aeeca3d204988673a50037be0b, type: 2}

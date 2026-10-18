@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cffddd547028394fb1d049c04e2f489, type: 3}
   m_Name: BattleVisualTuning
   m_EditorClassIdentifier: Fortress::Fortress.BattleVisualTuning
-  recoilDistance: 0.45
-  recoilSeconds: 0.35
+  recoilDistance: 0.65
+  recoilSeconds: 0.55
   muzzleLifetime: 0.12
   muzzleSize: 1.4
   muzzleParticles: 8
