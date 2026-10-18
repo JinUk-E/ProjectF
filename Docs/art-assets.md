@@ -1,5 +1,13 @@
 # Free art sources — military presentation pass
 
+## Shell presentation — 2026-10-19
+
+Actor: editor-tooling-codex. Polyfork [Artillery Shell](https://polyfork.dev/asset/artillery-shell-0870bc) supplies the projectile nose. Its [license](https://polyfork.dev/licensing) allows commercial game use and modification, but prohibits standalone asset redistribution; this is not CC0. Source and terms are retained under Assets/ThirdParty/PolyforkShell and must remain embedded in the game rather than uploaded as a public asset pack.
+
+ShellArtBuilder extracts the nose from the complete cartridge, aligns it to +Z, and adds a steel body and brass driving band. StandardShell uses a short orange trail. ShellVisual follows trajectory direction without changing ballistic state and clears its trail on cancellation, impact completion and pool reuse. MilitaryMatch/MilitaryAI impact dust uses the existing Kenney CC0 smoke sprite.
+
+Validation: Unity PlayMode 46/46 passed, including three new shell lifecycle/direction tests. Results: Validation/shell-visual-playmode.json. Physical damage, trajectory and collision rules are unchanged.
+
 Actor: editor-tooling-codex. Retrieved 2026-10-17. User direction: a weighty military style (muted olive/desert/gunmetal), not a bright cartoon presentation.
 
 | Asset | Official source | License | Project use |

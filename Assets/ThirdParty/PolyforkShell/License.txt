@@ -1,0 +1,12 @@
+Artillery Shell — Polyfork / Lucas Martinic
+Source: https://polyfork.dev/asset/artillery-shell-0870bc
+License: https://polyfork.dev/licensing (checked 2026-10-19)
+Downloaded from the publisher's public CDN; original GLB and module retained for provenance.
+
+Publisher permits personal and commercial game use and modification, with no attribution required.
+Standalone redistribution/resale of original or modified assets is prohibited, as is using them to build/train a commercial asset generator.
+Ship as part of the game, not as a separate asset download or asset pack. This is not CC0.
+
+ProjectF modification: extract projectile nose, remove cartridge case, reorient +Z,
+enlarge for game readability, add short body and brass driving band, use Unity URP materials.
+Downloaded JavaScript is reference/source material only; it is not executed or included in game logic.
