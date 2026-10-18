@@ -6,6 +6,7 @@ using UnityProjectile;
 namespace Fortress
 {
     // ui-developer-codex: event-driven hotseat presentation; rules belong to MatchController.
+    [DefaultExecutionOrder(200)]
     public sealed class MatchHud : MonoBehaviour
     {
         public MatchController match;
@@ -22,6 +23,11 @@ namespace Fortress
         public Image[] activeIndicators;
         public CanvasGroup notificationGroup;
         public TMP_Text movementLabel;
+        public TMP_Text windDetailLabel;
+        public Camera windCamera;
+        [Min(0)] public float calmWindThreshold=.05f;
+        void Awake() { if(windCamera==null) windCamera=Camera.main; }
+        void LateUpdate() { RefreshWindPresentation(); }
         int displayedTurn = -1, displayedSeed;
         float notificationRemaining;
         bool pendingImpact;
@@ -71,6 +77,35 @@ namespace Fortress
             notificationRemaining = Mathf.Max(0, notificationRemaining - Mathf.Max(0, deltaTime));
             notificationGroup.alpha = Mathf.Clamp01(notificationRemaining / Mathf.Max(.01f, style.notificationFadeSeconds));
         }
+        // Arrow points where the wind pushes a shell, in the current screen axes (+X right, +Y up).
+        public static Vector2 ProjectWindToScreen(Vector3 wind,Transform cameraTransform)
+        {
+            if(cameraTransform==null) return new Vector2(wind.x,wind.z);
+            return new Vector2(Vector3.Dot(wind,cameraTransform.right),Vector3.Dot(wind,cameraTransform.up));
+        }
+        public void RefreshWindPresentation()
+        {
+            if(windArrow==null || match==null || match.shots==null) return;
+            var wind=match.shots.Wind;
+            var projected=ProjectWindToScreen(wind,windCamera!=null?windCamera.transform:null);
+            bool visible=wind.sqrMagnitude>calmWindThreshold*calmWindThreshold && projected.sqrMagnitude>.000001f;
+            if(windArrow.gameObject.activeSelf!=visible) windArrow.gameObject.SetActive(visible);
+            if(visible) windArrow.localRotation=Quaternion.Euler(0,0,Mathf.Atan2(projected.y,projected.x)*Mathf.Rad2Deg);
+        }
+        void RefreshWindDetails(Vector3 wind)
+        {
+            if(windDetailLabel==null) return;
+            if(wind.magnitude<=calmWindThreshold) { windDetailLabel.SetText("CALM");return; }
+            var tank=match.shots.ActiveTank;
+            if(tank==null) { windDetailLabel.SetText("ARROW = BLOWING TOWARD");return; }
+            float yaw=tank.Yaw*Mathf.Deg2Rad;
+            var forward=new Vector3(Mathf.Sin(yaw),0,Mathf.Cos(yaw));
+            var right=new Vector3(forward.z,0,-forward.x);
+            float cross=Vector3.Dot(wind,right),along=Vector3.Dot(wind,forward);
+            windDetailLabel.SetText(cross>=0
+                ? (along>=0?"GUN: RIGHT {0:0.0} / TAIL {1:0.0}":"GUN: RIGHT {0:0.0} / HEAD {1:0.0}")
+                : (along>=0?"GUN: LEFT {0:0.0} / TAIL {1:0.0}":"GUN: LEFT {0:0.0} / HEAD {1:0.0}"),Mathf.Abs(cross),Mathf.Abs(along));
+        }
         public void Refresh()
         {
             if (match == null || match.shots == null || match.tuning == null) return;
@@ -93,8 +128,9 @@ namespace Fortress
             if(aiTurn) turnLabel.SetText("TURN {0:0}  /  AI",match.TurnNumber);
             else turnLabel.SetText("TURN {0:0}  /  PLAYER {1}", match.TurnNumber, match.ActivePlayerIndex + 1);
             var wind = shots.Wind;
-            windLabel.SetText("WIND  {0:0.0} m/s²", wind.magnitude);
-            windArrow.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(wind.z, wind.x) * Mathf.Rad2Deg);
+            windLabel.SetText("WIND / VIEW  {0:0.0} m/s²", wind.magnitude);
+            RefreshWindPresentation();
+            RefreshWindDetails(wind);
             var tank = shots.ActiveTank;
             if (tank != null) aimLabel.SetText("YAW {0:0.0}°     ELEVATION {1:0.0}°     POWER {2:0.0}", tank.Yaw, tank.Pitch, shots.Power);
             if (tank != null && elevationLabel != null) elevationLabel.SetText("{0:0.0}°", tank.Pitch);
@@ -133,3 +169,5 @@ namespace Fortress
         }
     }
 }
+
+

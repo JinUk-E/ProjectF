@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d94491b31b1fd284f834ba22e94748f2, type: 3}
+  m_Name: Vegetation
+  m_EditorClassIdentifier: Fortress::Fortress.VegetationSettings
+  treePrefab: {fileID: 2219220705502629302, guid: 17ff10ee0a849da4e98b80ca58734acb, type: 3}
+  shrubPrefab: {fileID: 6510742536373646933, guid: 029eda7214a5e4a49b330221ccb3e89c, type: 3}
+  treeCount: 65
+  shrubCount: 90
+  attemptsPerInstance: 20
+  minSpacing: 3.5
+  roadClearance: 3
+  spawnClearance: 6
+  buildingClearance: 3
+  maxSlopeDegrees: 48
+  minScale: 0.75
+  maxScale: 1.25
+  destructionDrop: 0.4

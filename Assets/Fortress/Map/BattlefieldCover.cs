@@ -111,16 +111,47 @@ namespace Fortress
             var bounds=Buildings[i].Bounds;
             intact[i]=new GameObject("Depot "+(i+1));intact[i].transform.SetParent(viewRoot.transform,false);
             var root=intact[i].transform;
-            Cube(root,"Concrete walls",bounds.center,bounds.size,settings.wallMaterial);
-            Cube(root,"Roof",bounds.center+Vector3.up*(bounds.extents.y+.15f),new Vector3(bounds.size.x+.3f,.3f,bounds.size.z+.3f),settings.roofMaterial);
-            float ground=bounds.max.y-settings.size.y;
+            int variant=i%3;root.name=variant==0?"Maintenance hangar":variant==1?"Ammunition store":"Communications post";
+            // Every intact detail stays inside the authoritative AABB. The roof reserves space
+            // for vents and aerials so visual cover never promises protection outside the bounds.
+            var c=bounds.center;var size=bounds.size;float top=bounds.max.y,baseY=bounds.min.y;
+            float roofSpace=Mathf.Min(.8f,size.y*.2f),wallHeight=size.y-roofSpace;
+            Cube(root,"Reinforced concrete shell",new Vector3(c.x,baseY+wallHeight*.5f,c.z),new Vector3(size.x*.94f,wallHeight,size.z*.94f),settings.wallMaterial);
+            Cube(root,"Standing seam steel roof",new Vector3(c.x,top-roofSpace+.1f,c.z),new Vector3(size.x,.2f,size.z),settings.roofMaterial);
+            for(int rib=0;rib<7;rib++)
+            {
+                float x=Mathf.Lerp(bounds.min.x+.12f,bounds.max.x-.12f,rib/6f);
+                Cube(root,"Roof seam",new Vector3(x,top-roofSpace+.23f,c.z),new Vector3(.045f,.06f,size.z*.94f),settings.roofMaterial);
+            }
             for(int side=-1;side<=1;side+=2)
             {
+                float faceZ=c.z+side*(bounds.extents.z-.04f);
+                for(int column=-1;column<=1;column++)
+                    Cube(root,"Concrete buttress",new Vector3(c.x+column*(bounds.extents.x-.12f),baseY+wallHeight*.5f,faceZ-side*.04f),new Vector3(.24f,wallHeight,.16f),settings.wallMaterial);
+                float doorHeight=Mathf.Min(2.25f,wallHeight*.75f),doorWidth=size.x*(variant==0?.44f:variant==1?.24f:.18f);
+                Cube(root,"Steel rolling shutter",new Vector3(c.x,baseY+doorHeight*.5f,faceZ),new Vector3(doorWidth,doorHeight,.06f),settings.roofMaterial);
+                for(int slat=1;slat<9;slat++)
+                    Cube(root,"Shutter horizontal seam",new Vector3(c.x,baseY+slat*doorHeight/9,faceZ+side*.015f),new Vector3(doorWidth*.96f,.025f,.025f),settings.windowMaterial);
                 for(int window=-1;window<=1;window+=2)
-                    Cube(root,"Window",new Vector3(bounds.center.x+window*bounds.size.x*.28f,ground+2.6f,bounds.center.z+side*(bounds.extents.z+.02f)),new Vector3(.85f,.9f,.05f),settings.windowMaterial);
-                Cube(root,"Door",new Vector3(bounds.center.x,ground+1.1f,bounds.center.z+side*(bounds.extents.z+.03f)),new Vector3(1.1f,2.2f,.06f),settings.roofMaterial);
+                {
+                    if(variant==0 || (variant==1 && window<0))continue;
+                    float x=c.x+window*size.x*.29f,y=baseY+wallHeight*.65f;
+                    Cube(root,"Recessed dark window",new Vector3(x,y,faceZ),new Vector3(size.x*(variant==1?.09f:.18f),wallHeight*.24f,.05f),settings.windowMaterial);
+                    Cube(root,"Window mullion",new Vector3(x,y,faceZ+side*.015f),new Vector3(.045f,wallHeight*.24f,.025f),settings.roofMaterial);
+                    Cube(root,"Window lintel",new Vector3(x,y+wallHeight*.13f,faceZ-side*.01f),new Vector3(size.x*.2f,.09f,.07f),settings.wallMaterial);
+                }
+                Cube(root,"Rain downpipe",new Vector3(c.x+size.x*.4f,baseY+wallHeight*.5f,faceZ),new Vector3(.065f,wallHeight,.065f),settings.roofMaterial);
             }
-            Cube(root,"Roof vent",new Vector3(bounds.center.x+.8f,bounds.max.y+.5f,bounds.center.z),new Vector3(1,.7f,1),settings.roofMaterial);
+            float roofBase=top-roofSpace+.2f;
+            Cube(root,"Vent housing",new Vector3(c.x+size.x*.22f,roofBase+roofSpace*.22f,c.z+size.z*.18f),new Vector3(size.x*.16f,roofSpace*.4f,size.z*.2f),settings.roofMaterial);
+            for(int louver=0;louver<4;louver++)
+                Cube(root,"Vent louver",new Vector3(c.x+size.x*.22f,roofBase+roofSpace*.44f,c.z+size.z*(.11f+louver*.04f)),new Vector3(size.x*.14f,.025f,.035f),settings.windowMaterial);
+            if(variant==2) Cube(root,"Radio aerial",new Vector3(c.x-size.x*.32f,roofBase+(top-roofBase)*.45f,c.z-size.z*.3f),new Vector3(.035f,(top-roofBase)*.9f,.035f),settings.roofMaterial);
+            // Distinct low-cost identification plates: one/two/three bright bars, no extra text atlas.
+            float plateX=c.x+size.x*.32f,plateY=baseY+wallHeight*.25f,plateZ=bounds.min.z+.025f;
+            Cube(root,"Facility identification plate",new Vector3(plateX,plateY,plateZ),new Vector3(size.x*.18f,wallHeight*.15f,.04f),settings.windowMaterial);
+            for(int bar=0;bar<=variant;bar++)
+                Cube(root,"Facility identification stripe",new Vector3(plateX+(bar-variant*.5f)*size.x*.04f,plateY,plateZ-.015f),new Vector3(size.x*.02f,wallHeight*.11f,.015f),settings.wallMaterial);
             ruins[i]=new GameObject("Depot "+(i+1)+" rubble (passable)");ruins[i].transform.SetParent(viewRoot.transform,false);
             ruins[i].transform.position=new Vector3(bounds.center.x,bounds.min.y+.12f,bounds.center.z);
             for(int piece=0;piece<5;piece++)
@@ -138,3 +169,5 @@ namespace Fortress
         }
     }
 }
+
+

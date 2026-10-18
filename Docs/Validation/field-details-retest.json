@@ -1,0 +1,80 @@
+{
+  "job_id": "ee20cf8222994e01b48722180f0372ec",
+  "status": "succeeded",
+  "mode": "PlayMode",
+  "started_unix_ms": 1792340479523,
+  "finished_unix_ms": 1792340485915,
+  "last_update_unix_ms": 1792340485915,
+  "progress": {
+    "completed": 5,
+    "total": 5,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": 1792340484932,
+    "last_finished_test_full_name": "Fortress.Tests.MatchPlayModeTests.Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer",
+    "last_finished_unix_ms": 1792340485883,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 5.2618067,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "BuildingDetails_StayInBoundsAndHideWithDestroyedBuilding",
+        "fullName": "Fortress.Tests.BattlefieldDetailTests.BuildingDetails_StayInBoundsAndHideWithDestroyedBuilding",
+        "state": "Passed",
+        "durationSeconds": 1.0808139,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Vegetation_CraterClearsDecorationOnlyAfterWorldThaws",
+        "fullName": "Fortress.Tests.BattlefieldDetailTests.Vegetation_CraterClearsDecorationOnlyAfterWorldThaws",
+        "state": "Passed",
+        "durationSeconds": 0.9442812,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Vegetation_SeedReproducesAndExcludesRoadsSpawnsBuildings",
+        "fullName": "Fortress.Tests.BattlefieldDetailTests.Vegetation_SeedReproducesAndExcludesRoadsSpawnsBuildings",
+        "state": "Passed",
+        "durationSeconds": 1.2843202,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "WindArrow_TracksScreenRotationPitchAndCalmWithoutChangingWind",
+        "fullName": "Fortress.Tests.BattlefieldDetailTests.WindArrow_TracksScreenRotationPitchAndCalmWithoutChangingWind",
+        "state": "Passed",
+        "durationSeconds": 0.9497523,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer",
+        "fullName": "Fortress.Tests.MatchPlayModeTests.Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer",
+        "state": "Passed",
+        "durationSeconds": 0.9518009,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

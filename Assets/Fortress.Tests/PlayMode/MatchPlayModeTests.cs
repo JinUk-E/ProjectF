@@ -224,6 +224,9 @@ namespace Fortress.Tests
             Assert.That(hud.headingLabel.text,Does.Contain("37"));
             shots.SetAim(-37,62,match.tuning.maxPower);
             Assert.That(hud.powerFill.fillAmount,Is.EqualTo(1).Within(.0001));
+            // Known top-down basis: world +X is screen right and world +Z is screen up.
+            // Other orbit angles are covered by BattlefieldDetailTests.
+            hud.windCamera.transform.rotation=Quaternion.Euler(90,0,0);
             shots.SetWind(new Vector3(3,0,0));
             Assert.That(Mathf.Abs(Mathf.DeltaAngle(hud.windArrow.localEulerAngles.z,0)),Is.LessThan(.01));
             string windText=hud.windLabel.text;
