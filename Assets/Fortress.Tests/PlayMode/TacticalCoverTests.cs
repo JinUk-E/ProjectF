@@ -33,13 +33,13 @@ namespace Fortress.Tests
             Assert.That(match.TryMoveActiveTank(Vector2.right,.25f),Is.False);Assert.That(match.MovementRemaining,Is.EqualTo(budget));
             yield return null;
         }
-        [UnityTest] public IEnumerator Building_DestructionOpensPathAndRestartRestoresSameLayout()
+        [UnityTest] public IEnumerator Building_DestructionLeavesLowCoverAndRestartRestoresSameLayout()
         {
             var cover=match.cover;var b=cover.Buildings[0];var bounds=b.Bounds;
             cover.ApplyExplosion(bounds.center,4,30);Assert.That(b.Destroyed,Is.False);
             cover.ApplyExplosion(bounds.center,4,30);Assert.That(b.Destroyed,Is.True);Assert.That(cover.Remaining,Is.EqualTo(5));
             var from=bounds.center-Vector3.right*4;var to=bounds.center+Vector3.right*4;
-            Assert.That(cover.BlocksMovement(from,to,1),Is.False);Assert.That(cover.TryHit(from,to,out _),Is.False);
+            Assert.That(cover.BlocksMovement(from,to,1),Is.True);Assert.That(cover.TryHit(from,to,out _),Is.False,"Former wall mid-height now clears the lower rubble.");
             match.Tanks[0].MoveOnGround(new Vector3(bounds.min.x-1.1f,bounds.min.y,bounds.center.z));
             Assert.That(match.TryMoveActiveTank(Vector2.right,.25f),Is.True);
             match.RestartMatch(match.Seed);Assert.That(cover.Remaining,Is.EqualTo(6));Assert.That(cover.Buildings[0].Bounds,Is.EqualTo(bounds));

@@ -62,7 +62,14 @@ namespace Fortress
             hit=default;bool found=false;float best=float.PositiveInfinity;
             foreach(var b in Buildings)
             {
-                if(b.Destroyed||!CoverBuilding.Intersect(b.Bounds,from,to,out var p)) continue;
+                if(b.Destroyed)
+                {
+                    if(!b.HasDryRubble || !CoverBuilding.Intersect(b.RubbleBounds,from,to,out _))continue;
+                    foreach(var piece in b.Rubble) if(piece.TryHit(from,to,out var rubbleHit))
+                    {float d=(rubbleHit-from).sqrMagnitude;if(d<best){found=true;best=d;hit=rubbleHit;}}
+                    continue;
+                }
+                if(!CoverBuilding.Intersect(b.Bounds,from,to,out var p)) continue;
                 float distance=(p-from).sqrMagnitude;if(distance<best) {found=true;best=distance;hit=p;}
             }
             return found;
@@ -71,7 +78,11 @@ namespace Fortress
         {
             foreach(var b in Buildings)
             {
-                if(b.Destroyed) continue;
+                if(b.Destroyed)
+                {
+                    foreach(var piece in b.Rubble)if(piece.BlocksMovement(from,to,radius))return true;
+                    continue;
+                }
                 var bounds=b.Bounds;bounds.Expand(new Vector3(radius*2,0,radius*2));
                 from.y=to.y=bounds.center.y;
                 if(CoverBuilding.Intersect(bounds,from,to,out _)) return true;
@@ -112,6 +123,7 @@ namespace Fortress
             {
                 if(Buildings[i].Destroyed)
                 {
+                    Buildings[i].SettleRubble(field);
                     collapses[i].Begin(Buildings[i].Bounds.center);collapses[i].RefreshGround();
                 }
                 else
@@ -173,8 +185,9 @@ namespace Fortress
             Cube(root,"Facility identification plate",new Vector3(plateX,plateY,plateZ),new Vector3(size.x*.18f,wallHeight*.15f,.04f),settings.windowMaterial);
             for(int bar=0;bar<=variant;bar++)
                 Cube(root,"Facility identification stripe",new Vector3(plateX+(bar-variant*.5f)*size.x*.04f,plateY,plateZ-.015f),new Vector3(size.x*.02f,wallHeight*.11f,.015f),settings.wallMaterial);
-            ruins[i]=new GameObject("Depot "+(i+1)+" rubble (passable)");ruins[i].transform.SetParent(viewRoot.transform,false);
-            collapses[i]=new CoverCollapseView(intact[i],ruins[i],field,settings,i);
+            ruins[i]=new GameObject("Depot "+(i+1)+" rubble (low cover)");ruins[i].transform.SetParent(viewRoot.transform,false);
+            Buildings[i].PrepareRubble(field,settings,i);
+            collapses[i]=new CoverCollapseView(intact[i],ruins[i],field,settings,i,Buildings[i].Rubble);
             damageViews[i]=new GameObject[2];
             for(int stage=0;stage<2;stage++)
             {
@@ -197,6 +210,3 @@ namespace Fortress
         }
     }
 }
-
-
-

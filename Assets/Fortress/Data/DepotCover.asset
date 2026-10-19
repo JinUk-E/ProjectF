@@ -31,3 +31,5 @@ MonoBehaviour:
   collapseDustPrefab: {fileID: 9047464256914841235, guid: 129dc1ffdad8ebe449cfd728bc0829f3, type: 3}
   collapseSeconds: 1.2
   collapseSpread: 1.25
+  rubbleHeight: 1.1
+  rubbleFootprintFraction: 0.55

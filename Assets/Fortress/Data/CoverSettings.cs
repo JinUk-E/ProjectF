@@ -14,6 +14,7 @@ namespace Fortress
         public ParticleSystem collapseDustPrefab;
         [Range(.9f,1.4f)] public float collapseSeconds=1.2f;
         [Min(0)] public float collapseSpread=1.5f;
+        [Range(.5f,1.5f)] public float rubbleHeight=1.1f;
+        [Range(.4f,.8f)] public float rubbleFootprintFraction=.55f;
     }
 }
-

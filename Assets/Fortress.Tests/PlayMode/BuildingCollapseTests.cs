@@ -51,7 +51,7 @@ namespace Fortress.Tests
             Assert.That(intact.gameObject.activeSelf,Is.False);Assert.That(ruins.gameObject.activeSelf,Is.True);
             Assert.That(ruins.childCount,Is.GreaterThan(30));
             Assert.That(ruins.GetChild(0).position,Is.EqualTo(initial));Assert.That(ruins.GetChild(0).rotation,Is.EqualTo(rotation));
-            Assert.That(cover.BlocksMovement(bounds.center,bounds.center,1),Is.False);
+            Assert.That(cover.BlocksMovement(bounds.center,bounds.center,1),Is.True);
             cover.TickPresentation(.35f);float progress=cover.CollapseProgress(0);
             Assert.That(progress,Is.GreaterThan(0));Assert.That(ruins.GetChild(0).position,Is.Not.EqualTo(initial));
             cover.ApplyExplosion(bounds.center,4,1000);Assert.That(cover.CollapseProgress(0),Is.EqualTo(progress));
@@ -61,7 +61,7 @@ namespace Fortress.Tests
             {
                 Assert.That(renderer.bounds.size.y,Is.LessThan(.6f),renderer.name);
                 match.terrainMap.Field.TrySample(renderer.transform.position.x,renderer.transform.position.z,out float height);
-                Assert.That(renderer.transform.position.y-height,Is.InRange(0,.6f));
+                Assert.That(renderer.transform.position.y-height,Is.InRange(0,cover.settings.rubbleHeight+.15f));
             }
             yield return null;
         }
@@ -85,7 +85,7 @@ namespace Fortress.Tests
             foreach(var renderer in Root().GetChild(1).GetComponentsInChildren<MeshRenderer>())
             {
                 var p=renderer.transform.position;field.TrySample(p.x,p.z,out float height);
-                Assert.That(p.y-height,Is.InRange(0,.6f),renderer.name);
+                Assert.That(p.y-height,Is.InRange(0,cover.settings.rubbleHeight+.15f),renderer.name);
             }
             yield return null;
         }

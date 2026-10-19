@@ -1,5 +1,7 @@
 # Building damage and collapse
 
+Historical first pass: the passable-rubble rule below was superseded by the user's approved low-cover change. Current behavior is documented in [rubble-cover-and-surroundings.md](rubble-cover-and-surroundings.md).
+
 Actor: editor-tooling-codex. User request 2026-10-19: buildings should visibly break rather than disappear.
 
 Buildings retain their existing HP, foundation-collapse and analytic cover rules. Visible wall panels, roof plates and facility details move into an animated fragment view on destruction, then remain as low rubble. Nonlethal damage adds surface damage while keeping cover intact. The collapse is presentation only: fragments do not create rigidbody collisions or additional damage, and rubble remains passable.

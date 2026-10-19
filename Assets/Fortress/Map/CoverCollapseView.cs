@@ -7,11 +7,12 @@ namespace Fortress
         struct Fragment
         {
             public Transform transform;
-            public Vector3 start,target;
+            public Vector3 start,target,startScale,targetScale;
             public Quaternion startRotation,targetRotation;
             public float clearance;
         }
         readonly Fragment[] fragments;
+        readonly RubblePiece[] rubble;
         readonly HeightField field;
         readonly CoverSettings settings;
         readonly GameObject intact,ruins;
@@ -20,9 +21,9 @@ namespace Fortress
         public bool Started { get; private set; }
         public bool Playing { get; private set; }
         public float Progress { get; private set; }
-        public CoverCollapseView(GameObject source,GameObject debris,HeightField map,CoverSettings tuning,int seed)
+        public CoverCollapseView(GameObject source,GameObject debris,HeightField map,CoverSettings tuning,int seed,RubblePiece[] structuralRubble)
         {
-            intact=source;ruins=debris;field=map;settings=tuning;
+            intact=source;ruins=debris;field=map;settings=tuning;rubble=structuralRubble;
             var meshes=source.GetComponentsInChildren<MeshFilter>();fragments=new Fragment[meshes.Length];
             var random=new System.Random(unchecked(seed*397^0x53cf));
             for(int i=0;i<meshes.Length;i++)
@@ -42,7 +43,7 @@ namespace Fortress
                 target.z=Mathf.Clamp(target.z,field.Origin.z,field.Origin.z+field.Size.y);
                 float clearance=Mathf.Min(size.x,Mathf.Min(size.y,size.z))*.5f+.04f+(float)random.NextDouble()*.06f;
                 fragments[i]=new Fragment { transform=piece.transform,start=mesh.transform.position,startRotation=mesh.transform.rotation,
-                    target=target,targetRotation=Quaternion.Euler(0,yaw,0)*flat,clearance=clearance };
+                    target=target,targetRotation=Quaternion.Euler(0,yaw,0)*flat,clearance=clearance,startScale=piece.transform.localScale,targetScale=piece.transform.localScale };
             }
             if(settings.collapseDustPrefab!=null)
             {
@@ -68,8 +69,13 @@ namespace Fortress
             for(int i=0;i<fragments.Length;i++)
             {
                 var part=fragments[i];
-                if(field.TrySample(part.target.x,part.target.z,out float height))part.target.y=height+part.clearance;
-                if(!Playing && part.transform!=null)part.transform.position=part.target;
+                if(i<rubble.Length)
+                {
+                    var slab=rubble[i];part.target=slab.Position;part.targetRotation=slab.ViewRotation;part.targetScale=slab.ViewScale;
+                    if(part.transform!=null)part.transform.gameObject.SetActive(slab.Active);
+                }
+                else if(field.TrySample(part.target.x,part.target.z,out float height))part.target.y=height+part.clearance;
+                if(!Playing && part.transform!=null) {part.transform.SetPositionAndRotation(part.target,part.targetRotation);part.transform.localScale=part.targetScale;}
                 fragments[i]=part;
             }
         }
@@ -83,6 +89,7 @@ namespace Fortress
                 if(part.transform==null)continue;
                 Vector3 p=Vector3.Lerp(part.start,part.target,t);p.y=Mathf.Lerp(part.start.y,part.target.y,fall);
                 part.transform.SetPositionAndRotation(p,Quaternion.Slerp(part.startRotation,part.targetRotation,fall));
+                part.transform.localScale=Vector3.Lerp(part.startScale,part.targetScale,fall);
             }
             if(t>=1)Playing=false;
         }

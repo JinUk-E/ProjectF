@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d319114f3db2354fae418179d0ef637, type: 3}
+  m_Name: Surroundings
+  m_EditorClassIdentifier: Fortress::Fortress.ExteriorSettings
+  apronWidth: 180
+  ridgeHeight: 27
+  ringSegments: 12
+  groundMaterial: {fileID: 2100000, guid: 2f1889730bc182c41b17836aee21b85f, type: 2}
+  boundaryMaterial: {fileID: 2100000, guid: 3042370eb77e30d4c851a3e599ee711e, type: 2}
+  boundaryPostSpacing: 10
+  boundaryPostHeight: 0.9
+  boundaryCableHeight: 0.25
+  cableWidth: 0.035
+  treePrefab: {fileID: 1686553641196000416, guid: d2974fef086d95446994419196e166eb, type: 3}
+  treeCount: 160
+  treeMinDistance: 15
+  treeMaxDistance: 80
+  treeScaleMin: 0.8
+  treeScaleMax: 1.3

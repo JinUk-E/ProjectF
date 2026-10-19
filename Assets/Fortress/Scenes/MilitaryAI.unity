@@ -18,8 +18,8 @@ RenderSettings:
   m_FogColor: {r: 0.48, g: 0.53, b: 0.56, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
-  m_LinearFogStart: 110
-  m_LinearFogEnd: 290
+  m_LinearFogStart: 105
+  m_LinearFogEnd: 250
   m_AmbientSkyColor: {r: 0.5, g: 0.55, b: 0.6, a: 1}
   m_AmbientEquatorColor: {r: 0.34, g: 0.36, b: 0.33, a: 1}
   m_AmbientGroundColor: {r: 0.18, g: 0.17, b: 0.15, a: 1}
@@ -1669,6 +1669,7 @@ GameObject:
   - component: {fileID: 189965742}
   - component: {fileID: 189965744}
   - component: {fileID: 189965745}
+  - component: {fileID: 189965746}
   m_Layer: 0
   m_Name: Hotseat Match
   m_TagString: Untagged
@@ -1739,6 +1740,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fortress::Fortress.BattlefieldVegetation
   match: {fileID: 189965742}
   settings: {fileID: 11400000, guid: 0441e17b89e8c2f4693123eda9a94017, type: 2}
+--- !u!114 &189965746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189965741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b34d54df32327fc4d83a977f70ee0c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fortress::Fortress.BattlefieldExterior
+  match: {fileID: 189965742}
+  settings: {fileID: 11400000, guid: 9229e9ea0f38ff244b2338f60a94915c, type: 2}
 --- !u!1 &203035594
 GameObject:
   m_ObjectHideFlags: 0
@@ -8689,7 +8704,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 400
+  far clip plane: 500
   field of view: 55
   orthographic: 0
   orthographic size: 5
@@ -8736,6 +8751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Fortress::Fortress.BattlefieldOrbitCamera
   match: {fileID: 189965742}
+  exterior: {fileID: 189965746}
   settings: {fileID: 11400000, guid: 9b6063f7493a0cc4f8555c442c66397e, type: 2}
   initialTarget: {x: 0, y: 2, z: 0}
   initializeFromCurrentPose: 1

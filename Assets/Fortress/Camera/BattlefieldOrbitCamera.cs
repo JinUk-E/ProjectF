@@ -8,6 +8,7 @@ namespace Fortress
     public sealed class BattlefieldOrbitCamera : MonoBehaviour
     {
         public MatchController match;
+        public BattlefieldExterior exterior;
         public OrbitCameraSettings settings;
         public Vector3 initialTarget=new Vector3(0,3,0);
         public bool initializeFromCurrentPose=true;
@@ -99,7 +100,8 @@ namespace Fortress
                 {
                     float t=(float)i/samples;
                     var sample=Vector3.Lerp(Target,position,t);
-                    if(field.TrySample(sample.x,sample.z,out float ground))
+                    if(field.TrySample(sample.x,sample.z,out float ground) ||
+                        (exterior!=null && exterior.TrySampleVisualHeight(sample.x,sample.z,out ground)))
                         requiredY=Mathf.Max(requiredY,Target.y+(ground+clearance-Target.y)/t);
                 }
                 position.y=requiredY;
