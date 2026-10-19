@@ -34,7 +34,29 @@ namespace Fortress
         struct Impact { public Vector3 position; public float time; public int index; }
         static readonly Comparison<Impact> ImpactOrder = (a,b) => { int time=a.time.CompareTo(b.time);return time!=0?time:a.index.CompareTo(b.index); };
 
-        void OnEnable() { Subscribe(); if(initialized && shots!=null) { shots.InputEnabled=State==MatchState.Aim; StateChanged?.Invoke(); } }
+        void OnEnable()
+        {
+#if UNITY_EDITOR
+            if(initialized && Tanks==null)
+            {
+                if(shots!=null) shots.InputEnabled=false;
+                return;
+            }
+#endif
+            Subscribe();
+            if(initialized && shots!=null && Tanks!=null) { shots.InputEnabled=State==MatchState.Aim; StateChanged?.Invoke(); }
+        }
+#if UNITY_EDITOR
+        // Hot reload retains simple fields but drops the non-serializable combat model.
+        // Recreate the whole scene so terrain, cover, AI and pooled shells reset together.
+        void Update()
+        {
+            if(!initialized || Tanks!=null) return;
+            initialized=false;
+            Debug.Log("Scripts reloaded: restarting the match because runtime combat data was reset.",this);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.path);
+        }
+#endif
         void Start() { if(autoStart && !initialized) InitializeMatch(initialSeed); }
         void OnDisable()
         {
