@@ -14,17 +14,22 @@ namespace Fortress.Editor
             if(EditorApplication.isPlaying)throw new InvalidOperationException("Stop play first.");
             Directory.CreateDirectory(Root);AssetDatabase.Refresh();
             var ground=Material("SurroundingGround",new Color(.88f,.94f,.83f));
+            ground.shader=Shader.Find("Fortress/ExteriorFog");
             ground.SetTexture("_BaseMap",AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/ThirdParty/PolyHavenBattlefield/aerial_grass_rock_diff_2k.jpg"));
             ground.SetTexture("_BumpMap",AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/ThirdParty/PolyHavenBattlefield/aerial_grass_rock_nor_gl_2k.jpg"));
             ground.EnableKeyword("_NORMALMAP");ground.SetFloat("_BumpScale",.4f);EditorUtility.SetDirty(ground);
             var boundary=Material("BoundaryMarkers",new Color(.48f,.39f,.18f));
             var bark=Material("DistantBark",new Color(.18f,.15f,.10f));
             var foliage=Material("DistantPine",new Color(.13f,.21f,.13f));
+            bark.shader=foliage.shader=Shader.Find("Fortress/ExteriorFog");EditorUtility.SetDirty(bark);EditorUtility.SetDirty(foliage);
+            var wall=Material("PerimeterConcrete",new Color(.55f,.54f,.48f));
+            wall.SetTexture("_BaseMap",AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/ThirdParty/PolyHavenBattlefield/concrete_wall_009_diff_2k.jpg"));EditorUtility.SetDirty(wall);
             var tree=Tree(bark,foliage);
             var settings=AssetDatabase.LoadAssetAtPath<ExteriorSettings>(Root+"Surroundings.asset");
             if(settings==null){settings=ScriptableObject.CreateInstance<ExteriorSettings>();AssetDatabase.CreateAsset(settings,Root+"Surroundings.asset");}
             Undo.RecordObject(settings,"Surrounding landscape");settings.apronWidth=180;settings.ridgeHeight=27;settings.ringSegments=12;
             settings.groundMaterial=ground;settings.boundaryMaterial=boundary;settings.boundaryPostSpacing=10;settings.treePrefab=tree;settings.treeCount=160;EditorUtility.SetDirty(settings);
+            settings.boundaryWallHeight=2.25f;settings.boundaryWallThickness=1;settings.boundaryWallBurial=1;settings.boundaryWallMaterial=wall;settings.fogStart=2;settings.fogEnd=35;
             var cover=AssetDatabase.LoadAssetAtPath<CoverSettings>("Assets/Fortress/Data/DepotCover.asset");
             Undo.RecordObject(cover,"Low rubble cover");cover.rubbleHeight=1.1f;cover.rubbleFootprintFraction=.55f;EditorUtility.SetDirty(cover);
             foreach(var path in new[]{MatchSceneBuilder.ScenePath,AiMatchBuilder.ScenePath})

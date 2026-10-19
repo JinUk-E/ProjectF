@@ -3,12 +3,16 @@ using UnityEngine;
 using UnityEngine.Rendering;
 namespace Fortress
 {
-    /// <summary>Outside scenery only. No collider and no change to the authoritative HeightField rectangle.</summary>
+    /// <summary>Scenery never expands the HeightField. Only the boundary wall has a physical collider, outside the playable rectangle.</summary>
     public sealed class BattlefieldExterior : MonoBehaviour
     {
         public MatchController match;
         public ExteriorSettings settings;
         public Mesh ApronMesh { get; private set; }
+        public Mesh BoundaryWallMesh { get; private set; }
+        public MeshCollider BoundaryCollider { get; private set; }
+        static readonly int PlayableRectId=Shader.PropertyToID("_PlayableRect"),FogColorId=Shader.PropertyToID("_ExteriorFogColor"),FogRangeId=Shader.PropertyToID("_ExteriorFogRange");
+        MaterialPropertyBlock fogProperties;
         public int Generation { get; private set; }=-1;
         public int BuildVersion { get; private set; }
         public int SeamVertexCount => edge!=null?edge.Length:0;
@@ -46,7 +50,7 @@ namespace Fortress
         void Clear()
         {
             if(root!=null) {root.SetActive(false);Destroy(root);root=null;}
-            foreach(var mesh in ownedMeshes)if(mesh!=null)Destroy(mesh);ownedMeshes.Clear();ApronMesh=null;
+            foreach(var mesh in ownedMeshes)if(mesh!=null)Destroy(mesh);ownedMeshes.Clear();ApronMesh=null;BoundaryWallMesh=null;BoundaryCollider=null;
         }
         void Build()
         {
@@ -90,10 +94,53 @@ namespace Fortress
                 ApronMesh.triangles=triangles;ApronMesh.RecalculateNormals();
             }
             var ground=new GameObject("Apron mesh");ground.transform.SetParent(root.transform,false);
-            ground.AddComponent<MeshFilter>().sharedMesh=ApronMesh;ground.AddComponent<MeshRenderer>().sharedMaterial=settings.groundMaterial;
-            BuildBoundary();BuildTrees(center,width);
+            ground.AddComponent<MeshFilter>().sharedMesh=ApronMesh;var groundRenderer=ground.AddComponent<MeshRenderer>();groundRenderer.sharedMaterial=settings.groundMaterial;ApplyExteriorFog(groundRenderer);
+            BuildBoundaryWall();BuildBoundary();BuildTrees(center,width);
         }
         Vector3 Point(int x,int z)=>new Vector3(field.Origin.x+x*field.CellX,field.GetHeight(x,z),field.Origin.z+z*field.CellZ);
+        void ApplyExteriorFog(Renderer renderer)
+        {
+            if(fogProperties==null)fogProperties=new MaterialPropertyBlock();
+            fogProperties.Clear();renderer.GetPropertyBlock(fogProperties);
+            fogProperties.SetVector(PlayableRectId,new Vector4(field.Origin.x,field.Origin.z,field.Origin.x+field.Size.x,field.Origin.z+field.Size.y));
+            fogProperties.SetColor(FogColorId,RenderSettings.fogColor);
+            fogProperties.SetVector(FogRangeId,new Vector4(Mathf.Max(0,settings.fogStart),Mathf.Max(settings.fogStart+.01f,settings.fogEnd),0,0));
+            renderer.SetPropertyBlock(fogProperties);
+        }
+        Vector3 BoundaryOutside(int i,float fraction)
+        {
+            var p=edge[i];float cx=field.Origin.x+field.Size.x*.5f,cz=field.Origin.z+field.Size.y*.5f;
+            float thickness=Mathf.Max(.1f,settings.boundaryWallThickness)*fraction;
+            p.x+=(p.x-cx)/(field.Size.x*.5f)*thickness;p.z+=(p.z-cz)/(field.Size.y*.5f)*thickness;
+            return p;
+        }
+        Vector3 BoundaryTop(int i)=>BoundaryOutside(i,.5f)+Vector3.up*Mathf.Clamp(settings.boundaryWallHeight,2,2.5f);
+        void BuildBoundaryWall()
+        {
+            int count=edge.Length;var vertices=new Vector3[count*4];var uv=new Vector2[vertices.Length];var indices=new int[count*24];
+            float height=Mathf.Clamp(settings.boundaryWallHeight,2,2.5f),burial=Mathf.Max(.1f,settings.boundaryWallBurial),distance=0;
+            for(int i=0;i<count;i++)
+            {
+                if(i>0)distance+=Vector3.Distance(edge[i],edge[i-1]);
+                var inner=edge[i];var outer=BoundaryOutside(i,1);int a=i*4;
+                vertices[a]=transform.InverseTransformPoint(inner-Vector3.up*burial);vertices[a+1]=transform.InverseTransformPoint(inner+Vector3.up*height);
+                vertices[a+2]=transform.InverseTransformPoint(outer-Vector3.up*burial);vertices[a+3]=transform.InverseTransformPoint(outer+Vector3.up*height);
+                uv[a]=uv[a+2]=new Vector2(distance/3,0);uv[a+1]=uv[a+3]=new Vector2(distance/3,(height+burial)/3);
+                int b=((i+1)%count)*4,t=i*24;
+                // Closed inner/outer/top/bottom strip; neighboring sections share vertices, including corners.
+                indices[t++]=a;indices[t++]=b;indices[t++]=b+1;indices[t++]=a;indices[t++]=b+1;indices[t++]=a+1;
+                indices[t++]=a+2;indices[t++]=a+3;indices[t++]=b+3;indices[t++]=a+2;indices[t++]=b+3;indices[t++]=b+2;
+                indices[t++]=a+1;indices[t++]=b+1;indices[t++]=b+3;indices[t++]=a+1;indices[t++]=b+3;indices[t++]=a+3;
+                indices[t++]=a;indices[t++]=a+2;indices[t++]=b+2;indices[t++]=a;indices[t++]=b+2;indices[t++]=b;
+            }
+            BoundaryWallMesh=new Mesh {name="Continuous outside boundary wall",indexFormat=vertices.Length>65535?IndexFormat.UInt32:IndexFormat.UInt16};
+            ownedMeshes.Add(BoundaryWallMesh);BoundaryWallMesh.vertices=vertices;BoundaryWallMesh.uv=uv;BoundaryWallMesh.triangles=indices;
+            BoundaryWallMesh.RecalculateNormals();BoundaryWallMesh.RecalculateBounds();
+            var wall=new GameObject("Physical boundary wall");wall.transform.SetParent(root.transform,false);
+            wall.AddComponent<MeshFilter>().sharedMesh=BoundaryWallMesh;
+            wall.AddComponent<MeshRenderer>().sharedMaterial=settings.boundaryWallMaterial!=null?settings.boundaryWallMaterial:settings.boundaryMaterial;
+            BoundaryCollider=wall.AddComponent<MeshCollider>();BoundaryCollider.sharedMesh=BoundaryWallMesh;
+        }
         void BuildBoundary()
         {
             var cableObject=new GameObject("Playable boundary cable");cableObject.transform.SetParent(root.transform,false);
@@ -103,15 +150,15 @@ namespace Fortress
             float distance=Mathf.Max(1,settings.boundaryPostSpacing);
             for(int i=0;i<edge.Length;i++)
             {
-                line.SetPosition(i,edge[i]+Vector3.up*Mathf.Max(0,settings.boundaryCableHeight));
+                line.SetPosition(i,BoundaryTop(i)+Vector3.up*Mathf.Max(0,settings.boundaryCableHeight));
                 if(i>0)distance+=new Vector2(edge[i].x-edge[i-1].x,edge[i].z-edge[i-1].z).magnitude;
                 if(distance<Mathf.Max(1,settings.boundaryPostSpacing))continue;distance=0;
                 var post=GameObject.CreatePrimitive(PrimitiveType.Cube);post.name="Boundary marker";post.transform.SetParent(root.transform,false);
-                float h=Mathf.Max(.1f,settings.boundaryPostHeight);post.transform.position=edge[i]+Vector3.up*h*.5f;post.transform.localScale=new Vector3(.14f,h,.14f);
+                float h=Mathf.Max(.1f,settings.boundaryPostHeight);post.transform.position=BoundaryTop(i)+Vector3.up*h*.5f;post.transform.localScale=new Vector3(.14f,h,.14f);
                 var collider=post.GetComponent<Collider>();collider.enabled=false;Destroy(collider);
                 post.GetComponent<MeshRenderer>().sharedMaterial=settings.boundaryMaterial;
             }
-            line.SetPosition(edge.Length,edge[0]+Vector3.up*Mathf.Max(0,settings.boundaryCableHeight));
+            line.SetPosition(edge.Length,BoundaryTop(0)+Vector3.up*Mathf.Max(0,settings.boundaryCableHeight));
         }
         void BuildTrees(Vector2 center,float width)
         {
@@ -129,6 +176,7 @@ namespace Fortress
                 float small=Mathf.Max(.01f,settings.treeScaleMin),large=Mathf.Max(small,settings.treeScaleMax);
                 tree.transform.localScale*=Mathf.Lerp(small,large,(float)random.NextDouble());
                 foreach(var collider in tree.GetComponentsInChildren<Collider>(true)){collider.enabled=false;Destroy(collider);}
+                foreach(var renderer in tree.GetComponentsInChildren<Renderer>(true))ApplyExteriorFog(renderer);
                 tree.SetActive(true);
             }
         }
@@ -169,3 +217,5 @@ namespace Fortress
         }
     }
 }
+
+

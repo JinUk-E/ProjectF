@@ -1,0 +1,125 @@
+{
+  "job_id": "0f8aa6174f1c4e2cbdd832928a3d3423",
+  "status": "succeeded",
+  "mode": "PlayMode",
+  "started_unix_ms": 1792410426675,
+  "finished_unix_ms": 1792410439676,
+  "last_update_unix_ms": 1792410439676,
+  "progress": {
+    "completed": 10,
+    "total": 10,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": 1792410438556,
+    "last_finished_test_full_name": "Fortress.Tests.RubbleExteriorTests.Rubble_SettledVisibleSlabsMatchAnalyticOrientedBounds",
+    "last_finished_unix_ms": 1792410439641,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 11.7176528,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "ExteriorFog_PropertiesApplyOnlyToGroundAndTrees",
+        "fullName": "Fortress.Tests.BoundaryWallTests.ExteriorFog_PropertiesApplyOnlyToGroundAndTrees",
+        "state": "Passed",
+        "durationSeconds": 1.1117239,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Wall_DoesNotExtendMovementAreaOrAlterAnalyticShotSurface",
+        "fullName": "Fortress.Tests.BoundaryWallTests.Wall_DoesNotExtendMovementAreaOrAlterAnalyticShotSurface",
+        "state": "Passed",
+        "durationSeconds": 1.173935,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Wall_EdgeCraterRebuildsAfterThawAndRestartRestoresGeometry",
+        "fullName": "Fortress.Tests.BoundaryWallTests.Wall_EdgeCraterRebuildsAfterThawAndRestartRestoresGeometry",
+        "state": "Passed",
+        "durationSeconds": 1.6525168,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Wall_IsClosedAndInnerFaceMatchesPlayableEdgeOnAllSides",
+        "fullName": "Fortress.Tests.BoundaryWallTests.Wall_IsClosedAndInnerFaceMatchesPlayableEdgeOnAllSides",
+        "state": "Passed",
+        "durationSeconds": 1.0205169,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Exterior_ConstantTimeHeightLookupMatchesTriangleCentroids",
+        "fullName": "Fortress.Tests.RubbleExteriorTests.Exterior_ConstantTimeHeightLookupMatchesTriangleCentroids",
+        "state": "Passed",
+        "durationSeconds": 1.0693059,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Exterior_EdgeCraterUpdatesSeamAfterThawButInteriorCraterSkipsRebuild",
+        "fullName": "Fortress.Tests.RubbleExteriorTests.Exterior_EdgeCraterUpdatesSeamAfterThawButInteriorCraterSkipsRebuild",
+        "state": "Passed",
+        "durationSeconds": 1.0219477,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Exterior_SeamMatchesAndBoundaryRemainsNonCombat",
+        "fullName": "Fortress.Tests.RubbleExteriorTests.Exterior_SeamMatchesAndBoundaryRemainsNonCombat",
+        "state": "Passed",
+        "durationSeconds": 1.0136266,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Rubble_BlocksLowShotBlastAndMovementButAllowsHighShotAndDetour",
+        "fullName": "Fortress.Tests.RubbleExteriorTests.Rubble_BlocksLowShotBlastAndMovementButAllowsHighShotAndDetour",
+        "state": "Passed",
+        "durationSeconds": 0.9627148,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Rubble_FreezeWaterAndRestartMaintainAuthoritativeState",
+        "fullName": "Fortress.Tests.RubbleExteriorTests.Rubble_FreezeWaterAndRestartMaintainAuthoritativeState",
+        "state": "Passed",
+        "durationSeconds": 1.5561498,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Rubble_SettledVisibleSlabsMatchAnalyticOrientedBounds",
+        "fullName": "Fortress.Tests.RubbleExteriorTests.Rubble_SettledVisibleSlabsMatchAnalyticOrientedBounds",
+        "state": "Passed",
+        "durationSeconds": 1.0844248,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}

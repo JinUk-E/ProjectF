@@ -1,0 +1,28 @@
+{
+  "job_id": "a2030d173c8b4ef485cdeabca7455b93",
+  "status": "failed",
+  "mode": "PlayMode",
+  "started_unix_ms": 1792410243259,
+  "finished_unix_ms": 1792410381720,
+  "last_update_unix_ms": 1792410381720,
+  "progress": {
+    "completed": 67,
+    "total": 67,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": 1792410381340,
+    "last_finished_test_full_name": "Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre",
+    "last_finished_unix_ms": 1792410381676,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "Fortress.Tests.BoundaryWallTests.ExteriorFog_PropertiesApplyOnlyToGroundAndTrees",
+        "message": "  Expected: (-80.00, -80.00, 80.00, 80.00)\r\n  But was:  (0.00, 0.00, 0.00, 0.00)\r\n"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": null
+}

@@ -77,7 +77,8 @@ namespace Fortress.Tests
         {
             CheckSeam();var field=match.terrainMap.Field;float x=field.Origin.x+field.Size.x+10,z=field.Origin.z+field.Size.y*.5f;
             Assert.That(exterior.TrySampleVisualHeight(x,z,out _),Is.True);Assert.That(field.TrySample(x,z,out _),Is.False);
-            foreach(var collider in exterior.GetComponentsInChildren<Collider>())Assert.That(collider.enabled,Is.False);
+            foreach(var collider in exterior.GetComponentsInChildren<Collider>())
+                Assert.That(collider.enabled,Is.EqualTo(collider==exterior.BoundaryCollider));
             var camera=Object.FindFirstObjectByType<BattlefieldOrbitCamera>();camera.exterior=exterior;
             var tank=match.shots.ActiveTank;float edgeX=field.Origin.x+field.Size.x-.5f;field.TrySample(edgeX,z,out float h);
             match.Tanks[match.ActivePlayerIndex].MoveOnGround(new Vector3(edgeX,h,z));camera.FocusActiveTank();
@@ -110,3 +111,4 @@ namespace Fortress.Tests
     }
 }
 #endif
+
