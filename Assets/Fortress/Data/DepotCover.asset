@@ -27,3 +27,7 @@ MonoBehaviour:
   roofMaterial: {fileID: 2100000, guid: 6dd8e926091163545a398e5e12a54437, type: 2}
   windowMaterial: {fileID: 2100000, guid: 0c257c0dd23955147a2561d30f767519, type: 2}
   rubbleMaterial: {fileID: 2100000, guid: 21dde6aeeca3d204988673a50037be0b, type: 2}
+  damageMaterial: {fileID: 2100000, guid: 95c298f3dc0756d4fab2a598267af824, type: 2}
+  collapseDustPrefab: {fileID: 9047464256914841235, guid: 129dc1ffdad8ebe449cfd728bc0829f3, type: 3}
+  collapseSeconds: 1.2
+  collapseSpread: 1.25

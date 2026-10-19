@@ -10,6 +10,14 @@ namespace Fortress
         HeightField field;
         GameObject viewRoot;
         GameObject[] intact,ruins;
+        GameObject[][] damageViews;
+        CoverCollapseView[] collapses;
+        public bool IsCollapsing(int index) => collapses!=null && collapses[index].Playing;
+        public float CollapseProgress(int index) => collapses==null?0:collapses[index].Progress;
+        public int DamageStage(int index) => Buildings[index].Destroyed?3:Buildings[index].Health<=settings.health*.35f?2:Buildings[index].Health<settings.health?1:0;
+        void Update() { TickPresentation(Time.deltaTime); }
+        public void TickPresentation(float deltaTime) { if(collapses!=null)foreach(var view in collapses)if(view!=null)view.Tick(deltaTime); }
+        void OnDisable() { if(collapses!=null)foreach(var view in collapses)if(view!=null)view.FinishAndClearDust(); }
         public int Remaining { get { int count=0;foreach(var b in Buildings) if(!b.Destroyed) count++;return count; } }
         public CoverBuilding[] Prepare(HeightField map,int seed,SpawnArea[] spawns)
         {
@@ -46,6 +54,7 @@ namespace Fortress
             field=map;Buildings=buildings;
             viewRoot=new GameObject("Battlefield buildings (runtime)");viewRoot.transform.SetParent(transform,false);
             intact=new GameObject[Buildings.Length];ruins=new GameObject[Buildings.Length];
+            collapses=new CoverCollapseView[Buildings.Length];damageViews=new GameObject[Buildings.Length][];
             for(int i=0;i<Buildings.Length;i++) BuildView(i);
         }
         public bool TryHit(Vector3 from,Vector3 to,out Vector3 hit)
@@ -101,9 +110,15 @@ namespace Fortress
         {
             for(int i=0;i<Buildings.Length;i++)
             {
-                intact[i].SetActive(!Buildings[i].Destroyed);ruins[i].SetActive(Buildings[i].Destroyed);
-                if(Buildings[i].Destroyed && field.TrySample(Buildings[i].Bounds.center.x,Buildings[i].Bounds.center.z,out float h))
-                {var p=ruins[i].transform.position;p.y=h+.12f;ruins[i].transform.position=p;}
+                if(Buildings[i].Destroyed)
+                {
+                    collapses[i].Begin(Buildings[i].Bounds.center);collapses[i].RefreshGround();
+                }
+                else
+                {
+                    int stage=DamageStage(i);
+                    for(int mark=0;mark<damageViews[i].Length;mark++)damageViews[i][mark].SetActive(stage>mark);
+                }
             }
         }
         void BuildView(int i)
@@ -116,8 +131,14 @@ namespace Fortress
             // for vents and aerials so visual cover never promises protection outside the bounds.
             var c=bounds.center;var size=bounds.size;float top=bounds.max.y,baseY=bounds.min.y;
             float roofSpace=Mathf.Min(.8f,size.y*.2f),wallHeight=size.y-roofSpace;
-            Cube(root,"Reinforced concrete shell",new Vector3(c.x,baseY+wallHeight*.5f,c.z),new Vector3(size.x*.94f,wallHeight,size.z*.94f),settings.wallMaterial);
-            Cube(root,"Standing seam steel roof",new Vector3(c.x,top-roofSpace+.1f,c.z),new Vector3(size.x,.2f,size.z),settings.roofMaterial);
+            for(int side=-1;side<=1;side+=2)for(int row=0;row<2;row++)for(int column=0;column<3;column++)
+            {
+                float y=baseY+(row+.5f)*wallHeight/2;
+                Cube(root,"Concrete wall panel",new Vector3(c.x+(column-1)*size.x*.94f/3,y,c.z+side*size.z*.45f),new Vector3(size.x*.94f/3,wallHeight/2,size.z*.04f),settings.wallMaterial);
+                Cube(root,"Concrete side panel",new Vector3(c.x+side*size.x*.45f,y,c.z+(column-1)*size.z*.86f/3),new Vector3(size.x*.04f,wallHeight/2,size.z*.86f/3),settings.wallMaterial);
+            }
+            for(int rx=0;rx<3;rx++)for(int rz=0;rz<2;rz++)
+                Cube(root,"Steel roof panel",new Vector3(c.x+(rx-1)*size.x/3,top-roofSpace+.1f,c.z+(rz-.5f)*size.z/2),new Vector3(size.x/3,.2f,size.z/2),settings.roofMaterial);
             for(int rib=0;rib<7;rib++)
             {
                 float x=Mathf.Lerp(bounds.min.x+.12f,bounds.max.x-.12f,rib/6f);
@@ -153,13 +174,20 @@ namespace Fortress
             for(int bar=0;bar<=variant;bar++)
                 Cube(root,"Facility identification stripe",new Vector3(plateX+(bar-variant*.5f)*size.x*.04f,plateY,plateZ-.015f),new Vector3(size.x*.02f,wallHeight*.11f,.015f),settings.wallMaterial);
             ruins[i]=new GameObject("Depot "+(i+1)+" rubble (passable)");ruins[i].transform.SetParent(viewRoot.transform,false);
-            ruins[i].transform.position=new Vector3(bounds.center.x,bounds.min.y+.12f,bounds.center.z);
-            for(int piece=0;piece<5;piece++)
+            collapses[i]=new CoverCollapseView(intact[i],ruins[i],field,settings,i);
+            damageViews[i]=new GameObject[2];
+            for(int stage=0;stage<2;stage++)
             {
-                var offset=new Vector3((piece%3-1)*1.2f,0,(piece/3-.5f)*1.4f);
-                Cube(ruins[i].transform,"Debris",ruins[i].transform.position+offset,new Vector3(1,.24f,.7f),settings.rubbleMaterial);
+                var marks=new GameObject(stage==0?"Impact scars":"Severe concrete cracks");marks.transform.SetParent(root,false);damageViews[i][stage]=marks;
+                for(int side=-1;side<=1;side+=2)for(int mark=0;mark<4;mark++)
+                {
+                    float x=c.x+(mark-1.5f)*size.x*.19f,y=baseY+wallHeight*(.2f+.16f*((mark+stage)%4));
+                    Cube(marks.transform,"Spalled concrete",new Vector3(x,y,c.z+side*(size.z*.47f+.002f)),new Vector3(size.x*.09f,.13f+.08f*stage,.012f),settings.damageMaterial!=null?settings.damageMaterial:settings.windowMaterial);
+                    for(int crack=0;crack<3;crack++)
+                        Cube(marks.transform,"Concrete fracture",new Vector3(x+(crack-1)*.09f,y+(crack-1)*.11f,c.z+side*(size.z*.47f+.009f)),new Vector3(.04f,.17f,.009f),settings.damageMaterial!=null?settings.damageMaterial:settings.windowMaterial);
+                }
+                marks.SetActive(false);
             }
-            ruins[i].SetActive(false);
         }
         static void Cube(Transform parent,string label,Vector3 position,Vector3 size,Material material)
         {
@@ -169,5 +197,6 @@ namespace Fortress
         }
     }
 }
+
 
 
