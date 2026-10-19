@@ -20,6 +20,7 @@ namespace Fortress
         HeightField field;
         int revision=-1,builtRings;
         float builtWidth;
+        float[] ringDistances;
         Vector3[] edge,worldVertices;
         int[] triangles;
         GameObject root;
@@ -62,20 +63,34 @@ namespace Fortress
             for(int z=0;z<d-1;z++)edge[at++]=Point(w-1,z);
             for(int x=w-1;x>0;x--)edge[at++]=Point(x,d-1);
             for(int z=d-1;z>0;z--)edge[at++]=Point(0,z);
-            int count=edge.Length,rings=Mathf.Clamp(settings.ringSegments,2,24);
+            int count=edge.Length,rings=Mathf.Clamp(settings.ringSegments,2,24)+3;
             worldVertices=new Vector3[count*(rings+1)];var vertices=new Vector3[worldVertices.Length];var uv=new Vector2[vertices.Length];
-            float width=Mathf.Max(10,settings.apronWidth);builtWidth=width;builtRings=rings;
+            float ridgeWidth=Mathf.Max(4,settings.boundaryRidgeWidth);
+            float shoulder=Mathf.Clamp(settings.boundaryShoulderDistance,.5f,ridgeWidth-.5f);
+            float width=Mathf.Max(ridgeWidth+10,settings.apronWidth);builtWidth=width;builtRings=rings;
+            ringDistances=new float[rings+1];ringDistances[0]=0;ringDistances[1]=Mathf.Clamp(settings.ridgeToeDistance,.1f,shoulder-.1f);ringDistances[2]=shoulder;ringDistances[3]=ridgeWidth;
+            for(int r=4;r<=rings;r++)ringDistances[r]=Mathf.Lerp(ridgeWidth,width,(float)(r-3)/(rings-3));
             Vector2 center=new Vector2(field.Origin.x+field.Size.x*.5f,field.Origin.z+field.Size.y*.5f);
             for(int ring=0;ring<=rings;ring++)for(int i=0;i<count;i++)
             {
-                float t=(float)ring/rings;var p=edge[i];
+                float distance=ringDistances[ring],t=distance/width;var p=edge[i];
                 p.x+=(p.x-center.x)/(field.Size.x*.5f)*t*width;
                 p.z+=(p.z-center.y)/(field.Size.y*.5f)*t*width;
                 if(ring>0)
                 {
-                    float noise=Mathf.PerlinNoise((p.x+match.Seed*.013f)*.012f,(p.z-match.Seed*.017f)*.012f);
-                    float target=Mathf.Max(field.WaterHeight+2,settings.ridgeHeight*(.2f+.8f*noise));
-                    p.y=Mathf.Lerp(edge[i].y,target,Mathf.SmoothStep(0,1,t));
+                    float broad=Mathf.PerlinNoise((edge[i].x+match.Seed*.013f)*.055f,(edge[i].z-match.Seed*.017f)*.055f);
+                    float broken=Mathf.PerlinNoise((edge[i].x+213)*.23f,(edge[i].z-match.Seed*.01f)*.23f);
+                    float minimum=Mathf.Max(1,settings.boundaryRidgeMinHeight),maximum=Mathf.Max(minimum,settings.boundaryRidgeMaxHeight);
+                    float peak=Mathf.Lerp(minimum,maximum,Mathf.Clamp01((broad*.75f+broken*.25f-.28f)/.44f));
+                    if(ring==1)p.y=edge[i].y+peak*Mathf.Clamp01(settings.toeHeightFactor);
+                    else if(ring==2)p.y=edge[i].y+peak;
+                    else if(ring==3)p.y=edge[i].y+peak*.65f;
+                    else
+                    {
+                        float noise=Mathf.PerlinNoise((p.x+match.Seed*.013f)*.012f,(p.z-match.Seed*.017f)*.012f);
+                        float target=Mathf.Max(field.WaterHeight+2,settings.ridgeHeight*(.2f+.8f*noise));
+                        p.y=Mathf.Lerp(edge[i].y+peak*.65f,target,Mathf.SmoothStep(0,1,(distance-ridgeWidth)/(width-ridgeWidth)));
+                    }
                 }
                 int index=ring*count+i;worldVertices[index]=p;vertices[index]=transform.InverseTransformPoint(p);uv[index]=new Vector2(p.x,p.z)/12f;
             }
@@ -93,9 +108,12 @@ namespace Fortress
                 for(int i=0;i<triangles.Length;i+=3){int swap=triangles[i+1];triangles[i+1]=triangles[i+2];triangles[i+2]=swap;}
                 ApronMesh.triangles=triangles;ApronMesh.RecalculateNormals();
             }
+            // First three rings are rendered once as the rock boundary; the apron starts beyond them.
+            var apronIndices=new int[triangles.Length-count*18];System.Array.Copy(triangles,count*18,apronIndices,0,apronIndices.Length);
+            ApronMesh.triangles=apronIndices;
             var ground=new GameObject("Apron mesh");ground.transform.SetParent(root.transform,false);
             ground.AddComponent<MeshFilter>().sharedMesh=ApronMesh;var groundRenderer=ground.AddComponent<MeshRenderer>();groundRenderer.sharedMaterial=settings.groundMaterial;ApplyExteriorFog(groundRenderer);
-            BuildBoundaryWall();BuildBoundary();BuildTrees(center,width);
+            BuildBoundaryWall();BuildTrees(center,width);
         }
         Vector3 Point(int x,int z)=>new Vector3(field.Origin.x+x*field.CellX,field.GetHeight(x,z),field.Origin.z+z*field.CellZ);
         void ApplyExteriorFog(Renderer renderer)
@@ -107,58 +125,18 @@ namespace Fortress
             fogProperties.SetVector(FogRangeId,new Vector4(Mathf.Max(0,settings.fogStart),Mathf.Max(settings.fogStart+.01f,settings.fogEnd),0,0));
             renderer.SetPropertyBlock(fogProperties);
         }
-        Vector3 BoundaryOutside(int i,float fraction)
-        {
-            var p=edge[i];float cx=field.Origin.x+field.Size.x*.5f,cz=field.Origin.z+field.Size.y*.5f;
-            float thickness=Mathf.Max(.1f,settings.boundaryWallThickness)*fraction;
-            p.x+=(p.x-cx)/(field.Size.x*.5f)*thickness;p.z+=(p.z-cz)/(field.Size.y*.5f)*thickness;
-            return p;
-        }
-        Vector3 BoundaryTop(int i)=>BoundaryOutside(i,.5f)+Vector3.up*Mathf.Clamp(settings.boundaryWallHeight,2,2.5f);
         void BuildBoundaryWall()
         {
-            int count=edge.Length;var vertices=new Vector3[count*4];var uv=new Vector2[vertices.Length];var indices=new int[count*24];
-            float height=Mathf.Clamp(settings.boundaryWallHeight,2,2.5f),burial=Mathf.Max(.1f,settings.boundaryWallBurial),distance=0;
-            for(int i=0;i<count;i++)
-            {
-                if(i>0)distance+=Vector3.Distance(edge[i],edge[i-1]);
-                var inner=edge[i];var outer=BoundaryOutside(i,1);int a=i*4;
-                vertices[a]=transform.InverseTransformPoint(inner-Vector3.up*burial);vertices[a+1]=transform.InverseTransformPoint(inner+Vector3.up*height);
-                vertices[a+2]=transform.InverseTransformPoint(outer-Vector3.up*burial);vertices[a+3]=transform.InverseTransformPoint(outer+Vector3.up*height);
-                uv[a]=uv[a+2]=new Vector2(distance/3,0);uv[a+1]=uv[a+3]=new Vector2(distance/3,(height+burial)/3);
-                int b=((i+1)%count)*4,t=i*24;
-                // Closed inner/outer/top/bottom strip; neighboring sections share vertices, including corners.
-                indices[t++]=a;indices[t++]=b;indices[t++]=b+1;indices[t++]=a;indices[t++]=b+1;indices[t++]=a+1;
-                indices[t++]=a+2;indices[t++]=a+3;indices[t++]=b+3;indices[t++]=a+2;indices[t++]=b+3;indices[t++]=b+2;
-                indices[t++]=a+1;indices[t++]=b+1;indices[t++]=b+3;indices[t++]=a+1;indices[t++]=b+3;indices[t++]=a+3;
-                indices[t++]=a;indices[t++]=a+2;indices[t++]=b+2;indices[t++]=a;indices[t++]=b+2;indices[t++]=b;
-            }
-            BoundaryWallMesh=new Mesh {name="Continuous outside boundary wall",indexFormat=vertices.Length>65535?IndexFormat.UInt32:IndexFormat.UInt16};
+            int count=edge.Length;var vertices=new Vector3[count*4];var uv=new Vector2[vertices.Length];
+            for(int i=0;i<vertices.Length;i++) {vertices[i]=transform.InverseTransformPoint(worldVertices[i]);uv[i]=new Vector2(worldVertices[i].x,worldVertices[i].z)/12f;}
+            var indices=new int[count*18];System.Array.Copy(triangles,indices,indices.Length);
+            BoundaryWallMesh=new Mesh {name="Irregular natural rock boundary",indexFormat=vertices.Length>65535?IndexFormat.UInt32:IndexFormat.UInt16};
             ownedMeshes.Add(BoundaryWallMesh);BoundaryWallMesh.vertices=vertices;BoundaryWallMesh.uv=uv;BoundaryWallMesh.triangles=indices;
             BoundaryWallMesh.RecalculateNormals();BoundaryWallMesh.RecalculateBounds();
-            var wall=new GameObject("Physical boundary wall");wall.transform.SetParent(root.transform,false);
-            wall.AddComponent<MeshFilter>().sharedMesh=BoundaryWallMesh;
-            wall.AddComponent<MeshRenderer>().sharedMaterial=settings.boundaryWallMaterial!=null?settings.boundaryWallMaterial:settings.boundaryMaterial;
-            BoundaryCollider=wall.AddComponent<MeshCollider>();BoundaryCollider.sharedMesh=BoundaryWallMesh;
-        }
-        void BuildBoundary()
-        {
-            var cableObject=new GameObject("Playable boundary cable");cableObject.transform.SetParent(root.transform,false);
-            var line=cableObject.AddComponent<LineRenderer>();line.useWorldSpace=true;line.positionCount=edge.Length+1;
-            line.startWidth=line.endWidth=Mathf.Max(.005f,settings.cableWidth);line.sharedMaterial=settings.boundaryMaterial;
-            line.shadowCastingMode=ShadowCastingMode.Off;line.receiveShadows=false;
-            float distance=Mathf.Max(1,settings.boundaryPostSpacing);
-            for(int i=0;i<edge.Length;i++)
-            {
-                line.SetPosition(i,BoundaryTop(i)+Vector3.up*Mathf.Max(0,settings.boundaryCableHeight));
-                if(i>0)distance+=new Vector2(edge[i].x-edge[i-1].x,edge[i].z-edge[i-1].z).magnitude;
-                if(distance<Mathf.Max(1,settings.boundaryPostSpacing))continue;distance=0;
-                var post=GameObject.CreatePrimitive(PrimitiveType.Cube);post.name="Boundary marker";post.transform.SetParent(root.transform,false);
-                float h=Mathf.Max(.1f,settings.boundaryPostHeight);post.transform.position=BoundaryTop(i)+Vector3.up*h*.5f;post.transform.localScale=new Vector3(.14f,h,.14f);
-                var collider=post.GetComponent<Collider>();collider.enabled=false;Destroy(collider);
-                post.GetComponent<MeshRenderer>().sharedMaterial=settings.boundaryMaterial;
-            }
-            line.SetPosition(edge.Length,BoundaryTop(0)+Vector3.up*Mathf.Max(0,settings.boundaryCableHeight));
+            var rock=new GameObject("Natural rock boundary");rock.transform.SetParent(root.transform,false);
+            rock.AddComponent<MeshFilter>().sharedMesh=BoundaryWallMesh;
+            var renderer=rock.AddComponent<MeshRenderer>();renderer.sharedMaterial=settings.boundaryWallMaterial!=null?settings.boundaryWallMaterial:settings.groundMaterial;
+            ApplyExteriorFog(renderer);BoundaryCollider=rock.AddComponent<MeshCollider>();BoundaryCollider.sharedMesh=BoundaryWallMesh;
         }
         void BuildTrees(Vector2 center,float width)
         {
@@ -202,7 +180,8 @@ namespace Fortress
                 index=x>cx?w+Mathf.Clamp(Mathf.FloorToInt((nz+1)*.5f*d),0,d-1)
                     :2*w+d+Mathf.Clamp(Mathf.FloorToInt((1-nz)*.5f*d),0,d-1);
             }
-            int ring=Mathf.Clamp(Mathf.FloorToInt(distance/builtWidth*builtRings),0,builtRings-1);
+            int ring=distance<ringDistances[1]?0:distance<ringDistances[2]?1:distance<ringDistances[3]?2:
+                Mathf.Clamp(3+Mathf.FloorToInt((distance-ringDistances[3])/(builtWidth-ringDistances[3])*(builtRings-3)),3,builtRings-1);
             int count=edge.Length,next=(index+1)%count,a=ring*count+index,b=ring*count+next,c=(ring+1)*count+index,e=(ring+1)*count+next;
             return TriangleHeight(x,z,a,c,b,out height)||TriangleHeight(x,z,b,c,e,out height);
         }
@@ -217,5 +196,3 @@ namespace Fortress
         }
     }
 }
-
-

@@ -17,12 +17,18 @@ MonoBehaviour:
   ringSegments: 12
   groundMaterial: {fileID: 2100000, guid: 2f1889730bc182c41b17836aee21b85f, type: 2}
   boundaryMaterial: {fileID: 2100000, guid: 3042370eb77e30d4c851a3e599ee711e, type: 2}
-  boundaryWallMaterial: {fileID: 2100000, guid: 5bd32731d4025c84a9c1a7c24cd8ec4e, type: 2}
+  boundaryWallMaterial: {fileID: 2100000, guid: 58c364e6c825d5945b6d30a82707f529, type: 2}
+  ridgeToeDistance: 4
+  toeHeightFactor: 0.15
+  boundaryRidgeWidth: 32
+  boundaryShoulderDistance: 14
+  boundaryRidgeMinHeight: 3
+  boundaryRidgeMaxHeight: 14
   boundaryWallHeight: 2.25
   boundaryWallThickness: 1
   boundaryWallBurial: 1
-  fogStart: 2
-  fogEnd: 35
+  fogStart: 8
+  fogEnd: 40
   boundaryPostSpacing: 10
   boundaryPostHeight: 0.9
   boundaryCableHeight: 0.25

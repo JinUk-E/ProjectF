@@ -87,6 +87,14 @@ namespace Fortress.Tests
                 { min=Mathf.Min(min,map.GetHeight(x,z));max=Mathf.Max(max,map.GetHeight(x,z)); }
                 lowestRelief=Mathf.Min(lowestRelief,max-min);Assert.That(max-min,Is.GreaterThan(8));Assert.That(max-min,Is.LessThan(20));
                 foreach(var tank in match.Tanks) Assert.That(tank.GroundHeight,Is.GreaterThan(-4));
+                Assert.That(match.cover.Remaining,Is.EqualTo(6));
+                foreach(int sx in new[]{-1,1})foreach(int sz in new[]{-1,1})
+                {
+                    float sidePeak=float.NegativeInfinity;
+                    for(int x=35;x<=65;x+=5)for(int z=35;z<=65;z+=5)
+                    {map.TrySample(x*sx,z*sz,out float sideHeight);sidePeak=Mathf.Max(sidePeak,sideHeight);}
+                    Assert.That(sidePeak,Is.GreaterThan(4),"Every outer quadrant needs visible low hill relief.");
+                }
                 foreach(float roadZ in new[]{-22f,0,22f}) for(int x=-26;x<=26;x++)
                 { Assert.That(map.TrySample(x,roadZ,out float h),Is.True);Assert.That(h,Is.EqualTo(0).Within(.08f)); }
                 foreach(float roadX in new[]{-26f,26f}) for(int z=-22;z<=22;z++)

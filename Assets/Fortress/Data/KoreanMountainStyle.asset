@@ -24,6 +24,11 @@ MonoBehaviour:
   hillRadius: 21
   hillSpacing: 32
   hillJitter: 7
+  centralHillScale: 0.75
+  peripheralHillHeight: 7
+  peripheralHillRadius: 17
+  peripheralInnerOffset: 40
+  peripheralOuterOffset: 62
   roadHalfWidth: 3
   roadBlend: 5
   flankRoadOffset: 22

@@ -22,14 +22,21 @@ namespace Fortress.Editor
             var bark=Material("DistantBark",new Color(.18f,.15f,.10f));
             var foliage=Material("DistantPine",new Color(.13f,.21f,.13f));
             bark.shader=foliage.shader=Shader.Find("Fortress/ExteriorFog");EditorUtility.SetDirty(bark);EditorUtility.SetDirty(foliage);
-            var wall=Material("PerimeterConcrete",new Color(.55f,.54f,.48f));
-            wall.SetTexture("_BaseMap",AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/ThirdParty/PolyHavenBattlefield/concrete_wall_009_diff_2k.jpg"));EditorUtility.SetDirty(wall);
+            var wall=Material("PerimeterRock",new Color(.72f,.75f,.72f));
+            wall.shader=Shader.Find("Fortress/ExteriorFog");
+            wall.SetTexture("_BaseMap",AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/ThirdParty/PolyHavenRockyTerrain/rocky_terrain_diff_2k.jpg"));
+            wall.SetFloat("_Triplanar",1);wall.SetFloat("_TextureScale",.22f);wall.SetFloat("_Desaturate",.65f);EditorUtility.SetDirty(wall);
+            wall.SetTexture("_TopMap",AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/ThirdParty/PolyHavenBattlefield/aerial_grass_rock_diff_2k.jpg"));wall.SetFloat("_SlopeGrass",1);
             var tree=Tree(bark,foliage);
             var settings=AssetDatabase.LoadAssetAtPath<ExteriorSettings>(Root+"Surroundings.asset");
             if(settings==null){settings=ScriptableObject.CreateInstance<ExteriorSettings>();AssetDatabase.CreateAsset(settings,Root+"Surroundings.asset");}
             Undo.RecordObject(settings,"Surrounding landscape");settings.apronWidth=180;settings.ridgeHeight=27;settings.ringSegments=12;
             settings.groundMaterial=ground;settings.boundaryMaterial=boundary;settings.boundaryPostSpacing=10;settings.treePrefab=tree;settings.treeCount=160;EditorUtility.SetDirty(settings);
-            settings.boundaryWallHeight=2.25f;settings.boundaryWallThickness=1;settings.boundaryWallBurial=1;settings.boundaryWallMaterial=wall;settings.fogStart=2;settings.fogEnd=35;
+            settings.boundaryWallBurial=1;settings.boundaryWallMaterial=wall;settings.fogStart=8;settings.fogEnd=40;
+            settings.boundaryRidgeWidth=32;settings.boundaryShoulderDistance=14;settings.boundaryRidgeMinHeight=3;settings.boundaryRidgeMaxHeight=14;
+            settings.ridgeToeDistance=4;settings.toeHeightFactor=.15f;
+            var mountains=AssetDatabase.LoadAssetAtPath<MountainTerrainSettings>("Assets/Fortress/Data/KoreanMountainStyle.asset");
+            Undo.RecordObject(mountains,"Distribute low hills across battlefield");mountains.centralHillScale=.75f;mountains.peripheralHillHeight=7;mountains.peripheralHillRadius=17;mountains.peripheralInnerOffset=40;mountains.peripheralOuterOffset=62;EditorUtility.SetDirty(mountains);
             var cover=AssetDatabase.LoadAssetAtPath<CoverSettings>("Assets/Fortress/Data/DepotCover.asset");
             Undo.RecordObject(cover,"Low rubble cover");cover.rubbleHeight=1.1f;cover.rubbleFootprintFraction=.55f;EditorUtility.SetDirty(cover);
             foreach(var path in new[]{MatchSceneBuilder.ScenePath,AiMatchBuilder.ScenePath})
