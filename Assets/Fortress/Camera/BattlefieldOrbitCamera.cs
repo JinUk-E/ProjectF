@@ -19,6 +19,7 @@ namespace Fortress
         public bool IsDragging => dragging;
         Transform cameraTransform;
         bool initialized,dragging,hasFocus=true;
+        bool Suspended => match!=null && match.shots!=null && match.shots.GameplaySuspended;
         void Awake() { cameraTransform=transform;Initialize(); }
         public void Initialize()
         {
@@ -42,6 +43,7 @@ namespace Fortress
         float MaximumDistance=>Mathf.Max(MinimumDistance,settings.maxDistance);
         public void Orbit(Vector2 pixelDelta)
         {
+            if(Suspended) return;
             Initialize();if(!initialized || !Finite(pixelDelta.x) || !Finite(pixelDelta.y)) return;
             Yaw=Mathf.Repeat(Yaw+pixelDelta.x*settings.orbitDegreesPerPixel+180,360)-180;
             Pitch=Mathf.Clamp(Pitch-pixelDelta.y*settings.orbitDegreesPerPixel,MinimumPitch,MaximumPitch);
@@ -49,17 +51,20 @@ namespace Fortress
         /// <param name="wheelDelta">Raw Input System scroll y units (120 is a conventional wheel notch).</param>
         public void Zoom(float wheelDelta)
         {
+            if(Suspended) return;
             Initialize();if(!initialized || !Finite(wheelDelta)) return;
             Distance=Mathf.Clamp(Distance*Mathf.Exp(-wheelDelta/120f*settings.zoomSpeed),MinimumDistance,MaximumDistance);
         }
         public void FocusActiveTank()
         {
+            if(Suspended) return;
             Initialize();
             if(!initialized || match==null || match.shots==null || match.shots.ActiveTank==null) return;
             Target=match.shots.ActiveTank.transform.position+Vector3.up*settings.focusHeight;
         }
         void LateUpdate()
         {
+            if(Suspended) { dragging=false;return; }
             Initialize();if(!initialized) return;
             ReadInput();ApplyPose();
         }

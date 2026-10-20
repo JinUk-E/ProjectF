@@ -15,6 +15,13 @@ namespace Fortress
         public Transform predictionMarker;
         public HeightFieldTerrain terrainMap;
         public bool externalResolution;
+        bool gameplaySuspended;
+        int resumeFrame = -1;
+        public bool GameplaySuspended
+        {
+            get => gameplaySuspended || Time.frameCount == resumeFrame;
+            set { if(gameplaySuspended && !value) resumeFrame=Time.frameCount;gameplaySuspended=value; }
+        }
         bool inputEnabled = true;
         public bool InputEnabled
         {
@@ -98,7 +105,7 @@ namespace Fortress
 
         public bool SetAim(float yaw, float pitch, float power)
         {
-            if (!InputEnabled || IsFiring || tuning == null || ActiveTank == null || !Finite(yaw) || !Finite(pitch) || !Finite(power)) return false;
+            if (GameplaySuspended || !InputEnabled || IsFiring || tuning == null || ActiveTank == null || !Finite(yaw) || !Finite(pitch) || !Finite(power)) return false;
             ActiveTank.SetAim(yaw, Mathf.Clamp(pitch, tuning.minPitch, tuning.maxPitch));
             Power = Mathf.Clamp(power, tuning.minPower, tuning.maxPower);
             RefreshPrediction();
@@ -109,7 +116,7 @@ namespace Fortress
         public bool TryFire()
         {
             Initialize();
-            if (!InputEnabled || !isActiveAndEnabled || IsFiring || pool == null || !TryBuildLaunch(out var launch)) return false;
+            if (GameplaySuspended || !InputEnabled || !isActiveAndEnabled || IsFiring || pool == null || !TryBuildLaunch(out var launch)) return false;
             var candidateField = (surface as IHeightFieldSurface)?.Field;
             if (candidateField != null && candidateField.IsFrozen) return false;
             var runner = pool.Get(projectilePrefab);

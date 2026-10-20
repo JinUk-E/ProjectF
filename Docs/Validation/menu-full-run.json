@@ -1,0 +1,32 @@
+{
+  "job_id": "da37149590db4837992bbfb8b8ae9927",
+  "status": "failed",
+  "mode": "PlayMode",
+  "started_unix_ms": 1792465982136,
+  "finished_unix_ms": 1792466122318,
+  "last_update_unix_ms": 1792466122318,
+  "progress": {
+    "completed": 74,
+    "total": 74,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": 1792466121973,
+    "last_finished_test_full_name": "Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre",
+    "last_finished_unix_ms": 1792466122277,
+    "stuck_suspected": false,
+    "editor_is_focused": true,
+    "blocked_reason": null,
+    "failures_so_far": [
+      {
+        "full_name": "Fortress.Tests.MatchPlayModeTests.Hud_Presentation_CapturesReadyAndResultsAtTargetResolutions",
+        "message": "  Expected: 1\r\n  But was:  2\r\n"
+      },
+      {
+        "full_name": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+        "message": "TearDown : Unhandled log message: '[Exception] MissingReferenceException: The object of type 'Fortress.TankRig' has been destroyed but you are still trying to access it.\nYour script should either check if it is null or you should not destroy the object.'. Use UnityEngine.TestTools.LogAssert.Expect"
+      }
+    ],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": null
+}

@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Fortress/Scenes/MainMenu.unity
+    guid: f7847a5920f2a35478f4394a72c379bc
+  - enabled: 1
+    path: Assets/Fortress/Scenes/MilitaryAI.unity
+    guid: c8c860b168024e248b56925c0bc37ec6
+  - enabled: 1
+    path: Assets/Fortress/Scenes/MilitaryMatch.unity
+    guid: 256ad0255b72dc04d9955e98f0ce2505
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

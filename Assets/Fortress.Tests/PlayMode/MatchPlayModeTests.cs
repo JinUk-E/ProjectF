@@ -265,7 +265,11 @@ namespace Fortress.Tests
         public IEnumerator Hud_Presentation_CapturesReadyAndResultsAtTargetResolutions()
         {
             var hud=Object.FindAnyObjectByType<MatchHud>();
-            Assert.That(Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Length,Is.EqualTo(1));
+            var menu=Object.FindFirstObjectByType<SessionMenu>();
+            Assert.That(menu,Is.Not.Null);
+            Assert.That(Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Length,Is.EqualTo(2));
+            Assert.That(menu.GetComponent<Canvas>().sortingOrder,Is.GreaterThan(hud.GetComponent<Canvas>().sortingOrder));
+            Assert.That(menu.combatHudGroup,Is.SameAs(hud.GetComponent<CanvasGroup>()));
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressHudCapture")>=0)
             {
                 Capture("hud-turn-720.png",1280,720);

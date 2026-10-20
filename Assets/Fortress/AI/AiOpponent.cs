@@ -16,7 +16,7 @@ namespace Fortress
         MatchController subscribedMatch;
         int plannedGeneration,plannedTurn;
         int observedGeneration = int.MinValue;
-        bool dispatching;
+        bool dispatching, deferredPlanning;
         void OnEnable() { Subscribe(); HandleMatchState(); }
         void Start() { Subscribe(); HandleMatchState(); }
         void OnDisable() { Unsubscribe();CancelThinking(); }
@@ -37,14 +37,19 @@ namespace Fortress
         }
         void CancelThinking()
         {
-            bool notify=IsThinking;IsThinking=false;RemainingThinkSeconds=0;
+            bool notify=IsThinking;IsThinking=false;RemainingThinkSeconds=0;deferredPlanning=false;
             if(notify) StateChanged?.Invoke();
         }
         void HandleMatchState()
         {
             if(match!=null && observedGeneration!=match.Generation) { observedGeneration=match.Generation;AiTurnNumber=0; }
-            if(!OwnsCurrentTurn || match.State!=MatchState.Aim || match.Tanks==null || match.shots==null || settings==null)
+            if(!OwnsCurrentTurn || match.State!=MatchState.Aim || match.Tanks==null || match.Tanks.Length!=2 ||
+                match.shots==null || !match.shots.isActiveAndEnabled || settings==null ||
+                match.Tanks[0]==null || match.Tanks[1]==null || match.Tanks[0].Rig==null || match.Tanks[1].Rig==null)
             { CancelThinking();return; }
+            // Scene unload can cancel a shot after tanks are destroyed but before AI OnDisable.
+            // Leaving/paused sessions must not plan again from that cancellation callback.
+            if(match.shots.GameplaySuspended) { deferredPlanning=true;return; }
             if(dispatching) return;
             if(IsThinking && plannedGeneration==match.Generation && plannedTurn==match.TurnNumber) return;
             CancelThinking();
@@ -54,9 +59,15 @@ namespace Fortress
             RemainingThinkSeconds=Mathf.Clamp(settings.thinkSeconds,1,2);
             IsThinking=true;StateChanged?.Invoke();
         }
-        void Update() { TickThinking(Time.deltaTime); }
+        void Update()
+        {
+            if(deferredPlanning && match!=null && match.shots!=null && !match.shots.GameplaySuspended)
+            { deferredPlanning=false;HandleMatchState(); }
+            TickThinking(Time.deltaTime);
+        }
         public void TickThinking(float deltaTime)
         {
+            if(match!=null && match.shots!=null && match.shots.GameplaySuspended) return;
             if(!IsThinking) return;
             if(!OwnsCurrentTurn || match.State!=MatchState.Aim || plannedGeneration!=match.Generation || plannedTurn!=match.TurnNumber)
             { CancelThinking();return; }

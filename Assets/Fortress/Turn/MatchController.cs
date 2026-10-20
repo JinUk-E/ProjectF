@@ -153,6 +153,7 @@ namespace Fortress
         public bool TryMoveActiveTank(Vector2 worldDirection,float deltaTime)
         {
             if(!initialized || !isActiveAndEnabled || State!=MatchState.Aim || tuning==null || !tuning.movementEnabled ||
+                (shots!=null && shots.GameplaySuspended) ||
                 shots==null || shots.IsFiring || !shots.InputEnabled || terrainMap==null || terrainMap.Field==null ||
                 terrainMap.Field.IsFrozen || MovementRemaining<=0 || !Finite(MovementRemaining) || !Finite(deltaTime) || deltaTime<=0 ||
                 !Finite(worldDirection.sqrMagnitude) || worldDirection.sqrMagnitude<=0 ||
