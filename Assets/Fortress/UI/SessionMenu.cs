@@ -81,13 +81,13 @@ namespace Fortress
         {
             if(IsLoading || IsMainMenu) return;
             if(match.State == MatchState.Ended) { Load(MainScene);return; }
-            Pause(); Confirm(Destination.Main, "LEAVE ENGAGEMENT?", "This match will be lost. Return to command?");
+            Pause(); Confirm(Destination.Main, "대전에서 나갈까요?", "진행 중인 대전은 저장되지 않습니다.\n메인 화면으로 돌아갈까요?");
         }
         public void RequestQuit()
         {
             if(IsLoading) return;
             if(!IsMainMenu) Pause();
-            Confirm(Destination.Quit, "EXIT GAME?", IsMainMenu ? "Close Project F?" : "This match will be lost. Exit to desktop?");
+            Confirm(Destination.Quit, "게임을 종료할까요?", IsMainMenu ? "프로젝트 F를 종료합니다." : "진행 중인 대전은 저장되지 않습니다.\n게임을 종료할까요?");
         }
         void Confirm(Destination destination, string title, string body)
         {
@@ -158,12 +158,12 @@ namespace Fortress
             if(IsLoading) return;
             if(!Application.CanStreamedLevelBeLoaded(scene))
             {
-                if(statusLabel != null) statusLabel.text = "SCENE UNAVAILABLE - RETURN TO COMMAND";
+                if(statusLabel != null) statusLabel.text = "대전 화면을 불러올 수 없습니다. 메인 화면으로 돌아가 주세요.";
                 Debug.LogError("Menu destination is not registered in Build Settings: " + scene, this);
                 return;
             }
             IsLoading = true;
-            if(statusLabel != null) statusLabel.text = "DEPLOYING...";
+            if(statusLabel != null) statusLabel.text = "이동 중...";
             if(navigationGroup != null) navigationGroup.interactable = false;
             PrepareDeparture();
             SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);

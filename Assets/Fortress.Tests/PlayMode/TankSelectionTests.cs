@@ -39,8 +39,8 @@ namespace Fortress.Tests
                 var role=picker.roles[i];Assert.That(role.appearance,Is.Not.Null);
                 Assert.That(role.appearance.portrait,Is.Not.Null);
                 Assert.That(picker.selectedPortrait.sprite,Is.SameAs(role.appearance.portrait));
-                Assert.That(picker.playerLabel.text,Is.EqualTo(role.displayName));
-                Assert.That(picker.roleDescription.text,Is.EqualTo(role.appearance.description));
+                Assert.That(picker.playerLabel.text,Is.EqualTo(KoreanUi.RoleName(role)));
+                Assert.That(picker.roleDescription.text,Is.EqualTo(KoreanUi.RoleDescription(role)));
                 Assert.That(picker.ammunitionLabel.text,Is.EqualTo(LoadoutMenu.AmmoDescription(role)));
                 for(int j=0;j<4;j++)
                 {
@@ -86,7 +86,7 @@ namespace Fortress.Tests
             picker=Object.FindFirstObjectByType<LoadoutMenu>();
             Assert.That(picker.selectionMarkers[1].activeSelf,Is.True);
             Assert.That(picker.selectedPortrait.sprite,Is.SameAs(role.appearance.portrait));
-            Assert.That(picker.opponentLabel.text,Does.Contain(opponent.displayName));
+            Assert.That(picker.opponentLabel.text,Does.Contain(KoreanUi.RoleName(opponent)));
         }
         static IEnumerator WaitForScene(string path)
         {

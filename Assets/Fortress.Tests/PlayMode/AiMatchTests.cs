@@ -39,7 +39,7 @@ namespace Fortress.Tests
         {
             FinishHumanShot();
             var hud=Object.FindAnyObjectByType<MatchHud>();
-            Assert.That(hud.stateLabel.text,Does.Contain("AI AIMING"));
+            Assert.That(hud.stateLabel.text,Does.Contain("AI 조준 중"));
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-fortressAiCapture")>=0) Capture("ai-thinking.png");
             Assert.That(ai.LastPlan.SolveCount,Is.LessThanOrEqualTo(200));
             var focus=InputSystem.settings.backgroundBehavior;var editor=InputSystem.settings.editorInputBehaviorInPlayMode;

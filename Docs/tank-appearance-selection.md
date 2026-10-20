@@ -32,3 +32,5 @@ If using the older `MenuFlowBuilder.Upgrade()` or `AmmunitionBuilder.Upgrade()` 
 Validation covers all four cards, portrait/description selection, invalid indices, opponent independence, AI and local entry, menu return persistence, model mounts and side materials, repeated enable/restart without duplicates, recoil and muzzle invariance. See `Docs/Validation/tank-selection-*` for final test results and screenshots.
 
 Final result: Fortress.PlayModeTests **93/93 passed**, 0 failures/skips, 178.081 seconds. Runtime screenshots inspected for main menu and close-up Siege in battle. No C# compile errors or gameplay exceptions were found; MCP connection/reload diagnostics were unrelated. Standalone player build not run in this pass.
+
+Korean UI follow-up: after regenerating appearances or legacy menus, run CommandUiBuilder.Upgrade() LAST to restore the current hangar and Korean combat layout. See Docs/korean-command-ui.md.

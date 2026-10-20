@@ -1,0 +1,68 @@
+{
+  "summary": {
+    "total": 14,
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 16.6555345,
+    "resultState": "Passed"
+  },
+  "tests": [
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Battle_ButtonClicksAdjustAimPowerAndFireOnce",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Battle_PauseAndAiOwnershipBlockButtonAndDirectCommands",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Main_AllCardsSwitchSingleShowroomModelAndReadableKoreanBriefing",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Main_ManualAndConfirmationUseAvailableKoreanGlyphs",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.DirectSelection_DeploysIntoAiMatch",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.DirectSelection_DeploysLocalAndSurvivesReturnToMenu",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.EveryCard_SelectsItsOwnRolePortraitAndExclusiveMarker",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.Selection_InvalidIndicesIgnoredAndOpponentDoesNotChangePlayer",
+      "state": "Passed"
+    }
+  ]
+}

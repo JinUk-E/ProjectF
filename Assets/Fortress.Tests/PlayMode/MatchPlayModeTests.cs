@@ -75,7 +75,7 @@ namespace Fortress.Tests
             Assert.That(match.State,Is.EqualTo(MatchState.Ended));
             Assert.That(match.WinnerIndex,Is.EqualTo(0));
             Assert.That(hud.resultPanel.activeSelf,Is.True);
-            Assert.That(hud.resultLabel.text,Does.Contain("PLAYER 1 WINS"));
+            Assert.That(hud.resultLabel.text,Does.Contain("플레이어 1 승리"));
             Assert.That(shots.TryFire(),Is.False);
             Assert.That(shots.SetAim(0,45,20),Is.False);
             yield return null;
@@ -147,7 +147,7 @@ namespace Fortress.Tests
             match.enabled=true;
             Assert.That(match.State,Is.EqualTo(MatchState.Aim));
             Assert.That(shots.InputEnabled,Is.True);
-            Assert.That(hud.stateLabel.text,Does.Contain("READY"));
+            Assert.That(hud.stateLabel.text,Does.Contain("사격 준비"));
             Assert.That(shots.TryFire(),Is.True);
             shots.CancelShot();
             yield return null;
@@ -189,7 +189,7 @@ namespace Fortress.Tests
                 Assert.That(loser.Health,Is.EqualTo(100),"Water alone must defeat a full-health tank.");
                 Assert.That(loser.GroundHeight,Is.LessThanOrEqualTo(-4));
                 var hud=Object.FindAnyObjectByType<MatchHud>();
-                Assert.That(hud.resultLabel.text,Does.Contain("SUBMERGED"));
+                Assert.That(hud.resultLabel.text,Does.Contain("침수"));
                 Assert.That(shots.TryFire(),Is.False);
                 TestContext.WriteLine("Water defeat at HP="+loser.Health+", ground="+loser.GroundHeight+", shots="+fired);
                 if(CaptureEnabled())
@@ -259,7 +259,7 @@ namespace Fortress.Tests
             Assert.That(shots.LastSolveHit,Is.False);
             shots.ActiveRunner.Tick(shots.tuning.maxFlightTime+1);
             Assert.That(hud.notificationGroup.alpha,Is.GreaterThan(0));
-            Assert.That(hud.notificationLabel.text.ToUpperInvariant(),Does.Not.Contain("IMPACT"));
+            Assert.That(hud.notificationLabel.text.ToUpperInvariant(),Does.Not.Contain("착탄"));
             yield return null;
         }
         [UnityTest]

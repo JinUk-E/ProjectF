@@ -1,0 +1,404 @@
+{
+  "summary": {
+    "total": 98,
+    "passed": 98,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 203.3025224,
+    "resultState": "Passed"
+  },
+  "tests": [
+    {
+      "test": "Fortress.Tests.AiMatchTests.Ai_RestartInsideAimEvent_DoesNotFireIntoNewMatch",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AiMatchTests.Ai_RestartSameSeedAndDisable_CancelPendingFire",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AiMatchTests.Ai_ThinksBlocksKeyboardFiresOnceAndReturnsHumanTurn",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AiMatchTests.AiMatch_FullHealthCompletesAndResultRestartResetsAi",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AiMatchTests.EasyAi_RetainsLateTurnError_AndIsLessAccurateThanNormal",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AiMatchTests.Planner_DeterministicBudgetedAndDoesNotMoveLiveRig",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AimReadabilityTests.RockLayer_RepaintsCraterWithoutChangingSimulation",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AimReadabilityTests.StyledPreview_InvalidBindingHidesExistingGeometry",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AimReadabilityTests.StyledPreview_RetainsWindFreePartialArcAndDirection",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.AiTurn_BlocksHumanAmmoSelection",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Ammo_ActualShotsApplyDistinctHealthDamageAndExcavation",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Cluster_CancelAfterSplit_DiscardsAllDamageAndUnlocks",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Cluster_CollisionFallback_OnlySixChildrenDealDamage",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Cluster_NoSurfaceHit_TimeoutDoesNotDamageTerrain",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Cluster_SixPhysicalChildren_HoldWorldUntilLastFinish_ResolveOrdered",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Launch_SnapshotsDamageAndKeepsTankAmmunitionIndependent",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Loadouts_SelectAndConsumeOnlySuccessfulLaunch_RestartRefills",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Menu_ChosenRolesReachBothMatchSeats",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.AmmunitionTests.Special_DepletionFallsBackToUnlimitedHE",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BattlefieldDetailTests.BuildingDetails_StayInBoundsAndHideWithDestroyedBuilding",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BattlefieldDetailTests.Vegetation_CraterClearsDecorationOnlyAfterWorldThaws",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BattlefieldDetailTests.Vegetation_SeedReproducesAndExcludesRoadsSpawnsBuildings",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BattlefieldDetailTests.WindArrow_TracksScreenRotationPitchAndCalmWithoutChangingWind",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BoundaryWallTests.CentralPeaks_AreReducedByConfiguredQuarterWithoutRemovingSideRelief",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BoundaryWallTests.ExteriorFog_PropertiesApplyOnlyToGroundAndTrees",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BoundaryWallTests.NaturalBoundary_HeightQueriesMatchVisibleRockWithoutArtificialProps",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BoundaryWallTests.Wall_DoesNotExtendMovementAreaOrAlterAnalyticShotSurface",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BoundaryWallTests.Wall_EdgeCraterRebuildsAfterThawAndRestartRestoresGeometry",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BoundaryWallTests.Wall_IsClosedAndInnerFaceMatchesPlayableEdgeOnAllSides",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BuildingCollapseTests.Collapse_StartMatchesPanelsThenFallsWithoutBlockingOrRestarting",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BuildingCollapseTests.FoundationCollapse_RetargetsNewCraterAndDisableFinishesPresentation",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BuildingCollapseTests.NonlethalDamage_ShowsStagesWithoutChangingCoverBounds",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.BuildingCollapseTests.RestartDuringCollapse_RemovesOldViewsAndRestoresIntactState",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.CraterMovementTests.Movement_RejectsNewWetOrOutOfBoundsFootprint",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.CraterMovementTests.NearbyShell_DamagedFootprint_CanRetreatWithoutChangingHealthOrAim",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.CraterMovementTests.SmallDryLedge_CanCrossBothWays",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.CraterMovementTests.SteepRamp_CannotReuseStepAllowanceToClimbOrDescend",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.FlatRangePlayModeTests.FlatRange_DisableDuringFlight_NativeLifecycleCancelsAndAllowsRestart",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.FlatRangePlayModeTests.FlatRange_NormalShot_FinishesThroughNativeUpdateWithinOneCentimetre",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Battle_ButtonClicksAdjustAimPowerAndFireOnce",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Battle_PauseAndAiOwnershipBlockButtonAndDirectCommands",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Main_AllCardsSwitchSingleShowroomModelAndReadableKoreanBriefing",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.KoreanCommandUiTests.Main_ManualAndConfirmationUseAvailableKoreanGlyphs",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Hud_AimWindAndHealthChanges_UpdateGaugesAndActivePlayer",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Hud_Presentation_CapturesReadyAndResultsAtTargetResolutions",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Hud_TurnNotice_ExpiresAndMissDoesNotClaimImpact",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Keyboard_AimAndFireBindings_DriveMatchAndLockDuringFlight",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Match_CraterReachesWater_DefeatsHealthyTankAndRestartClearsDrowning",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Match_DisableAndEnable_CancelsFlightAndRestoresAimHud",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Match_FullHealthHotseat_ReachesWinnerThroughRepeatedShots",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Match_Hit_ChangesHealthAndGroundOnlyAfterFlightThenSwitchesPlayer",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Match_RestartDuringFlight_CancelsAndReplaysSeedWithoutChangingLaunchRig",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Match_Victory_DisplaysResultAndRestartButtonRestoresTerrainAndHealth",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Terrain_InvalidGenerationDuringFlight_PreservesCurrentMatch",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MatchPlayModeTests.Terrain_NewSeedChangesMap_SameSeedRestoresMapAndSpawn",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MovementMountainTests.Hills_MultipleSeeds_HaveReliefDrySpawnsAndConnectedRoads",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MovementMountainTests.Keyboard_MoveFollowsCameraPreservesAimAndExhaustsBudget",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MovementMountainTests.Move_ConsumesBudgetPreservesHealthAndLocksInFlight",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.MovementMountainTests.Move_RejectsWaterAndOtherTankWithoutSpendingFuel",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.FocusAndTurn_RespectManualViewAndStayAboveTerrain",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Mouse_RightDragAndWheel_RouteThroughInputSystem",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Orbit_RotatesZoomsClampsAndDoesNotChangeAim",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Zoom_ChangesActualDistanceWithoutTilting_OnGeneratedTerrain",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Exterior_ConstantTimeHeightLookupMatchesTriangleCentroids",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Exterior_EdgeCraterUpdatesSeamAfterThawButInteriorCraterSkipsRebuild",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Exterior_SeamMatchesAndBoundaryRemainsNonCombat",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Rubble_BlocksLowShotBlastAndMovementButAllowsHighShotAndDetour",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Rubble_FreezeWaterAndRestartMaintainAuthoritativeState",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Rubble_SettledVisibleSlabsMatchAnalyticOrientedBounds",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ShellVisualTests.CancelAndReuse_ClearsOldTrailAndRestartsPresentation",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ShellVisualTests.DisableDuringFlight_ClearsTrailAndUnsubscribes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ShellVisualTests.VisualDirection_TracksFlightWithoutChangingTrajectoryOrImpact",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TacticalCoverTests.Building_BlocksShotMovementAndBlast_HighShotPasses",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TacticalCoverTests.Building_DestructionLeavesLowCoverAndRestartRestoresSameLayout",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TacticalCoverTests.Building_FoundationDestroyed_Collapses",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TacticalCoverTests.Road_CraterChangesGround_AlternateRoadRemainsAndRestartRestores",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TacticalCoverTests.Shot_BuildingShieldsTankFromExplosionBeforeItCollapses",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TacticalCoverTests.Shot_RealProjectileHitsBuilding_OnlyDamagesAfterFinish",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankAppearanceTests.NewCannon_FollowsAimAndRecoilWithoutMovingMuzzle",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankAppearanceTests.SelectedModels_UseCorrectMountsAndSideMaterials_RestartDoesNotDuplicate",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.DirectSelection_DeploysIntoAiMatch",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.DirectSelection_DeploysLocalAndSurvivesReturnToMenu",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.EveryCard_SelectsItsOwnRolePortraitAndExclusiveMarker",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TankSelectionTests.Selection_InvalidIndicesIgnoredAndOpponentDoesNotChangePlayer",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainBlastTests.RoadsHaveHeightVariationAndInitialPadsResistFourShallowCraters",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainBlastTests.Soil_PoolIsBoundedStaysOnGroundAndRestartClears",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainRangePlayModeTests(False).TerrainRange_CraterPatch_Reports257GridUpdateTiming",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainRangePlayModeTests(False).TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainRangePlayModeTests(False).TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_CraterPatch_Reports257GridUpdateTiming",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_Preview_IgnoresWindAndHidesOnlyDuringFlight",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.TerrainRangePlayModeTests(True).TerrainRange_Shot_ChangesPrivateViewAndReaimsWithinOneCentimetre",
+      "state": "Passed"
+    }
+  ]
+}

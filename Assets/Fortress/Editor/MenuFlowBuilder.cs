@@ -15,11 +15,11 @@ namespace Fortress.Editor
     public static class MenuFlowBuilder
     {
         static TMP_FontAsset font;
-        static readonly Color Ink = new Color(.035f,.055f,.053f);
-        static readonly Color Panel = new Color(.07f,.095f,.087f,.98f);
-        static readonly Color Accent = new Color(.72f,.78f,.51f);
-        static readonly Color Text = new Color(.9f,.92f,.84f);
-        static readonly Color Muted = new Color(.53f,.62f,.57f);
+        static readonly Color Ink = new Color(.035f,.045f,.055f);
+        static readonly Color Panel = new Color(.065f,.08f,.095f,.98f);
+        static readonly Color Accent = new Color(1,.49f,.19f);
+        static readonly Color Text = new Color(.94f,.95f,.96f);
+        static readonly Color Muted = new Color(.56f,.63f,.69f);
         [MenuItem("Fortress/Upgrade Main Menu and Session Flow")]
         public static void Upgrade()
         {
@@ -176,7 +176,7 @@ namespace Fortress.Editor
         }
         static Button Button(Transform parent,float x,float y,float w,float h,string caption,UnityAction action,bool primary,SessionMenu target=null,string method=null)
         {
-            var r=Box(caption,parent,x,y,w,h,primary?Accent:new Color(.13f,.18f,.15f));var image=r.GetComponent<Image>();image.raycastTarget=true;
+            var r=Box(caption,parent,x,y,w,h,primary?Accent:new Color(.105f,.13f,.155f));var image=r.GetComponent<Image>();image.raycastTarget=true;
             var b=r.gameObject.AddComponent<Button>();b.targetGraphic=image;
             var colors=b.colors;colors.highlightedColor=new Color(1.15f,1.15f,1.15f);colors.selectedColor=new Color(1.2f,1.2f,1.2f);colors.pressedColor=new Color(.7f,.7f,.7f);b.colors=colors;
             if(method!=null) UnityEventTools.AddVoidPersistentListener(b.onClick,(UnityAction)System.Delegate.CreateDelegate(typeof(UnityAction),target,method));

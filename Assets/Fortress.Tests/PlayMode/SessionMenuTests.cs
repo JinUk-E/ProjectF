@@ -37,6 +37,8 @@ namespace Fortress.Tests
             Assert.That(menu.match.TryMoveActiveTank(Vector2.right,1),Is.False);
             camera.Orbit(new Vector2(100,0));Assert.That(camera.Yaw,Is.EqualTo(yaw));
             menu.RequestMainMenu();Assert.That(menu.IsConfirming,Is.True);
+            Assert.That(menu.confirmationTitle.text,Is.EqualTo("대전에서 나갈까요?"));
+            Assert.That(menu.confirmationBody.text,Does.Contain("저장되지 않습니다"));
             menu.CancelConfirmation();Assert.That(menu.IsPaused,Is.True);Assert.That(Time.timeScale,Is.Zero);
             Assert.That(menu.combatHudGroup.interactable,Is.False);
             menu.Resume();Assert.That(Time.timeScale,Is.EqualTo(scale));Assert.That(AudioListener.pause,Is.True);
@@ -73,7 +75,10 @@ namespace Fortress.Tests
             menu=Object.FindFirstObjectByType<SessionMenu>();Assert.That(menu.IsMainMenu,Is.True);
             Assert.That(Time.timeScale,Is.EqualTo(1));Assert.That(AudioListener.pause,Is.False);
             Assert.That(Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length,Is.EqualTo(1));
-            menu.OpenControls();menu.CloseControls();menu.RequestQuit();menu.CancelConfirmation();Assert.That(menu.IsLoading,Is.False);
+            menu.OpenControls();menu.CloseControls();menu.RequestQuit();
+            Assert.That(menu.confirmationTitle.text,Is.EqualTo("게임을 종료할까요?"));
+            Assert.That(menu.confirmationBody.text,Is.EqualTo("프로젝트 F를 종료합니다."));
+            menu.CancelConfirmation();Assert.That(menu.IsLoading,Is.False);
             menu.StartLocal();menu.StartAi(); // Duplicate click must keep the first destination.
             yield return WaitForScene(SessionMenu.LocalScene);
             menu=Object.FindFirstObjectByType<SessionMenu>();Assert.That(Object.FindFirstObjectByType<AiOpponent>(),Is.Null);

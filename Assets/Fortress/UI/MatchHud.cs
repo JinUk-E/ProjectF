@@ -95,28 +95,28 @@ namespace Fortress
         void RefreshWindDetails(Vector3 wind)
         {
             if(windDetailLabel==null) return;
-            if(wind.magnitude<=calmWindThreshold) { windDetailLabel.SetText("CALM");return; }
+            if(wind.magnitude<=calmWindThreshold) { windDetailLabel.SetText("무풍");return; }
             var tank=match.shots.ActiveTank;
-            if(tank==null) { windDetailLabel.SetText("ARROW = BLOWING TOWARD");return; }
+            if(tank==null) { windDetailLabel.SetText("화살표 = 바람이 미는 방향");return; }
             float yaw=tank.Yaw*Mathf.Deg2Rad;
             var forward=new Vector3(Mathf.Sin(yaw),0,Mathf.Cos(yaw));
             var right=new Vector3(forward.z,0,-forward.x);
             float cross=Vector3.Dot(wind,right),along=Vector3.Dot(wind,forward);
             windDetailLabel.SetText(cross>=0
-                ? (along>=0?"GUN: RIGHT {0:0.0} / TAIL {1:0.0}":"GUN: RIGHT {0:0.0} / HEAD {1:0.0}")
-                : (along>=0?"GUN: LEFT {0:0.0} / TAIL {1:0.0}":"GUN: LEFT {0:0.0} / HEAD {1:0.0}"),Mathf.Abs(cross),Mathf.Abs(along));
+                ? (along>=0?"포신 기준: 오른쪽 {0:0.0} / 뒷바람 {1:0.0}":"포신 기준: 오른쪽 {0:0.0} / 맞바람 {1:0.0}")
+                : (along>=0?"포신 기준: 왼쪽 {0:0.0} / 뒷바람 {1:0.0}":"포신 기준: 왼쪽 {0:0.0} / 맞바람 {1:0.0}"),Mathf.Abs(cross),Mathf.Abs(along));
         }
         public void Refresh()
         {
             if (match == null || match.shots == null || match.tuning == null) return;
             var shots = match.shots;
-            if(movementLabel!=null) movementLabel.SetText("ARROW KEYS  MOVE  /  {0:0.0}m LEFT",match.MovementRemaining);
+            if(movementLabel!=null) movementLabel.SetText("방향키 이동  /  남은 거리 {0:0.0}m",match.MovementRemaining);
             var tanks = match.Tanks;
             if (tanks == null || tanks.Length != 2) return;
             for (int i = 0; i < 2; i++)
             {
-                if(ai!=null && i==1) healthLabels[i].SetText("AI  /  {0:0} HP",tanks[i].Health);
-                else healthLabels[i].SetText("PLAYER {0}  /  {1:0} HP", i + 1, tanks[i].Health);
+                if(ai!=null && i==1) healthLabels[i].SetText("AI  /  체력 {0:0}",tanks[i].Health);
+                else healthLabels[i].SetText("플레이어 {0}  /  체력 {1:0}", i + 1, tanks[i].Health);
                 healthFills[i].fillAmount = tanks[i].Health / match.tuning.maxHealth;
                 if (style != null) healthFills[i].color = healthFills[i].fillAmount <= style.dangerHealthFraction ? style.danger : style.accent;
                 if (activeIndicators != null && i < activeIndicators.Length && activeIndicators[i] != null)
@@ -125,19 +125,19 @@ namespace Fortress
             bool hasWinner = match.WinnerIndex >= 0 && match.WinnerIndex < tanks.Length;
             bool ended = match.State == MatchState.Ended && (match.IsDraw || hasWinner);
             bool aiTurn=ai!=null && match.ActivePlayerIndex==1;
-            if(aiTurn) turnLabel.SetText("TURN {0:0}  /  AI",match.TurnNumber);
-            else turnLabel.SetText("TURN {0:0}  /  PLAYER {1}", match.TurnNumber, match.ActivePlayerIndex + 1);
+            if(aiTurn) turnLabel.SetText("{0:0}턴  /  AI",match.TurnNumber);
+            else turnLabel.SetText("{0:0}턴  /  플레이어 {1}", match.TurnNumber, match.ActivePlayerIndex + 1);
             var wind = shots.Wind;
-            windLabel.SetText("WIND / VIEW  {0:0.0} m/s²", wind.magnitude);
+            windLabel.SetText("화면 기준 바람  {0:0.0} m/s²", wind.magnitude);
             RefreshWindPresentation();
             RefreshWindDetails(wind);
             var tank = shots.ActiveTank;
-            if (tank != null) aimLabel.SetText("YAW {0:0.0}°     ELEVATION {1:0.0}°     POWER {2:0.0}", tank.Yaw, tank.Pitch, shots.Power);
+            if (tank != null) aimLabel.SetText("방위 {0:0.0}°     고각 {1:0.0}°     화력 {2:0.0}", tank.Yaw, tank.Pitch, shots.Power);
             if (tank != null && elevationLabel != null) elevationLabel.SetText("{0:0.0}°", tank.Pitch);
-            if (tank != null && headingLabel != null) headingLabel.SetText("BEARING  {0:0.0}°", tank.Yaw);
+            if (tank != null && headingLabel != null) headingLabel.SetText("방위  {0:0.0}°", tank.Yaw);
             if (powerFill != null) powerFill.fillAmount = Mathf.InverseLerp(match.tuning.minPower, match.tuning.maxPower, shots.Power);
             if (powerLabel != null) powerLabel.SetText("{0:0.0}", shots.Power);
-            stateLabel.text = ended ? "MATCH COMPLETE" : aiTurn && match.State==MatchState.Aim ? "AI AIMING...  /  PLEASE WAIT" : match.State == MatchState.Aim ? "READY  /  SPACE TO FIRE" : "SHOT IN PROGRESS  /  CONTROLS LOCKED";
+            stateLabel.text = ended ? "대전 종료" : aiTurn && match.State==MatchState.Aim ? "AI 조준 중...  /  잠시 기다려 주세요" : match.State == MatchState.Aim ? "사격 준비  /  SPACE 발사" : "포탄 비행 중  /  조작 잠금";
             if (resultPanel.activeSelf != ended) resultPanel.SetActive(ended);
             if (ended) ClearNotice();
             if (!ended && match.State == MatchState.Aim && (displayedTurn != match.TurnNumber || displayedSeed != match.Seed))
@@ -146,25 +146,25 @@ namespace Fortress
                 displayedTurn = match.TurnNumber; displayedSeed = match.Seed;
                 if (notificationLabel != null)
                 {
-                    if(aiTurn) notificationLabel.text="AI TURN  /  AIMING";
-                    else notificationLabel.SetText(pendingImpact ? "IMPACT CONFIRMED  /  PLAYER {0} TURN" : "PLAYER {0}  /  YOUR TURN", match.ActivePlayerIndex + 1);
+                    if(aiTurn) notificationLabel.text="AI 차례  /  조준 중";
+                    else notificationLabel.SetText(pendingImpact ? "착탄 확인  /  플레이어 {0} 차례" : "플레이어 {0}  /  내 차례", match.ActivePlayerIndex + 1);
                 }
                 pendingImpact = false;
                 if (notificationGroup != null && style != null) { notificationRemaining = style.notificationSeconds; notificationGroup.alpha = 1; }
             }
             if (ended)
             {
-                if (match.IsDraw) resultLabel.SetText("DRAW\n{0:0} TURNS", match.TurnNumber);
+                if (match.IsDraw) resultLabel.SetText("무승부\n{0:0}턴", match.TurnNumber);
                 else if(ai!=null)
                 {
                     bool drowned=tanks[1-match.WinnerIndex].Drowned;
                     resultLabel.SetText(match.WinnerIndex==0
-                        ? (drowned ? "VICTORY\nOPPONENT SUBMERGED\n{0:0} TURNS" : "VICTORY\n{0:0} TURNS")
-                        : (drowned ? "DEFEAT\nYOUR TANK SUBMERGED\n{0:0} TURNS" : "DEFEAT\n{0:0} TURNS"),match.TurnNumber);
+                        ? (drowned ? "승리\n상대 전차 침수\n{0:0}턴" : "승리\n{0:0}턴")
+                        : (drowned ? "패배\n내 전차 침수\n{0:0}턴" : "패배\n{0:0}턴"),match.TurnNumber);
                 }
                 else if(tanks[1-match.WinnerIndex].Drowned)
-                    resultLabel.SetText("PLAYER {0} WINS\nOPPONENT SUBMERGED\n{1:0} TURNS",match.WinnerIndex+1,match.TurnNumber);
-                else resultLabel.SetText("PLAYER {0} WINS\n{1:0} TURNS", match.WinnerIndex + 1, match.TurnNumber);
+                    resultLabel.SetText("플레이어 {0} 승리\n상대 전차 침수\n{1:0}턴",match.WinnerIndex+1,match.TurnNumber);
+                else resultLabel.SetText("플레이어 {0} 승리\n{1:0}턴", match.WinnerIndex + 1, match.TurnNumber);
             }
         }
     }

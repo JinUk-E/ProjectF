@@ -28,11 +28,11 @@ namespace Fortress
             BattleLoadoutSelection.Player=Mathf.Clamp(BattleLoadoutSelection.Player,0,roles.Length-1);
             BattleLoadoutSelection.Opponent=Mathf.Clamp(BattleLoadoutSelection.Opponent,0,roles.Length-1);
             var role=roles[BattleLoadoutSelection.Player];
-            if(playerLabel!=null) playerLabel.text=role!=null?role.displayName:"UNIT UNAVAILABLE";
-            if(opponentLabel!=null) opponentLabel.text=Describe("OPPONENT / PLAYER 2",roles[BattleLoadoutSelection.Opponent]);
+            if(playerLabel!=null) playerLabel.text=KoreanUi.RoleName(role);
+            if(opponentLabel!=null) opponentLabel.text=Describe("상대 / 플레이어 2",roles[BattleLoadoutSelection.Opponent]);
             var appearance=role!=null?role.appearance:null;
             if(selectedPortrait!=null) { selectedPortrait.sprite=appearance!=null?appearance.portrait:null;selectedPortrait.enabled=selectedPortrait.sprite!=null; }
-            if(roleDescription!=null) roleDescription.text=appearance!=null?appearance.description:"";
+            if(roleDescription!=null) roleDescription.text=KoreanUi.RoleDescription(role);
             if(ammunitionLabel!=null) ammunitionLabel.text=AmmoDescription(role);
             if(selectionMarkers!=null) for(int i=0;i<selectionMarkers.Length;i++)
                 if(selectionMarkers[i]!=null) selectionMarkers[i].SetActive(i==BattleLoadoutSelection.Player);
@@ -41,9 +41,8 @@ namespace Fortress
         }
         public static string AmmoDescription(TankLoadout role)
         {
-            if(role==null) return "";
-            return role.special!=null?"HE / UNLIMITED  +  "+role.special.displayName+" / "+role.specialRounds+" ROUNDS":"HIGH EXPLOSIVE / UNLIMITED";
+            return KoreanUi.AmmoDescription(role);
         }
-        static string Describe(string seat,TankLoadout role)=>seat+"   >   "+(role!=null?role.displayName:"UNAVAILABLE")+"\n"+AmmoDescription(role)+"   [CHANGE]";
+        static string Describe(string seat,TankLoadout role)=>seat+"   >   "+KoreanUi.RoleName(role)+"\n"+AmmoDescription(role)+"   [변경]";
     }
 }

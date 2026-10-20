@@ -32,10 +32,15 @@ namespace Fortress.Tests
         [UnityTest] public IEnumerator Loadouts_SelectAndConsumeOnlySuccessfulLaunch_RestartRefills()
         {
             Assert.That(shots.ActiveLoadout.displayName,Is.EqualTo("SUPPORT"));Assert.That(shots.SpecialRemaining,Is.EqualTo(2));
+            var hud=Object.FindFirstObjectByType<AmmoHud>();hud.Refresh();
+            Assert.That(hud.roleLabel.text,Does.Contain("지원 자주포"));
+            Assert.That(hud.basicLabel.text,Does.Contain("고폭탄 / 무제한"));
             Assert.That(shots.SelectAmmo(true),Is.True);
+            Assert.That(hud.specialLabel.text,Is.EqualTo("[선택] 2  클러스터탄 / 2발"));
             shots.GameplaySuspended=true;Assert.That(shots.TryFire(),Is.False);Assert.That(shots.SelectAmmo(false),Is.False);Assert.That(shots.SpecialRemaining,Is.EqualTo(2));
             shots.GameplaySuspended=false;yield return null;
             Aim();Assert.That(shots.TryFire(),Is.True);Assert.That(shots.SpecialRemaining,Is.EqualTo(1));
+            Assert.That(hud.specialLabel.text,Is.EqualTo("[선택] 2  클러스터탄 / 1발"));
             Assert.That(shots.TryFire(),Is.False);Assert.That(shots.SelectAmmo(false),Is.False);Assert.That(shots.SpecialRemaining,Is.EqualTo(1));
             shots.CancelShot();match.RestartMatch(match.Seed);
             Assert.That(shots.SpecialRemaining,Is.EqualTo(2));Assert.That(shots.SpecialSelected,Is.False);
@@ -139,7 +144,7 @@ namespace Fortress.Tests
             BattleLoadoutSelection.Player=BattleLoadoutSelection.Opponent=0;
             EditorSceneManager.LoadSceneInPlayMode(SessionMenu.MainScene,new LoadSceneParameters(LoadSceneMode.Single));yield return null;
             var picker=Object.FindFirstObjectByType<LoadoutMenu>();picker.NextPlayer();picker.NextOpponent();picker.NextOpponent();picker.NextOpponent();
-            Assert.That(picker.playerLabel.text,Does.Contain("SIEGE"));Assert.That(picker.opponentLabel.text,Does.Contain("SUPPORT"));
+            Assert.That(picker.playerLabel.text,Does.Contain("공성 전차"));Assert.That(picker.opponentLabel.text,Does.Contain("지원 자주포"));
             Object.FindFirstObjectByType<SessionMenu>().StartLocal();
             for(int i=0;i<120 && SceneManager.GetActiveScene().path!=SessionMenu.LocalScene;i++) yield return null;
             yield return null;match=Object.FindFirstObjectByType<MatchController>();shots=match.shots;

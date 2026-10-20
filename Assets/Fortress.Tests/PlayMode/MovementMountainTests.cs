@@ -52,7 +52,7 @@ namespace Fortress.Tests
                 Assert.That(delta.magnitude,Is.GreaterThan(0));
                 Assert.That(Vector3.Dot(delta.normalized,forward),Is.GreaterThan(.99f));
                 Assert.That(tank.Rig.Yaw,Is.EqualTo(yaw).Within(.001f));
-                Assert.That(Object.FindAnyObjectByType<MatchHud>().movementLabel.text,Does.Contain("LEFT"));
+                Assert.That(Object.FindAnyObjectByType<MatchHud>().movementLabel.text,Does.Contain("남은 거리"));
                 // Spend the remaining budget on the clear central road, not through a depot.
                 match.terrainMap.Field.TrySample(-25,0,out float roadHeight);
                 tank.MoveOnGround(new Vector3(-25,roadHeight,0));

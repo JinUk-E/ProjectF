@@ -37,9 +37,9 @@ namespace Fortress
             bool editable=shots.InputEnabled && !shots.IsFiring && !shots.GameplaySuspended && (shots.ai==null || !shots.ai.OwnsCurrentTurn);
             basicButton.interactable=editable;
             specialButton.interactable=editable && role.special!=null && shots.SpecialRemaining>0;
-            roleLabel.text=role.displayName+"  /  AMMUNITION";
-            basicLabel.text=(shots.SpecialSelected?"":"[READY] ")+"1  HE / UNLIMITED";
-            specialLabel.text=role.special==null?"NO SPECIAL AMMUNITION":(shots.SpecialSelected?"[READY] ":"")+"2  "+role.special.displayName+" / "+shots.SpecialRemaining;
+            roleLabel.text=KoreanUi.RoleName(role)+"  /  탄약";
+            basicLabel.text=(shots.SpecialSelected?"":"[선택] ")+"1  "+KoreanUi.AmmoName(role.basic)+" / 무제한";
+            specialLabel.text=role.special==null?"전용 특수탄 없음":(shots.SpecialSelected?"[선택] ":"")+"2  "+KoreanUi.AmmoName(role.special)+" / "+shots.SpecialRemaining+"발";
         }
     }
 }

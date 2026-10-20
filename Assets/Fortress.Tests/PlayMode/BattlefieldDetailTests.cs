@@ -34,9 +34,9 @@ namespace Fortress.Tests
                 Assert.That(Vector2.Dot(new Vector2(arrow.x,arrow.y),p.normalized),Is.GreaterThan(.999f));
                 Assert.That(match.shots.Wind,Is.EqualTo(wind));
             }
-            Assert.That(hud.windDetailLabel.text,Does.StartWith("GUN:"));
+            Assert.That(hud.windDetailLabel.text,Does.StartWith("포신 기준:"));
             match.shots.SetWind(Vector3.zero);hud.RefreshWindPresentation();
-            Assert.That(hud.windArrow.gameObject.activeSelf,Is.False);Assert.That(hud.windDetailLabel.text,Is.EqualTo("CALM"));
+            Assert.That(hud.windArrow.gameObject.activeSelf,Is.False);Assert.That(hud.windDetailLabel.text,Is.EqualTo("무풍"));
             yield return null;
         }
         Transform PlantRoot(BattlefieldVegetation vegetation)
