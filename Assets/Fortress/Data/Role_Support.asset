@@ -15,4 +15,5 @@ MonoBehaviour:
   displayName: SUPPORT
   basic: {fileID: 11400000, guid: 587021a0ddd6d5549844c63b2285ebf6, type: 2}
   special: {fileID: 11400000, guid: b3592ab9a38e96743a1b931211737dbd, type: 2}
+  appearance: {fileID: 11400000, guid: cee1d1e15864e3944ba78e0f87e685e7, type: 2}
   specialRounds: 2

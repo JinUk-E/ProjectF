@@ -9476,14 +9476,17 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3373597509158076296, guid: bff72d614497006409c082ddfec6b68d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1593466848}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8195878213862570017, guid: bff72d614497006409c082ddfec6b68d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 691134415}
   m_SourcePrefab: {fileID: 100100000, guid: bff72d614497006409c082ddfec6b68d, type: 3}
 --- !u!114 &691134410 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 799512970325079229, guid: bff72d614497006409c082ddfec6b68d, type: 3}
   m_PrefabInstance: {fileID: 691134409}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 691134414}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a85faaa72895742408f0ce1c3f7c9cf3, type: 3}
@@ -9504,6 +9507,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2802207810151445055, guid: bff72d614497006409c082ddfec6b68d, type: 3}
   m_PrefabInstance: {fileID: 691134409}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &691134414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8195878213862570017, guid: bff72d614497006409c082ddfec6b68d, type: 3}
+  m_PrefabInstance: {fileID: 691134409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &691134415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691134414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b160da1babc7141a597e884c544a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fortress::Fortress.TankAppearanceView
+  shots: {fileID: 1822788466}
+  rig: {fileID: 691134410}
+  gunParent: {fileID: 1593466848}
+  tankIndex: 0
 --- !u!1 &695934036
 GameObject:
   m_ObjectHideFlags: 0
@@ -23965,14 +23989,17 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3373597509158076296, guid: bff72d614497006409c082ddfec6b68d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 208304565}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8195878213862570017, guid: bff72d614497006409c082ddfec6b68d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1662168713}
   m_SourcePrefab: {fileID: 100100000, guid: bff72d614497006409c082ddfec6b68d, type: 3}
 --- !u!114 &1662168708 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 799512970325079229, guid: bff72d614497006409c082ddfec6b68d, type: 3}
   m_PrefabInstance: {fileID: 1662168707}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1662168712}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a85faaa72895742408f0ce1c3f7c9cf3, type: 3}
@@ -23993,6 +24020,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2802207810151445055, guid: bff72d614497006409c082ddfec6b68d, type: 3}
   m_PrefabInstance: {fileID: 1662168707}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1662168712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8195878213862570017, guid: bff72d614497006409c082ddfec6b68d, type: 3}
+  m_PrefabInstance: {fileID: 1662168707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1662168713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662168712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b160da1babc7141a597e884c544a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fortress::Fortress.TankAppearanceView
+  shots: {fileID: 1822788466}
+  rig: {fileID: 1662168708}
+  gunParent: {fileID: 208304565}
+  tankIndex: 1
 --- !u!1 &1687630061
 GameObject:
   m_ObjectHideFlags: 0

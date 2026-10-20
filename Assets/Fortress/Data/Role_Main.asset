@@ -15,4 +15,5 @@ MonoBehaviour:
   displayName: MAIN BATTLE
   basic: {fileID: 11400000, guid: 587021a0ddd6d5549844c63b2285ebf6, type: 2}
   special: {fileID: 0}
+  appearance: {fileID: 11400000, guid: 8dfd0277a239fdc4c845d9c3515c0142, type: 2}
   specialRounds: 0

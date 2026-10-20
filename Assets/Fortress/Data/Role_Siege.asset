@@ -15,4 +15,5 @@ MonoBehaviour:
   displayName: SIEGE
   basic: {fileID: 11400000, guid: 587021a0ddd6d5549844c63b2285ebf6, type: 2}
   special: {fileID: 11400000, guid: 2a9195aa32caf6b4397589e0153f0da9, type: 2}
+  appearance: {fileID: 11400000, guid: c11b9680d328735488d7c1db122e5c63, type: 2}
   specialRounds: 3

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 108c2ced7798c6140a06856644bf3a7f, type: 3}
+  m_Name: Main
+  m_EditorClassIdentifier: Fortress::Fortress.TankAppearance
+  portrait: {fileID: 21300000, guid: 40fa111ac92777048b3c6794ad00b575, type: 3}
+  description: Versatile frontline tank. Reliable HE fire with no ammunition limit.
+  sourceModel: Assets/ThirdParty/QuaterniusTanks/Tank2.fbx
+  pieces:
+  - mesh: {fileID: 4300000, guid: 4d3aff2b13a58b64a90e3ac5a126b658, type: 2}
+    mount: 0
+    playerMaterials:
+    - {fileID: 2100000, guid: 87e7189a2f87f35418d4c9bd5e17b513, type: 2}
+    - {fileID: 2100000, guid: d58f6ac453d620b46a02cd3900729e4d, type: 2}
+    - {fileID: 2100000, guid: 295ee794a2383b44281feeaa01d589fc, type: 2}
+    - {fileID: 2100000, guid: 372bc63a8e65bb84a834eb4dcf118aa1, type: 2}
+    - {fileID: 2100000, guid: ea278ff0d4e3ac34e8341b0c4dbd78ac, type: 2}
+    opponentMaterials:
+    - {fileID: 2100000, guid: 5436e32b24447b24bb6f397db885c33e, type: 2}
+    - {fileID: 2100000, guid: 540edd4554f401146ad78fa918b924d4, type: 2}
+    - {fileID: 2100000, guid: eb1506d30dceaf94fb24883c9099afcc, type: 2}
+    - {fileID: 2100000, guid: 6085ef1bd20d87344ad08ada1bfed39e, type: 2}
+    - {fileID: 2100000, guid: b5eebb5197df3024ab5f56453a589a99, type: 2}
+  - mesh: {fileID: 4300000, guid: 66f91052244baac4c865f3fd68e830e4, type: 2}
+    mount: 2
+    playerMaterials:
+    - {fileID: 2100000, guid: 372bc63a8e65bb84a834eb4dcf118aa1, type: 2}
+    opponentMaterials:
+    - {fileID: 2100000, guid: 6085ef1bd20d87344ad08ada1bfed39e, type: 2}
+  - mesh: {fileID: 4300000, guid: c0eb7301dd6768d48841fe96af980ab1, type: 2}
+    mount: 1
+    playerMaterials:
+    - {fileID: 2100000, guid: d58f6ac453d620b46a02cd3900729e4d, type: 2}
+    - {fileID: 2100000, guid: 87e7189a2f87f35418d4c9bd5e17b513, type: 2}
+    opponentMaterials:
+    - {fileID: 2100000, guid: 540edd4554f401146ad78fa918b924d4, type: 2}
+    - {fileID: 2100000, guid: 5436e32b24447b24bb6f397db885c33e, type: 2}
+  - mesh: {fileID: 4300000, guid: c8df39794dcb0b84c88133765cc02272, type: 2}
+    mount: 0
+    playerMaterials:
+    - {fileID: 2100000, guid: 372bc63a8e65bb84a834eb4dcf118aa1, type: 2}
+    opponentMaterials:
+    - {fileID: 2100000, guid: 6085ef1bd20d87344ad08ada1bfed39e, type: 2}
+  - mesh: {fileID: 4300000, guid: 2877f1d0df2f1ac4484bf8f4d09b2c34, type: 2}
+    mount: 0
+    playerMaterials:
+    - {fileID: 2100000, guid: 372bc63a8e65bb84a834eb4dcf118aa1, type: 2}
+    opponentMaterials:
+    - {fileID: 2100000, guid: 6085ef1bd20d87344ad08ada1bfed39e, type: 2}

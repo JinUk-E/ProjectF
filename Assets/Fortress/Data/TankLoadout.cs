@@ -6,6 +6,7 @@ namespace Fortress
     {
         public string displayName="MAIN BATTLE";
         public AmmoDefinition basic, special;
+        public TankAppearance appearance;
         [Min(0)] public int specialRounds=3;
     }
     public static class BattleLoadoutSelection

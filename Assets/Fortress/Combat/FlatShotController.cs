@@ -29,6 +29,7 @@ namespace Fortress
         public AmmoDefinition SelectedAmmo => ActiveLoadout==null?null:SpecialSelected?ActiveLoadout.special:ActiveLoadout.basic;
         public ProjectileRunner SelectedPrefab => SelectedAmmo!=null?SelectedAmmo.projectilePrefab:projectilePrefab;
         public int ActiveFamilyCount => family.Count;
+        public TankLoadout GetLoadout(int tankIndex) => loadouts!=null && tankIndex>=0 && tankIndex<loadouts.Length ? loadouts[tankIndex] : null;
         struct Member { public ProjectileRunner runner; public float start; public int index; }
         readonly List<Member> family=new List<Member>(8);
         int nextMemberIndex;
