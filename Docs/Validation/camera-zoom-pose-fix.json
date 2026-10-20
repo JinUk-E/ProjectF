@@ -1,0 +1,76 @@
+{
+  "summary": {
+    "total": 16,
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 20.5332794,
+    "resultState": "Passed"
+  },
+  "tests": [
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.FocusAndTurn_RespectManualViewAndStayAboveTerrain",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Mouse_RightDragAndWheel_RouteThroughInputSystem",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Orbit_RotatesZoomsClampsAndDoesNotChangeAim",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Zoom_ChangesActualDistanceWithoutTilting_OnGeneratedTerrain",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Exterior_ConstantTimeHeightLookupMatchesTriangleCentroids",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Exterior_EdgeCraterUpdatesSeamAfterThawButInteriorCraterSkipsRebuild",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Exterior_SeamMatchesAndBoundaryRemainsNonCombat",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Rubble_BlocksLowShotBlastAndMovementButAllowsHighShotAndDetour",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Rubble_FreezeWaterAndRestartMaintainAuthoritativeState",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.RubbleExteriorTests.Rubble_SettledVisibleSlabsMatchAnalyticOrientedBounds",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+      "state": "Passed"
+    }
+  ]
+}

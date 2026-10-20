@@ -98,27 +98,27 @@ namespace Fortress
         public void ApplyPose()
         {
             if(!initialized || settings==null) return;
+            float clearance=Mathf.Max(0,settings.groundClearance);
+            // A generated hill may be above the scene's original focus point.
+            // Keep that point above the ground instead of amplifying its height error
+            // across the entire sight line (which pushed the camera into the sky).
+            if(TryGroundHeight(Target.x,Target.z,out float targetGround) && Target.y<targetGround+clearance)
+                Target=new Vector3(Target.x,targetGround+clearance,Target.z);
             float yaw=Yaw*Mathf.Deg2Rad,pitch=Pitch*Mathf.Deg2Rad;
-            Vector3 position=Target+new Vector3(Mathf.Sin(yaw)*Mathf.Cos(pitch),Mathf.Sin(pitch),Mathf.Cos(yaw)*Mathf.Cos(pitch))*Distance;
+            var outward=new Vector3(Mathf.Sin(yaw)*Mathf.Cos(pitch),Mathf.Sin(pitch),Mathf.Cos(yaw)*Mathf.Cos(pitch));
+            Vector3 position=Target+outward*Distance;
+            // Protect the camera itself from terrain. Intervening hills may occlude
+            // the target; users can orbit around them without automatic pitch changes.
+            if(TryGroundHeight(position.x,position.z,out float ground))
+                position.y=Mathf.Max(position.y,ground+clearance);
+            cameraTransform.SetPositionAndRotation(position,Quaternion.LookRotation(-outward,Vector3.up));
+        }
+        bool TryGroundHeight(float x,float z,out float height)
+        {
             var field=match!=null && match.terrainMap!=null?match.terrainMap.Field:null;
-            if(field!=null)
-            {
-                float clearance=Mathf.Max(0,settings.groundClearance);
-                int samples=Mathf.Clamp(settings.terrainSamples,1,128);
-                // Raise the viewing end of the segment when hills would cover the target/camera.
-                // Camera-end sample always enforces exact local ground clearance.
-                float requiredY=position.y;
-                for(int i=1;i<=samples;i++)
-                {
-                    float t=(float)i/samples;
-                    var sample=Vector3.Lerp(Target,position,t);
-                    if(field.TrySample(sample.x,sample.z,out float ground) ||
-                        (exterior!=null && exterior.TrySampleVisualHeight(sample.x,sample.z,out ground)))
-                        requiredY=Mathf.Max(requiredY,Target.y+(ground+clearance-Target.y)/t);
-                }
-                position.y=requiredY;
-            }
-            cameraTransform.SetPositionAndRotation(position,Quaternion.LookRotation(Target-position,Vector3.up));
+            if(field!=null && field.TrySample(x,z,out height))return true;
+            if(exterior!=null && exterior.TrySampleVisualHeight(x,z,out height))return true;
+            height=0;return false;
         }
         static bool Finite(float value)=>!float.IsNaN(value)&&!float.IsInfinity(value);
     }

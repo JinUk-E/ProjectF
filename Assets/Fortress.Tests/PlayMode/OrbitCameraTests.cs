@@ -53,6 +53,33 @@ namespace Fortress.Tests
             var p=orbit.transform.position;
             if(orbit.match.terrainMap.Field.TrySample(p.x,p.z,out float h)) Assert.That(p.y,Is.GreaterThanOrEqualTo(h+orbit.settings.groundClearance-.01f));
         }
+        [UnityTest] public IEnumerator Zoom_ChangesActualDistanceWithoutTilting_OnGeneratedTerrain()
+        {
+            orbit.ApplyPose();
+            var target=orbit.Target;var before=orbit.transform.position;var rotation=orbit.transform.rotation;
+            Assert.That(orbit.match.terrainMap.Field.TrySample(target.x,target.z,out float ground),Is.True);
+            Assert.That(target.y,Is.GreaterThanOrEqualTo(ground+orbit.settings.groundClearance-.01f));
+            Assert.That(Vector3.Distance(before,target),Is.EqualTo(orbit.Distance).Within(.01f));
+            orbit.Zoom(600);orbit.ApplyPose();
+            Assert.That(Quaternion.Angle(rotation,orbit.transform.rotation),Is.LessThan(.01f));
+            Assert.That(Vector3.Distance(orbit.transform.position,target),Is.LessThan(Vector3.Distance(before,target)*.75f));
+            orbit.Zoom(-600);orbit.ApplyPose();
+            Assert.That(Vector3.Distance(before,orbit.transform.position),Is.LessThan(.01f));
+            Assert.That(Quaternion.Angle(rotation,orbit.transform.rotation),Is.LessThan(.01f));
+            // Even when terrain forces a camera-height correction, it must not rotate.
+            orbit.Orbit(new Vector2(0,100000));orbit.Zoom(100000);orbit.ApplyPose();
+            rotation=orbit.transform.rotation;
+            for(int i=0;i<25;i++)
+            {
+                orbit.Zoom(-120);orbit.ApplyPose();
+                Assert.That(Quaternion.Angle(rotation,orbit.transform.rotation),Is.LessThan(.01f));
+                var p=orbit.transform.position;
+                if(orbit.match.terrainMap.Field.TrySample(p.x,p.z,out ground) ||
+                    orbit.exterior.TrySampleVisualHeight(p.x,p.z,out ground))
+                    Assert.That(p.y,Is.GreaterThanOrEqualTo(ground+orbit.settings.groundClearance-.01f));
+            }
+            yield return null;
+        }
         [UnityTest] public IEnumerator Mouse_RightDragAndWheel_RouteThroughInputSystem()
         {
             var oldFocus=InputSystem.settings.backgroundBehavior;var oldEditor=InputSystem.settings.editorInputBehaviorInPlayMode;
