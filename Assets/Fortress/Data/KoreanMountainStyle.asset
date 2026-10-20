@@ -17,16 +17,18 @@ MonoBehaviour:
   ridgeWidth: 13
   valleyBend: 7
   ridgeWavelength: 65
-  valleyFloor: 0
+  valleyFloor: 4
   detailHeight: 0.55
+  rollingHeight: 3
+  rollingWavelength: 38
   tacticalHills: 1
-  hillHeight: 14
-  hillRadius: 21
+  hillHeight: 16
+  hillRadius: 25
   hillSpacing: 32
   hillJitter: 7
   centralHillScale: 0.75
-  peripheralHillHeight: 7
-  peripheralHillRadius: 17
+  peripheralHillHeight: 9
+  peripheralHillRadius: 21
   peripheralInnerOffset: 40
   peripheralOuterOffset: 62
   roadHalfWidth: 3

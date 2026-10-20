@@ -1,0 +1,17 @@
+using UnityEngine;
+namespace Fortress
+{
+    [CreateAssetMenu(menuName="Fortress/Tank Loadout")]
+    public sealed class TankLoadout : ScriptableObject
+    {
+        public string displayName="MAIN BATTLE";
+        public AmmoDefinition basic, special;
+        [Min(0)] public int specialRounds=3;
+    }
+    public static class BattleLoadoutSelection
+    {
+        public static int Player, Opponent;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void Reset() { Player=0;Opponent=0; }
+    }
+}

@@ -58,16 +58,24 @@ namespace Fortress
                     height=mountain.valleyFloor+mountain.ridgeHeight*ridge*peaks+mountain.detailHeight*(value/weight);
                     if(mountain.tacticalHills) height=TacticalTerrain.Height(wx,wz,seed,mountain,value/weight);
                 }
-                float pad=0;
+                float pad=0,targetPadHeight=padHeight;
                 foreach(var area in spawnAreas)
                 {
                     float dx=Mathf.Max(area.min.x-margin-wx,Mathf.Max(0,wx-area.max.x-margin));
                     float dz=Mathf.Max(area.min.y-margin-wz,Mathf.Max(0,wz-area.max.y-margin));
                     float distance=Mathf.Sqrt(dx*dx+dz*dz);
                     float t=Mathf.Clamp01(distance/settings.spawnPadBlend);
-                    pad=Mathf.Max(pad,1-Smooth(t));
+                    float influence=1-Smooth(t);
+                    if(influence>pad)
+                    {
+                        pad=influence;
+                        targetPadHeight=mountain!=null && mountain.tacticalHills && mountain.rollingHeight>0
+                            ? Mathf.Max(template.WaterHeight+settings.spawnPadClearance,
+                                TacticalTerrain.RoadElevation((area.min.x+area.max.x)*.5f,(area.min.y+area.max.y)*.5f,seed,mountain))
+                            : padHeight;
+                    }
                 }
-                heights[z,x]=Mathf.Max(template.LowerHeight,Mathf.Lerp(height,padHeight,pad));
+                heights[z,x]=Mathf.Max(template.LowerHeight,Mathf.Lerp(height,targetPadHeight,pad));
             }
             return new HeightField(heights,template.Origin,template.Size,template.LowerHeight,template.WaterHeight);
         }

@@ -39,13 +39,13 @@ MonoBehaviour:
   maxMoveStepHeight: 0.65
   mountainTerrain: {fileID: 11400000, guid: bd97f3697b8d6724a95dd4a7ea80ccb1, type: 2}
   randomTerrain: 1
-  terrainBaseHeight: 0
+  terrainBaseHeight: 4
   terrainAmplitude: 4
   terrainNoiseScale: 30
   terrainOctaves: 3
   terrainPersistence: 0.5
   spawnPadMargin: 2
-  spawnPadBlend: 8
+  spawnPadBlend: 12
   spawnPadClearance: 1
   groundHeight: 0
   terrainLowerHeight: -8

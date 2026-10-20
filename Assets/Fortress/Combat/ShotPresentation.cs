@@ -56,7 +56,6 @@ namespace Fortress
         }
         void Impacted(ProjectileRunner runner)
         {
-            if(!shots.LastSolveHit) return;
             if(impactAudio!=null) { impactAudio.transform.position=runner.Position;impactAudio.Play(); }
             if(impactFlash==null) return;
             impactFlash.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);

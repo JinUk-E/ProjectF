@@ -60,16 +60,19 @@ namespace Fortress
         internal float SampleCell(int x, int z, float u, float v) =>
             Mathf.LerpUnclamped(Mathf.LerpUnclamped(heights[z,x], heights[z,x+1], u),
                 Mathf.LerpUnclamped(heights[z+1,x], heights[z+1,x+1], u), v);
-        public RectInt ApplyCrater(Vector3 center, float radius, float depth)
+        public RectInt ApplyCrater(Vector3 center, float radius, float depth, float rimHeight = 0)
         {
             if (IsFrozen) throw new InvalidOperationException("Terrain is frozen until shot completion.");
             if (!(radius > 0) || !(depth > 0) || float.IsInfinity(radius) || float.IsInfinity(depth)) return new RectInt();
+            if (float.IsNaN(center.x) || float.IsInfinity(center.x) || float.IsNaN(center.z) || float.IsInfinity(center.z)) return new RectInt();
+            rimHeight = float.IsNaN(rimHeight) || float.IsInfinity(rimHeight) ? 0 : Mathf.Clamp(rimHeight,0,depth*.25f);
+            float reach = rimHeight > 0 ? radius*1.5f : radius;
             if (center.x + radius < Origin.x || center.x - radius > Origin.x + Size.x ||
                 center.z + radius < Origin.z || center.z - radius > Origin.z + Size.y) return new RectInt();
-            int x0 = Mathf.Clamp(Mathf.FloorToInt((center.x-radius-Origin.x)/CellX), 0, Width-1);
-            int x1 = Mathf.Clamp(Mathf.CeilToInt((center.x+radius-Origin.x)/CellX), 0, Width-1);
-            int z0 = Mathf.Clamp(Mathf.FloorToInt((center.z-radius-Origin.z)/CellZ), 0, Depth-1);
-            int z1 = Mathf.Clamp(Mathf.CeilToInt((center.z+radius-Origin.z)/CellZ), 0, Depth-1);
+            int x0 = Mathf.Clamp(Mathf.FloorToInt((center.x-reach-Origin.x)/CellX), 0, Width-1);
+            int x1 = Mathf.Clamp(Mathf.CeilToInt((center.x+reach-Origin.x)/CellX), 0, Width-1);
+            int z0 = Mathf.Clamp(Mathf.FloorToInt((center.z-reach-Origin.z)/CellZ), 0, Depth-1);
+            int z1 = Mathf.Clamp(Mathf.CeilToInt((center.z+reach-Origin.z)/CellZ), 0, Depth-1);
             bool changed = false;
             for (int z = z0; z <= z1; z++) for (int x = x0; x <= x1; x++)
             {
@@ -80,6 +83,17 @@ namespace Fortress
                 changed |= next != heights[z,x]; heights[z,x] = next;
             }
             if (!changed) return new RectInt();
+            // Deposited earth belongs to the same authoritative surface. Cap against the initial
+            // ground so repeated shelling cannot build an ever-growing ring wall.
+            if(rimHeight>0) for(int z=z0;z<=z1;z++) for(int x=x0;x<=x1;x++)
+            {
+                float dx=Origin.x+x*CellX-center.x,dz=Origin.z+z*CellZ-center.z;
+                float distance=Mathf.Sqrt(dx*dx+dz*dz)/radius;
+                if(distance<=1 || distance>=1.5f || heights[z,x]<=WaterHeight) continue;
+                float t=(distance-1)*2;
+                float deposit=rimHeight*Mathf.Sin(t*Mathf.PI);
+                heights[z,x]=Mathf.Max(heights[z,x],Mathf.Min(heights[z,x]+deposit,originalHeights[z,x]+rimHeight));
+            }
             Revision++;
             return new RectInt(x0,z0,x1-x0+1,z1-z0+1);
         }

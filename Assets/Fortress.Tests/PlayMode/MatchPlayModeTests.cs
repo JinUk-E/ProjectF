@@ -159,6 +159,7 @@ namespace Fortress.Tests
             var controlled=Object.Instantiate(original);
             // Isolate the approved water-loss path without mutating the shared settings asset.
             controlled.explosionDamage=0;controlled.fallDamagePerMeter=0;
+            shots.availableLoadouts=null;shots.ResetLoadouts();
             match.tuning=controlled;shots.tuning=controlled;
             try
             {

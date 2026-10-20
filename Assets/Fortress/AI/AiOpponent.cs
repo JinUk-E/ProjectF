@@ -55,6 +55,15 @@ namespace Fortress
             CancelThinking();
             plannedGeneration=match.Generation;plannedTurn=match.TurnNumber;
             AiTurnNumber=(match.TurnNumber+1)/2;
+            var role=match.shots.ActiveLoadout;
+            if(role!=null)
+            {
+                var special=role.special;
+                bool useful=special!=null && (special.purpose==AmmoPurpose.Cluster ||
+                    (special.purpose==AmmoPurpose.Demolition && match.cover!=null && match.cover.Shields(match.Tanks[1].Center,match.Tanks[0].Center)) ||
+                    (special.purpose==AmmoPurpose.Excavation && match.Tanks[0].GroundHeight-match.terrainMap.Field.WaterHeight<=special.depth*role.specialRounds));
+                match.shots.SelectAmmo(useful && AiTurnNumber%2==0,true);
+            }
             LastPlan=AiShotPlanner.Plan(match.shots,match.Tanks[0].Center,settings,match.Seed,AiTurnNumber);
             RemainingThinkSeconds=Mathf.Clamp(settings.thinkSeconds,1,2);
             IsThinking=true;StateChanged?.Invoke();

@@ -11,6 +11,8 @@ namespace Fortress
         public float ridgeWavelength=65;
         public float valleyFloor=0;
         public float detailHeight=2;
+        [Min(0)] public float rollingHeight;
+        [Min(1)] public float rollingWavelength=45;
         public bool tacticalHills;
         public float hillHeight=14;
         public float hillRadius=21;

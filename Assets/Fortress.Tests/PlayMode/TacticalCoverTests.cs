@@ -62,9 +62,9 @@ namespace Fortress.Tests
         }
         [UnityTest] public IEnumerator Road_CraterChangesGround_AlternateRoadRemainsAndRestartRestores()
         {
-            var map=match.terrainMap.Field;map.TrySample(0,0,out float before);
+            var map=match.terrainMap.Field;map.TrySample(0,0,out float before);map.TrySample(0,22,out float bypassBefore);
             map.ApplyCrater(Vector3.zero,4,2);map.TrySample(0,0,out float after);Assert.That(after,Is.LessThan(before-1));
-            map.TrySample(0,22,out float bypass);Assert.That(bypass,Is.EqualTo(0).Within(.08f));
+            map.TrySample(0,22,out float bypass);Assert.That(bypass,Is.EqualTo(bypassBefore));
             match.RestartMatch(match.Seed);match.terrainMap.Field.TrySample(0,0,out float reset);Assert.That(reset,Is.EqualTo(before));
             yield return null;
         }
@@ -72,6 +72,7 @@ namespace Fortress.Tests
         {
             var original=match.tuning;var testTuning=Object.Instantiate(original);
             match.tuning=match.shots.tuning=testTuning;testTuning.craterRadius=12;testTuning.craterDepth=.1f;testTuning.fallDamagePerMeter=0;
+            match.shots.availableLoadouts=null;match.shots.ResetLoadouts();
             try
             {
                 var b=match.cover.Buildings[0].Bounds;float z=b.center.z;

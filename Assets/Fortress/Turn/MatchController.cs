@@ -7,7 +7,7 @@ namespace Fortress
 {
     public enum MatchState { Aim, Firing, Resolving, Applying, Judging, Ended }
 
-    /// <summary>Hotseat match. Standard shell is the only supported family until scatter is introduced.</summary>
+    /// <summary>Resolves complete shot families in stable impact order against the authoritative terrain.</summary>
     public sealed class MatchController : MonoBehaviour
     {
         public FlatShotController shots;
@@ -27,6 +27,7 @@ namespace Fortress
         public int Generation { get; private set; }
         public TankCombatant[] Tanks { get; private set; }
         public event Action StateChanged;
+        public event Action<Vector3,float> TerrainImpactApplied;
         System.Random windRandom;
         bool initialized, restarting;
         FlatShotController subscribedShots;
@@ -71,13 +72,13 @@ namespace Fortress
             Unsubscribe();
             if(shots==null) return;
             subscribedShots=shots;shots.externalResolution=true;
-            shots.ShotLaunched+=OnLaunched;shots.ShotImpacted+=OnImpacted;
+            shots.ShotLaunched+=OnLaunched;shots.ImpactRecorded+=OnImpacted;
             shots.BeforeResolution+=ApplyImpacts;shots.ShotFinished+=OnFinished;shots.ShotCancelled+=OnCancelled;
         }
         void Unsubscribe()
         {
             if(subscribedShots==null) return;
-            subscribedShots.ShotLaunched-=OnLaunched;subscribedShots.ShotImpacted-=OnImpacted;
+            subscribedShots.ShotLaunched-=OnLaunched;subscribedShots.ImpactRecorded-=OnImpacted;
             subscribedShots.BeforeResolution-=ApplyImpacts;subscribedShots.ShotFinished-=OnFinished;subscribedShots.ShotCancelled-=OnCancelled;
             subscribedShots=null;
         }
@@ -113,6 +114,7 @@ namespace Fortress
             try
             {
                 shots.CancelShot();impacts.Clear();
+                shots.ResetLoadouts();
                 if(candidateTerrain!=null) terrainMap.InstallTerrain(candidateTerrain);else terrainMap.ResetTerrain();
                 if(cover!=null) cover.Install(terrainMap.Field,nextBuildings);
                 shots.tuning=tuning;shots.terrainMap=terrainMap;
@@ -241,9 +243,9 @@ namespace Fortress
         {
             impacts.Clear();SetState(MatchState.Firing);
         }
-        void OnImpacted(ProjectileRunner runner)
+        void OnImpacted(Vector3 position,float time,int index)
         {
-            if(shots.LastSolveHit) impacts.Add(new Impact { position=runner.Position,time=runner.LocalTime,index=0 });
+            impacts.Add(new Impact { position=position,time=time,index=index });
             SetState(MatchState.Resolving);
         }
         void ApplyImpacts()
@@ -251,15 +253,17 @@ namespace Fortress
             if(!initialized || restarting) return;
             SetState(MatchState.Applying);
             impacts.Sort(ImpactOrder);
+            var ammo=shots.CurrentShotDamage;
             foreach(var impact in impacts)
             {
                 // Evaluate shields against the intact world before this blast destroys cover.
                 foreach(var tank in Tanks)
-                    if(cover==null || !cover.Shields(impact.position,tank.Center)) tank.ApplyExplosion(impact.position,tuning.explosionDamage,tuning.craterRadius);
-                if(cover!=null) cover.ApplyExplosion(impact.position,tuning.craterRadius,tuning.explosionDamage);
+                    if(cover==null || !cover.Shields(impact.position,tank.Center)) tank.ApplyExplosion(impact.position,ammo.damage,ammo.radius);
+                if(cover!=null) cover.ApplyExplosion(impact.position,ammo.radius,ammo.buildingDamage);
                 // Projection is vertical: crater modifies the height grid at the impact XZ.
-                var region=terrainMap.Field.ApplyCrater(impact.position,tuning.craterRadius,tuning.craterDepth);
+                var region=terrainMap.Field.ApplyCrater(impact.position,ammo.radius,ammo.depth,ammo.rimHeight);
                 terrainMap.UpdateRegion(region);
+                if(region.width>0 && region.height>0) TerrainImpactApplied?.Invoke(impact.position,ammo.radius);
             }
             impacts.Clear();
             if(cover!=null) cover.SettleFoundations();

@@ -96,9 +96,9 @@ namespace Fortress.Tests
                     Assert.That(sidePeak,Is.GreaterThan(4),"Every outer quadrant needs visible low hill relief.");
                 }
                 foreach(float roadZ in new[]{-22f,0,22f}) for(int x=-26;x<=26;x++)
-                { Assert.That(map.TrySample(x,roadZ,out float h),Is.True);Assert.That(h,Is.EqualTo(0).Within(.08f)); }
+                { Assert.That(map.TrySample(x,roadZ,out float h),Is.True);Assert.That(h,Is.GreaterThan(map.WaterHeight+4));map.TrySample(x+1,roadZ,out float next);Assert.That(Mathf.Abs(next-h),Is.LessThan(.35f),"Connected rolling road must remain driveable."); }
                 foreach(float roadX in new[]{-26f,26f}) for(int z=-22;z<=22;z++)
-                { map.TrySample(roadX,z,out float h);Assert.That(h,Is.EqualTo(0).Within(.08f)); }
+                { map.TrySample(roadX,z,out float h);Assert.That(h,Is.GreaterThan(map.WaterHeight+4));map.TrySample(roadX,z+1,out float next);Assert.That(Mathf.Abs(next-h),Is.LessThan(.35f)); }
             }
             TestContext.WriteLine("Minimum isolated hill relief across 8 seeds: "+lowestRelief+"m");
             yield return null;

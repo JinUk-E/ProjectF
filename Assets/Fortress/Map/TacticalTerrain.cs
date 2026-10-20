@@ -10,6 +10,8 @@ namespace Fortress
             foreach(float v in new[]{s.hillHeight,s.hillRadius,s.hillSpacing,s.roadHalfWidth,s.roadBlend,s.flankRoadOffset,s.roadJunctionX,s.peripheralHillRadius,s.peripheralInnerOffset,s.peripheralOuterOffset})
                 if(float.IsNaN(v)||float.IsInfinity(v)||v<=0) throw new ArgumentException("Tactical terrain dimensions must be finite and positive.");
             if(float.IsNaN(s.hillJitter)||float.IsInfinity(s.hillJitter)||s.hillJitter<0) throw new ArgumentException("Invalid hill jitter.");
+            if(float.IsNaN(s.rollingHeight)||float.IsInfinity(s.rollingHeight)||s.rollingHeight<0 ||
+                !(s.rollingWavelength>=1)||float.IsInfinity(s.rollingWavelength)) throw new ArgumentException("Invalid rolling terrain.");
         }
         public static float Height(float x,float z,int seed,MountainTerrainSettings s,float detail)
         {
@@ -33,9 +35,17 @@ namespace Fortress
                 float d=new Vector2(x-cx,z-cz).magnitude/radius;
                 if(d<1)peak=Mathf.Max(peak,Mathf.Max(0,s.peripheralHillHeight)*(1+.15f*Hash(sx+83,sz+hill,seed))*(.5f+.5f*Mathf.Cos(d*Mathf.PI)));
             }
-            float height=s.valleyFloor+peak+s.detailHeight*detail;
+            float roadHeight=RoadElevation(x,z,seed,s);
+            float height=roadHeight+peak+s.detailHeight*detail;
             float road=Mathf.Clamp01((RoadDistance(x,z,s)-s.roadHalfWidth)/s.roadBlend);
-            return Mathf.Lerp(s.valleyFloor,height,road*road*(3-2*road));
+            return Mathf.Lerp(roadHeight,height,road*road*(3-2*road));
+        }
+        public static float RoadElevation(float x,float z,int seed,MountainTerrainSettings s)
+        {
+            float phase=Hash(119,47,seed)*.65f;
+            // Broad connected undulations keep the road climbable while exposing high and low ground.
+            return s.valleyFloor+s.rollingHeight*(.55f*Mathf.Sin(x/s.rollingWavelength+phase)+
+                .45f*Mathf.Cos(z/s.rollingWavelength-phase));
         }
         public static float RoadDistance(float x,float z,MountainTerrainSettings s)
         {

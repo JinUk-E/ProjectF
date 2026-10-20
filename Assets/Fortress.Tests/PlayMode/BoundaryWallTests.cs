@@ -106,8 +106,9 @@ namespace Fortress.Tests
                 for(int seed=1;seed<=8;seed++)
                 {
                     float x=current.hillSpacing,z=current.hillSpacing;
-                    float before=TacticalTerrain.Height(x,z,seed,baseline,0)-current.valleyFloor;
-                    float after=TacticalTerrain.Height(x,z,seed,current,0)-current.valleyFloor;
+                    float baseHeight=TacticalTerrain.RoadElevation(x,z,seed,current);
+                    float before=TacticalTerrain.Height(x,z,seed,baseline,0)-baseHeight;
+                    float after=TacticalTerrain.Height(x,z,seed,current,0)-baseHeight;
                     Assert.That(after,Is.EqualTo(before*current.centralHillScale).Within(.001f));
                 }
             }
