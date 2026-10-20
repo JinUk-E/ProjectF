@@ -79,7 +79,14 @@ namespace Fortress
                 if(mouse.rightButton.wasReleasedThisFrame || !mouse.rightButton.isPressed) dragging=false;
                 if(dragging && !pressed) Orbit(mouse.delta.ReadValue());
                 float scroll=mouse.scroll.ReadValue().y;
-                if(scroll!=0 && !PointerOverUi()) Zoom(scroll);
+                if(scroll!=0 && !PointerOverUi())
+                {
+                    // Input System now defaults to one unit per notch. Zoom keeps its
+                    // existing 120-unit API for callers using legacy Windows deltas.
+                    bool nativeWindows=InputSystem.settings.scrollDeltaBehavior==InputSettings.ScrollDeltaBehavior.KeepPlatformSpecificInputRange &&
+                        (Application.platform==RuntimePlatform.WindowsEditor || Application.platform==RuntimePlatform.WindowsPlayer);
+                    Zoom(nativeWindows?scroll:scroll*120f);
+                }
             }
             else dragging=false;
             var keyboard=Keyboard.current;

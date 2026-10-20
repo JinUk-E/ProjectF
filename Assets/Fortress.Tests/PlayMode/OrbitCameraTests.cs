@@ -29,7 +29,7 @@ namespace Fortress.Tests
             var before=orbit.transform.position;
             orbit.Orbit(new Vector2(150,50));orbit.ApplyPose();
             Assert.That(Vector3.Distance(before,orbit.transform.position),Is.GreaterThan(1));
-            float distance=orbit.Distance;orbit.Zoom(120);Assert.That(orbit.Distance,Is.LessThan(distance));
+            float distance=orbit.Distance;orbit.Zoom(120);Assert.That(orbit.Distance,Is.EqualTo(distance*Mathf.Exp(-orbit.settings.zoomSpeed)).Within(.01f));
             orbit.Zoom(100000);Assert.That(orbit.Distance,Is.GreaterThanOrEqualTo(orbit.settings.minDistance));
             orbit.Zoom(-100000);Assert.That(orbit.Distance,Is.LessThanOrEqualTo(orbit.settings.maxDistance));
             orbit.Orbit(new Vector2(0,100000));Assert.That(orbit.Pitch,Is.InRange(orbit.settings.minPitch,orbit.settings.maxPitch));
@@ -58,6 +58,8 @@ namespace Fortress.Tests
             var oldFocus=InputSystem.settings.backgroundBehavior;var oldEditor=InputSystem.settings.editorInputBehaviorInPlayMode;
             InputSystem.settings.backgroundBehavior=InputSettings.BackgroundBehavior.IgnoreFocus;
             InputSystem.settings.editorInputBehaviorInPlayMode=InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
+            var oldScroll=InputSystem.settings.scrollDeltaBehavior;
+            InputSystem.settings.scrollDeltaBehavior=InputSettings.ScrollDeltaBehavior.UniformAcrossAllPlatforms;
             var mouse=InputSystem.AddDevice<Mouse>();
             orbit.SendMessage("OnApplicationFocus",true);
             try
@@ -66,15 +68,28 @@ namespace Fortress.Tests
                 InputSystem.QueueStateEvent(mouse,state);yield return null;yield return null;
                 float yaw=orbit.Yaw,distance=orbit.Distance;
                 InputSystem.QueueDeltaStateEvent(mouse.delta,new Vector2(120,0));
-                InputSystem.QueueDeltaStateEvent(mouse.scroll,new Vector2(0,120));
+                InputSystem.QueueDeltaStateEvent(mouse.scroll,new Vector2(0,1));
                 yield return null;yield return null;
                 Assert.That(Mathf.Abs(Mathf.DeltaAngle(yaw,orbit.Yaw)),Is.GreaterThan(1));
-                Assert.That(orbit.Distance,Is.LessThan(distance));
+                Assert.That(orbit.Distance,Is.EqualTo(distance*Mathf.Exp(-orbit.settings.zoomSpeed)).Within(.01f));
+                InputSystem.QueueDeltaStateEvent(mouse.scroll,new Vector2(0,-1));
+                yield return null;yield return null;
+                Assert.That(orbit.Distance,Is.EqualTo(distance).Within(.01f));
+                // Fractional/high-resolution scrolling must keep its magnitude.
+                InputSystem.QueueDeltaStateEvent(mouse.scroll,new Vector2(0,.5f));
+                yield return null;yield return null;
+                Assert.That(orbit.Distance,Is.EqualTo(distance*Mathf.Exp(-.5f*orbit.settings.zoomSpeed)).Within(.01f));
+                distance=orbit.Distance;
+                InputSystem.settings.scrollDeltaBehavior=InputSettings.ScrollDeltaBehavior.KeepPlatformSpecificInputRange;
+                bool windows=Application.platform==RuntimePlatform.WindowsEditor || Application.platform==RuntimePlatform.WindowsPlayer;
+                InputSystem.QueueDeltaStateEvent(mouse.scroll,new Vector2(0,windows?120:1));
+                yield return null;yield return null;
+                Assert.That(orbit.Distance,Is.EqualTo(distance*Mathf.Exp(-orbit.settings.zoomSpeed)).Within(.01f));
                 orbit.SendMessage("OnApplicationFocus",false);Assert.That(orbit.IsDragging,Is.False);
             }
             finally
             {
-                InputSystem.RemoveDevice(mouse);InputSystem.settings.backgroundBehavior=oldFocus;InputSystem.settings.editorInputBehaviorInPlayMode=oldEditor;
+                InputSystem.settings.scrollDeltaBehavior=oldScroll;InputSystem.RemoveDevice(mouse);InputSystem.settings.backgroundBehavior=oldFocus;InputSystem.settings.editorInputBehaviorInPlayMode=oldEditor;
             }
         }
     }
