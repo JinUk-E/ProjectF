@@ -76,15 +76,16 @@ namespace Fortress.Editor
             menu.primaryButton=Button(detail,"Deploy",32,680,386,86,"AI 대전 출격   >",menu.StartAi,true);
             Button(detail,"Local duel",32,784,386,68,"로컬 2인 대전",menu.StartLocal,false);
             Label(detail,"Offline note",32,872,386,30,"같은 PC에서 번갈아 조작합니다",17,Muted);
-            picker.playerCards=new Button[4];picker.cardBorders=new Image[4];picker.selectionMarkers=new GameObject[4];
-            for(int i=0;i<4;i++)
+            int roleCount=picker.roles.Length;float cardWidth=(1232-18*(roleCount-1))/roleCount;
+            picker.playerCards=new Button[roleCount];picker.cardBorders=new Image[roleCount];picker.selectionMarkers=new GameObject[roleCount];
+            for(int i=0;i<picker.roles.Length;i++)
             {
-                float x=76+i*310;var role=picker.roles[i];var card=Box(root,"Tank card "+i,x,804,292,180,Line);picker.cardBorders[i]=card.GetComponent<Image>();
-                var face=Box(card,"Choose tank",2,2,288,176,Panel);face.GetComponent<Image>().raycastTarget=true;
+                float x=76+i*(cardWidth+18);var role=picker.roles[i];var card=Box(root,"Tank card "+i,x,804,cardWidth,180,Line);picker.cardBorders[i]=card.GetComponent<Image>();
+                var face=Box(card,"Choose tank",2,2,cardWidth-4,176,Panel);face.GetComponent<Image>().raycastTarget=true;
                 var button=face.gameObject.AddComponent<Button>();button.targetGraphic=face.GetComponent<Image>();picker.playerCards[i]=button;UnityEventTools.AddIntPersistentListener(button.onClick,picker.SelectPlayer,i);
-                var portrait=Box(face,"Portrait",10,6,268,112,Color.white).GetComponent<Image>();portrait.sprite=role.appearance.portrait;portrait.preserveAspect=true;
-                Label(face,"Name",18,122,260,32,KoreanUi.RoleName(role),23,Text);
-                var marker=Box(face,"Selected",238,144,32,4,Accent);picker.selectionMarkers[i]=marker.gameObject;
+                var portrait=Box(face,"Portrait",10,6,cardWidth-24,112,Color.white).GetComponent<Image>();portrait.sprite=role.appearance.portrait;portrait.preserveAspect=true;
+                Label(face,"Name",18,122,cardWidth-36,32,KoreanUi.RoleName(role),23,Text);
+                var marker=Box(face,"Selected",cardWidth-54,144,32,4,Accent);picker.selectionMarkers[i]=marker.gameObject;
             }
             // The large model is the hero preview; keep the sprite binding for existing menu clients.
             var bound=Box(picker.transform,"Selected portrait binding",0,0,0,0,Color.clear).GetComponent<Image>();picker.selectedPortrait=bound;
@@ -95,13 +96,13 @@ namespace Fortress.Editor
             LocalizeOverlays(menu);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
         }
         static IEnumerable<Transform> Children(Transform root) {for(int i=0;i<root.childCount;i++)yield return root.GetChild(i);}
-        static TankLoadout[] Roles() {var result=new TankLoadout[4];var names=new[]{"Main","Siege","Excavator","Support"};for(int i=0;i<4;i++)result[i]=AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_"+names[i]+".asset");return result;}
+        static TankLoadout[] Roles() {var names=new[]{"Main","Siege","Excavator","Support","Heavy"};var result=new TankLoadout[names.Length];for(int i=0;i<names.Length;i++)result[i]=AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_"+names[i]+".asset");return result;}
         static void Hangar(LoadoutMenu picker)
         {
             var camera=Camera.main;camera.backgroundColor=Ink;camera.rect=new Rect(0,0,1,1);camera.fieldOfView=34;
             camera.transform.position=new Vector3(9,5.2f,12);camera.transform.LookAt(new Vector3(-1.8f,.2f,0));
-            var root=new GameObject("Hangar showroom");var preview=root.AddComponent<HangarTankPreview>();preview.models=new GameObject[4];
-            for(int i=0;i<4;i++)
+            var root=new GameObject("Hangar showroom");var preview=root.AddComponent<HangarTankPreview>();preview.models=new GameObject[picker.roles.Length];
+            for(int i=0;i<picker.roles.Length;i++)
             {
                 var tank=new GameObject("Showroom "+i);tank.transform.SetParent(root.transform,false);preview.models[i]=tank;
                 foreach(var piece in picker.roles[i].appearance.pieces)

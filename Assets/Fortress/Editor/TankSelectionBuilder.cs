@@ -29,26 +29,27 @@ namespace Fortress.Editor
                 AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_Main.asset"),
                 AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_Siege.asset"),
                 AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_Excavator.asset"),
-                AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_Support.asset")};
+                AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_Support.asset"),AssetDatabase.LoadAssetAtPath<TankLoadout>("Assets/Fortress/Data/Role_Heavy.asset")};
             Label(panel,28,20,760,32,"01 / CHOOSE YOUR TANK",20,Accent);
             picker.playerLabel=Label(panel,28,62,760,48,"",36,Text);
             var portrait=Box(panel,"Selected tank portrait",28,116,764,274,Color.white).GetComponent<Image>();
             portrait.preserveAspect=true;picker.selectedPortrait=portrait;
             picker.roleDescription=Label(panel,28,402,764,50,"",22,Text);
             picker.ammunitionLabel=Label(panel,28,458,764,30,"",18,Accent);
-            picker.playerCards=new Button[4];picker.cardBorders=new Image[4];picker.selectionMarkers=new GameObject[4];
-            for(int i=0;i<4;i++)
+            int count=picker.roles.Length;float width=(764-12*(count-1))/count;
+            picker.playerCards=new Button[count];picker.cardBorders=new Image[count];picker.selectionMarkers=new GameObject[count];
+            for(int i=0;i<count;i++)
             {
-                var role=picker.roles[i];float x=28+i*194;
-                var border=Box(panel,"Tank card "+i,x,510,182,152,picker.idleColor);picker.cardBorders[i]=border.GetComponent<Image>();
-                var card=Box(border,"Choose "+role.displayName,2,2,178,148,new Color(.075f,.115f,.095f));
+                var role=picker.roles[i];float x=28+i*(width+12);
+                var border=Box(panel,"Tank card "+i,x,510,width,152,picker.idleColor);picker.cardBorders[i]=border.GetComponent<Image>();
+                var card=Box(border,"Choose "+role.displayName,2,2,width-4,148,new Color(.075f,.115f,.095f));
                 var image=card.GetComponent<Image>();image.raycastTarget=true;
                 var button=card.gameObject.AddComponent<Button>();button.targetGraphic=image;picker.playerCards[i]=button;
                 UnityEventTools.AddIntPersistentListener(button.onClick,picker.SelectPlayer,i);
-                var thumbnail=Box(card,"Portrait",4,8,170,88,Color.white).GetComponent<Image>();thumbnail.preserveAspect=true;
+                var thumbnail=Box(card,"Portrait",4,8,width-12,88,Color.white).GetComponent<Image>();thumbnail.preserveAspect=true;
                 thumbnail.sprite=role.appearance!=null?role.appearance.portrait:null;thumbnail.enabled=thumbnail.sprite!=null;
-                var caption=Label(card,6,95,166,25,role.displayName,17,Text);caption.alignment=TextAlignmentOptions.Center;
-                var selected=Label(card,6,122,166,22,"SELECTED",14,Accent);selected.alignment=TextAlignmentOptions.Center;picker.selectionMarkers[i]=selected.gameObject;
+                var caption=Label(card,6,95,width-16,25,role.displayName,17,Text);caption.alignment=TextAlignmentOptions.Center;
+                var selected=Label(card,6,122,width-16,22,"SELECTED",14,Accent);selected.alignment=TextAlignmentOptions.Center;picker.selectionMarkers[i]=selected.gameObject;
             }
             var opponent=Box(panel,"Opponent selection",28,684,764,80,new Color(.11f,.16f,.13f));
             opponent.GetComponent<Image>().raycastTarget=true;

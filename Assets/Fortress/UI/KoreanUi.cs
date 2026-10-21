@@ -12,6 +12,7 @@ namespace Fortress
                 case "SIEGE": return "공성 전차";
                 case "EXCAVATOR": return "굴착 전차";
                 case "SUPPORT": return "지원 자주포";
+                case "HEAVY": return "중장갑 전차";
                 default: return role.displayName;
             }
         }
@@ -24,6 +25,7 @@ namespace Fortress
                 case "SIEGE": return "파쇄탄으로 건물과 엄폐물을\n무너뜨리는 공성 전차";
                 case "EXCAVATOR": return "굴착탄으로 지형을 파괴해\n적의 이동을 제한하는 전차";
                 case "SUPPORT": return "클러스터탄을 넓게 흩뿌려\n적을 견제하는 지원 자주포";
+                case "HEAVY": return "주력 전차와 성능은 동일한\n중장갑 외형 파생형";
                 default: return role.appearance!=null?role.appearance.description:"";
             }
         }

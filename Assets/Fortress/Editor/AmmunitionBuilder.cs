@@ -29,6 +29,8 @@ namespace Fortress.Editor
             var shatter=Ammo("Ammo_Shatter","SHATTER",AmmoPurpose.Demolition,standard,18,90,3,.3f,.1f);
             var cluster=Ammo("Ammo_Cluster","CLUSTER",AmmoPurpose.Cluster,carrier,9,9,1.5f,.18f,.08f);
             var roles=new[]{Role("Role_Main","MAIN BATTLE",he,null,0),Role("Role_Siege","SIEGE",he,shatter,3),Role("Role_Excavator","EXCAVATOR",he,drill,3),Role("Role_Support","SUPPORT",he,cluster,2)};
+            var heavy=AssetDatabase.LoadAssetAtPath<TankLoadout>(Data+"Role_Heavy.asset");
+            if(heavy!=null) { System.Array.Resize(ref roles,roles.Length+1);roles[roles.Length-1]=heavy; }
             foreach(var path in new[]{SessionMenu.AiScene,SessionMenu.LocalScene})
             {
                 var scene=EditorSceneManager.OpenScene(path);

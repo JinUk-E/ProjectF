@@ -31,11 +31,11 @@ namespace Fortress.Tests
         {
             var picker=Object.FindFirstObjectByType<LoadoutMenu>();
             var preview=Object.FindFirstObjectByType<HangarTankPreview>();
-            Assert.That(preview,Is.Not.Null);Assert.That(preview.models.Length,Is.EqualTo(4));
-            for(int i=0;i<4;i++)
+            Assert.That(preview,Is.Not.Null);Assert.That(preview.models.Length,Is.EqualTo(picker.roles.Length));
+            for(int i=0;i<picker.roles.Length;i++)
             {
                 picker.playerCards[i].onClick.Invoke();yield return null;
-                for(int j=0;j<4;j++)
+                for(int j=0;j<picker.roles.Length;j++)
                 {
                     Assert.That(preview.models[j],Is.Not.Null);
                     Assert.That(preview.models[j].activeSelf,Is.EqualTo(i==j),"Showroom model "+j);
