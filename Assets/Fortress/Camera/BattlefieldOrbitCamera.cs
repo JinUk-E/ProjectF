@@ -17,9 +17,11 @@ namespace Fortress
         public float Pitch { get; private set; }
         public float Distance { get; private set; }
         public bool IsDragging => dragging;
+        public bool CinematicOverride { get; private set; }
+        public void SetCinematicOverride(bool active) { CinematicOverride=active;if(active) dragging=false; }
         Transform cameraTransform;
         bool initialized,dragging,hasFocus=true;
-        bool Suspended => match!=null && match.shots!=null && match.shots.GameplaySuspended;
+        bool Suspended => CinematicOverride || (match!=null && match.shots!=null && match.shots.GameplaySuspended);
         void Awake() { cameraTransform=transform;Initialize(); }
         public void Initialize()
         {
@@ -97,7 +99,7 @@ namespace Fortress
         void OnDisable() { dragging=false; }
         public void ApplyPose()
         {
-            if(!initialized || settings==null) return;
+            if(!initialized || settings==null || CinematicOverride) return;
             float clearance=Mathf.Max(0,settings.groundClearance);
             // A generated hill may be above the scene's original focus point.
             // Keep that point above the ground instead of amplifying its height error

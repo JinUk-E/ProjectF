@@ -1,0 +1,82 @@
+{
+  "actor": "main-codex",
+  "date": "2026-10-24",
+  "summary": {
+    "total": 17,
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 22.1969301,
+    "resultState": "Passed"
+  },
+  "tests": [
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.FocusAndTurn_RespectManualViewAndStayAboveTerrain",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Mouse_RightDragAndWheel_RouteThroughInputSystem",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Orbit_RotatesZoomsClampsAndDoesNotChangeAim",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.OrbitCameraTests.Zoom_ChangesActualDistanceWithoutTilting_OnGeneratedTerrain",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ProjectileFollowCameraTests.CancelRestartAndDisable_RestoreAndReleaseCameraOwnership",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ProjectileFollowCameraTests.Cluster_FramesWholeFamily_AndWaitsForLastChild",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ProjectileFollowCameraTests.EarlyImpactAndMissTimeout_BothFinishWithoutCameraLock",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ProjectileFollowCameraTests.NewShotDuringReturn_PreservesOriginalUserView",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ProjectileFollowCameraTests.Pause_FreezesFlightHoldAndReturnPresentation",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ProjectileFollowCameraTests.SingleShot_FollowsVisibleShell_ThenRestoresManualPoseAndFov",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.ProjectileFollowCameraTests.TrackingAndReturning_NeverPlaceCameraBelowTerrainOrExterior",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+      "state": "Passed"
+    },
+    {
+      "test": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+      "state": "Passed"
+    }
+  ]
+}
