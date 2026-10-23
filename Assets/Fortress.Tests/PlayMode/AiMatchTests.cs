@@ -14,18 +14,26 @@ namespace Fortress.Tests
 {
     public sealed class AiMatchTests
     {
-        MatchController match;AiOpponent ai;FlatShotController shots;
+        MatchController match;AiOpponent ai;FlatShotController shots;ProjectileFollowCamera shotCamera;
         [UnitySetUp] public IEnumerator Load()
         {
             EditorSceneManager.LoadSceneInPlayMode("Assets/Fortress/Scenes/MilitaryAI.unity",new LoadSceneParameters(LoadSceneMode.Single));
             yield return null;
             ai=Object.FindAnyObjectByType<AiOpponent>();match=ai.match;shots=match.shots;
+            shotCamera=Object.FindAnyObjectByType<ProjectileFollowCamera>();
         }
         [UnityTearDown] public IEnumerator Unload()
         {
+            Time.timeScale=1;
             if(shots!=null) shots.CancelShot();
             var scene=SceneManager.GetActiveScene();SceneManager.SetActiveScene(SceneManager.CreateScene("AiCleanup"));
             yield return SceneManager.UnloadSceneAsync(scene);
+        }
+        void FinishPresentation()
+        {
+            Assert.That(shotCamera,Is.Not.Null);
+            shotCamera.TickPresentation(10);shotCamera.TickPresentation(10);
+            Assert.That(shotCamera.IsTracking,Is.False);
         }
         void FinishHumanShot()
         {
@@ -55,7 +63,7 @@ namespace Fortress.Tests
                 Assert.That(shots.ActiveTank.Yaw,Is.EqualTo(yaw));Assert.That(shots.ActiveTank.Pitch,Is.EqualTo(pitch));Assert.That(shots.Power,Is.EqualTo(power));
             }
             finally { InputSystem.RemoveDevice(keyboard);InputSystem.settings.backgroundBehavior=focus;InputSystem.settings.editorInputBehaviorInPlayMode=editor; }
-            ai.TickThinking(2);
+            FinishPresentation();ai.TickThinking(2);
             Assert.That(shots.IsFiring,Is.True);Assert.That(ai.IsThinking,Is.False);
             var runner=shots.ActiveRunner;ai.TickThinking(100);Assert.That(shots.ActiveRunner,Is.SameAs(runner));
             runner.Tick(shots.tuning.maxFlightTime+1);
@@ -70,9 +78,39 @@ namespace Fortress.Tests
             Assert.That(shots.IsFiring,Is.False);Assert.That(ai.IsThinking,Is.False);
             ai.enabled=true;
             Assert.That(ai.IsThinking,Is.True);
-            ai.TickThinking(2);Assert.That(shots.IsFiring,Is.True);
+            FinishPresentation();ai.TickThinking(2);Assert.That(shots.IsFiring,Is.True);
             match.RestartMatch(seed);ai.TickThinking(100);
             Assert.That(shots.IsFiring,Is.False);Assert.That(ai.IsThinking,Is.False);
+            yield return null;
+        }
+        [UnityTest] public IEnumerator Ai_WaitsForImpactAndReturn_ThenGetsFullThinkingDelay()
+        {
+            FinishHumanShot();
+            float delay=ai.RemainingThinkSeconds;
+            Assert.That(delay,Is.InRange(1.5f,2f));
+            Assert.That(shotCamera.Phase,Is.EqualTo(ProjectileFollowCamera.ViewPhase.ImpactHold));
+            ai.TickThinking(100);
+            Assert.That(ai.RemainingThinkSeconds,Is.EqualTo(delay));Assert.That(shots.IsFiring,Is.False);
+            shotCamera.TickPresentation(shotCamera.settings.impactHoldSeconds+.01f);
+            Assert.That(shotCamera.Phase,Is.EqualTo(ProjectileFollowCamera.ViewPhase.Returning));
+            ai.TickThinking(100);
+            Assert.That(ai.RemainingThinkSeconds,Is.EqualTo(delay));Assert.That(shots.IsFiring,Is.False);
+            shotCamera.TickPresentation(shotCamera.settings.returnSeconds+.01f);
+            Assert.That(shotCamera.IsTracking,Is.False);
+            ai.TickThinking(delay-.1f);Assert.That(shots.IsFiring,Is.False);
+            ai.TickThinking(.11f);Assert.That(shots.IsFiring,Is.True);
+            yield return null;
+        }
+        [UnityTest] public IEnumerator Ai_PausedAfterReturn_PreservesDelay_AndDisabledCameraDoesNotLockTurn()
+        {
+            FinishHumanShot();FinishPresentation();
+            float delay=ai.RemainingThinkSeconds;
+            Time.timeScale=0;ai.TickThinking(100);
+            Assert.That(ai.RemainingThinkSeconds,Is.EqualTo(delay));Assert.That(shots.IsFiring,Is.False);
+            Time.timeScale=1;ai.TickThinking(delay-.1f);Assert.That(shots.IsFiring,Is.False);
+            match.RestartMatch(match.Seed);
+            FinishHumanShot();shotCamera.enabled=false;
+            ai.TickThinking(2);Assert.That(shots.IsFiring,Is.True);
             yield return null;
         }
         [UnityTest] public IEnumerator Planner_DeterministicBudgetedAndDoesNotMoveLiveRig()
@@ -97,7 +135,7 @@ namespace Fortress.Tests
             Action restart=null;
             restart=()=>{ shots.StateChanged-=restart;match.RestartMatch(match.Seed); };
             shots.StateChanged+=restart;
-            try { ai.TickThinking(2); }
+            try { FinishPresentation();ai.TickThinking(2); }
             finally { shots.StateChanged-=restart; }
             Assert.That(match.ActivePlayerIndex,Is.Zero);
             Assert.That(match.State,Is.EqualTo(MatchState.Aim));
@@ -118,7 +156,7 @@ namespace Fortress.Tests
                         var plan=AiShotPlanner.Plan(shots,match.Tanks[1].Center,precise,match.Seed,1);
                         shots.SetAim(plan.Yaw,plan.Pitch,plan.Power);Assert.That(shots.TryFire(),Is.True);
                     }
-                    else { Assert.That(ai.IsThinking,Is.True);ai.TickThinking(2);Assert.That(shots.IsFiring,Is.True); }
+                    else { Assert.That(ai.IsThinking,Is.True);FinishPresentation();ai.TickThinking(2);Assert.That(shots.IsFiring,Is.True); }
                     shots.ActiveRunner.Tick(shots.tuning.maxFlightTime+1);count++;
                     yield return null;
                 }

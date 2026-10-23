@@ -14,16 +14,25 @@ namespace Fortress
         public event Action StateChanged;
         public bool OwnsCurrentTurn => isActiveAndEnabled && match!=null && match.isActiveAndEnabled && match.ActivePlayerIndex==1;
         MatchController subscribedMatch;
+        ProjectileFollowCamera shotCamera;
         int plannedGeneration,plannedTurn;
         int observedGeneration = int.MinValue;
         bool dispatching, deferredPlanning;
+        void Awake() { CacheCamera(); }
         void OnEnable() { Subscribe(); HandleMatchState(); }
         void Start() { Subscribe(); HandleMatchState(); }
         void OnDisable() { Unsubscribe();CancelThinking(); }
         public void Configure(MatchController target,AiSettings difficulty)
         {
-            Unsubscribe();CancelThinking();match=target;settings=difficulty;
+            Unsubscribe();CancelThinking();match=target;settings=difficulty;CacheCamera();
             if(isActiveAndEnabled) { Subscribe();HandleMatchState(); }
+        }
+        void CacheCamera()
+        {
+            shotCamera=null;
+            if(match==null) return;
+            foreach(var candidate in FindObjectsByType<ProjectileFollowCamera>(FindObjectsSortMode.None))
+                if(candidate.shots==match.shots) { shotCamera=candidate;break; }
         }
         void Subscribe()
         {
@@ -80,6 +89,9 @@ namespace Fortress
             if(!IsThinking) return;
             if(!OwnsCurrentTurn || match.State!=MatchState.Aim || plannedGeneration!=match.Generation || plannedTurn!=match.TurnNumber)
             { CancelThinking();return; }
+            // Impact observation and the return movement must finish before the full thinking delay.
+            // Match enters Aim before that presentation ends; spending the delay there causes back-to-back pans.
+            if(Time.timeScale<=0 || (shotCamera!=null && shotCamera.isActiveAndEnabled && shotCamera.IsTracking)) return;
             if(float.IsNaN(deltaTime) || float.IsInfinity(deltaTime) || deltaTime<0) return;
             RemainingThinkSeconds=Mathf.Max(0,RemainingThinkSeconds-deltaTime);
             if(RemainingThinkSeconds>0) return;
