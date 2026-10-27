@@ -1,0 +1,113 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "3ea5fc0062674c32adffc1d7d2bdc6b0",
+    "status": "succeeded",
+    "mode": "PlayMode",
+    "started_unix_ms": 1793106710787,
+    "finished_unix_ms": 1793106773028,
+    "last_update_unix_ms": 1793106773028,
+    "progress": {
+      "completed": 8,
+      "total": 8,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1793106771019,
+      "last_finished_test_full_name": "Fortress.Tests.AiMatchTests.Planner_DeterministicBudgetedAndDoesNotMoveLiveRig",
+      "last_finished_unix_ms": 1793106773012,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 8,
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 56.1338513,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "Ai_PausedAfterReturn_PreservesDelay_AndDisabledCameraDoesNotLockTurn",
+          "fullName": "Fortress.Tests.AiMatchTests.Ai_PausedAfterReturn_PreservesDelay_AndDisabledCameraDoesNotLockTurn",
+          "state": "Passed",
+          "durationSeconds": 3.1106774,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Ai_RestartInsideAimEvent_DoesNotFireIntoNewMatch",
+          "fullName": "Fortress.Tests.AiMatchTests.Ai_RestartInsideAimEvent_DoesNotFireIntoNewMatch",
+          "state": "Passed",
+          "durationSeconds": 3.5931049,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Ai_RestartSameSeedAndDisable_CancelPendingFire",
+          "fullName": "Fortress.Tests.AiMatchTests.Ai_RestartSameSeedAndDisable_CancelPendingFire",
+          "state": "Passed",
+          "durationSeconds": 3.1239328,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Ai_ThinksBlocksKeyboardFiresOnceAndReturnsHumanTurn",
+          "fullName": "Fortress.Tests.AiMatchTests.Ai_ThinksBlocksKeyboardFiresOnceAndReturnsHumanTurn",
+          "state": "Passed",
+          "durationSeconds": 3.5763393,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Ai_WaitsForImpactAndReturn_ThenGetsFullThinkingDelay",
+          "fullName": "Fortress.Tests.AiMatchTests.Ai_WaitsForImpactAndReturn_ThenGetsFullThinkingDelay",
+          "state": "Passed",
+          "durationSeconds": 2.1436704,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AiMatch_FullHealthCompletesAndResultRestartResetsAi",
+          "fullName": "Fortress.Tests.AiMatchTests.AiMatch_FullHealthCompletesAndResultRestartResetsAi",
+          "state": "Passed",
+          "durationSeconds": 4.312841,
+          "message": null,
+          "stackTrace": null,
+          "output": "AI match finished after 9 shots; winner=0\r\n"
+        },
+        {
+          "name": "EasyAi_RetainsLateTurnError_AndIsLessAccurateThanNormal",
+          "fullName": "Fortress.Tests.AiMatchTests.EasyAi_RetainsLateTurnError_AndIsLessAccurateThanNormal",
+          "state": "Passed",
+          "durationSeconds": 34.1746956,
+          "message": null,
+          "stackTrace": null,
+          "output": "Easy mountain calibration: first=14.768781401217m third=12.7553091645241m late=11.6341509073973m versus Normal late=1.00000003632158m fallback=0\r\n"
+        },
+        {
+          "name": "Planner_DeterministicBudgetedAndDoesNotMoveLiveRig",
+          "fullName": "Fortress.Tests.AiMatchTests.Planner_DeterministicBudgetedAndDoesNotMoveLiveRig",
+          "state": "Passed",
+          "durationSeconds": 1.9932125,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}
