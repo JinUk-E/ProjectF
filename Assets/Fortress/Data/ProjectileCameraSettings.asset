@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d84c6e76620cd4c8dbd1bddcc2fe93, type: 3}
   m_Name: ProjectileCameraSettings
   m_EditorClassIdentifier: Fortress::Fortress.ProjectileCameraSettings
+  casualPresentation: 1
+  wideResponse: 2.5
+  wideMinDistance: 32
+  wideHeight: 24
+  wideSamples: 48
+  wideMissSeconds: 4
   chaseDistance: 11
   chaseHeight: 4
   sideOffset: 3

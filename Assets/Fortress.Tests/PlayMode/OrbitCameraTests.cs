@@ -13,15 +13,18 @@ namespace Fortress.Tests
     public sealed class OrbitCameraTests
     {
         BattlefieldOrbitCamera orbit;
+        OrbitCameraSettings runtimeSettings;
         [UnitySetUp] public IEnumerator Load()
         {
             EditorSceneManager.LoadSceneInPlayMode("Assets/Fortress/Scenes/MilitaryAI.unity",new LoadSceneParameters(LoadSceneMode.Single));
             yield return null;orbit=Object.FindAnyObjectByType<BattlefieldOrbitCamera>();Assert.That(orbit,Is.Not.Null);
+            runtimeSettings=Object.Instantiate(orbit.settings);runtimeSettings.casualPresentation=false;orbit.settings=runtimeSettings;
         }
         [UnityTearDown] public IEnumerator Unload()
         {
             orbit.match.shots.CancelShot();var scene=SceneManager.GetActiveScene();SceneManager.SetActiveScene(SceneManager.CreateScene("CameraCleanup"));
             yield return SceneManager.UnloadSceneAsync(scene);
+            Object.Destroy(runtimeSettings);
         }
         [UnityTest] public IEnumerator Orbit_RotatesZoomsClampsAndDoesNotChangeAim()
         {

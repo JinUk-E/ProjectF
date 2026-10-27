@@ -13,6 +13,7 @@ namespace Fortress.Tests
     public sealed class ProjectileFollowCameraTests
     {
         MatchController match;FlatShotController shots;BattlefieldOrbitCamera orbit;ProjectileFollowCamera follow;Camera camera;
+        ProjectileCameraSettings cameraSettings;OrbitCameraSettings orbitSettings;
         [UnitySetUp] public IEnumerator Load()
         {
             BattleLoadoutSelection.Player=BattleLoadoutSelection.Opponent=0;
@@ -20,6 +21,8 @@ namespace Fortress.Tests
             match=Object.FindFirstObjectByType<MatchController>();shots=match.shots;camera=Camera.main;
             orbit=camera.GetComponent<BattlefieldOrbitCamera>();follow=camera.GetComponent<ProjectileFollowCamera>();
             Assert.That(follow,Is.Not.Null,"Saved battle scenes must install the projectile camera.");Assert.That(follow.settings,Is.Not.Null);
+            cameraSettings=Object.Instantiate(follow.settings);cameraSettings.casualPresentation=false;follow.settings=cameraSettings;
+            orbitSettings=Object.Instantiate(orbit.settings);orbitSettings.casualPresentation=false;orbit.settings=orbitSettings;
             Time.timeScale=1;AudioListener.pause=false;
         }
         [UnityTearDown] public IEnumerator Cleanup()
@@ -27,6 +30,7 @@ namespace Fortress.Tests
             if(shots!=null) shots.CancelShot();if(follow!=null) follow.RestoreImmediate();Time.timeScale=1;AudioListener.pause=false;
             BattleLoadoutSelection.Player=BattleLoadoutSelection.Opponent=0;
             var scene=SceneManager.GetActiveScene();SceneManager.SetActiveScene(SceneManager.CreateScene("FollowCameraCleanup"));yield return SceneManager.UnloadSceneAsync(scene);
+            Object.Destroy(cameraSettings);Object.Destroy(orbitSettings);
         }
         ProjectileRunner Fire()
         {

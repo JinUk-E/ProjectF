@@ -3,7 +3,7 @@ using UnityProjectile;
 
 namespace Fortress
 {
-    /// <summary>Wind-free partial trajectory only; depth styling adds no solved impact information.</summary>
+    /// <summary>Legacy partial arc or opt-in wind-aware aiming and first-impact guide.</summary>
     public sealed class DashedAimPreview : MonoBehaviour
     {
         public FlatShotController controller;
@@ -12,6 +12,13 @@ namespace Fortress
         LineRenderer[] lines,outlines,occluded,arrows,arrowOutlines,arrowOccluded;
         bool styled;
         int directionEvery;
+        LineRenderer impactGuide,impactOutline;
+        bool lastAllowed;
+        public bool ImpactGuideVisible => impactGuide!=null && impactGuide.enabled;
+        public Vector3 ImpactGuidePosition { get; private set; }
+        bool Allowed => controller!=null && !controller.IsFiring && controller.InputEnabled && !controller.GameplaySuspended && Time.timeScale>0 &&
+            !(controller.ai!=null && controller.ai.OwnsCurrentTurn);
+        void Update() { bool allowed=Allowed;if(allowed!=lastAllowed) Refresh(); }
         public void Bind(FlatShotController target,Material material)
         {
             if(controller!=null) controller.StateChanged-=Refresh;
@@ -22,10 +29,11 @@ namespace Fortress
         void OnEnable() { if(controller!=null) controller.StateChanged+=Refresh;if(lines!=null) Refresh(); }
         void Start() { Refresh(); }
         void OnDisable() { if(controller!=null) controller.StateChanged-=Refresh;HideAll(); }
-        void HideAll() { SetHidden(lines);SetHidden(outlines);SetHidden(occluded);SetHidden(arrows);SetHidden(arrowOutlines);SetHidden(arrowOccluded); }
+        void HideAll() { SetHidden(lines);SetHidden(outlines);SetHidden(occluded);SetHidden(arrows);SetHidden(arrowOutlines);SetHidden(arrowOccluded);if(impactGuide!=null)impactGuide.enabled=false;if(impactOutline!=null)impactOutline.enabled=false; }
         static void SetHidden(LineRenderer[] group) { if(group!=null) foreach(var line in group) if(line!=null)line.enabled=false; }
         public void Refresh()
         {
+            lastAllowed=Allowed;
             if(controller==null || controller.tuning==null || controller.ActiveTank==null || controller.ActiveTank.Muzzle==null)
             { HideAll();return; }
             var settings=controller.tuning;
@@ -33,9 +41,12 @@ namespace Fortress
             int every=style!=null?Mathf.Clamp(style.directionEvery,2,32):0;
             if(lines==null || lines.Length!=count || styled!=(style!=null) || every!=directionEvery) Rebuild(count,every);
             var muzzle=controller.ActiveTank.Muzzle;
-            var shot=new ArtilleryShot(muzzle.position,muzzle.forward,controller.Power,settings.gravity,Vector3.zero);
+            bool windAware=style!=null && style.windAwarePreview;
+            var shot=new ArtilleryShot(muzzle.position,muzzle.forward,controller.Power,settings.gravity,windAware?controller.Wind:Vector3.zero);
             float step=Mathf.Max(0,settings.previewSeconds)/count;
-            bool visible=isActiveAndEnabled && !controller.IsFiring && controller.InputEnabled && step>0;
+            if(windAware && controller.LastSolveHit) step=Mathf.Min(settings.maxFlightTime,controller.LastPrediction.MotionEndTime)/count;
+            bool visible=isActiveAndEnabled && Allowed && step>0;
+            RefreshImpactGuide(visible);
             for(int i=0;i<count;i++)
             {
                 var a=shot.PositionAt(i*step);var b=shot.PositionAt((i+Mathf.Clamp01(settings.previewDashFraction))*step);
@@ -57,6 +68,28 @@ namespace Fortress
                 DrawArrow(arrows[index],left,b,right,width,style.coreMaterial,style.coreColor,visible);
                 DrawArrow(arrowOutlines[index],left,b,right,width*Mathf.Max(1,style.outlineWidthMultiplier),style.outlineMaterial,style.outlineColor,visible && style.outlineMaterial!=null);
                 DrawArrow(arrowOccluded[index],left,b,right,width,style.occludedMaterial,style.occludedColor,visible && style.occludedMaterial!=null);
+            }
+        }
+        void RefreshImpactGuide(bool visible)
+        {
+            bool show=visible && style!=null && style.showImpactGuide && controller.LastSolveHit &&
+                !float.IsInfinity(controller.LastPrediction.FirstVisibleImpactTime) && !float.IsNaN(controller.LastPrediction.FirstVisibleImpactTime);
+            if(!show) { if(impactGuide!=null)impactGuide.enabled=false;if(impactOutline!=null)impactOutline.enabled=false;return; }
+            int segments=Mathf.Clamp(style.impactSegments,12,128);
+            if(impactGuide==null) { impactGuide=Create(1,"Aim Impact Guide",segments+1,2)[0];impactOutline=Create(1,"Aim Impact Outline",segments+1,1)[0]; }
+            ImpactGuidePosition=controller.LastPrediction.FirstVisibleImpactPosition;
+            impactGuide.positionCount=impactOutline.positionCount=segments+1;
+            impactGuide.enabled=true;impactOutline.enabled=style.outlineMaterial!=null;
+            impactGuide.sharedMaterial=style.coreMaterial!=null?style.coreMaterial:lineMaterial;impactOutline.sharedMaterial=style.outlineMaterial;
+            impactGuide.startColor=impactGuide.endColor=style.impactColor;impactOutline.startColor=impactOutline.endColor=style.outlineColor;
+            impactGuide.startWidth=impactGuide.endWidth=style.impactWidth;
+            impactOutline.startWidth=impactOutline.endWidth=style.impactWidth*style.outlineWidthMultiplier;
+            for(int i=0;i<=segments;i++)
+            {
+                float angle=i*Mathf.PI*2/segments;
+                var p=ImpactGuidePosition+new Vector3(Mathf.Cos(angle)*style.impactRadius,style.impactLift,Mathf.Sin(angle)*style.impactRadius);
+                if(controller.terrainMap!=null && controller.terrainMap.Field!=null && controller.terrainMap.Field.TrySample(p.x,p.z,out float ground)) p.y=Mathf.Max(p.y,ground+style.impactLift);
+                impactGuide.SetPosition(i,p);impactOutline.SetPosition(i,p);
             }
         }
         void Draw(LineRenderer line,Vector3 a,Vector3 b,float width,Material material,Color color,bool visible)

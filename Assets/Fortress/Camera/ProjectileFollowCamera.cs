@@ -34,7 +34,8 @@ namespace Fortress
         Quaternion savedRotation,returnStartRotation;
         float savedFov,returnStartFov,timer;
         int generation;
-        bool impactApproach;
+        bool impactApproach,wideView;
+        public bool IsWideView => wideView && IsTracking;
         void Awake() { Cache(); }
         void Cache() { cameraTransform=transform;if(viewCamera==null) viewCamera=GetComponent<Camera>(); }
         void OnEnable()
@@ -76,6 +77,19 @@ namespace Fortress
             heading=runner.Params.direction;heading.y=0;
             if(heading.sqrMagnitude<.00001f) heading=Vector3.forward;else heading.Normalize();
             Focus=runner.Position;FamilyRadius=0;impactApproach=false;timer=0;
+            wideView=settings.casualPresentation && !shots.SpecialSelected;
+            if(wideView)
+            {
+                var trajectory=new ArtilleryShot(runner.Params.origin,runner.Params.direction,shots.Power,shots.tuning.gravity,runner.Params.wind);
+                var bounds=new Bounds(runner.Position,Vector3.zero);
+                int samples=Mathf.Clamp(settings.wideSamples,8,128);
+                float duration=shots.LastSolveHit?runner.Params.arrivalTime:Mathf.Min(runner.Params.arrivalTime,settings.wideMissSeconds);
+                for(int i=1;i<=samples;i++) bounds.Encapsulate(trajectory.PositionAt(duration*i/samples));
+                Focus=bounds.center;FamilyRadius=bounds.extents.magnitude;
+                // Preserve the viewing side and frame the whole flight once instead of chasing it.
+                heading=Focus-cameraTransform.position;heading.y=0;
+                if(heading.sqrMagnitude<.001f) heading=Vector3.forward;else heading.Normalize();
+            }
             orbit.SetCinematicOverride(true);Phase=ViewPhase.Following;
         }
         void Register(ProjectileRunner runner)
@@ -128,6 +142,7 @@ namespace Fortress
                     timer+=deltaTime;
                     if(timer>=settings.impactHoldSeconds)
                     {
+                        if(orbit.PrepareCasualReturn(out var aimPosition,out var aimRotation)) { savedPosition=aimPosition;savedRotation=aimRotation; }
                         timer=0;returnStartPosition=cameraTransform.position;returnStartRotation=cameraTransform.rotation;returnStartFov=viewCamera.fieldOfView;Phase=ViewPhase.Returning;
                     }
                 }
@@ -142,6 +157,7 @@ namespace Fortress
         }
         void UpdateBounds()
         {
+            if(wideView) return;
             bool any=false;Bounds bounds=default;
             foreach(var member in members)
             {
@@ -155,19 +171,19 @@ namespace Fortress
         }
         void Follow(float dt)
         {
-            bool overview=impactApproach || members.Count>1 || Phase==ViewPhase.ImpactHold;
+            bool overview=wideView || impactApproach || members.Count>1 || Phase==ViewPhase.ImpactHold;
             float fov=overview?settings.overviewFieldOfView:settings.flightFieldOfView;
             float halfAngle=Mathf.Atan(Mathf.Tan(fov*Mathf.Deg2Rad*.5f)*Mathf.Min(1,viewCamera.aspect));
-            float distance=Mathf.Max(overview?settings.overviewDistance:settings.chaseDistance,
+            float distance=Mathf.Max(wideView?settings.wideMinDistance:overview?settings.overviewDistance:settings.chaseDistance,
                 (FamilyRadius+settings.framingMargin)*settings.framingPadding/Mathf.Max(.1f,Mathf.Sin(halfAngle)));
             Vector3 right=Vector3.Cross(Vector3.up,heading);
-            Vector3 offset=-heading*distance+right*settings.sideOffset+Vector3.up*(overview?settings.overviewHeight:settings.chaseHeight);
+            Vector3 offset=-heading*distance+right*(wideView?0:settings.sideOffset)+Vector3.up*(wideView?settings.wideHeight:overview?settings.overviewHeight:settings.chaseHeight);
             var desired=ProtectSightLine(Focus,Focus+offset);
-            float positionBlend=1-Mathf.Exp(-Mathf.Max(.1f,settings.positionResponse)*dt);
+            float positionBlend=1-Mathf.Exp(-Mathf.Max(.1f,wideView?settings.wideResponse:settings.positionResponse)*dt);
             Vector3 position=ProtectGround(Vector3.Lerp(cameraTransform.position,desired,positionBlend));
             Vector3 toward=Focus-position;
             Quaternion rotation=toward.sqrMagnitude>.00001f?Quaternion.LookRotation(toward,Vector3.up):cameraTransform.rotation;
-            float rotationBlend=1-Mathf.Exp(-Mathf.Max(.1f,settings.rotationResponse)*dt);
+            float rotationBlend=1-Mathf.Exp(-Mathf.Max(.1f,wideView?settings.wideResponse:settings.rotationResponse)*dt);
             cameraTransform.SetPositionAndRotation(position,Quaternion.Slerp(cameraTransform.rotation,rotation,rotationBlend));
             viewCamera.fieldOfView=Mathf.Lerp(viewCamera.fieldOfView,fov,positionBlend);
         }

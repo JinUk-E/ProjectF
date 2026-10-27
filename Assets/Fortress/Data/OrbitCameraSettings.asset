@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a12bd920f81c546adb8783a5b9edc8, type: 3}
   m_Name: OrbitCameraSettings
   m_EditorClassIdentifier: Fortress::Fortress.OrbitCameraSettings
+  casualPresentation: 1
+  aimDistance: 45
+  aimPitch: 38
+  aimLookAhead: 8
   orbitDegreesPerPixel: 0.15
   zoomSpeed: 0.08
   minPitch: 20

@@ -4,6 +4,10 @@ namespace Fortress
     [CreateAssetMenu(menuName="Fortress/Projectile Camera Settings")]
     public sealed class ProjectileCameraSettings : ScriptableObject
     {
+        public bool casualPresentation;
+        [Min(.1f)] public float wideResponse=2.5f,wideMinDistance=32,wideHeight=24;
+        [Range(8,128)] public int wideSamples=48;
+        [Min(.1f)] public float wideMissSeconds=4;
         [Min(.1f)] public float chaseDistance=11;
         [Min(0)] public float chaseHeight=4;
         public float sideOffset=3;

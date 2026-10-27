@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 namespace Fortress
 {
-    /// <summary>User orbit only. Turn changes and projectile events never reset the viewing pose.</summary>
+    /// <summary>Manual orbit with opt-in rear aiming views.</summary>
     [DisallowMultipleComponent]
     public sealed class BattlefieldOrbitCamera : MonoBehaviour
     {
@@ -20,7 +20,47 @@ namespace Fortress
         public bool CinematicOverride { get; private set; }
         public void SetCinematicOverride(bool active) { CinematicOverride=active;if(active) dragging=false; }
         Transform cameraTransform;
-        bool initialized,dragging,hasFocus=true;
+        bool initialized,dragging,hasFocus=true,pendingAimView;
+        MatchController subscribedMatch;
+        int seenGeneration=-1,seenTurn=-1;
+        void OnEnable() { SubscribeMatch(); }
+        void Start() { SubscribeMatch();OnMatchChanged(); }
+        void SubscribeMatch()
+        {
+            if(subscribedMatch!=null) subscribedMatch.StateChanged-=OnMatchChanged;
+            subscribedMatch=match;
+            if(subscribedMatch!=null) subscribedMatch.StateChanged+=OnMatchChanged;
+        }
+        void OnMatchChanged()
+        {
+            if(settings==null || !settings.casualPresentation || match==null || match.State!=MatchState.Aim) return;
+            if(seenGeneration==match.Generation && seenTurn==match.TurnNumber) return;
+            seenGeneration=match.Generation;seenTurn=match.TurnNumber;pendingAimView=true;
+        }
+        int OwnIndex => match!=null && match.shots!=null && match.shots.ai!=null && match.shots.ai.isActiveAndEnabled?0:match!=null?match.ActivePlayerIndex:0;
+        public void ViewOwnTank() { if(!Suspended && SetTankView(false)) ApplyPose(); }
+        public void ViewOpponent() { if(!Suspended && SetTankView(true)) ApplyPose(); }
+        bool SetTankView(bool opponent)
+        {
+            Initialize();
+            if(!initialized || match==null || match.shots==null || match.shots.tanks==null || match.shots.tanks.Length!=2) return false;
+            int own=OwnIndex;var a=match.shots.tanks[own];var b=match.shots.tanks[1-own];
+            if(a==null || b==null) return false;
+            var toward=b.transform.position-a.transform.position;toward.y=0;
+            if(toward.sqrMagnitude<.001f) toward=Vector3.forward;
+            Target=(opponent?b:a).transform.position+Vector3.up*settings.focusHeight;
+            if(!opponent) Target+=toward.normalized*Mathf.Min(settings.aimLookAhead,toward.magnitude*.5f);
+            Yaw=Mathf.Atan2(-toward.x,-toward.z)*Mathf.Rad2Deg;
+            Pitch=Mathf.Clamp(settings.aimPitch,MinimumPitch,MaximumPitch);
+            Distance=Mathf.Clamp(settings.aimDistance,MinimumDistance,MaximumDistance);
+            pendingAimView=false;return true;
+        }
+        public bool PrepareCasualReturn(out Vector3 position,out Quaternion rotation)
+        {
+            position=transform.position;rotation=transform.rotation;
+            if(settings==null || !settings.casualPresentation || !SetTankView(false)) return false;
+            CalculatePose(out position,out rotation);return true;
+        }
         bool Suspended => CinematicOverride || (match!=null && match.shots!=null && match.shots.GameplaySuspended);
         void Awake() { cameraTransform=transform;Initialize(); }
         public void Initialize()
@@ -68,6 +108,7 @@ namespace Fortress
         {
             if(Suspended) { dragging=false;return; }
             Initialize();if(!initialized) return;
+            if(pendingAimView && settings.casualPresentation) SetTankView(false);
             ReadInput();ApplyPose();
         }
         void ReadInput()
@@ -96,10 +137,14 @@ namespace Fortress
         }
         static bool PointerOverUi() => EventSystem.current!=null && EventSystem.current.IsPointerOverGameObject();
         void OnApplicationFocus(bool focused) { hasFocus=focused;if(!focused) dragging=false; }
-        void OnDisable() { dragging=false; }
+        void OnDisable() { dragging=false;if(subscribedMatch!=null) subscribedMatch.StateChanged-=OnMatchChanged;subscribedMatch=null; }
         public void ApplyPose()
         {
             if(!initialized || settings==null || CinematicOverride) return;
+            CalculatePose(out var position,out var rotation);cameraTransform.SetPositionAndRotation(position,rotation);
+        }
+        void CalculatePose(out Vector3 position,out Quaternion rotation)
+        {
             float clearance=Mathf.Max(0,settings.groundClearance);
             // A generated hill may be above the scene's original focus point.
             // Keep that point above the ground instead of amplifying its height error
@@ -108,12 +153,12 @@ namespace Fortress
                 Target=new Vector3(Target.x,targetGround+clearance,Target.z);
             float yaw=Yaw*Mathf.Deg2Rad,pitch=Pitch*Mathf.Deg2Rad;
             var outward=new Vector3(Mathf.Sin(yaw)*Mathf.Cos(pitch),Mathf.Sin(pitch),Mathf.Cos(yaw)*Mathf.Cos(pitch));
-            Vector3 position=Target+outward*Distance;
+            position=Target+outward*Distance;
             // Protect the camera itself from terrain. Intervening hills may occlude
             // the target; users can orbit around them without automatic pitch changes.
             if(TryGroundHeight(position.x,position.z,out float ground))
                 position.y=Mathf.Max(position.y,ground+clearance);
-            cameraTransform.SetPositionAndRotation(position,Quaternion.LookRotation(-outward,Vector3.up));
+            rotation=Quaternion.LookRotation(-outward,Vector3.up);
         }
         bool TryGroundHeight(float x,float z,out float height)
         {

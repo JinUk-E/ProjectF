@@ -4,6 +4,10 @@ namespace Fortress
     [CreateAssetMenu(menuName="Fortress/Orbit Camera Settings")]
     public sealed class OrbitCameraSettings : ScriptableObject
     {
+        public bool casualPresentation;
+        [Min(1)] public float aimDistance=38;
+        [Range(1,89)] public float aimPitch=32;
+        [Min(0)] public float aimLookAhead=8;
         [Min(0)] public float orbitDegreesPerPixel=.15f;
         [Min(0)] public float zoomSpeed=.08f;
         public float minPitch=20,maxPitch=80;
