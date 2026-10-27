@@ -20,8 +20,11 @@ namespace Fortress.Editor
             var orbitSettings = AssetDatabase.LoadAssetAtPath<OrbitCameraSettings>("Assets/Fortress/Data/OrbitCameraSettings.asset");
             var shotSettings = AssetDatabase.LoadAssetAtPath<ProjectileCameraSettings>("Assets/Fortress/Data/ProjectileCameraSettings.asset");
             var aim = AssetDatabase.LoadAssetAtPath<AimPreviewStyle>("Assets/Fortress/Art/Atmosphere/ReadableAim.asset");
-            Undo.RecordObjects(new Object[] { orbitSettings, shotSettings, aim }, "Casual presentation");
-            orbitSettings.casualPresentation = true; shotSettings.casualPresentation = true; aim.showImpactGuide = true; aim.windAwarePreview = true;
+            var tuning = AssetDatabase.LoadAssetAtPath<GameTuning>("Assets/Fortress/Data/MatchTuning.asset");
+            Undo.RecordObjects(new Object[] { orbitSettings, shotSettings, aim, tuning }, "Casual presentation");
+            orbitSettings.casualPresentation = true; shotSettings.casualPresentation = true; aim.showImpactGuide = false; aim.windAwarePreview = false;
+            tuning.previewSeconds = .35f; tuning.previewSegments = 8;
+            EditorUtility.SetDirty(tuning);
             orbitSettings.aimDistance = 45; orbitSettings.aimPitch = 38;
             aim.coreColor = new Color(.75f, 1, .94f); aim.widthMultiplier = 1.9f;
             EditorUtility.SetDirty(orbitSettings); EditorUtility.SetDirty(shotSettings); EditorUtility.SetDirty(aim);
@@ -62,7 +65,7 @@ namespace Fortress.Editor
                 var holder = Rect(root, "View shortcuts", 44, 175, 490, 102);
                 Button(holder, "Own view", 0, "내 탱크 보기", orbit.ViewOwnTank, new Color(.13f, .43f, .52f, .97f));
                 Button(holder, "Opponent view", 250, "상대 보기", orbit.ViewOpponent, new Color(.65f, .28f, .16f, .97f));
-                Label(holder, "Guide legend", 0, 64, 490, 30, "원: 첫 착탄 예상 · 피해 범위 아님", 19);
+                Label(holder, "Guide legend", 0, 64, 490, 30, "점선: 발사 방향 · 바람은 직접 보정", 19);
                 var hint = root.Find("Camera controls").GetComponent<TMP_Text>();
                 Undo.RecordObject(hint, "Camera controls"); hint.text = "우클릭  회전   ·   휠  확대/축소   ·   F  내 탱크";
                 for (int i = 0; i < hud.healthFills.Length; i++)

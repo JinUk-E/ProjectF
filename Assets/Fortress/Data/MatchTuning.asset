@@ -52,8 +52,8 @@ MonoBehaviour:
   waterHeight: -4
   craterRadius: 4
   craterDepth: 2
-  previewSeconds: 1.5
-  previewSegments: 24
+  previewSeconds: 0.35
+  previewSegments: 8
   previewDashFraction: 0.55
   previewWidth: 0.08
   wind: {x: 0, y: 0, z: 0}

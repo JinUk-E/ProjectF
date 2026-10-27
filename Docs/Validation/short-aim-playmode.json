@@ -1,0 +1,257 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "3f2c917acdc74325b6ae311dc016fc74",
+    "status": "succeeded",
+    "mode": "PlayMode",
+    "started_unix_ms": 1793106476801,
+    "finished_unix_ms": 1793106540086,
+    "last_update_unix_ms": 1793106540086,
+    "progress": {
+      "completed": 24,
+      "total": 24,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1793106538232,
+      "last_finished_test_full_name": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+      "last_finished_unix_ms": 1793106540030,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 24,
+        "passed": 24,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 55.7133194,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "RockLayer_RepaintsCraterWithoutChangingSimulation",
+          "fullName": "Fortress.Tests.AimReadabilityTests.RockLayer_RepaintsCraterWithoutChangingSimulation",
+          "state": "Passed",
+          "durationSeconds": 1.9974648,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StyledPreview_InvalidBindingHidesExistingGeometry",
+          "fullName": "Fortress.Tests.AimReadabilityTests.StyledPreview_InvalidBindingHidesExistingGeometry",
+          "state": "Passed",
+          "durationSeconds": 1.0499556,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StyledPreview_RetainsWindFreePartialArcAndDirection",
+          "fullName": "Fortress.Tests.AimReadabilityTests.StyledPreview_RetainsWindFreePartialArcAndDirection",
+          "state": "Passed",
+          "durationSeconds": 1.0670362,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BasicShot_UsesFixedComposition_ThenReturnsBehindNextTank",
+          "fullName": "Fortress.Tests.CasualPresentationTests.BasicShot_UsesFixedComposition_ThenReturnsBehindNextTank",
+          "state": "Passed",
+          "durationSeconds": 2.8755785,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MatchAim_IsShortWindFreeAndHasNoImpactGuide",
+          "fullName": "Fortress.Tests.CasualPresentationTests.MatchAim_IsShortWindFreeAndHasNoImpactGuide",
+          "state": "Passed",
+          "durationSeconds": 2.9072151,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpecialShot_KeepsCloseTracking_AndPauseFreezesIt",
+          "fullName": "Fortress.Tests.CasualPresentationTests.SpecialShot_KeepsCloseTracking_AndPauseFreezesIt",
+          "state": "Passed",
+          "durationSeconds": 2.0287986,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ViewButtons_PreserveAim_AndRespectPauseAndShotLock",
+          "fullName": "Fortress.Tests.CasualPresentationTests.ViewButtons_PreserveAim_AndRespectPauseAndShotLock",
+          "state": "Passed",
+          "durationSeconds": 1.7590881,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FocusAndTurn_RespectManualViewAndStayAboveTerrain",
+          "fullName": "Fortress.Tests.OrbitCameraTests.FocusAndTurn_RespectManualViewAndStayAboveTerrain",
+          "state": "Passed",
+          "durationSeconds": 2.4138397,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Mouse_RightDragAndWheel_RouteThroughInputSystem",
+          "fullName": "Fortress.Tests.OrbitCameraTests.Mouse_RightDragAndWheel_RouteThroughInputSystem",
+          "state": "Passed",
+          "durationSeconds": 3.2258935,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Orbit_RotatesZoomsClampsAndDoesNotChangeAim",
+          "fullName": "Fortress.Tests.OrbitCameraTests.Orbit_RotatesZoomsClampsAndDoesNotChangeAim",
+          "state": "Passed",
+          "durationSeconds": 1.9755496,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Zoom_ChangesActualDistanceWithoutTilting_OnGeneratedTerrain",
+          "fullName": "Fortress.Tests.OrbitCameraTests.Zoom_ChangesActualDistanceWithoutTilting_OnGeneratedTerrain",
+          "state": "Passed",
+          "durationSeconds": 1.9259066,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CancelRestartAndDisable_RestoreAndReleaseCameraOwnership",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.CancelRestartAndDisable_RestoreAndReleaseCameraOwnership",
+          "state": "Passed",
+          "durationSeconds": 2.214841,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Cluster_FramesWholeFamily_AndWaitsForLastChild",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.Cluster_FramesWholeFamily_AndWaitsForLastChild",
+          "state": "Passed",
+          "durationSeconds": 2.913094,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EarlyImpactAndMissTimeout_BothFinishWithoutCameraLock",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.EarlyImpactAndMissTimeout_BothFinishWithoutCameraLock",
+          "state": "Passed",
+          "durationSeconds": 2.9448443,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NewShotDuringReturn_PreservesOriginalUserView",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.NewShotDuringReturn_PreservesOriginalUserView",
+          "state": "Passed",
+          "durationSeconds": 1.3702948,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_FreezesFlightHoldAndReturnPresentation",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.Pause_FreezesFlightHoldAndReturnPresentation",
+          "state": "Passed",
+          "durationSeconds": 1.8452063,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SingleShot_FollowsVisibleShell_ThenRestoresManualPoseAndFov",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.SingleShot_FollowsVisibleShell_ThenRestoresManualPoseAndFov",
+          "state": "Passed",
+          "durationSeconds": 1.7856883,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrackingAndReturning_NeverPlaceCameraBelowTerrainOrExterior",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.TrackingAndReturning_NeverPlaceCameraBelowTerrainOrExterior",
+          "state": "Passed",
+          "durationSeconds": 1.4183263,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Escape_OpensPauseCancelsConfirmationThenResumes",
+          "fullName": "Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes",
+          "state": "Passed",
+          "durationSeconds": 3.0867751,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MainMenu_RoundTripBothModesAndCancelsLiveShot",
+          "fullName": "Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot",
+          "state": "Passed",
+          "durationSeconds": 6.0015523,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_AiKeepsPendingPlanWithoutDispatching",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+          "state": "Passed",
+          "durationSeconds": 2.258445,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_BlocksAimMovementCameraAndRestoresExactScale",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale",
+          "state": "Passed",
+          "durationSeconds": 1.5796594,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+          "state": "Passed",
+          "durationSeconds": 2.0123372,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_LateTurnEventDefersAiPlanningUntilResume",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+          "state": "Passed",
+          "durationSeconds": 1.7977747,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

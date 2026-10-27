@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e69bf58975697e4daead25172693d6f, type: 3}
   m_Name: ReadableAim
   m_EditorClassIdentifier: Fortress::Fortress.AimPreviewStyle
-  showImpactGuide: 1
-  windAwarePreview: 1
+  showImpactGuide: 0
+  windAwarePreview: 0
   impactRadius: 1.8
   impactWidth: 0.16
   impactLift: 0.25

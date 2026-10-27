@@ -16,7 +16,7 @@ namespace Fortress.Tests
             BattleLoadoutSelection.Player=1;BattleLoadoutSelection.Opponent=0;
             EditorSceneManager.LoadSceneInPlayMode(SessionMenu.LocalScene,new LoadSceneParameters(LoadSceneMode.Single));yield return null;
             match=Object.FindFirstObjectByType<MatchController>();shots=match.shots;orbit=Camera.main.GetComponent<BattlefieldOrbitCamera>();follow=Camera.main.GetComponent<ProjectileFollowCamera>();preview=Object.FindFirstObjectByType<DashedAimPreview>();
-            Assert.That(orbit.settings.casualPresentation,Is.True);Assert.That(follow.settings.casualPresentation,Is.True);Assert.That(preview.style.showImpactGuide,Is.True);
+            Assert.That(orbit.settings.casualPresentation,Is.True);Assert.That(follow.settings.casualPresentation,Is.True);Assert.That(preview.style.showImpactGuide,Is.False);
             shots.SetWind(Vector3.zero);shots.SetAim(0,75,22);
         }
         [UnityTearDown] public IEnumerator Unload()
@@ -52,16 +52,23 @@ namespace Fortress.Tests
             var target=orbit.Target;shots.GameplaySuspended=true;orbit.ViewOpponent();Assert.That(orbit.Target,Is.EqualTo(target));
             shots.GameplaySuspended=false;yield return null;Assert.That(shots.TryFire(),Is.True);orbit.ViewOpponent();Assert.That(orbit.Target,Is.EqualTo(target));
         }
-        [UnityTest] public IEnumerator ImpactGuide_UsesWindPrediction_AndHidesForPauseFlightAndDisabledInput()
+        [UnityTest] public IEnumerator MatchAim_IsShortWindFreeAndHasNoImpactGuide()
         {
-            preview.Refresh();Assert.That(preview.ImpactGuideVisible,Is.True);var before=preview.ImpactGuidePosition;
+            preview.Refresh();Assert.That(preview.ImpactGuideVisible,Is.False);
+            Assert.That(preview.style.windAwarePreview,Is.False);
+            Assert.That(shots.tuning.previewSeconds,Is.LessThanOrEqualTo(.35f));
+            var lines=preview.GetComponentsInChildren<LineRenderer>();
+            int count=shots.tuning.previewSegments;
+            Assert.That(count,Is.EqualTo(8));
+            Vector3 before=lines[count-1].GetPosition(1);
+            Assert.That(Vector3.Distance(shots.ActiveTank.Muzzle.position,before),Is.LessThan(8f));
             shots.SetWind(new Vector3(1,0,0));preview.Refresh();
-            Assert.That(preview.ImpactGuidePosition,Is.EqualTo(shots.LastPrediction.FirstVisibleImpactPosition));
-            Assert.That(Vector3.Distance(before,preview.ImpactGuidePosition),Is.GreaterThan(.1f));
-            shots.GameplaySuspended=true;yield return null;Assert.That(preview.ImpactGuideVisible,Is.False);
-            shots.GameplaySuspended=false;yield return null;yield return null;Assert.That(preview.ImpactGuideVisible,Is.True);
-            shots.InputEnabled=false;Assert.That(preview.ImpactGuideVisible,Is.False);shots.InputEnabled=true;
-            Assert.That(shots.TryFire(),Is.True);Assert.That(preview.ImpactGuideVisible,Is.False);
+            Assert.That(lines[count-1].GetPosition(1),Is.EqualTo(before));
+            Assert.That(preview.ImpactGuideVisible,Is.False);
+            shots.GameplaySuspended=true;yield return null;foreach(var line in lines)Assert.That(line.enabled,Is.False);
+            shots.GameplaySuspended=false;yield return null;yield return null;Assert.That(lines[0].enabled,Is.True);
+            shots.InputEnabled=false;foreach(var line in lines)Assert.That(line.enabled,Is.False);shots.InputEnabled=true;
+            Assert.That(shots.TryFire(),Is.True);foreach(var line in lines)Assert.That(line.enabled,Is.False);
         }
     }
 }
