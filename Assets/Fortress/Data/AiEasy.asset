@@ -25,3 +25,14 @@ MonoBehaviour:
   noiseDecay: 0.92
   minimumNoiseScale: 0.75
   thinkSeconds: 1.5
+  enableMovement: 1
+  moveCandidates: 16
+  maxMoveDistance: 6
+  maxMoveSeconds: 3
+  safeWaterClearance: 5
+  coverPreference: 4
+  safetyPreference: 1
+  moveImprovement: 0.2
+  preferredRange: 35
+  rangePreference: 0.08
+  travelPenalty: 0.03

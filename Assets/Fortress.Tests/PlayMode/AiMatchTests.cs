@@ -15,17 +15,20 @@ namespace Fortress.Tests
     public sealed class AiMatchTests
     {
         MatchController match;AiOpponent ai;FlatShotController shots;ProjectileFollowCamera shotCamera;
+        AiSettings legacySettings;
         [UnitySetUp] public IEnumerator Load()
         {
             EditorSceneManager.LoadSceneInPlayMode("Assets/Fortress/Scenes/MilitaryAI.unity",new LoadSceneParameters(LoadSceneMode.Single));
             yield return null;
             ai=Object.FindAnyObjectByType<AiOpponent>();match=ai.match;shots=match.shots;
+            legacySettings=Object.Instantiate(ai.settings);legacySettings.enableMovement=false;ai.Configure(match,legacySettings);
             shotCamera=Object.FindAnyObjectByType<ProjectileFollowCamera>();
         }
         [UnityTearDown] public IEnumerator Unload()
         {
             Time.timeScale=1;
             if(shots!=null) shots.CancelShot();
+            if(legacySettings!=null)Object.Destroy(legacySettings);
             var scene=SceneManager.GetActiveScene();SceneManager.SetActiveScene(SceneManager.CreateScene("AiCleanup"));
             yield return SceneManager.UnloadSceneAsync(scene);
         }

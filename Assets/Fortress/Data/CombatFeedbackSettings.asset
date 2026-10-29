@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978f5951619cba441977745ebf785950, type: 3}
+  m_Name: CombatFeedbackSettings
+  m_EditorClassIdentifier: Fortress::Fortress.CombatFeedbackSettings
+  lifetimeSeconds: 1.8
+  risePixels: 65
+  worldHeight: 3
+  shakeSeconds: 0.18
+  shakeDistance: 0.12
+  shakeFrequency: 35
+  damageColor: {r: 1, g: 0.8, b: 0.35, a: 1}
+  directColor: {r: 1, g: 0.4, b: 0.2, a: 1}
+  fallColor: {r: 0.7, g: 0.8, b: 1, a: 1}
+  impacts:
+  - purpose: 0
+    clip: {fileID: 8300000, guid: 3bebfe76fcc96584295b90cf5dbd5e8c, type: 3}
+    color: {r: 1, g: 0.58, b: 0.12, a: 1}
+    sizeMultiplier: 1
+    pitch: 1
+    volume: 0.7
+  - purpose: 1
+    clip: {fileID: 8300000, guid: 37b5d11d7faa8fd49a260cd9e93c9c81, type: 3}
+    color: {r: 0.85, g: 0.65, b: 0.32, a: 1}
+    sizeMultiplier: 0.8
+    pitch: 1
+    volume: 0.7
+  - purpose: 2
+    clip: {fileID: 8300000, guid: 59461eaf760435a48aaf15d3c807e7f8, type: 3}
+    color: {r: 0.8, g: 0.9, b: 1, a: 1}
+    sizeMultiplier: 1.25
+    pitch: 1
+    volume: 0.7
+  - purpose: 3
+    clip: {fileID: 8300000, guid: 6c71fb8c19709b04f98f7ba18fbef33e, type: 3}
+    color: {r: 1, g: 0.77, b: 0.25, a: 1}
+    sizeMultiplier: 0.6
+    pitch: 1
+    volume: 0.42

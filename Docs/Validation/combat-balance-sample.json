@@ -1,0 +1,72 @@
+{
+    "actor": "gameplay-programmer-codex",
+    "method": "3 fixed seeds x noise-free/Easy, both seats same planner, HE only, <=40 shots, no human aiming time; not a 5–8 minute playtime measurement",
+    "samples": [
+        {
+            "seed": 7,
+            "shots": 10,
+            "hitShots": 10,
+            "directHits": 6,
+            "turns": 10,
+            "drownedDefeats": 0,
+            "preset": "noise-free",
+            "finished": true,
+            "simulatedFlightSeconds": 29.498567581176759
+        },
+        {
+            "seed": 19,
+            "shots": 11,
+            "hitShots": 10,
+            "directHits": 7,
+            "turns": 11,
+            "drownedDefeats": 0,
+            "preset": "noise-free",
+            "finished": true,
+            "simulatedFlightSeconds": 34.521881103515628
+        },
+        {
+            "seed": 31,
+            "shots": 9,
+            "hitShots": 9,
+            "directHits": 6,
+            "turns": 9,
+            "drownedDefeats": 0,
+            "preset": "noise-free",
+            "finished": true,
+            "simulatedFlightSeconds": 27.709827423095704
+        },
+        {
+            "seed": 7,
+            "shots": 40,
+            "hitShots": 7,
+            "directHits": 1,
+            "turns": 41,
+            "drownedDefeats": 0,
+            "preset": "Easy",
+            "finished": false,
+            "simulatedFlightSeconds": 83.17361450195313
+        },
+        {
+            "seed": 19,
+            "shots": 40,
+            "hitShots": 5,
+            "directHits": 0,
+            "turns": 41,
+            "drownedDefeats": 0,
+            "preset": "Easy",
+            "finished": false,
+            "simulatedFlightSeconds": 121.5024185180664
+        },
+        {
+            "seed": 31,
+            "shots": 40,
+            "hitShots": 0,
+            "directHits": 0,
+            "turns": 41,
+            "drownedDefeats": 0,
+            "preset": "Easy",
+            "finished": false,
+            "simulatedFlightSeconds": 101.88102722167969
+        }
+    ]
+}

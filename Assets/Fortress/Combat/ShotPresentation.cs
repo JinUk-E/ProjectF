@@ -8,12 +8,14 @@ namespace Fortress
     {
         public FlatShotController shots;
         public BattleVisualTuning tuning;
+        public CombatFeedbackSettings feedbackSettings;
         public Transform[] gunVisuals = System.Array.Empty<Transform>();
         public AudioSource shotAudio,impactAudio;
         public ParticleSystem muzzleFlash, impactFlash;
         Vector3[] restPositions;
         int recoiling = -1;
         float elapsed;
+        AmmoPurpose shotPurpose;
         void Awake()
         {
             restPositions = new Vector3[gunVisuals.Length];
@@ -41,6 +43,7 @@ namespace Fortress
         }
         void Launched(ProjectileRunner runner)
         {
+            shotPurpose=shots.SelectedAmmo!=null?shots.SelectedAmmo.purpose:AmmoPurpose.HighExplosive;
             Restore();
             if(shotAudio!=null) { shotAudio.transform.position=runner.Position;shotAudio.Play(); }
             if(tuning==null || shots.ActiveTank==null) return;
@@ -56,10 +59,23 @@ namespace Fortress
         }
         void Impacted(ProjectileRunner runner)
         {
-            if(impactAudio!=null) { impactAudio.transform.position=runner.Position;impactAudio.Play(); }
+            bool styled=feedbackSettings!=null && feedbackSettings.TryGetImpact(shotPurpose,out _);
+            CombatFeedbackSettings.ImpactStyle style=default;
+            if(styled)feedbackSettings.TryGetImpact(shotPurpose,out style);
+            if(impactAudio!=null)
+            {
+                impactAudio.transform.position=runner.Position;
+                if(styled) { impactAudio.pitch=Mathf.Clamp(style.pitch,.25f,2);impactAudio.volume=Mathf.Clamp01(style.volume); }
+                if(styled && style.clip!=null)impactAudio.PlayOneShot(style.clip);else impactAudio.Play();
+            }
             if(impactFlash==null) return;
             impactFlash.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
             impactFlash.transform.position=runner.Position;
+            if(styled && tuning!=null)
+            {
+                var main=impactFlash.main;main.startColor=style.color;
+                main.startSize=tuning.flashSize*Mathf.Clamp(style.sizeMultiplier,.25f,3);
+            }
             impactFlash.Play(true);
         }
         void LateUpdate()

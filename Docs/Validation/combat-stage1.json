@@ -1,0 +1,266 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "d35776d54d194869ab015628df276cfb",
+    "status": "succeeded",
+    "mode": "PlayMode",
+    "started_unix_ms": 1793312368459,
+    "finished_unix_ms": 1793312407727,
+    "last_update_unix_ms": 1793312407727,
+    "progress": {
+      "completed": 25,
+      "total": 25,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1793312406692,
+      "last_finished_test_full_name": "Fortress.Tests.ProjectileFollowCameraTests.TrackingAndReturning_NeverPlaceCameraBelowTerrainOrExterior",
+      "last_finished_unix_ms": 1793312407688,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 25,
+        "passed": 25,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 34.6764489,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "AiTurn_BlocksHumanAmmoSelection",
+          "fullName": "Fortress.Tests.AmmunitionTests.AiTurn_BlocksHumanAmmoSelection",
+          "state": "Passed",
+          "durationSeconds": 1.8303185,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Ammo_ActualShotsApplyDistinctHealthDamageAndExcavation",
+          "fullName": "Fortress.Tests.AmmunitionTests.Ammo_ActualShotsApplyDistinctHealthDamageAndExcavation",
+          "state": "Passed",
+          "durationSeconds": 3.0947413,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Cluster_CancelAfterSplit_DiscardsAllDamageAndUnlocks",
+          "fullName": "Fortress.Tests.AmmunitionTests.Cluster_CancelAfterSplit_DiscardsAllDamageAndUnlocks",
+          "state": "Passed",
+          "durationSeconds": 1.1678326,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Cluster_CollisionFallback_OnlySixChildrenDealDamage",
+          "fullName": "Fortress.Tests.AmmunitionTests.Cluster_CollisionFallback_OnlySixChildrenDealDamage",
+          "state": "Passed",
+          "durationSeconds": 1.0375525,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Cluster_NoSurfaceHit_TimeoutDoesNotDamageTerrain",
+          "fullName": "Fortress.Tests.AmmunitionTests.Cluster_NoSurfaceHit_TimeoutDoesNotDamageTerrain",
+          "state": "Passed",
+          "durationSeconds": 1.0453665,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Cluster_SixPhysicalChildren_HoldWorldUntilLastFinish_ResolveOrdered",
+          "fullName": "Fortress.Tests.AmmunitionTests.Cluster_SixPhysicalChildren_HoldWorldUntilLastFinish_ResolveOrdered",
+          "state": "Passed",
+          "durationSeconds": 1.0387741,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Launch_SnapshotsDamageAndKeepsTankAmmunitionIndependent",
+          "fullName": "Fortress.Tests.AmmunitionTests.Launch_SnapshotsDamageAndKeepsTankAmmunitionIndependent",
+          "state": "Passed",
+          "durationSeconds": 1.0798737,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Loadouts_SelectAndConsumeOnlySuccessfulLaunch_RestartRefills",
+          "fullName": "Fortress.Tests.AmmunitionTests.Loadouts_SelectAndConsumeOnlySuccessfulLaunch_RestartRefills",
+          "state": "Passed",
+          "durationSeconds": 1.4612532,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Menu_ChosenRolesReachBothMatchSeats",
+          "fullName": "Fortress.Tests.AmmunitionTests.Menu_ChosenRolesReachBothMatchSeats",
+          "state": "Passed",
+          "durationSeconds": 2.3393491,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Special_DepletionFallsBackToUnlimitedHE",
+          "fullName": "Fortress.Tests.AmmunitionTests.Special_DepletionFallsBackToUnlimitedHE",
+          "state": "Passed",
+          "durationSeconds": 1.0272742,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BasicShot_UsesFixedComposition_ThenReturnsBehindNextTank",
+          "fullName": "Fortress.Tests.CasualPresentationTests.BasicShot_UsesFixedComposition_ThenReturnsBehindNextTank",
+          "state": "Passed",
+          "durationSeconds": 1.0194323,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MatchAim_IsShortWindFreeAndHasNoImpactGuide",
+          "fullName": "Fortress.Tests.CasualPresentationTests.MatchAim_IsShortWindFreeAndHasNoImpactGuide",
+          "state": "Passed",
+          "durationSeconds": 1.0578566,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SpecialShot_KeepsCloseTracking_AndPauseFreezesIt",
+          "fullName": "Fortress.Tests.CasualPresentationTests.SpecialShot_KeepsCloseTracking_AndPauseFreezesIt",
+          "state": "Passed",
+          "durationSeconds": 1.0369836,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ViewButtons_PreserveAim_AndRespectPauseAndShotLock",
+          "fullName": "Fortress.Tests.CasualPresentationTests.ViewButtons_PreserveAim_AndRespectPauseAndShotLock",
+          "state": "Passed",
+          "durationSeconds": 1.1192016,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ActualHit_CaptureReadableFeedback",
+          "fullName": "Fortress.Tests.CombatFeedbackTests.ActualHit_CaptureReadableFeedback",
+          "state": "Passed",
+          "durationSeconds": 1.379144,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ActualHit_ReportsHpDeltaOnce_AndPauseRestartClearPresentation",
+          "fullName": "Fortress.Tests.CombatFeedbackTests.ActualHit_ReportsHpDeltaOnce_AndPauseRestartClearPresentation",
+          "state": "Passed",
+          "durationSeconds": 2.3120306,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Cluster_ResolvesOneFamilyNotice_AndImpactStylesAreDistinct",
+          "fullName": "Fortress.Tests.CombatFeedbackTests.Cluster_ResolvesOneFamilyNotice_AndImpactStylesAreDistinct",
+          "state": "Passed",
+          "durationSeconds": 1.692438,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NearbyBlast_IsNotDirect_AndCancelledShotHasNoDamageNotice",
+          "fullName": "Fortress.Tests.CombatFeedbackTests.NearbyBlast_IsNotDirect_AndCancelledShotHasNoDamageNotice",
+          "state": "Passed",
+          "durationSeconds": 1.8809081,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CancelRestartAndDisable_RestoreAndReleaseCameraOwnership",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.CancelRestartAndDisable_RestoreAndReleaseCameraOwnership",
+          "state": "Passed",
+          "durationSeconds": 1.4557944,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Cluster_FramesWholeFamily_AndWaitsForLastChild",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.Cluster_FramesWholeFamily_AndWaitsForLastChild",
+          "state": "Passed",
+          "durationSeconds": 1.4663957,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EarlyImpactAndMissTimeout_BothFinishWithoutCameraLock",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.EarlyImpactAndMissTimeout_BothFinishWithoutCameraLock",
+          "state": "Passed",
+          "durationSeconds": 1.0005542,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NewShotDuringReturn_PreservesOriginalUserView",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.NewShotDuringReturn_PreservesOriginalUserView",
+          "state": "Passed",
+          "durationSeconds": 1.0017213,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_FreezesFlightHoldAndReturnPresentation",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.Pause_FreezesFlightHoldAndReturnPresentation",
+          "state": "Passed",
+          "durationSeconds": 1.0392488,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SingleShot_FollowsVisibleShell_ThenRestoresManualPoseAndFov",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.SingleShot_FollowsVisibleShell_ThenRestoresManualPoseAndFov",
+          "state": "Passed",
+          "durationSeconds": 1.0101568,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrackingAndReturning_NeverPlaceCameraBelowTerrainOrExterior",
+          "fullName": "Fortress.Tests.ProjectileFollowCameraTests.TrackingAndReturning_NeverPlaceCameraBelowTerrainOrExterior",
+          "state": "Passed",
+          "durationSeconds": 0.9954634,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

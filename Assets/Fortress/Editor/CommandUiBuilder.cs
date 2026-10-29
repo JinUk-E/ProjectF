@@ -56,6 +56,7 @@ namespace Fortress.Editor
             var root=menu.transform.Find("Command composition");foreach(Transform child in new List<Transform>(Children(root)))Object.DestroyImmediate(child.gameObject);
             var pickerGo=new GameObject("Unit selection");pickerGo.transform.SetParent(root,false);pickerGo.SetActive(false);
             var picker=pickerGo.AddComponent<LoadoutMenu>();picker.roles=Roles();picker.selectedColor=Accent;picker.idleColor=Line;
+            picker.tuning=AssetDatabase.LoadAssetAtPath<GameTuning>("Assets/Fortress/Data/MatchTuning.asset");
             Box(root,"Top shade",0,0,1920,240,new Color(.025f,.035f,.045f,.85f));
             Box(root,"Bottom shade",0,786,1920,294,new Color(.025f,.035f,.045f,.85f));
             Label(root,"Brand",72,50,900,64,"프로젝트 F",48,Text);

@@ -32,7 +32,7 @@ namespace Fortress.Tests
             Assert.That(match.TryMoveActiveTank(Vector2.right,1),Is.False);Assert.That(tank.Rig.transform.position,Is.EqualTo(position));
             match.shots.CancelShot();Assert.That(match.MovementRemaining,Is.EqualTo(remaining));
             match.shots.TryFire();match.shots.ActiveRunner.Tick(match.tuning.maxFlightTime+1);
-            Assert.That(match.MovementRemaining,Is.EqualTo(match.tuning.moveDistancePerTurn));
+            Assert.That(match.MovementRemaining,Is.EqualTo(match.Tanks[match.ActivePlayerIndex].MoveDistance));
             yield return null;
         }
         [UnityTest] public IEnumerator Keyboard_MoveFollowsCameraPreservesAimAndExhaustsBudget()

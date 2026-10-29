@@ -17,3 +17,6 @@ MonoBehaviour:
   special: {fileID: 11400000, guid: ab4c7a8f69286664d8e7058db0c1e1b7, type: 2}
   appearance: {fileID: 11400000, guid: 00904eb970f5a3648bdd50692bf1db59, type: 2}
   specialRounds: 3
+  healthMultiplier: 0.95
+  movementMultiplier: 1.1666666
+  speedMultiplier: 1.1

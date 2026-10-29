@@ -1,0 +1,86 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "40ede08791434bbcbc18fe02433294a9",
+    "status": "succeeded",
+    "mode": "PlayMode",
+    "started_unix_ms": 1793312697993,
+    "finished_unix_ms": 1793312709814,
+    "last_update_unix_ms": 1793312709814,
+    "progress": {
+      "completed": 5,
+      "total": 5,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1793312708538,
+      "last_finished_test_full_name": "Fortress.Tests.AiMovementTests.SharedMovementProbe_StopsAtMapEdgeExactlyLikeActualMovement",
+      "last_finished_unix_ms": 1793312709781,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 6.9940003,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "Ai_WaitsForCamera_MovesWithinBudget_ThenThinksFullDelayAndFires",
+          "fullName": "Fortress.Tests.AiMovementTests.Ai_WaitsForCamera_MovesWithinBudget_ThenThinksFullDelayAndFires",
+          "state": "Passed",
+          "durationSeconds": 1.6370838,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Movement_PauseAndRestartCancelWithoutTeleportOrDelayedShot",
+          "fullName": "Fortress.Tests.AiMovementTests.Movement_PauseAndRestartCancelWithoutTeleportOrDelayedShot",
+          "state": "Passed",
+          "durationSeconds": 1.6262259,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Plan_IsDeterministicSafeAndDoesNotMutateLiveWorld",
+          "fullName": "Fortress.Tests.AiMovementTests.Plan_IsDeterministicSafeAndDoesNotMutateLiveWorld",
+          "state": "Passed",
+          "durationSeconds": 1.229836,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Planner_PrefersReachableCoverOverUnprotectedApproach",
+          "fullName": "Fortress.Tests.AiMovementTests.Planner_PrefersReachableCoverOverUnprotectedApproach",
+          "state": "Passed",
+          "durationSeconds": 1.2232597,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SharedMovementProbe_StopsAtMapEdgeExactlyLikeActualMovement",
+          "fullName": "Fortress.Tests.AiMovementTests.SharedMovementProbe_StopsAtMapEdgeExactlyLikeActualMovement",
+          "state": "Passed",
+          "durationSeconds": 1.244367,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

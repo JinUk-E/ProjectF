@@ -67,7 +67,10 @@ namespace Fortress.Tests
             ai.TickThinking(100);Assert.That(shots.IsFiring,Is.False,"The resumed shot camera still owns the view.");
             var shotCamera=Object.FindAnyObjectByType<ProjectileFollowCamera>();
             shotCamera.TickPresentation(10);shotCamera.TickPresentation(10);
-            ai.TickThinking(100);Assert.That(shots.IsFiring,Is.True);
+            ai.TickThinking(100);
+            for(int i=0;i<40 && ai.IsMoving;i++)ai.TickMovement(.1f);
+            if(!shots.IsFiring)ai.TickThinking(100);
+            Assert.That(shots.IsFiring,Is.True);
         }
         [UnityTest] public IEnumerator MainMenu_RoundTripBothModesAndCancelsLiveShot()
         {

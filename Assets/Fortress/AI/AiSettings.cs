@@ -13,5 +13,10 @@ namespace Fortress
         [Range(0,1)] public float noiseDecay=0.6123724f;
         [Range(0,1)] public float minimumNoiseScale;
         [Range(1,2)] public float thinkSeconds=1.5f;
+        public bool enableMovement;
+        [Range(4,32)] public int moveCandidates=16;
+        [Min(0)] public float maxMoveDistance=6, maxMoveSeconds=3;
+        [Min(0)] public float safeWaterClearance=5, coverPreference=4, safetyPreference=1, moveImprovement=.2f;
+        [Min(0)] public float preferredRange=35, rangePreference=.08f, travelPenalty=.03f;
     }
 }

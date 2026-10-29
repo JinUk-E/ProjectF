@@ -41,7 +41,8 @@ namespace Fortress.Tests
                 Assert.That(role.appearance.portrait,Is.Not.Null);
                 Assert.That(picker.selectedPortrait.sprite,Is.SameAs(role.appearance.portrait));
                 Assert.That(picker.playerLabel.text,Is.EqualTo(KoreanUi.RoleName(role)));
-                Assert.That(picker.roleDescription.text,Is.EqualTo(KoreanUi.RoleDescription(role)));
+                Assert.That(picker.roleDescription.text,Does.StartWith(KoreanUi.RoleDescription(role)));
+                Assert.That(picker.roleDescription.text,Does.Contain("체력"));
                 Assert.That(picker.ammunitionLabel.text,Is.EqualTo(LoadoutMenu.AmmoDescription(role)));
                 for(int j=0;j<picker.roles.Length;j++)
                 {
@@ -100,7 +101,7 @@ namespace Fortress.Tests
             picker.playerCards[index].onClick.Invoke();
             var heavy=picker.roles[index];var standard=picker.roles[0];
             Assert.That(picker.playerLabel.text,Is.EqualTo("중장갑 전차"));
-            Assert.That(picker.roleDescription.text,Does.Contain("성능은 동일"));
+            Assert.That(picker.roleDescription.text,Does.Contain("느리지만 튼튼한"));
             Assert.That(heavy.basic,Is.SameAs(standard.basic));Assert.That(heavy.special,Is.SameAs(standard.special));
             Assert.That(heavy.specialRounds,Is.EqualTo(standard.specialRounds));
             Assert.That(heavy.appearance,Is.Not.Null);Assert.That(heavy.appearance,Is.Not.SameAs(standard.appearance));
@@ -127,7 +128,8 @@ namespace Fortress.Tests
             Assert.That(shots.SetAim(30,55,25),Is.True);
             Assert.That(view.rig.muzzle.localPosition,Is.EqualTo(muzzle));
             var match=Object.FindFirstObjectByType<MatchController>();
-            Assert.That(match.Tanks[0].Health,Is.EqualTo(match.Tanks[1].Health));
+            Assert.That(match.Tanks[0].Health,Is.EqualTo(130).Within(.01f));
+            Assert.That(match.Tanks[0].Health,Is.GreaterThan(match.Tanks[1].Health));
             var rest=view.gunParent.localPosition;
             Assert.That(shots.TryFire(),Is.True);yield return null;yield return new WaitForEndOfFrame();
             Assert.That(view.gunParent.localPosition.z,Is.LessThan(rest.z));

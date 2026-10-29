@@ -6,6 +6,7 @@ namespace Fortress
     public sealed class LoadoutMenu : MonoBehaviour
     {
         public TankLoadout[] roles;
+        public GameTuning tuning;
         public TMP_Text playerLabel,opponentLabel;
         public TMP_Text roleDescription, ammunitionLabel;
         public Image selectedPortrait;
@@ -32,7 +33,7 @@ namespace Fortress
             if(opponentLabel!=null) opponentLabel.text=Describe("상대 / 플레이어 2",roles[BattleLoadoutSelection.Opponent]);
             var appearance=role!=null?role.appearance:null;
             if(selectedPortrait!=null) { selectedPortrait.sprite=appearance!=null?appearance.portrait:null;selectedPortrait.enabled=selectedPortrait.sprite!=null; }
-            if(roleDescription!=null) roleDescription.text=KoreanUi.RoleDescription(role);
+            if(roleDescription!=null) roleDescription.text=DescribeRole(role);
             if(ammunitionLabel!=null) ammunitionLabel.text=AmmoDescription(role);
             if(selectionMarkers!=null) for(int i=0;i<selectionMarkers.Length;i++)
                 if(selectionMarkers[i]!=null) selectionMarkers[i].SetActive(i==BattleLoadoutSelection.Player);
@@ -42,6 +43,12 @@ namespace Fortress
         public static string AmmoDescription(TankLoadout role)
         {
             return KoreanUi.AmmoDescription(role);
+        }
+        public string DescribeRole(TankLoadout role)
+        {
+            var description=KoreanUi.RoleDescription(role);
+            if(role==null || tuning==null)return description;
+            return description+$"\n<size=70%>체력 {tuning.maxHealth*role.healthMultiplier:0} · 이동 {tuning.moveDistancePerTurn*role.movementMultiplier:0.#}m\n속도 {tuning.moveSpeed*role.speedMultiplier:0.#}m/s</size>";
         }
         static string Describe(string seat,TankLoadout role)=>seat+"   >   "+KoreanUi.RoleName(role)+"\n"+AmmoDescription(role)+"   [변경]";
     }

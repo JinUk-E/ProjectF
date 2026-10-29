@@ -117,7 +117,7 @@ namespace Fortress
             {
                 if(ai!=null && i==1) healthLabels[i].SetText("AI  /  체력 {0:0}",tanks[i].Health);
                 else healthLabels[i].SetText("플레이어 {0}  /  체력 {1:0}", i + 1, tanks[i].Health);
-                healthFills[i].fillAmount = tanks[i].Health / match.tuning.maxHealth;
+                healthFills[i].fillAmount = tanks[i].Health / tanks[i].MaxHealth;
                 if (style != null) healthFills[i].color = healthFills[i].fillAmount <= style.dangerHealthFraction ? style.danger : style.accent;
                 if (activeIndicators != null && i < activeIndicators.Length && activeIndicators[i] != null)
                     activeIndicators[i].enabled = match.State != MatchState.Ended && match.ActivePlayerIndex == i;
@@ -137,7 +137,7 @@ namespace Fortress
             if (tank != null && headingLabel != null) headingLabel.SetText("방위  {0:0.0}°", tank.Yaw);
             if (powerFill != null) powerFill.fillAmount = Mathf.InverseLerp(match.tuning.minPower, match.tuning.maxPower, shots.Power);
             if (powerLabel != null) powerLabel.SetText("{0:0.0}", shots.Power);
-            stateLabel.text = ended ? "대전 종료" : aiTurn && match.State==MatchState.Aim ? "AI 조준 중...  /  잠시 기다려 주세요" : match.State == MatchState.Aim ? "사격 준비  /  SPACE 발사" : "포탄 비행 중  /  조작 잠금";
+            stateLabel.text = ended ? "대전 종료" : aiTurn && match.State==MatchState.Aim ? (ai.IsMoving ? "AI 이동 중...  /  사격 위치 변경" : "AI 조준 중...  /  잠시 기다려 주세요") : match.State == MatchState.Aim ? "사격 준비  /  SPACE 발사" : "포탄 비행 중  /  조작 잠금";
             if (resultPanel.activeSelf != ended) resultPanel.SetActive(ended);
             if (ended) ClearNotice();
             if (!ended && match.State == MatchState.Aim && (displayedTurn != match.TurnNumber || displayedSeed != match.Seed))

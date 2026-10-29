@@ -11,6 +11,8 @@ namespace Fortress
         public float RemainingThinkSeconds { get; private set; }
         public int AiTurnNumber { get; private set; }
         public AiShotPlan LastPlan { get; private set; }
+        public AiMovePlan LastMovePlan { get; private set; }
+        public bool IsMoving { get; private set; }
         public event Action StateChanged;
         public bool OwnsCurrentTurn => isActiveAndEnabled && match!=null && match.isActiveAndEnabled && match.ActivePlayerIndex==1;
         MatchController subscribedMatch;
@@ -18,6 +20,8 @@ namespace Fortress
         int plannedGeneration,plannedTurn;
         int observedGeneration = int.MinValue;
         bool dispatching, deferredPlanning;
+        bool movementPending;
+        float moveRemaining,moveElapsed;
         void Awake() { CacheCamera(); }
         void OnEnable() { Subscribe(); HandleMatchState(); }
         void Start() { Subscribe(); HandleMatchState(); }
@@ -46,7 +50,7 @@ namespace Fortress
         }
         void CancelThinking()
         {
-            bool notify=IsThinking;IsThinking=false;RemainingThinkSeconds=0;deferredPlanning=false;
+            bool notify=IsThinking || IsMoving;IsThinking=false;IsMoving=false;movementPending=false;moveRemaining=0;moveElapsed=0;RemainingThinkSeconds=0;deferredPlanning=false;
             if(notify) StateChanged?.Invoke();
         }
         void HandleMatchState()
@@ -73,8 +77,10 @@ namespace Fortress
                     (special.purpose==AmmoPurpose.Excavation && match.Tanks[0].GroundHeight-match.terrainMap.Field.WaterHeight<=special.depth*role.specialRounds));
                 match.shots.SelectAmmo(useful && AiTurnNumber%2==0,true);
             }
-            LastPlan=AiShotPlanner.Plan(match.shots,match.Tanks[0].Center,settings,match.Seed,AiTurnNumber);
+            // Moving AI solves only after its final position, retaining the per-turn solver budget.
+            LastPlan=settings.enableMovement?default:AiShotPlanner.Plan(match.shots,match.Tanks[0].Center,settings,match.Seed,AiTurnNumber);
             RemainingThinkSeconds=Mathf.Clamp(settings.thinkSeconds,1,2);
+            movementPending=settings.enableMovement;LastMovePlan=default;
             IsThinking=true;StateChanged?.Invoke();
         }
         void Update()
@@ -82,6 +88,29 @@ namespace Fortress
             if(deferredPlanning && match!=null && match.shots!=null && !match.shots.GameplaySuspended)
             { deferredPlanning=false;HandleMatchState(); }
             TickThinking(Time.deltaTime);
+        }
+        void FixedUpdate() { TickMovement(Time.fixedDeltaTime); }
+        public void TickMovement(float deltaTime)
+        {
+            if(!IsMoving || match==null || match.shots==null || match.shots.GameplaySuspended || Time.timeScale<=0)return;
+            if(!OwnsCurrentTurn || match.State!=MatchState.Aim || plannedGeneration!=match.Generation || plannedTurn!=match.TurnNumber)
+            { CancelThinking();return; }
+            if(shotCamera!=null && shotCamera.isActiveAndEnabled && shotCamera.IsTracking)return;
+            if(float.IsNaN(deltaTime) || float.IsInfinity(deltaTime) || deltaTime<=0)return;
+            float dt=Mathf.Min(deltaTime,.1f);moveElapsed+=dt;
+            float before=match.MovementRemaining;
+            float speed=Mathf.Max(.01f,match.Tanks[match.ActivePlayerIndex].MoveSpeed);
+            bool moved=match.TryMoveActiveTank(LastMovePlan.Direction,Mathf.Min(dt,moveRemaining/speed));
+            moveRemaining=Mathf.Max(0,moveRemaining-(before-match.MovementRemaining));
+            if(moved && moveRemaining>.01f && moveElapsed<Mathf.Clamp(settings.maxMoveSeconds,.1f,5))return;
+            IsMoving=false;
+            // Re-solve from the real new muzzle, then preserve the entire thinking delay.
+            if(OwnsCurrentTurn && match.State==MatchState.Aim && plannedGeneration==match.Generation && plannedTurn==match.TurnNumber)
+            {
+                LastPlan=AiShotPlanner.Plan(match.shots,match.Tanks[0].Center,settings,match.Seed,AiTurnNumber);
+                RemainingThinkSeconds=Mathf.Clamp(settings.thinkSeconds,1,2);
+            }
+            StateChanged?.Invoke();
         }
         public void TickThinking(float deltaTime)
         {
@@ -93,6 +122,16 @@ namespace Fortress
             // Match enters Aim before that presentation ends; spending the delay there causes back-to-back pans.
             if(Time.timeScale<=0 || (shotCamera!=null && shotCamera.isActiveAndEnabled && shotCamera.IsTracking)) return;
             if(float.IsNaN(deltaTime) || float.IsInfinity(deltaTime) || deltaTime<0) return;
+            if(IsMoving)return;
+            if(movementPending)
+            {
+                movementPending=false;LastMovePlan=AiMovementPlanner.Plan(match,settings);
+                if(LastMovePlan.Distance>.01f && settings.maxMoveSeconds>0)
+                {
+                    moveRemaining=LastMovePlan.Distance;moveElapsed=0;IsMoving=true;StateChanged?.Invoke();return;
+                }
+                LastPlan=AiShotPlanner.Plan(match.shots,match.Tanks[0].Center,settings,match.Seed,AiTurnNumber);
+            }
             RemainingThinkSeconds=Mathf.Max(0,RemainingThinkSeconds-deltaTime);
             if(RemainingThinkSeconds>0) return;
             int expectedGeneration=plannedGeneration,expectedTurn=plannedTurn;

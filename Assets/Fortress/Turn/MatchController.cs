@@ -28,11 +28,14 @@ namespace Fortress
         public TankCombatant[] Tanks { get; private set; }
         public event Action StateChanged;
         public event Action<Vector3,float> TerrainImpactApplied;
+        public event Action<ShotResolution> ShotResolved;
+        public ShotResolution LastResolution { get; private set; }
+        AmmoPurpose shotPurpose;
         System.Random windRandom;
         bool initialized, restarting;
         FlatShotController subscribedShots;
         readonly List<Impact> impacts = new List<Impact>(8);
-        struct Impact { public Vector3 position; public float time; public int index; }
+        struct Impact { public Vector3 position; public float time; public int index,directTank; }
         static readonly Comparison<Impact> ImpactOrder = (a,b) => { int time=a.time.CompareTo(b.time);return time!=0?time:a.index.CompareTo(b.index); };
 
         void OnEnable()
@@ -100,7 +103,7 @@ namespace Fortress
             var positions=new Vector3[2];
             for(int i=0;i<2;i++)
             {
-                nextTanks[i]=new TankCombatant(shots.tanks[i],tuning);
+                nextTanks[i]=new TankCombatant(shots.tanks[i],tuning,shots.SelectedLoadoutForNewMatch(i));
                 bool found=false;
                 for(int attempt=0;attempt<Mathf.Max(1,tuning.spawnAttempts);attempt++)
                 {
@@ -125,6 +128,7 @@ namespace Fortress
                 WinnerIndex=-1;IsDraw=false;ActivePlayerIndex=0;TurnNumber=1;initialized=true;
                 // Commit coherent new-match state before BeginAim publishes any shot/UI events.
                 Generation++;
+                LastResolution=default;
                 State=MatchState.Aim;
                 Time.timeScale=1;
             }
@@ -135,7 +139,7 @@ namespace Fortress
         public void RestartMatch(int seed) { InitializeMatch(seed); }
         void BeginAim()
         {
-            MovementRemaining=tuning.movementEnabled?Mathf.Max(0,tuning.moveDistancePerTurn):0;
+            MovementRemaining=tuning.movementEnabled?Mathf.Max(0,Tanks[ActivePlayerIndex].MoveDistance):0;
             shots.InputEnabled=true;
             shots.SetActiveTank(ActivePlayerIndex);
             shots.SetSurface(new CombatShotSurface(terrainMap.Field,Tanks,ActivePlayerIndex,cover));
@@ -154,18 +158,35 @@ namespace Fortress
         };
         public bool TryMoveActiveTank(Vector2 worldDirection,float deltaTime)
         {
+            if(!Finite(deltaTime) || deltaTime<=0 || tuning==null || Tanks==null)return false;
+            float moved=PreviewMoveActiveTank(worldDirection,Tanks[ActivePlayerIndex].MoveSpeed*deltaTime,out var ground);
+            if(moved<=0)return false;
+            var tank=Tanks[ActivePlayerIndex];var direction=worldDirection.normalized;
+            float yaw=tank.Rig.Yaw,pitch=tank.Rig.Pitch;
+            tank.MoveOnGround(ground);
+            tank.Rig.transform.rotation=Quaternion.Euler(0,Mathf.Atan2(direction.x,direction.y)*Mathf.Rad2Deg,0);
+            tank.Rig.SetAim(yaw,pitch);
+            MovementRemaining=Mathf.Max(0,MovementRemaining-moved);
+            shots.SetAim(yaw,pitch,shots.Power);
+            StateChanged?.Invoke();
+            return true;
+        }
+        /// <summary>Shared dry-run locomotion, with no tank, budget, aim or terrain mutation.</summary>
+        public float PreviewMoveActiveTank(Vector2 worldDirection,float requestedDistance,out Vector3 endpoint)
+        {
+            endpoint=default;
             if(!initialized || !isActiveAndEnabled || State!=MatchState.Aim || tuning==null || !tuning.movementEnabled ||
                 (shots!=null && shots.GameplaySuspended) ||
                 shots==null || shots.IsFiring || !shots.InputEnabled || terrainMap==null || terrainMap.Field==null ||
-                terrainMap.Field.IsFrozen || MovementRemaining<=0 || !Finite(MovementRemaining) || !Finite(deltaTime) || deltaTime<=0 ||
+                terrainMap.Field.IsFrozen || MovementRemaining<=0 || !Finite(MovementRemaining) || !Finite(requestedDistance) || requestedDistance<=0 ||
                 !Finite(worldDirection.sqrMagnitude) || worldDirection.sqrMagnitude<=0 ||
-                !Finite(tuning.moveSpeed) || tuning.moveSpeed<=0 || !Finite(tuning.moveStep) || tuning.moveStep<=0 ||
-                !Finite(tuning.maxMoveSlopeDegrees) || !Finite(tuning.maxMoveStepHeight) || tuning.maxMoveStepHeight<0) return false;
+                !Finite(Tanks[ActivePlayerIndex].MoveSpeed) || Tanks[ActivePlayerIndex].MoveSpeed<=0 || !Finite(tuning.moveStep) || tuning.moveStep<=0 ||
+                !Finite(tuning.maxMoveSlopeDegrees) || !Finite(tuning.maxMoveStepHeight) || tuning.maxMoveStepHeight<0) return 0;
             var tank=Tanks[ActivePlayerIndex];
-            if(tank.IsDefeated) return false;
+            if(tank.IsDefeated) return 0;
             var field=terrainMap.Field;
             Vector2 direction=worldDirection.normalized;
-            float requested=Mathf.Min(MovementRemaining,tuning.moveSpeed*deltaTime);
+            float requested=Mathf.Min(MovementRemaining,requestedDistance);
             float stepLimit=Mathf.Clamp(tuning.moveStep,.01f,.25f);
             float slope=Mathf.Tan(Mathf.Clamp(tuning.maxMoveSlopeDegrees,0,89)*Mathf.Deg2Rad);
             Vector3 ground=tank.Rig.transform.position;ground.y=tank.GroundHeight;
@@ -186,15 +207,7 @@ namespace Fortress
                     BlockedByTank(ground,next,tank.Radius)) break;
                 ground=next;moved+=step;unsafeSamples=nextUnsafe;supportError=nextError;
             }
-            if(moved<=0) return false;
-            float yaw=tank.Rig.Yaw,pitch=tank.Rig.Pitch;
-            tank.MoveOnGround(ground);
-            tank.Rig.transform.rotation=Quaternion.Euler(0,Mathf.Atan2(direction.x,direction.y)*Mathf.Rad2Deg,0);
-            tank.Rig.SetAim(yaw,pitch);
-            MovementRemaining=Mathf.Max(0,MovementRemaining-moved);
-            shots.SetAim(yaw,pitch,shots.Power);
-            StateChanged?.Invoke();
-            return true;
+            endpoint=ground;return moved;
         }
         bool BlockedByTank(Vector3 from,Vector3 to,float radius)
         {
@@ -241,12 +254,26 @@ namespace Fortress
         void SetState(MatchState value) { State=value;StateChanged?.Invoke(); }
         void OnLaunched(ProjectileRunner runner)
         {
+            shotPurpose=shots.SelectedAmmo!=null?shots.SelectedAmmo.purpose:AmmoPurpose.HighExplosive;
             impacts.Clear();SetState(MatchState.Firing);
         }
         void OnImpacted(Vector3 position,float time,int index)
         {
-            impacts.Add(new Impact { position=position,time=time,index=index });
+            int direct=-1;
+            // World and tank capsules are still frozen here. Do not infer a direct hit from blast radius.
+            if(Tanks!=null) for(int i=0;i<Tanks.Length;i++)
+                if(i!=ActivePlayerIndex && !Tanks[i].IsDefeated && IsCapsuleImpact(position,Tanks[i]))
+                { direct=i;break; }
+            impacts.Add(new Impact { position=position,time=time,index=index,directTank=direct });
             SetState(MatchState.Resolving);
+        }
+        bool IsCapsuleImpact(Vector3 point,TankCombatant tank)
+        {
+            var center=tank.Center;float half=tank.Height*.5f-tank.Radius;
+            var axis=new Vector3(center.x,Mathf.Clamp(point.y,center.y-half,center.y+half),center.z);
+            float tolerance=Mathf.Min(.02f,Mathf.Max(0,tuning.impactTolerance));
+            float radius=tank.Radius+tolerance;
+            return (point-axis).sqrMagnitude<=radius*radius;
         }
         void ApplyImpacts()
         {
@@ -254,11 +281,17 @@ namespace Fortress
             SetState(MatchState.Applying);
             impacts.Sort(ImpactOrder);
             var ammo=shots.CurrentShotDamage;
+            float firstHealth=Tanks[0].Health,secondHealth=Tanks[1].Health;
+            bool firstDirect=false,secondDirect=false;
             foreach(var impact in impacts)
             {
                 // Evaluate shields against the intact world before this blast destroys cover.
-                foreach(var tank in Tanks)
+                for(int i=0;i<Tanks.Length;i++)
+                {
+                    var tank=Tanks[i];float before=tank.Health;
                     if(cover==null || !cover.Shields(impact.position,tank.Center)) tank.ApplyExplosion(impact.position,ammo.damage,ammo.radius);
+                    if(tank.Health<before && impact.directTank==i) { if(i==0)firstDirect=true;else secondDirect=true; }
+                }
                 if(cover!=null) cover.ApplyExplosion(impact.position,ammo.radius,ammo.buildingDamage);
                 // Projection is vertical: crater modifies the height grid at the impact XZ.
                 var region=terrainMap.Field.ApplyCrater(impact.position,ammo.radius,ammo.depth,ammo.rimHeight);
@@ -267,7 +300,12 @@ namespace Fortress
             }
             impacts.Clear();
             if(cover!=null) cover.SettleFoundations();
+            float firstAfterBlast=Tanks[0].Health,secondAfterBlast=Tanks[1].Health;
             foreach(var tank in Tanks) tank.Settle(terrainMap.Field,tuning.fallDamagePerMeter);
+            LastResolution=new ShotResolution(ActivePlayerIndex,Generation,TurnNumber,shotPurpose,
+                new TankDamageResult(0,Tanks[0].Center,firstHealth-firstAfterBlast,firstAfterBlast-Tanks[0].Health,firstDirect,Tanks[0].Drowned),
+                new TankDamageResult(1,Tanks[1].Center,secondHealth-secondAfterBlast,secondAfterBlast-Tanks[1].Health,secondDirect,Tanks[1].Drowned));
+            ShotResolved?.Invoke(LastResolution);
             SetState(MatchState.Judging);
         }
         void OnFinished()

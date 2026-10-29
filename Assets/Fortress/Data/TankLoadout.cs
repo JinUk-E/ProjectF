@@ -8,6 +8,7 @@ namespace Fortress
         public AmmoDefinition basic, special;
         public TankAppearance appearance;
         [Min(0)] public int specialRounds=3;
+        [Min(.1f)] public float healthMultiplier=1, movementMultiplier=1, speedMultiplier=1;
     }
     public static class BattleLoadoutSelection
     {

@@ -45,6 +45,10 @@ namespace Fortress.Tests
                 picker.NextOpponent();Readable(picker.opponentLabel);
             }
             AssertKoreanGlyphs(Object.FindFirstObjectByType<SessionMenu>().gameObject);
+            yield return new WaitForEndOfFrame();
+            System.IO.Directory.CreateDirectory("Docs/Validation");
+            ScreenCapture.CaptureScreenshot("Docs/Validation/combat-tank-menu.png");
+            yield return null;
         }
         [UnityTest] public IEnumerator Main_ManualAndConfirmationUseAvailableKoreanGlyphs()
         {

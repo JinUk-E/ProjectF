@@ -87,7 +87,7 @@ namespace Fortress.Tests
             Assert.That(match.State,Is.EqualTo(MatchState.Aim));
             Assert.That(match.TurnNumber,Is.EqualTo(1));
             Assert.That(hud.resultPanel.activeSelf,Is.False);
-            foreach(var tank in match.Tanks) Assert.That(tank.Health,Is.EqualTo(match.tuning.maxHealth));
+            foreach(var tank in match.Tanks) Assert.That(tank.Health,Is.EqualTo(tank.MaxHealth));
             Assert.That(match.terrainMap.Field,Is.Not.SameAs(previousField));
             Assert.That(match.terrainMap.Field.Revision,Is.Zero);
             match.RestartMatch(seed);

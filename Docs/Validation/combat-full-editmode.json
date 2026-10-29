@@ -1,0 +1,482 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "4abab8021dfe4256a5296032bfda33be",
+    "status": "succeeded",
+    "mode": "EditMode",
+    "started_unix_ms": 1793313482603,
+    "finished_unix_ms": 1793313489709,
+    "last_update_unix_ms": 1793313489709,
+    "progress": {
+      "completed": 49,
+      "total": 49,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1793313489474,
+      "last_finished_test_full_name": "Fortress.Tests.WaterHeightValidationTests.NonFiniteWater_RejectsHeightFieldAndTerrainBeforeClone(float.NegativeInfinity)",
+      "last_finished_unix_ms": 1793313489475,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 49,
+        "passed": 49,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 2.5095961,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "FrozenRimDoesNotChangeWorld_AndLegacyCraterNeverRaisesGround",
+          "fullName": "Fortress.Tests.CraterRimTests.FrozenRimDoesNotChangeWorld_AndLegacyCraterNeverRaisesGround",
+          "state": "Passed",
+          "durationSeconds": 0.0212026,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Rim_DepositsOutsideCraterAndBoundsRepeatedAccumulation",
+          "fullName": "Fortress.Tests.CraterRimTests.Rim_DepositsOutsideCraterAndBoundsRepeatedAccumulation",
+          "state": "Passed",
+          "durationSeconds": 0.0086201,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CancelShot_TerrainShot_DiscardsCraterAndUnlocksField",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.CancelShot_TerrainShot_DiscardsCraterAndUnlocksField",
+          "state": "Passed",
+          "durationSeconds": 0.0215991,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CancelShot_WhileFiring_ReleasesRunnerAndRemovesShotCallbacks",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.CancelShot_WhileFiring_ReleasesRunnerAndRemovesShotCallbacks",
+          "state": "Passed",
+          "durationSeconds": 0.0018865,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SetAim_OutOfRange_ClampsPitchPowerAndUsesWorldYaw",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.SetAim_OutOfRange_ClampsPitchPowerAndUsesWorldYaw",
+          "state": "Passed",
+          "durationSeconds": 0.0012186,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_DuringFlight_RejectsSecondShotAndAimWindChangesThenUnlocks",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_DuringFlight_RejectsSecondShotAndAimWindChangesThenUnlocks",
+          "state": "Passed",
+          "durationSeconds": 0.0014814,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(0.0f,45.0f,22.0f,0.0f)",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(0.0f,45.0f,22.0f,0.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0037377,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(90.0f,25.0f,30.0f,2.0f)",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(90.0f,25.0f,30.0f,2.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0008062,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(237.0f,70.0f,15.0f,-3.0f)",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(237.0f,70.0f,15.0f,-3.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0007049,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(359.0f,0.0f,5.0f,0.0f)",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_FlatSurface_ActualImpactMatchesPredictionWithinOneCentimetre(359.0f,0.0f,5.0f,0.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0005021,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_LeavesTerrainBounds_CompletesWithoutDiggingAtTimeout",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_LeavesTerrainBounds_CompletesWithoutDiggingAtTimeout",
+          "state": "Passed",
+          "durationSeconds": 0.0007509,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_NoSurfaceHit_FinishesAtConfiguredTimeLimit",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_NoSurfaceHit_FinishesAtConfiguredTimeLimit",
+          "state": "Passed",
+          "durationSeconds": 0.0007701,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryFire_TerrainShot_AppliesOnlyAfterFinishAndReaimMatchesChangedGround",
+          "fullName": "Fortress.Tests.FlatShotControllerTests.TryFire_TerrainShot_AppliesOnlyAfterFinishAndReaimMatchesChangedGround",
+          "state": "Passed",
+          "durationSeconds": 0.0038027,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CancelShot_DoesNotAdvanceTurnOrApplyDamage",
+          "fullName": "Fortress.Tests.MatchControllerTests.CancelShot_DoesNotAdvanceTurnOrApplyDamage",
+          "state": "Passed",
+          "durationSeconds": 0.017674,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CapsuleIntersection_UsesEarliestEntryAndExcludesShooter",
+          "fullName": "Fortress.Tests.MatchControllerTests.CapsuleIntersection_UsesEarliestEntryAndExcludesShooter",
+          "state": "Passed",
+          "durationSeconds": 0.0047621,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Impact_HoldsHealthAndTerrainUntilFinished_ThenJudgesWinner",
+          "fullName": "Fortress.Tests.MatchControllerTests.Impact_HoldsHealthAndTerrainUntilFinished_ThenJudgesWinner",
+          "state": "Passed",
+          "durationSeconds": 0.0077738,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InputDisabled_ImmediatelyHidesPreview",
+          "fullName": "Fortress.Tests.MatchControllerTests.InputDisabled_ImmediatelyHidesPreview",
+          "state": "Passed",
+          "durationSeconds": 0.009043,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidRestart_IsRejectedBeforeMutatingActiveMatch",
+          "fullName": "Fortress.Tests.MatchControllerTests.InvalidRestart_IsRejectedBeforeMutatingActiveMatch",
+          "state": "Passed",
+          "durationSeconds": 0.0051767,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Miss_CompletesAndAlternatesWithoutChangingWorld",
+          "fullName": "Fortress.Tests.MatchControllerTests.Miss_CompletesAndAlternatesWithoutChangingWorld",
+          "state": "Passed",
+          "durationSeconds": 0.0045581,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Restart_AfterDrowning_RestoresDryTerrainAndClearsDefeat",
+          "fullName": "Fortress.Tests.MatchControllerTests.Restart_AfterDrowning_RestoresDryTerrainAndClearsDefeat",
+          "state": "Passed",
+          "durationSeconds": 0.0049976,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Restart_AfterEnded_PublishesOnlyCoherentNewMatchState",
+          "fullName": "Fortress.Tests.MatchControllerTests.Restart_AfterEnded_PublishesOnlyCoherentNewMatchState",
+          "state": "Passed",
+          "durationSeconds": 0.0046728,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Restart_RestoresOriginalHeightsHealthSeedAndWind",
+          "fullName": "Fortress.Tests.MatchControllerTests.Restart_RestoresOriginalHeightsHealthSeedAndWind",
+          "state": "Passed",
+          "durationSeconds": 0.0084842,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SeededSpawnAndWind_AreReproducibleAndUseSeparateStreams",
+          "fullName": "Fortress.Tests.MatchControllerTests.SeededSpawnAndWind_AreReproducibleAndUseSeparateStreams",
+          "state": "Passed",
+          "durationSeconds": 0.0167241,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TankDamage_LinearFalloffAndFallDamage",
+          "fullName": "Fortress.Tests.MatchControllerTests.TankDamage_LinearFalloffAndFallDamage",
+          "state": "Passed",
+          "durationSeconds": 0.006133,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaterBoundary_SettlesOnlyAfterShotAndDefeatsWithHealthRemaining(3.999f,False)",
+          "fullName": "Fortress.Tests.MatchControllerTests.WaterBoundary_SettlesOnlyAfterShotAndDefeatsWithHealthRemaining(3.999f,False)",
+          "state": "Passed",
+          "durationSeconds": 0.0055079,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaterBoundary_SettlesOnlyAfterShotAndDefeatsWithHealthRemaining(4.0f,True)",
+          "fullName": "Fortress.Tests.MatchControllerTests.WaterBoundary_SettlesOnlyAfterShotAndDefeatsWithHealthRemaining(4.0f,True)",
+          "state": "Passed",
+          "durationSeconds": 0.0044092,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WaterBoundary_SettlesOnlyAfterShotAndDefeatsWithHealthRemaining(4.001f,True)",
+          "fullName": "Fortress.Tests.MatchControllerTests.WaterBoundary_SettlesOnlyAfterShotAndDefeatsWithHealthRemaining(4.001f,True)",
+          "state": "Passed",
+          "durationSeconds": 0.0042356,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Generate_ManySeeds_HasFiniteVaryingHeightsAndDryFlatSpawnAreas",
+          "fullName": "Fortress.Tests.SeededTerrainTests.Generate_ManySeeds_HasFiniteVaryingHeightsAndDryFlatSpawnAreas",
+          "state": "Passed",
+          "durationSeconds": 0.9793548,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Generate_SameSeedAfterCrater_RestoresPristineHeightsWithoutMutatingTemplate",
+          "fullName": "Fortress.Tests.SeededTerrainTests.Generate_SameSeedAfterCrater_RestoresPristineHeightsWithoutMutatingTemplate",
+          "state": "Passed",
+          "durationSeconds": 0.04532,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ApplyCrater_ClipsBoundsAndLowerHeight_LeavesOutsideRadiusUnchanged",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.ApplyCrater_ClipsBoundsAndLowerHeight_LeavesOutsideRadiusUnchanged",
+          "state": "Passed",
+          "durationSeconds": 0.0005913,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ApplyCrater_DuringShot_RejectsMutationUntilEndShot",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.ApplyCrater_DuringShot_RejectsMutationUntilEndShot",
+          "state": "Passed",
+          "durationSeconds": 0.0003802,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "HeightField_SourceChanges_DoNotMutateOwnedHeights",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.HeightField_SourceChanges_DoNotMutateOwnedHeights",
+          "state": "Passed",
+          "durationSeconds": 0.0004099,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Initialize_LowerBelowTerrainRepresentation_RejectsBeforeCloning",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.Initialize_LowerBelowTerrainRepresentation_RejectsBeforeCloning",
+          "state": "Passed",
+          "durationSeconds": 0.0010832,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryHit_BilinearRidgeBetweenAboveEndpoints_ReturnsFirstRoot",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.TryHit_BilinearRidgeBetweenAboveEndpoints_ReturnsFirstRoot",
+          "state": "Passed",
+          "durationSeconds": 0.0003904,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryHit_EntersMapFromOutside_FindsInsideIntersection",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.TryHit_EntersMapFromOutside_FindsInsideIntersection",
+          "state": "Passed",
+          "durationSeconds": 0.0009801,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryHit_FullyOutsideMap_DoesNotExtendGroundPlane",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.TryHit_FullyOutsideMap_DoesNotExtendGroundPlane",
+          "state": "Passed",
+          "durationSeconds": 0.000291,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryHit_LongSegmentAcrossMultipleCells_DoesNotSkipRidge",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.TryHit_LongSegmentAcrossMultipleCells_DoesNotSkipRidge",
+          "state": "Passed",
+          "durationSeconds": 0.0003224,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryHit_VerticalAndBoundarySegments_ReturnGround(0.0f,0.0f)",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.TryHit_VerticalAndBoundarySegments_ReturnGround(0.0f,0.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0005784,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryHit_VerticalAndBoundarySegments_ReturnGround(-2.0f,-2.0f)",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.TryHit_VerticalAndBoundarySegments_ReturnGround(-2.0f,-2.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000761,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TryHit_VerticalAndBoundarySegments_ReturnGround(2.0f,2.0f)",
+          "fullName": "Fortress.Tests.TerrainShotSurfaceTests.TryHit_VerticalAndBoundarySegments_ReturnGround(2.0f,2.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.000059,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FiniteWater_AcceptsLegacyBelowLowerAndReachableWater(-10.0f)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.FiniteWater_AcceptsLegacyBelowLowerAndReachableWater(-10.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0005378,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FiniteWater_AcceptsLegacyBelowLowerAndReachableWater(-8.0f)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.FiniteWater_AcceptsLegacyBelowLowerAndReachableWater(-8.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000641,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FiniteWater_AcceptsLegacyBelowLowerAndReachableWater(-4.0f)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.FiniteWater_AcceptsLegacyBelowLowerAndReachableWater(-4.0f)",
+          "state": "Passed",
+          "durationSeconds": 0.0000446,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NonFiniteLower_RejectsHeightField(float.NaN)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.NonFiniteLower_RejectsHeightField(float.NaN)",
+          "state": "Passed",
+          "durationSeconds": 0.0004583,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NonFiniteLower_RejectsHeightField(float.PositiveInfinity)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.NonFiniteLower_RejectsHeightField(float.PositiveInfinity)",
+          "state": "Passed",
+          "durationSeconds": 0.0000788,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NonFiniteLower_RejectsHeightField(float.NegativeInfinity)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.NonFiniteLower_RejectsHeightField(float.NegativeInfinity)",
+          "state": "Passed",
+          "durationSeconds": 0.0000545,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NonFiniteWater_RejectsHeightFieldAndTerrainBeforeClone(float.NaN)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.NonFiniteWater_RejectsHeightFieldAndTerrainBeforeClone(float.NaN)",
+          "state": "Passed",
+          "durationSeconds": 0.0013619,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NonFiniteWater_RejectsHeightFieldAndTerrainBeforeClone(float.PositiveInfinity)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.NonFiniteWater_RejectsHeightFieldAndTerrainBeforeClone(float.PositiveInfinity)",
+          "state": "Passed",
+          "durationSeconds": 0.0004376,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "NonFiniteWater_RejectsHeightFieldAndTerrainBeforeClone(float.NegativeInfinity)",
+          "fullName": "Fortress.Tests.WaterHeightValidationTests.NonFiniteWater_RejectsHeightFieldAndTerrainBeforeClone(float.NegativeInfinity)",
+          "state": "Passed",
+          "durationSeconds": 0.00041,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

@@ -30,6 +30,12 @@ namespace Fortress
         public ProjectileRunner SelectedPrefab => SelectedAmmo!=null?SelectedAmmo.projectilePrefab:projectilePrefab;
         public int ActiveFamilyCount => family.Count;
         public TankLoadout GetLoadout(int tankIndex) => loadouts!=null && tankIndex>=0 && tankIndex<loadouts.Length ? loadouts[tankIndex] : null;
+        public TankLoadout SelectedLoadoutForNewMatch(int tankIndex)
+        {
+            if(availableLoadouts==null || availableLoadouts.Length==0 || tankIndex<0 || tankIndex>1)return null;
+            int selection=tankIndex==0?BattleLoadoutSelection.Player:BattleLoadoutSelection.Opponent;
+            return availableLoadouts[Mathf.Clamp(selection,0,availableLoadouts.Length-1)];
+        }
         struct Member { public ProjectileRunner runner; public float start; public int index; }
         readonly List<Member> family=new List<Member>(8);
         int nextMemberIndex;
@@ -73,7 +79,7 @@ namespace Fortress
         {
             if(IsFiring) return;
             if(availableLoadouts==null || availableLoadouts.Length==0) { loadouts=null;specialRemaining=null;specialSelected=null;return; }
-            loadouts=new[]{availableLoadouts[Mathf.Clamp(BattleLoadoutSelection.Player,0,availableLoadouts.Length-1)],availableLoadouts[Mathf.Clamp(BattleLoadoutSelection.Opponent,0,availableLoadouts.Length-1)]};
+            loadouts=new[]{SelectedLoadoutForNewMatch(0),SelectedLoadoutForNewMatch(1)};
             specialRemaining=new int[2];specialSelected=new bool[2];
             for(int i=0;i<2;i++) specialRemaining[i]=loadouts[i]!=null?Mathf.Max(0,loadouts[i].specialRounds):0;
         }
