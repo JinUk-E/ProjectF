@@ -1,0 +1,131 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "4a2a4a22cfd64c4399fd9cc202db089c",
+    "status": "succeeded",
+    "mode": "PlayMode",
+    "started_unix_ms": 1793314291754,
+    "finished_unix_ms": 1793314312203,
+    "last_update_unix_ms": 1793314312203,
+    "progress": {
+      "completed": 10,
+      "total": 10,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1793314311121,
+      "last_finished_test_full_name": "Fortress.Tests.WebSessionTests.BrowserPause_FullscreenExitEscapeCannotResume_ButLaterEscapeCan",
+      "last_finished_unix_ms": 1793314312171,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "PlayMode",
+      "summary": {
+        "total": 10,
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 15.569591,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "Escape_OpensPauseCancelsConfirmationThenResumes",
+          "fullName": "Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes",
+          "state": "Passed",
+          "durationSeconds": 1.7456446,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MainMenu_RoundTripBothModesAndCancelsLiveShot",
+          "fullName": "Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot",
+          "state": "Passed",
+          "durationSeconds": 3.5710046,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_AiKeepsPendingPlanWithoutDispatching",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+          "state": "Passed",
+          "durationSeconds": 1.2125962,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_BlocksAimMovementCameraAndRestoresExactScale",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale",
+          "state": "Passed",
+          "durationSeconds": 1.0687398,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+          "state": "Passed",
+          "durationSeconds": 1.1632552,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "Pause_LateTurnEventDefersAiPlanningUntilResume",
+          "fullName": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+          "state": "Passed",
+          "durationSeconds": 0.981822,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BrowserPause_AfterRestartReassertsPauseWithoutLosingResumeScale",
+          "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_AfterRestartReassertsPauseWithoutLosingResumeScale",
+          "state": "Passed",
+          "durationSeconds": 1.4044224,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BrowserPause_DuplicateSignalsPreserveShotAndResumeState",
+          "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_DuplicateSignalsPreserveShotAndResumeState",
+          "state": "Passed",
+          "durationSeconds": 1.1252632,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BrowserPause_DuringNavigationUsesNewSceneAndDoesNotFreezeMainMenu",
+          "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_DuringNavigationUsesNewSceneAndDoesNotFreezeMainMenu",
+          "state": "Passed",
+          "durationSeconds": 2.2109201,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "BrowserPause_FullscreenExitEscapeCannotResume_ButLaterEscapeCan",
+          "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_FullscreenExitEscapeCannotResume_ButLaterEscapeCan",
+          "state": "Passed",
+          "durationSeconds": 1.0493054,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

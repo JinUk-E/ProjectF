@@ -29,20 +29,36 @@ namespace Fortress
         float previousScale = 1;
         bool previousAudioPause;
         bool previousHudInteractable;
+        int ignoreEscapeThroughFrame=-1;
         Selectable[] menuSelectables;
 
         void Awake() { menuSelectables=GetComponentsInChildren<Selectable>(true); }
         void Start() { RefreshNavigation();Select(primaryButton); }
         void Update()
         {
-            if(IsLoading || Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame) return;
+            if(IsLoading || Time.frameCount<=ignoreEscapeThroughFrame || Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame) return;
             if(IsConfirming) CancelConfirmation();
             else if(controlsPanel != null && controlsPanel.activeSelf) ShowControls(false);
             else if(!IsMainMenu) { if(IsPaused) Resume(); else Pause(); }
         }
+        public void PauseFromBrowser()
+        {
+            // Fullscreen exit may deliver its Esc key in this frame or the next input update.
+            // Keep that event from immediately toggling the just-opened pause menu closed.
+            ignoreEscapeThroughFrame=Mathf.Max(ignoreEscapeThroughFrame,Time.frameCount+1);
+            Pause();
+        }
         public void Pause()
         {
-            if(IsMainMenu || IsPaused || IsLoading) return;
+            if(IsMainMenu || IsLoading) return;
+            // Browser blur/visibility/fullscreen events can arrive together. Preserve the
+            // original resume state, but reassert suspension after a restart initialized time.
+            if(IsPaused)
+            {
+                if(match.shots != null) match.shots.GameplaySuspended = true;
+                Time.timeScale = 0;AudioListener.pause = true;
+                return;
+            }
             previousScale = Time.timeScale;
             previousAudioPause = AudioListener.pause;
             IsPaused = true;
