@@ -15,6 +15,13 @@ namespace Fortress.Editor
         static readonly string[] Models={"Tank2","Tank4","Tank3","Tank"};
         static readonly string[] Descriptions={"Versatile frontline tank. Reliable HE fire with no ammunition limit.","Heavy siege cannon. SHATTER rounds break cover and buildings.","Terrain specialist. DRILL rounds dig deeper to disrupt enemy footing.","Area support tank. CLUSTER rounds spread lighter blasts over a wide area."};
         sealed class Piece { public Mesh mesh; public int mount; public Material[] materials; }
+        [MenuItem("Fortress/Rebuild Tank Visual Assets Only")]
+        public static void RebuildVisuals()
+        {
+            if(EditorApplication.isPlayingOrWillChangePlaymode)throw new InvalidOperationException("Stop Play first.");
+            for(int i=0;i<4;i++)Build(i);
+            AssetDatabase.SaveAssets();
+        }
         [MenuItem("Fortress/Upgrade Tank Appearances")]
         public static void Upgrade()
         {
@@ -49,7 +56,12 @@ namespace Fortress.Editor
                     Mesh mesh;
                     if(renderer is SkinnedMeshRenderer skin){mesh=new Mesh();skin.BakeMesh(mesh);}
                     else {var filter=renderer.GetComponent<MeshFilter>();if(filter==null)continue;mesh=UnityEngine.Object.Instantiate(filter.sharedMesh);}
-                    var matrix=Matrix4x4.Rotate(Quaternion.Euler(0,-90,0))*renderer.localToWorldMatrix;
+                    // BakeMesh already includes the FBX renderer's scale. Applying it again
+                    // makes geometry 100x too large relative to the left/right track offsets.
+                    var toWorld=renderer is SkinnedMeshRenderer
+                        ?Matrix4x4.TRS(renderer.transform.position,renderer.transform.rotation,Vector3.one)
+                        :renderer.localToWorldMatrix;
+                    var matrix=Matrix4x4.Rotate(Quaternion.Euler(0,-90,0))*toWorld;
                     var vertices=mesh.vertices;for(int v=0;v<vertices.Length;v++)vertices[v]=matrix.MultiplyPoint3x4(vertices[v]);
                     mesh.vertices=vertices;mesh.RecalculateBounds();mesh.name=Roles[role]+"_"+renderer.name;
                     pieces.Add(new Piece{mesh=mesh,mount=renderer.name.Contains("Gun")?2:renderer.name.Contains("Turret")?1:0,materials=renderer.sharedMaterials});
@@ -73,7 +85,7 @@ namespace Fortress.Editor
                 foreach(var p in pieces)
                 {
                     var meshPath=Folder+p.mesh.name+".asset";var saved=AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
-                    if(saved==null){saved=p.mesh;AssetDatabase.CreateAsset(saved,meshPath);}else {EditorUtility.CopySerialized(p.mesh,saved);UnityEngine.Object.DestroyImmediate(p.mesh);}
+                    if(saved==null){saved=p.mesh;AssetDatabase.CreateAsset(saved,meshPath);}else {EditorUtility.CopySerialized(p.mesh,saved);saved.vertices=p.mesh.vertices;EditorUtility.SetDirty(saved);UnityEngine.Object.DestroyImmediate(p.mesh);}
                     p.mesh=null;
                     var a=new Material[p.materials.Length];var b=new Material[a.Length];
                     for(int m=0;m<a.Length;m++){string slot=p.materials[m].name;a[m]=Material(0,slot);b[m]=Material(1,slot);}
@@ -87,6 +99,7 @@ namespace Fortress.Editor
         static Material Material(int side,string slot)
         {
             string path=Folder+"Side"+side+"_"+slot+".mat";var mat=AssetDatabase.LoadAssetAtPath<Material>(path);
+            if(mat!=null)return mat; // Preserve the current art direction when rebuilding geometry.
             if(mat==null){mat=new Material(Shader.Find("Universal Render Pipeline/Lit"));AssetDatabase.CreateAsset(mat,path);}
             var color=side==0?new Color(.25f,.29f,.17f):new Color(.48f,.41f,.28f);
             bool metal=slot.Contains("Details")||slot.Contains("Wheels");
@@ -111,7 +124,8 @@ namespace Fortress.Editor
                 camera.transform.position=new Vector3(8,5,10);camera.transform.LookAt(new Vector3(0,1.1f,.4f));camera.orthographic=true;camera.orthographicSize=2.35f;camera.nearClipPlane=.1f;camera.farClipPlane=50;camera.targetTexture=rt;
                 foreach(var angle in new[]{new Vector3(40,-35,0),new Vector3(30,140,0)})
                 {var lightGo=new GameObject("Studio light",typeof(Light));SceneManager.MoveGameObjectToScene(lightGo,scene);var light=lightGo.GetComponent<Light>();light.type=LightType.Directional;light.intensity=1.5f;lightGo.transform.eulerAngles=angle;}
-                camera.Render();RenderTexture.active=rt;texture.ReadPixels(new Rect(0,0,1024,512),0,0);texture.Apply();
+                // The first render after a domain reload can only initialize the URP pipeline.
+                camera.Render();camera.Render();RenderTexture.active=rt;texture.ReadPixels(new Rect(0,0,1024,512),0,0);texture.Apply();
                 string path=Folder+Roles[role]+"Portrait.png";File.WriteAllBytes(path,texture.EncodeToPNG());AssetDatabase.ImportAsset(path);
                 var importer=(TextureImporter)AssetImporter.GetAtPath(path);importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;importer.mipmapEnabled=false;importer.alphaIsTransparency=false;importer.SaveAndReimport();
                 return AssetDatabase.LoadAssetAtPath<Sprite>(path);
