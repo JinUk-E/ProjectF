@@ -1,0 +1,23 @@
+{
+  "actor": "ui-developer-codex",
+  "passed": 16,
+  "failed": 0,
+  "tests": [
+    "PC stays desktop until the manual touch toggle",
+    "Ready handshake configures touch and large menu actions reach Unity",
+    "Pointer actions and tabs prevent focus theft without removing click handlers",
+    "Hold heartbeat terminates on pointerup",
+    "Hold heartbeat terminates on pointercancel",
+    "Hold heartbeat terminates on lostpointercapture",
+    "Multiple fingers preserve remaining axis when one releases",
+    "Epoch change clears locally without an endless ClearInput feedback loop",
+    "A real ClearInput acknowledgement advances epoch once and next hold is accepted",
+    "Turn and suspension disable combat while camera obeys its own authority",
+    "No-ammo disables special, confirmation and result expose complete flow",
+    "Held input clears on blur",
+    "Held input clears on visibilitychange",
+    "Held input clears on fortress-clear-input",
+    "Portrait pauses, landscape return remains paused until manual resume",
+    "Changing controls tab releases holds; no direct canvas gesture listener exists"
+  ]
+}

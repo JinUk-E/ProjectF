@@ -10,7 +10,7 @@ $source=[IO.Path]::GetFullPath((Join-Path $projectRoot $OutputDirectory))
 if(-not $source.StartsWith($allowed,[StringComparison]::OrdinalIgnoreCase)){throw 'Publication output must be inside project Builds.'}
 if(Test-Path -LiteralPath $source){throw 'Publication folder already exists; choose a new destination before repackaging.'}
 New-Item -ItemType Directory -Path $source | Out-Null
-foreach($name in @('index.html','Build','StreamingAssets','TemplateData')){
+foreach($name in @('index.html','mobile-controls.js','mobile.css','Build','StreamingAssets','TemplateData')){
     $item=Join-Path $raw $name
     if(Test-Path -LiteralPath $item){Copy-Item -LiteralPath $item -Destination $source -Recurse}
 }
@@ -41,5 +41,5 @@ if($unsafe.Count){throw 'Unexpected source/debug artifacts in web output; inspec
 $files=@(Get-ChildItem -LiteralPath $source -Recurse -File | Where-Object Name -ne 'release.json' | ForEach-Object {
     [ordered]@{path=[IO.Path]::GetRelativePath($source,$_.FullName).Replace('\','/');bytes=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLower()}
 })
-[ordered]@{platform='PC WebGL';sourceCommit=(git -C $projectRoot rev-parse HEAD);workingTreeAssetsMayDiffer=$true;actor='editor-tooling-codex';createdUtc=[DateTime]::UtcNow.ToString('o');files=$files} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $source 'release.json') -Encoding utf8
+[ordered]@{platform='PC / Mobile WebGL';sourceCommit=(git -C $projectRoot rev-parse HEAD);workingTreeAssetsMayDiffer=$true;actor='editor-tooling-codex';createdUtc=[DateTime]::UtcNow.ToString('o');files=$files} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $source 'release.json') -Encoding utf8
 $files | ForEach-Object {[pscustomobject]$_} | Format-Table path,bytes

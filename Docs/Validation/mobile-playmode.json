@@ -1,0 +1,260 @@
+{
+  "job_id": "be24faaa36d04d599ae5a5db78d7154f",
+  "status": "succeeded",
+  "mode": "PlayMode",
+  "started_unix_ms": 1793367101551,
+  "finished_unix_ms": 1793367141519,
+  "last_update_unix_ms": 1793367141519,
+  "progress": {
+    "completed": 25,
+    "total": 25,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": 1793367140409,
+    "last_finished_test_full_name": "Fortress.Tests.WebSessionTests.BrowserPause_FullscreenExitEscapeCannotResume_ButLaterEscapeCan",
+    "last_finished_unix_ms": 1793367141481,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "PlayMode",
+    "summary": {
+      "total": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 35.2300037,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "AiTurn_RejectsMoveAimFireAndAmmoCommands",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.AiTurn_RejectsMoveAimFireAndAmmoCommands",
+        "state": "Passed",
+        "durationSeconds": 3.3642721,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DesktopUiAndPerformance_AreRestoredWithoutOverwritingPause",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.DesktopUiAndPerformance_AreRestoredWithoutOverwritingPause",
+        "state": "Passed",
+        "durationSeconds": 1.0484519,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DisabledAdapterRejectsConfigurationAndCombatCommands",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.DisabledAdapterRejectsConfigurationAndCombatCommands",
+        "state": "Passed",
+        "durationSeconds": 1.0092138,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MainMenuSelectionAndAiEntry_AreAvailableWithoutCanvasClicks",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.MainMenuSelectionAndAiEntry_AreAvailableWithoutCanvasClicks",
+        "state": "Passed",
+        "durationSeconds": 2.2847299,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MatchResultRestartAndMainReturn_CompleteWithTouchCommands",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.MatchResultRestartAndMainReturn_CompleteWithTouchCommands",
+        "state": "Passed",
+        "durationSeconds": 1.9322391,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MissingSceneAndMalformedInput_AreSafeAndDisabled",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.MissingSceneAndMalformedInput_AreSafeAndDisabled",
+        "state": "Passed",
+        "durationSeconds": 1.0226486,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MobileMoveAimAmmoAndShot_UseActualRulesAndClearAtTurnBoundary",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.MobileMoveAimAmmoAndShot_UseActualRulesAndClearAtTurnBoundary",
+        "state": "Passed",
+        "durationSeconds": 1.277878,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PauseResumeAndLeaseExpiry_NeverResumeHeldInput",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.PauseResumeAndLeaseExpiry_NeverResumeHeldInput",
+        "state": "Passed",
+        "durationSeconds": 1.016064,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TouchCameraUsesExistingOrbitLimitsAndPauseGuard",
+        "fullName": "Fortress.Tests.MobileWebControlsTests.TouchCameraUsesExistingOrbitLimitsAndPauseGuard",
+        "state": "Passed",
+        "durationSeconds": 1.0392946,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Escape_OpensPauseCancelsConfirmationThenResumes",
+        "fullName": "Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes",
+        "state": "Passed",
+        "durationSeconds": 1.142301,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MainMenu_RoundTripBothModesAndCancelsLiveShot",
+        "fullName": "Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot",
+        "state": "Passed",
+        "durationSeconds": 3.558707,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Pause_AiKeepsPendingPlanWithoutDispatching",
+        "fullName": "Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching",
+        "state": "Passed",
+        "durationSeconds": 1.1297686,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Pause_BlocksAimMovementCameraAndRestoresExactScale",
+        "fullName": "Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale",
+        "state": "Passed",
+        "durationSeconds": 1.0194498,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+        "fullName": "Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes",
+        "state": "Passed",
+        "durationSeconds": 1.1469796,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Pause_LateTurnEventDefersAiPlanningUntilResume",
+        "fullName": "Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume",
+        "state": "Passed",
+        "durationSeconds": 0.9850732,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DirectSelection_DeploysIntoAiMatch",
+        "fullName": "Fortress.Tests.TankSelectionTests.DirectSelection_DeploysIntoAiMatch",
+        "state": "Passed",
+        "durationSeconds": 1.2728677,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DirectSelection_DeploysLocalAndSurvivesReturnToMenu",
+        "fullName": "Fortress.Tests.TankSelectionTests.DirectSelection_DeploysLocalAndSurvivesReturnToMenu",
+        "state": "Passed",
+        "durationSeconds": 1.6464109,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryCard_SelectsItsOwnRolePortraitAndExclusiveMarker",
+        "fullName": "Fortress.Tests.TankSelectionTests.EveryCard_SelectsItsOwnRolePortraitAndExclusiveMarker",
+        "state": "Passed",
+        "durationSeconds": 0.3409,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HeavySelection_DeploysAiWithMainBattleAmmoAndHeavyMounts",
+        "fullName": "Fortress.Tests.TankSelectionTests.HeavySelection_DeploysAiWithMainBattleAmmoAndHeavyMounts",
+        "state": "Passed",
+        "durationSeconds": 1.3620621,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HeavySelection_DeploysLocalWithMainBattleAmmoAndHeavyMounts",
+        "fullName": "Fortress.Tests.TankSelectionTests.HeavySelection_DeploysLocalWithMainBattleAmmoAndHeavyMounts",
+        "state": "Passed",
+        "durationSeconds": 1.3228931,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "Selection_InvalidIndicesIgnoredAndOpponentDoesNotChangePlayer",
+        "fullName": "Fortress.Tests.TankSelectionTests.Selection_InvalidIndicesIgnoredAndOpponentDoesNotChangePlayer",
+        "state": "Passed",
+        "durationSeconds": 0.3215904,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BrowserPause_AfterRestartReassertsPauseWithoutLosingResumeScale",
+        "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_AfterRestartReassertsPauseWithoutLosingResumeScale",
+        "state": "Passed",
+        "durationSeconds": 1.4448143,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BrowserPause_DuplicateSignalsPreserveShotAndResumeState",
+        "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_DuplicateSignalsPreserveShotAndResumeState",
+        "state": "Passed",
+        "durationSeconds": 1.1300779,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BrowserPause_DuringNavigationUsesNewSceneAndDoesNotFreezeMainMenu",
+        "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_DuringNavigationUsesNewSceneAndDoesNotFreezeMainMenu",
+        "state": "Passed",
+        "durationSeconds": 2.264926,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BrowserPause_FullscreenExitEscapeCannotResume_ButLaterEscapeCan",
+        "fullName": "Fortress.Tests.WebSessionTests.BrowserPause_FullscreenExitEscapeCannotResume_ButLaterEscapeCan",
+        "state": "Passed",
+        "durationSeconds": 1.0724473,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}
