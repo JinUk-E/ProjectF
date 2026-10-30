@@ -103,7 +103,7 @@ namespace Fortress
         {
             if(IsLoading) return;
             if(!IsMainMenu) Pause();
-            Confirm(Destination.Quit, "게임을 종료할까요?", IsMainMenu ? "프로젝트 F를 종료합니다." : "진행 중인 대전은 저장되지 않습니다.\n게임을 종료할까요?");
+            Confirm(Destination.Quit, "게임을 종료할까요?", IsMainMenu ? "제5병기창을 종료합니다." : "진행 중인 대전은 저장되지 않습니다.\n게임을 종료할까요?");
         }
         void Confirm(Destination destination, string title, string body)
         {

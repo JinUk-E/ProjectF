@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>별빛공방 · 제5병기창 연결안</title>
+<style>:root{color-scheme:light dark;font-family:system-ui,sans-serif}body{max-width:1050px;margin:auto;padding:28px;line-height:1.7}h1{font-size:36px}h2{font-size:27px}code,pre{background:#8882;padding:5px;overflow-wrap:anywhere}pre{white-space:pre-wrap;padding:20px}nav{display:flex;gap:24px;border-bottom:1px solid #8886;padding:14px 0}.selected{border-bottom:3px solid #f59a4a}.card{margin-top:28px;border:1px solid #8886;border-radius:18px;overflow:hidden}.copy{padding:28px}.tag{font-size:13px;border:1px solid #8886;border-radius:20px;padding:5px 12px}.button{display:inline-block;background:#ff9344;color:#17242b;border-radius:8px;padding:12px 24px;font-weight:700}.pending{padding:18px;background:#dd94151c;border-left:5px solid #dc951d}.ready{padding:18px;background:#25966519;border-left:5px solid #259665}table{border-collapse:collapse;width:100%;margin:25px 0}th,td{text-align:left;padding:12px;border:1px solid #8886}svg{display:block;width:100%;height:auto}.muted{opacity:.7}</style>
+<h1>공방에서 소개하고, 웹에서 바로 플레이</h1>
+<p>별빛공방 상단에 <strong>게임</strong> 탭을 두고, 첫 게임으로 <strong>제5병기창</strong>을 소개합니다. 플레이 버튼은 GitHub Pages의 게임 화면을 새 탭으로 엽니다. 아래는 연결할 내용과 화면 구성안입니다.</p>
+<div class="pending"><strong>연결 준비 중</strong> · 공방 주소·사이트 저장소와 공개할 게임 저장소가 확정되면 실제 링크를 넣습니다. 이 파일은 공방에 적용된 화면이 아닙니다.</div>
+<nav aria-label="공방 탭 구성 예시"><span>별빛공방</span><strong class="selected">게임</strong></nav>
+<article class="card">
+<svg viewBox="0 0 1000 320" role="img" aria-label="제5병기창 소개용 전차 도식"><rect width="1000" height="320" fill="#13242f"/><path d="M0 260 170 180 330 245 540 145 760 240 1000 170V320H0Z" fill="#29414b"/><circle cx="850" cy="64" r="100" fill="#ffad5422"/><g transform="translate(180 68)"><rect x="0" y="130" width="365" height="70" rx="30" fill="#0b151e" stroke="#76929d" stroke-width="5"/><path d="M30 95h290l60 60H0Z" fill="#39a9be"/><path d="M100 45h125l45 65H70Z" fill="#5bbacc"/><path d="m223 65 230 0v20H230Z" fill="#85c9d2"/><g fill="#314d5c"><circle cx="50" cy="166" r="20"/><circle cx="115" cy="166" r="20"/><circle cx="180" cy="166" r="20"/><circle cx="245" cy="166" r="20"/><circle cx="310" cy="166" r="20"/></g></g><text x="660" y="140" fill="#fff" font-family="sans-serif" font-size="40" font-weight="700">제5병기창</text><text x="660" y="180" fill="#b5ccd4" font-family="sans-serif" font-size="19">전장을 바꾸는 한 발.</text></svg>
+<div class="copy"><span class="tag">PC 웹 게임 · 개발 중 프리뷰</span><h2>제5병기창</h2><p>전차를 고르고, 포탄으로 지형과 엄폐물을 무너뜨리세요.<br>AI와 맞붙거나 같은 PC에서 친구와 번갈아 포격하는 3D 턴제 전차 게임입니다.</p><span class="button" aria-disabled="true">웹에서 플레이 · 주소 확정 후 연결</span><p class="muted">PC 키보드·마우스 필요 · AI 대전 / 로컬 2인 · 온라인 대전 미지원</p></div></article>
+<table><thead><tr><th>영역</th><th>적용 내용</th></tr></thead><tbody><tr><td>공방 상단 탭</td><td>게임 — 기존 공방 메뉴는 유지하고 탭 하나 추가</td></tr><tr><td>게임 카드</td><td>제5병기창 / 전장을 바꾸는 한 발. / 개발 중 프리뷰 표시</td></tr><tr><td>플레이 버튼</td><td>검증된 Pages HTTPS 주소를 새 탭으로 열기</td></tr><tr><td>조작법</td><td>방향키 이동, W/S 각도, A/D 방향, Q/E 위력, Space 발사, 우클릭 회전, 휠 줌, Esc 정지</td></tr><tr><td>업데이트 표시</td><td>전차 5종 · 탄종별 전술 · 파괴 가능한 지형과 엄폐물</td></tr><tr><td>게임 페이지</td><td>플레이/전체화면/정지/라이선스, 공방 주소 확정 후 복귀 링크</td></tr></tbody></table>
+<h2>공방 사이트에 연결할 버튼</h2><p><code>PLAY_URL</code>을 게시 후 검증된 주소로 교체합니다. 공방 프레임워크에 맞춰 카드와 탭의 스타일만 조정하면 됩니다.</p>
+<pre>&lt;a href="PLAY_URL" target="_blank" rel="noopener"&gt;
+  제5병기창 웹에서 플레이
+&lt;/a&gt;</pre>
+<div class="ready"><strong>운영 방식</strong> · 게임 실행 파일은 GitHub Pages에서 제공하므로 공방의 맥에는 게임 파일을 복사할 필요가 없습니다. 공방은 소개와 링크를 담당합니다.</div>
+<p class="muted">2026-10-30 · editor-tooling-codex · 실제 사이트 연결 및 브라우저 플레이 검증 대기</p></html>

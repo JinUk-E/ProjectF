@@ -84,7 +84,7 @@ namespace Fortress.Tests
             Assert.That(Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length,Is.EqualTo(1));
             menu.OpenControls();menu.CloseControls();menu.RequestQuit();
             Assert.That(menu.confirmationTitle.text,Is.EqualTo("게임을 종료할까요?"));
-            Assert.That(menu.confirmationBody.text,Is.EqualTo("프로젝트 F를 종료합니다."));
+            Assert.That(menu.confirmationBody.text,Is.EqualTo("제5병기창을 종료합니다."));
             menu.CancelConfirmation();Assert.That(menu.IsLoading,Is.False);
             menu.StartLocal();menu.StartAi(); // Duplicate click must keep the first destination.
             yield return WaitForScene(SessionMenu.LocalScene);

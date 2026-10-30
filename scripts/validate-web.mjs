@@ -3,7 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import zlib from 'node:zlib';
 import vm from 'node:vm';
-const root=path.resolve('Builds/WebPublish'),base='http://127.0.0.1:8173/';
+const root=path.resolve(process.argv[2]||'Builds/WebPublish'),base=process.argv[3]||'http://127.0.0.1:8173/';
 const release=JSON.parse(fs.readFileSync(path.join(root,'release.json'),'utf8').replace(/^\uFEFF/,''));
 const checked=[];
 for(const file of release.files){
@@ -23,6 +23,6 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 if(html.includes('{{{'))throw Error('Unexpanded template');
 new vm.Script(html.match(/<script>([\s\S]*?)<\/script>/)[1]);
 for(const match of html.matchAll(/Build\/([^'"\s]+)/g))if(!fs.existsSync(path.join(root,'Build',match[1])))throw Error(`Missing ${match[1]}`);
-const evidence={actor:'editor-tooling-codex',verifiedAt:new Date().toISOString(),httpAndCompression:'passed',browserGameplay:'not verified; Work local browser use disabled',publicDeployment:'pending confirmed destination',totalBytes:checked.reduce((sum,f)=>sum+f.bytes,0),files:checked};
-fs.writeFileSync('Docs/Validation/web-http-files.json',JSON.stringify(evidence,null,2)+'\n');
+const evidence={actor:'editor-tooling-codex',verifiedAt:new Date().toISOString(),baseUrl:base,sourceCommit:release.sourceCommit,httpAndCompression:'passed',browserGameplay:'not verified by this file-level check',totalBytes:checked.reduce((sum,f)=>sum+f.bytes,0),files:checked};
+fs.writeFileSync(process.argv[4]||'Docs/Validation/web-http-files.json',JSON.stringify(evidence,null,2)+'\n');
 console.log(JSON.stringify({files:checked.length,totalBytes:evidence.totalBytes,result:'HTTP/hash/gzip/wasm-header/template syntax passed'}));

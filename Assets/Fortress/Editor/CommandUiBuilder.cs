@@ -59,7 +59,7 @@ namespace Fortress.Editor
             picker.tuning=AssetDatabase.LoadAssetAtPath<GameTuning>("Assets/Fortress/Data/MatchTuning.asset");
             Box(root,"Top shade",0,0,1920,240,new Color(.025f,.035f,.045f,.85f));
             Box(root,"Bottom shade",0,786,1920,294,new Color(.025f,.035f,.045f,.85f));
-            Label(root,"Brand",72,50,900,64,"프로젝트 F",48,Text);
+            Label(root,"Brand",72,50,900,64,"제5병기창",48,Text);
             Label(root,"Subtitle",75,125,1000,40,"전술 포격전  /  출격 준비",23,Muted);
             Box(root,"Brand accent",73,206,58,4,Accent);
             Label(root,"Hangar number",146,193,650,32,"제 01 격납고     ·     전차를 선택하세요",18,Muted);
