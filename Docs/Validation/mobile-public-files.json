@@ -1,0 +1,107 @@
+{
+  "actor": "editor-tooling-codex",
+  "verifiedAt": "2026-10-30T13:46:33.901Z",
+  "baseUrl": "https://jinuk-e.github.io/ProjectF/",
+  "sourceCommit": "65dc71dcf910271e241aa4a2ad0cc297a1205477",
+  "httpAndCompression": "passed",
+  "browserGameplay": "not verified by this file-level check",
+  "totalBytes": 30968327,
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "status": 200,
+      "type": "application/octet-stream"
+    },
+    {
+      "path": "index.html",
+      "bytes": 12609,
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "mobile-controls.js",
+      "bytes": 8259,
+      "status": 200,
+      "type": "application/javascript; charset=utf-8"
+    },
+    {
+      "path": "mobile.css",
+      "bytes": 5013,
+      "status": 200,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "path": "Build/27481b62aa7a3cb9d03f23e402c05ea2.loader.js",
+      "bytes": 48106,
+      "status": 200,
+      "type": "application/javascript; charset=utf-8"
+    },
+    {
+      "path": "Build/30437a34ef725d2d81c4106ce6f81534.wasm.unityweb",
+      "bytes": 11714258,
+      "status": 200,
+      "type": "application/vnd.unity"
+    },
+    {
+      "path": "Build/95ff90fcba94e2dfd093a495b30300e8.framework.js.unityweb",
+      "bytes": 74473,
+      "status": 200,
+      "type": "application/vnd.unity"
+    },
+    {
+      "path": "Build/db131131c5c6971f0d954bd58d8755eb.data.unityweb",
+      "bytes": 19092753,
+      "status": 200,
+      "type": "application/vnd.unity"
+    },
+    {
+      "path": "Licenses/index.html",
+      "bytes": 987,
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "Licenses/KenneyParticles.txt",
+      "bytes": 651,
+      "status": 200,
+      "type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "Licenses/LiberationSans-OFL.txt",
+      "bytes": 4469,
+      "status": 200,
+      "type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "Licenses/NanumGothic-OFL.txt",
+      "bytes": 4534,
+      "status": 200,
+      "type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "Licenses/PolyforkShell.txt",
+      "bytes": 872,
+      "status": 200,
+      "type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "Licenses/PolyHavenBattlefield.txt",
+      "bytes": 510,
+      "status": 200,
+      "type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "Licenses/PolyHavenTerrain.txt",
+      "bytes": 469,
+      "status": 200,
+      "type": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "Licenses/QuaterniusTanks.txt",
+      "bytes": 364,
+      "status": 200,
+      "type": "text/plain; charset=utf-8"
+    }
+  ]
+}
