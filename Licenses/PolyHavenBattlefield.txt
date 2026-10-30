@@ -1,0 +1,10 @@
+Poly Haven CC0 textures, downloaded 2026-10-19 by editor-tooling-codex.
+https://polyhaven.com/license
+https://creativecommons.org/publicdomain/zero/1.0/
+Commercial use, modification and redistribution permitted.
+
+https://polyhaven.com/a/aerial_grass_rock
+https://polyhaven.com/a/brown_mud_leaves_01
+https://polyhaven.com/a/concrete_wall_009
+2K JPG diffuse and OpenGL normal maps. Downloads verified against official API MD5.
+Used for ground, roads and weathered building surfaces. No preview renders included.

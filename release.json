@@ -1,0 +1,89 @@
+{
+  "platform": "PC / Mobile WebGL",
+  "sourceCommit": "65dc71dcf910271e241aa4a2ad0cc297a1205477",
+  "workingTreeAssetsMayDiffer": true,
+  "actor": "editor-tooling-codex",
+  "createdUtc": "2026-10-30T13:42:16.5430352Z",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "index.html",
+      "bytes": 12609,
+      "sha256": "2e31546e5246b77158fda202ed503d2b433bd7ca3ece93cbd9d6d4125903fa68"
+    },
+    {
+      "path": "mobile-controls.js",
+      "bytes": 8259,
+      "sha256": "b362c71acd01b8b434252d6baefe15766480c2af051254194a9a37acfc7e61ee"
+    },
+    {
+      "path": "mobile.css",
+      "bytes": 5013,
+      "sha256": "a0c418891e9d441c87c094575c5008cda8087c47fc0cd555d7216cb305d34d91"
+    },
+    {
+      "path": "Build/27481b62aa7a3cb9d03f23e402c05ea2.loader.js",
+      "bytes": 48106,
+      "sha256": "d47fc73366fe559f6635f32bfed3b67def55d701c1a725c62b093ce85560a923"
+    },
+    {
+      "path": "Build/30437a34ef725d2d81c4106ce6f81534.wasm.unityweb",
+      "bytes": 11714258,
+      "sha256": "3530c6a1be7ad33cfab5c9605aac3ab5c30ed74dbc42dd52f6770ec7dfb56f6e"
+    },
+    {
+      "path": "Build/95ff90fcba94e2dfd093a495b30300e8.framework.js.unityweb",
+      "bytes": 74473,
+      "sha256": "1a9a2d3457c4c5e818439a4c70fa1b66aa191c685ad01f010192f543604a87fb"
+    },
+    {
+      "path": "Build/db131131c5c6971f0d954bd58d8755eb.data.unityweb",
+      "bytes": 19092753,
+      "sha256": "aa126f3dafee33e7c6452ad9e21ef9dbf049b4c9a072d8f21e9807acc0ee20b5"
+    },
+    {
+      "path": "Licenses/index.html",
+      "bytes": 987,
+      "sha256": "053e2fb9b1e3be10fc219b7e7f9fc6be868551219582217d4ebe477f72c73c9d"
+    },
+    {
+      "path": "Licenses/KenneyParticles.txt",
+      "bytes": 651,
+      "sha256": "f9e70b81d8cc07c4e07c9f2eff1d94fd371a06070b18cb67c651c41158ec2975"
+    },
+    {
+      "path": "Licenses/LiberationSans-OFL.txt",
+      "bytes": 4469,
+      "sha256": "37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48"
+    },
+    {
+      "path": "Licenses/NanumGothic-OFL.txt",
+      "bytes": 4534,
+      "sha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f"
+    },
+    {
+      "path": "Licenses/PolyforkShell.txt",
+      "bytes": 872,
+      "sha256": "ae8819d64d57e0edfddc3140ea3af7e6976d7feff791d23f64b6e2f9beff5b96"
+    },
+    {
+      "path": "Licenses/PolyHavenBattlefield.txt",
+      "bytes": 510,
+      "sha256": "4659121c1fbe040fe793ac8cdabd5463972fe3cc0d5725e12f52f25a91bbffc0"
+    },
+    {
+      "path": "Licenses/PolyHavenTerrain.txt",
+      "bytes": 469,
+      "sha256": "bf45b72ede018bbe11a817a0b77cb2d8bdd2df7c769b7048c8770a00fdbe5676"
+    },
+    {
+      "path": "Licenses/QuaterniusTanks.txt",
+      "bytes": 364,
+      "sha256": "83d8959f9fc56353ed571fbe2dc52e4bcd64508e2399501cd45ac2ce3df0bf8c"
+    }
+  ]
+}

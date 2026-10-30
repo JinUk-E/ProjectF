@@ -1,0 +1,8 @@
+Rocky Terrain by Amal Kumar / Poly Haven
+Source: https://polyhaven.com/a/rocky_terrain
+License: CC0 1.0 Universal (public domain dedication)
+License information: https://polyhaven.com/license
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Retrieved 2026-10-17 by editor-tooling-codex for ProjectF.
+Files: rocky_terrain_diff_2k.jpg, rocky_terrain_nor_gl_2k.jpg
+Only asset textures are redistributed here; site preview renders are not included.
