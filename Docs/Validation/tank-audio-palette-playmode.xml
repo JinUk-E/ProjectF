@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="28" result="Passed" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-05 12:32:34Z" end-time="2026-11-05 12:33:18Z" duration="43.6271188">
+  <test-suite type="TestSuite" id="1185" name="ProjectF" fullname="ProjectF" runstate="Runnable" testcasecount="147" result="Passed" start-time="2026-11-05 12:32:34Z" end-time="2026-11-05 12:33:18Z" duration="43.627119" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1179" name="Fortress.PlayModeTests.dll" fullname="D:/MoraeGames/01.Unity/ProjectF/Library/ScriptAssemblies/Fortress.PlayModeTests.dll" runstate="Runnable" testcasecount="147" result="Passed" start-time="2026-11-05 12:32:34Z" end-time="2026-11-05 12:33:18Z" duration="43.618248" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="27740" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1180" name="Fortress" fullname="Fortress" runstate="Runnable" testcasecount="147" result="Passed" start-time="2026-11-05 12:32:34Z" end-time="2026-11-05 12:33:18Z" duration="43.615321" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1181" name="Tests" fullname="Fortress.Tests" runstate="Runnable" testcasecount="147" result="Passed" start-time="2026-11-05 12:32:34Z" end-time="2026-11-05 12:33:18Z" duration="43.605292" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1010" name="AiMovementTests" fullname="Fortress.Tests.AiMovementTests" classname="Fortress.Tests.AiMovementTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-05 12:32:34Z" end-time="2026-11-05 12:32:42Z" duration="8.023221" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1012" name="Ai_WaitsForCamera_MovesWithinBudget_ThenThinksFullDelayAndFires" fullname="Fortress.Tests.AiMovementTests.Ai_WaitsForCamera_MovesWithinBudget_ThenThinksFullDelayAndFires" methodname="Ai_WaitsForCamera_MovesWithinBudget_ThenThinksFullDelayAndFires" classname="Fortress.Tests.AiMovementTests" runstate="Runnable" seed="113160632" result="Passed" start-time="2026-11-05 12:32:34Z" end-time="2026-11-05 12:32:36Z" duration="2.014093" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="Movement_PauseAndRestartCancelWithoutTeleportOrDelayedShot" fullname="Fortress.Tests.AiMovementTests.Movement_PauseAndRestartCancelWithoutTeleportOrDelayedShot" methodname="Movement_PauseAndRestartCancelWithoutTeleportOrDelayedShot" classname="Fortress.Tests.AiMovementTests" runstate="Runnable" seed="412924515" result="Passed" start-time="2026-11-05 12:32:36Z" end-time="2026-11-05 12:32:38Z" duration="1.651026" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="Plan_IsDeterministicSafeAndDoesNotMutateLiveWorld" fullname="Fortress.Tests.AiMovementTests.Plan_IsDeterministicSafeAndDoesNotMutateLiveWorld" methodname="Plan_IsDeterministicSafeAndDoesNotMutateLiveWorld" classname="Fortress.Tests.AiMovementTests" runstate="Runnable" seed="1157765238" result="Passed" start-time="2026-11-05 12:32:38Z" end-time="2026-11-05 12:32:39Z" duration="1.263240" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1015" name="Planner_PrefersReachableCoverOverUnprotectedApproach" fullname="Fortress.Tests.AiMovementTests.Planner_PrefersReachableCoverOverUnprotectedApproach" methodname="Planner_PrefersReachableCoverOverUnprotectedApproach" classname="Fortress.Tests.AiMovementTests" runstate="Runnable" seed="1422260966" result="Passed" start-time="2026-11-05 12:32:39Z" end-time="2026-11-05 12:32:41Z" duration="1.741001" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: Discovered 19 MCP resources via reflection
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: Discovered 19 MCP resources via reflection
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: Discovered 35 MCP tools via reflection
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: Discovered 35 MCP tools via reflection
+]]></output>
+            </test-case>
+            <test-case id="1014" name="SharedMovementProbe_StopsAtMapEdgeExactlyLikeActualMovement" fullname="Fortress.Tests.AiMovementTests.SharedMovementProbe_StopsAtMapEdgeExactlyLikeActualMovement" methodname="SharedMovementProbe_StopsAtMapEdgeExactlyLikeActualMovement" classname="Fortress.Tests.AiMovementTests" runstate="Runnable" seed="2018702187" result="Passed" start-time="2026-11-05 12:32:41Z" end-time="2026-11-05 12:32:42Z" duration="1.341177" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1053" name="CombatFeedbackTests" fullname="Fortress.Tests.CombatFeedbackTests" classname="Fortress.Tests.CombatFeedbackTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-05 12:32:42Z" end-time="2026-11-05 12:32:50Z" duration="7.315052" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1057" name="ActualHit_CaptureReadableFeedback" fullname="Fortress.Tests.CombatFeedbackTests.ActualHit_CaptureReadableFeedback" methodname="ActualHit_CaptureReadableFeedback" classname="Fortress.Tests.CombatFeedbackTests" runstate="Runnable" seed="621816532" result="Passed" start-time="2026-11-05 12:32:42Z" end-time="2026-11-05 12:32:44Z" duration="1.410572" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1054" name="ActualHit_ReportsHpDeltaOnce_AndPauseRestartClearPresentation" fullname="Fortress.Tests.CombatFeedbackTests.ActualHit_ReportsHpDeltaOnce_AndPauseRestartClearPresentation" methodname="ActualHit_ReportsHpDeltaOnce_AndPauseRestartClearPresentation" classname="Fortress.Tests.CombatFeedbackTests" runstate="Runnable" seed="748936166" result="Passed" start-time="2026-11-05 12:32:44Z" end-time="2026-11-05 12:32:46Z" duration="2.286192" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1056" name="Cluster_ResolvesOneFamilyNotice_AndImpactStylesAreDistinct" fullname="Fortress.Tests.CombatFeedbackTests.Cluster_ResolvesOneFamilyNotice_AndImpactStylesAreDistinct" methodname="Cluster_ResolvesOneFamilyNotice_AndImpactStylesAreDistinct" classname="Fortress.Tests.CombatFeedbackTests" runstate="Runnable" seed="885615082" result="Passed" start-time="2026-11-05 12:32:46Z" end-time="2026-11-05 12:32:48Z" duration="1.701339" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1055" name="NearbyBlast_IsNotDirect_AndCancelledShotHasNoDamageNotice" fullname="Fortress.Tests.CombatFeedbackTests.NearbyBlast_IsNotDirect_AndCancelledShotHasNoDamageNotice" methodname="NearbyBlast_IsNotDirect_AndCancelledShotHasNoDamageNotice" classname="Fortress.Tests.CombatFeedbackTests" runstate="Runnable" seed="1424606148" result="Passed" start-time="2026-11-05 12:32:48Z" end-time="2026-11-05 12:32:50Z" duration="1.890879" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1123" name="SessionMenuTests" fullname="Fortress.Tests.SessionMenuTests" classname="Fortress.Tests.SessionMenuTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-05 12:32:50Z" end-time="2026-11-05 12:32:59Z" duration="9.419228" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1129" name="Escape_OpensPauseCancelsConfirmationThenResumes" fullname="Fortress.Tests.SessionMenuTests.Escape_OpensPauseCancelsConfirmationThenResumes" methodname="Escape_OpensPauseCancelsConfirmationThenResumes" classname="Fortress.Tests.SessionMenuTests" runstate="Runnable" seed="1088100842" result="Passed" start-time="2026-11-05 12:32:50Z" end-time="2026-11-05 12:32:51Z" duration="1.228374" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1127" name="MainMenu_RoundTripBothModesAndCancelsLiveShot" fullname="Fortress.Tests.SessionMenuTests.MainMenu_RoundTripBothModesAndCancelsLiveShot" methodname="MainMenu_RoundTripBothModesAndCancelsLiveShot" classname="Fortress.Tests.SessionMenuTests" runstate="Runnable" seed="697995006" result="Passed" start-time="2026-11-05 12:32:51Z" end-time="2026-11-05 12:32:54Z" duration="3.565195" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1126" name="Pause_AiKeepsPendingPlanWithoutDispatching" fullname="Fortress.Tests.SessionMenuTests.Pause_AiKeepsPendingPlanWithoutDispatching" methodname="Pause_AiKeepsPendingPlanWithoutDispatching" classname="Fortress.Tests.SessionMenuTests" runstate="Runnable" seed="1031921037" result="Passed" start-time="2026-11-05 12:32:54Z" end-time="2026-11-05 12:32:56Z" duration="1.339994" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1124" name="Pause_BlocksAimMovementCameraAndRestoresExactScale" fullname="Fortress.Tests.SessionMenuTests.Pause_BlocksAimMovementCameraAndRestoresExactScale" methodname="Pause_BlocksAimMovementCameraAndRestoresExactScale" classname="Fortress.Tests.SessionMenuTests" runstate="Runnable" seed="1583870604" result="Passed" start-time="2026-11-05 12:32:56Z" end-time="2026-11-05 12:32:57Z" duration="1.006834" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1125" name="Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes" fullname="Fortress.Tests.SessionMenuTests.Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes" methodname="Pause_InFlightPreservesRunnerAndFrozenTerrainThenResumes" classname="Fortress.Tests.SessionMenuTests" runstate="Runnable" seed="743137914" result="Passed" start-time="2026-11-05 12:32:57Z" end-time="2026-11-05 12:32:58Z" duration="1.183745" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1128" name="Pause_LateTurnEventDefersAiPlanningUntilResume" fullname="Fortress.Tests.SessionMenuTests.Pause_LateTurnEventDefersAiPlanningUntilResume" methodname="Pause_LateTurnEventDefersAiPlanningUntilResume" classname="Fortress.Tests.SessionMenuTests" runstate="Runnable" seed="1339625270" result="Passed" start-time="2026-11-05 12:32:58Z" end-time="2026-11-05 12:32:59Z" duration="1.077842" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1141" name="TankAppearanceTests" fullname="Fortress.Tests.TankAppearanceTests" classname="Fortress.Tests.TankAppearanceTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-05 12:32:59Z" end-time="2026-11-05 12:33:02Z" duration="2.842013" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1143" name="NewCannon_FollowsAimAndRecoilWithoutMovingMuzzle" fullname="Fortress.Tests.TankAppearanceTests.NewCannon_FollowsAimAndRecoilWithoutMovingMuzzle" methodname="NewCannon_FollowsAimAndRecoilWithoutMovingMuzzle" classname="Fortress.Tests.TankAppearanceTests" runstate="Runnable" seed="1924184929" result="Passed" start-time="2026-11-05 12:32:59Z" end-time="2026-11-05 12:33:00Z" duration="1.253372" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1142" name="SelectedModels_UseCorrectMountsAndSideMaterials_RestartDoesNotDuplicate" fullname="Fortress.Tests.TankAppearanceTests.SelectedModels_UseCorrectMountsAndSideMaterials_RestartDoesNotDuplicate" methodname="SelectedModels_UseCorrectMountsAndSideMaterials_RestartDoesNotDuplicate" classname="Fortress.Tests.TankAppearanceTests" runstate="Runnable" seed="1041854106" result="Passed" start-time="2026-11-05 12:33:00Z" end-time="2026-11-05 12:33:02Z" duration="1.585469" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1144" name="TankAudioPaletteTests" fullname="Fortress.Tests.TankAudioPaletteTests" classname="Fortress.Tests.TankAudioPaletteTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-05 12:33:02Z" end-time="2026-11-05 12:33:11Z" duration="9.130986" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1147" name="ActualShotStopsMovement_PlaysImpactAndKeepsOriginalCannon" fullname="Fortress.Tests.TankAudioPaletteTests.ActualShotStopsMovement_PlaysImpactAndKeepsOriginalCannon" methodname="ActualShotStopsMovement_PlaysImpactAndKeepsOriginalCannon" classname="Fortress.Tests.TankAudioPaletteTests" runstate="Runnable" seed="1646179393" result="Passed" start-time="2026-11-05 12:33:02Z" end-time="2026-11-05 12:33:03Z" duration="1.261517" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1148" name="ClusterImpactsKeepGameplayButLimitSameFrameAudio" fullname="Fortress.Tests.TankAudioPaletteTests.ClusterImpactsKeepGameplayButLimitSameFrameAudio" methodname="ClusterImpactsKeepGameplayButLimitSameFrameAudio" classname="Fortress.Tests.TankAudioPaletteTests" runstate="Runnable" seed="800898009" result="Passed" start-time="2026-11-05 12:33:03Z" end-time="2026-11-05 12:33:05Z" duration="2.057036" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1145" name="CommittedMovementFadesIn_ThenBlockedMovementFadesOut" fullname="Fortress.Tests.TankAudioPaletteTests.CommittedMovementFadesIn_ThenBlockedMovementFadesOut" methodname="CommittedMovementFadesIn_ThenBlockedMovementFadesOut" classname="Fortress.Tests.TankAudioPaletteTests" runstate="Runnable" seed="1041071611" result="Passed" start-time="2026-11-05 12:33:05Z" end-time="2026-11-05 12:33:07Z" duration="1.287422" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1146" name="PauseRestartDisableAndSpawnNeverLeaveEngineRunning" fullname="Fortress.Tests.TankAudioPaletteTests.PauseRestartDisableAndSpawnNeverLeaveEngineRunning" methodname="PauseRestartDisableAndSpawnNeverLeaveEngineRunning" classname="Fortress.Tests.TankAudioPaletteTests" runstate="Runnable" seed="1242025617" result="Passed" start-time="2026-11-05 12:33:07Z" end-time="2026-11-05 12:33:09Z" duration="1.989203" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1149" name="StoredLoopsAndArmorAreReadyInBothBattleScenes" fullname="Fortress.Tests.TankAudioPaletteTests.StoredLoopsAndArmorAreReadyInBothBattleScenes" methodname="StoredLoopsAndArmorAreReadyInBothBattleScenes" classname="Fortress.Tests.TankAudioPaletteTests" runstate="Runnable" seed="1824296868" result="Passed" start-time="2026-11-05 12:33:09Z" end-time="2026-11-05 12:33:11Z" duration="2.532582" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1155" name="TankSelectionTests" fullname="Fortress.Tests.TankSelectionTests" classname="Fortress.Tests.TankSelectionTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-05 12:33:11Z" end-time="2026-11-05 12:33:18Z" duration="6.860557" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1158" name="DirectSelection_DeploysIntoAiMatch" fullname="Fortress.Tests.TankSelectionTests.DirectSelection_DeploysIntoAiMatch" methodname="DirectSelection_DeploysIntoAiMatch" classname="Fortress.Tests.TankSelectionTests" runstate="Runnable" seed="1996848741" result="Passed" start-time="2026-11-05 12:33:11Z" end-time="2026-11-05 12:33:12Z" duration="1.359059" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1159" name="DirectSelection_DeploysLocalAndSurvivesReturnToMenu" fullname="Fortress.Tests.TankSelectionTests.DirectSelection_DeploysLocalAndSurvivesReturnToMenu" methodname="DirectSelection_DeploysLocalAndSurvivesReturnToMenu" classname="Fortress.Tests.TankSelectionTests" runstate="Runnable" seed="2143554870" result="Passed" start-time="2026-11-05 12:33:12Z" end-time="2026-11-05 12:33:14Z" duration="1.730088" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1156" name="EveryCard_SelectsItsOwnRolePortraitAndExclusiveMarker" fullname="Fortress.Tests.TankSelectionTests.EveryCard_SelectsItsOwnRolePortraitAndExclusiveMarker" methodname="EveryCard_SelectsItsOwnRolePortraitAndExclusiveMarker" classname="Fortress.Tests.TankSelectionTests" runstate="Runnable" seed="657208816" result="Passed" start-time="2026-11-05 12:33:14Z" end-time="2026-11-05 12:33:15Z" duration="0.354542" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1160" name="HeavySelection_DeploysAiWithMainBattleAmmoAndHeavyMounts" fullname="Fortress.Tests.TankSelectionTests.HeavySelection_DeploysAiWithMainBattleAmmoAndHeavyMounts" methodname="HeavySelection_DeploysAiWithMainBattleAmmoAndHeavyMounts" classname="Fortress.Tests.TankSelectionTests" runstate="Runnable" seed="1882024640" result="Passed" start-time="2026-11-05 12:33:15Z" end-time="2026-11-05 12:33:16Z" duration="1.562296" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1161" name="HeavySelection_DeploysLocalWithMainBattleAmmoAndHeavyMounts" fullname="Fortress.Tests.TankSelectionTests.HeavySelection_DeploysLocalWithMainBattleAmmoAndHeavyMounts" methodname="HeavySelection_DeploysLocalWithMainBattleAmmoAndHeavyMounts" classname="Fortress.Tests.TankSelectionTests" runstate="Runnable" seed="432335645" result="Passed" start-time="2026-11-05 12:33:16Z" end-time="2026-11-05 12:33:18Z" duration="1.447872" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1157" name="Selection_InvalidIndicesIgnoredAndOpponentDoesNotChangePlayer" fullname="Fortress.Tests.TankSelectionTests.Selection_InvalidIndicesIgnoredAndOpponentDoesNotChangePlayer" methodname="Selection_InvalidIndicesIgnoredAndOpponentDoesNotChangePlayer" classname="Fortress.Tests.TankSelectionTests" runstate="Runnable" seed="1008231612" result="Passed" start-time="2026-11-05 12:33:18Z" end-time="2026-11-05 12:33:18Z" duration="0.401010" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: C:/Users/jjw68/AppData/LocalLow/DefaultCompany/ProjectF\TestResults.xml
+Saving results to: C:/Users/jjw68/AppData/LocalLow/DefaultCompany/ProjectF\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

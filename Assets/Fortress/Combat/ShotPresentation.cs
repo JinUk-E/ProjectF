@@ -16,6 +16,8 @@ namespace Fortress
         int recoiling = -1;
         float elapsed;
         AmmoPurpose shotPurpose;
+        float nextImpactAudio;
+        public int ImpactSoundsPlayed { get; private set; }
         void Awake()
         {
             restPositions = new Vector3[gunVisuals.Length];
@@ -35,6 +37,7 @@ namespace Fortress
         }
         void Cancelled()
         {
+            nextImpactAudio=0;
             if(shotAudio!=null) shotAudio.Stop();
             if(impactAudio!=null) impactAudio.Stop();
             Restore();
@@ -43,6 +46,7 @@ namespace Fortress
         }
         void Launched(ProjectileRunner runner)
         {
+            nextImpactAudio=0;
             shotPurpose=shots.SelectedAmmo!=null?shots.SelectedAmmo.purpose:AmmoPurpose.HighExplosive;
             Restore();
             if(shotAudio!=null) { shotAudio.transform.position=runner.Position;shotAudio.Play(); }
@@ -62,8 +66,10 @@ namespace Fortress
             bool styled=feedbackSettings!=null && feedbackSettings.TryGetImpact(shotPurpose,out _);
             CombatFeedbackSettings.ImpactStyle style=default;
             if(styled)feedbackSettings.TryGetImpact(shotPurpose,out style);
-            if(impactAudio!=null)
+            if(impactAudio!=null && Time.unscaledTime>=nextImpactAudio)
             {
+                nextImpactAudio=Time.unscaledTime+(feedbackSettings!=null?Mathf.Max(0,feedbackSettings.impactAudioInterval):0);
+                ImpactSoundsPlayed++;
                 impactAudio.transform.position=runner.Position;
                 if(styled) { impactAudio.pitch=Mathf.Clamp(style.pitch,.25f,2);impactAudio.volume=Mathf.Clamp01(style.volume); }
                 if(styled && style.clip!=null)impactAudio.PlayOneShot(style.clip);else impactAudio.Play();

@@ -6,6 +6,7 @@ namespace Fortress
     public sealed class CombatFeedbackSettings : ScriptableObject
     {
         [Min(.1f)] public float lifetimeSeconds=1.8f;
+        [Min(0)] public float impactAudioInterval=.055f;
         [Min(0)] public float risePixels=65, worldHeight=3;
         [Min(0)] public float shakeSeconds=.18f, shakeDistance=.12f, shakeFrequency=35;
         public Color damageColor=new Color(1,.8f,.35f), directColor=new Color(1,.4f,.2f), fallColor=new Color(.7f,.8f,1);

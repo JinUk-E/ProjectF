@@ -27,6 +27,7 @@ namespace Fortress
         public int Generation { get; private set; }
         public TankCombatant[] Tanks { get; private set; }
         public event Action StateChanged;
+        public event Action<int,float> TankMoved;
         public event Action<Vector3,float> TerrainImpactApplied;
         public event Action<ShotResolution> ShotResolved;
         public ShotResolution LastResolution { get; private set; }
@@ -169,6 +170,7 @@ namespace Fortress
             MovementRemaining=Mathf.Max(0,MovementRemaining-moved);
             shots.SetAim(yaw,pitch,shots.Power);
             StateChanged?.Invoke();
+            TankMoved?.Invoke(ActivePlayerIndex,moved/deltaTime);
             return true;
         }
         /// <summary>Shared dry-run locomotion, with no tank, budget, aim or terrain mutation.</summary>

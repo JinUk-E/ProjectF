@@ -69,26 +69,8 @@ namespace Fortress.Editor
         }
         static AudioClip Sound(string name,float seconds,float frequency,float brightness)
         {
-            string path=AudioRoot+"Feedback"+name+".wav";
-            if (!File.Exists(path))
-            {
-                // Original synthesized transients; no external samples or redistribution dependency.
-                const int rate=22050;int count=(int)(seconds*rate);var random=new System.Random(763+name.Length);float low=0;
-                using(var writer=new BinaryWriter(File.Create(path)))
-                {
-                    writer.Write(System.Text.Encoding.ASCII.GetBytes("RIFF"));writer.Write(36+count*2);
-                    writer.Write(System.Text.Encoding.ASCII.GetBytes("WAVEfmt "));writer.Write(16);writer.Write((short)1);writer.Write((short)1);
-                    writer.Write(rate);writer.Write(rate*2);writer.Write((short)2);writer.Write((short)16);writer.Write(System.Text.Encoding.ASCII.GetBytes("data"));writer.Write(count*2);
-                    for(int i=0;i<count;i++)
-                    {
-                        float t=(float)i/rate,noise=(float)random.NextDouble()*2-1;low=Mathf.Lerp(low,noise,.1f);
-                        float body=Mathf.Sin(2*Mathf.PI*frequency*t*(1-.14f*t))*Mathf.Exp(-t*8);
-                        float value=(body*.65f+low*.9f+noise*brightness*Mathf.Exp(-t*12))*Mathf.Exp(-t*4);
-                        value*=Mathf.Min(1,t*700)*Mathf.Clamp01((seconds-t)*30);writer.Write((short)(Mathf.Clamp(value,-.85f,.85f)*32767));
-                    }
-                }
-            }
-            AssetDatabase.ImportAsset(path);return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+            int kind=name=="Drill"?3:name=="Shatter"?4:name=="Cluster"?5:2;
+            return TankAudioPaletteBuilder.Sound("Feedback"+name,kind==5?.7f:1.7f,kind);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Fortress.Editor
     public static class TankAppearanceBuilder
     {
         const string Folder="Assets/Fortress/Art/TankRoles/";
-        static readonly string[] Roles={"Main","Siege","Excavator","Support"};
+        static readonly string[] Roles={"Main","Siege","Excavator","Support","Heavy"};
         static readonly string[] Models={"Tank2","Tank4","Tank3","Tank"};
         static readonly string[] Descriptions={"Versatile frontline tank. Reliable HE fire with no ammunition limit.","Heavy siege cannon. SHATTER rounds break cover and buildings.","Terrain specialist. DRILL rounds dig deeper to disrupt enemy footing.","Area support tank. CLUSTER rounds spread lighter blasts over a wide area."};
         sealed class Piece { public Mesh mesh; public int mount; public Material[] materials; }
@@ -106,7 +106,7 @@ namespace Fortress.Editor
             if(metal)color=new Color(.1f,.115f,.1f);else if(slot.Contains("Dark"))color*=.65f;else if(slot.Contains("Light"))color*=1.18f;
             color.a=1;mat.color=color;mat.SetFloat("_Metallic",metal?.65f:.25f);mat.SetFloat("_Smoothness",metal?.32f:.18f);EditorUtility.SetDirty(mat);return mat;
         }
-        static Sprite Portrait(int role,TankAppearance appearance)
+        public static Sprite Portrait(int role,TankAppearance appearance)
         {
             var scene=EditorSceneManager.NewPreviewScene();var old=RenderTexture.active;
             var rt=new RenderTexture(1024,512,24);var texture=new Texture2D(1024,512,TextureFormat.RGB24,false);

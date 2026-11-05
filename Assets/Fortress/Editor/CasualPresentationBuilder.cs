@@ -36,13 +36,7 @@ namespace Fortress.Editor
             Tint("Assets/Fortress/Art/FieldDetails/PineNeedles.mat", new Color(.20f, .43f, .22f));
             Tint("Assets/Fortress/Art/FieldDetails/ShrubLeaves.mat", new Color(.32f, .57f, .23f));
             Tint("Assets/Fortress/Art/Exterior/DistantPine.mat", new Color(.23f, .43f, .32f));
-            for (int side = 0; side < 2; side++)
-            {
-                Color team = side == 0 ? new Color(.16f, .61f, .70f) : new Color(.90f, .36f, .20f);
-                Tint("Assets/Fortress/Art/TankRoles/Side" + side + "_Main.mat", team);
-                Tint("Assets/Fortress/Art/TankRoles/Side" + side + "_Main_Light.mat", Color.Lerp(team, Color.white, .25f));
-                Tint("Assets/Fortress/Art/TankRoles/Side" + side + "_Main_Dark.mat", team * .65f);
-            }
+            TankAudioPaletteBuilder.ApplyPalette();
             foreach (var path in new[] { SessionMenu.LocalScene, SessionMenu.AiScene })
             {
                 var scene = EditorSceneManager.OpenScene(path);

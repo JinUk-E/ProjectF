@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be9a347e05c58d47abf25fa2fbca0b1, type: 3}
+  m_Name: TankAudioSettings
+  m_EditorClassIdentifier: Fortress::Fortress.TankAudioSettings
+  engineLoop: {fileID: 8300000, guid: edbdbf9ade04f774fa4022f803ead88b, type: 3}
+  trackLoop: {fileID: 8300000, guid: e2b22a33555660b469062b15f10c9047, type: 3}
+  engineVolume: 0.2
+  trackVolume: 0.28
+  movementLease: 0.12
+  fadeIn: 0.08
+  fadeOut: 0.15
+  referenceSpeed: 4
+  enginePitch: {x: 0.8, y: 1.12}
+  trackPitch: {x: 0.75, y: 1.2}
